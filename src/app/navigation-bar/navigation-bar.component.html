@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light  navbar-custom" xmlns="http://www.w3.org/1999/html">
   <div class="container-fluid">
-    <a class="nav-link" href="/home">
+    <a class="nav-link" routerLink="/home">
       <img src="/assets/images.png" alt="image" class="logo"> &nbsp;
     </a>
     <div class="input-group rounded ">
@@ -8,7 +8,7 @@
              aria-describedby="search-addon" />
       <span class="input-group-text border-0" id="search-addon">
         <!--button implementation missing-->
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <i class="fa fa-search" aria-hidden="true" routerLink="/invalid"></i>
       </span>
     </div>
 
@@ -21,14 +21,14 @@
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
           <div class="icons">
             <i class="fa fa-users fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link" href="/mynetwork">My Network</a>
+          <a class="nav-link" routerLink="/mynetwork">My Network</a>
         </li>
         <li class="nav-item">
 
@@ -36,7 +36,7 @@
             <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link" href="/messages">Messages</a>
+          <a class="nav-link" routerLink="/messages">Messages</a>
         </li>
       </ul>
 
