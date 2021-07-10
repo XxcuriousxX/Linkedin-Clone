@@ -1,3 +1,5 @@
+import { MessagesComponent } from './messages/messages.component';
+import { MyNetworkComponent } from './my-network/my-network.component';
 import { Component } from '@angular/core';
 
 @Component({
