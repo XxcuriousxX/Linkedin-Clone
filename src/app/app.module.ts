@@ -9,27 +9,38 @@ import { MessagesComponent } from './messages/messages.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule, Routes} from "@angular/router";
+import { LoginComponent } from './login/login.component';
+import { MainViewComponent } from './main-view/main-view.component';
 
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
 const appRoutes : Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'home',
     component: HomeComponent
   },
   {
-    path: 'messaging',
+    path: 'messages',
     component: MessagesComponent
   },
   {
-    path: 'my-network',
+    path: 'mynetwork',
     component: MyNetworkComponent
   },
+
   {
     //default route
     path: '' ,
-    component: HomeComponent ,
+    component: LoginComponent ,
     pathMatch : 'full'
+  },
+  {
+    path: 'app',
+    component: MainViewComponent,
   },
   {
     // ** -> none of our routes are hit wildcard route
@@ -45,14 +56,17 @@ const appRoutes : Routes = [
     routingComponents,
     MessagesComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes,{enableTracing:true})
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

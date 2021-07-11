@@ -6,6 +6,7 @@
 .navbar-custom {
   background-color: white;
   height: 53 px;
+  width: 100%;
 }
 
 
@@ -86,6 +87,9 @@
   height: 3px;
   transition: all 0.3s;
 }
+
+
+
 .navbar .navbar-nav .nav-link:hover::after {
   width: 100%;
 }
