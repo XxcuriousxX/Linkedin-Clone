@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MyNetworkComponent } from './my-network/my-network.component';
@@ -53,7 +52,6 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    routingComponents,
     MessagesComponent,
     HomeComponent,
     NotFoundComponent,
