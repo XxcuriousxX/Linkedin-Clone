@@ -1,25 +1,15 @@
-<body>
-<div class="container">
-  <div class="top">
-    <h1 id="title" class="hidden"><span id="logo">Daily <span>UI</span></span></h1>
-  </div>
-  <div class="login-box animated fadeInUp">
-    <div class="box-header">
-      <h2>Log In</h2>
-    </div>
-    <label for="username">Username</label>
-    <br/>
-    <input type="text" id="username">
-    <br/>
-    <label for="password">Password</label>
-    <br/>
-    <input type="password" id="password">
-    <br/>
-    <button type="submit" routerLink="/app">Sign In</button>
-    <br/>
-    <a href="#"><p class="small">Forgot your password?</p></a>
-  </div>
+<div class="wrapper">
+  <form class="login">
+    <p class="title">Log in</p>
+    <input type="text" placeholder="Username" autofocus />
+    <i class="fa fa-user"></i>
+    <input type="password" placeholder="Password" />
+    <i class="fa fa-key"></i>
+    <a href="#">Forgot your password?</a>
+    <button>
+      <i class="spinner"></i>
+      <span class="state">Log in</span>
+    </button>
+  </form>
+  <footer><a target="blank" href="#" style="color: black">Not having an Account? Sign Up</a></footer>
 </div>
-</body>
-
-
