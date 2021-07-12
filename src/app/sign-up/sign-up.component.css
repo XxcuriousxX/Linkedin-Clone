@@ -27,7 +27,7 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  background: #f3f2ef;
+  background: white;
 }
 
 .login {
@@ -67,7 +67,7 @@ body {
   border: 1px solid #ddd;
   transition: border-width 0.2s ease;
   border-radius: 2px;
-  color: #ccc;
+  color: white;
 }
 .login input + i.fa {
   color: #fff;
@@ -149,7 +149,7 @@ footer {
   display: block;
   padding-top: 50px;
   text-align: center;
-  color: #ddd;
+  color: white;
   font-weight: normal;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
   font-size: 0.8em;

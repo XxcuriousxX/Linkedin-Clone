@@ -1,10 +1,10 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
+
 body {
   font-family: "Open Sans", sans-serif;
   height: 100vh;
-  background: url("https://i.imgur.com/HgflTDf.jpg") 50% fixed;
-  background-size: cover;
+  background-color: white;
 }
 
 @keyframes spinner {
@@ -27,7 +27,7 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  background: #f3f2ef;
+  background:white;
 }
 
 .login {
