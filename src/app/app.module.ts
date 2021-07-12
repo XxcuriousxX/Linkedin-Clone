@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
 import { MainViewComponent } from './main-view/main-view.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
@@ -17,6 +18,10 @@ const appRoutes : Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
   },
   {
     path: 'home',
@@ -56,7 +61,8 @@ const appRoutes : Routes = [
     HomeComponent,
     NotFoundComponent,
     LoginComponent,
-    MainViewComponent
+    MainViewComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
