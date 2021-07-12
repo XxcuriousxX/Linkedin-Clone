@@ -4,3 +4,33 @@
 
 
 
+.right {
+  position: absolute;
+  right: 100px;
+  top: 200px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.roundedCorner
+{
+  width:350px;height:200px;
+  border: solid 1px #555;
+  background-color: rgb(255, 255, 230);
+  box-shadow: 10px -10px 5px  rgba(0,0,0,0.6);
+  -moz-box-shadow: 10px -10px 5px  rgba(0,0,0,0.6);
+  -webkit-box-shadow: 10px -10px 5px  rgba(0,0,0,0.6);
+  -o-box-shadow: 10px -10px 5px  rgba(0,0,0,0.6);
+  border-radius:25px;
+}
+
+.left {
+  position: absolute;
+  left: 100px;
+  top: 200px;
+}
