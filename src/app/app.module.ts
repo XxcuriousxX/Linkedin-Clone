@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { MyNetworkComponent } from './my-network/my-network.component';
-import { MessagesComponent } from './messages/messages.component';
-import { HomeComponent } from './home/home.component';
+import { NavigationBarComponent } from './main-view/navigation-bar/navigation-bar.component';
+import { MyNetworkComponent } from './main-view/my-network/my-network.component';
+import { MessagesComponent } from './main-view/messages/messages.component';
+import { HomeComponent } from './main-view/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
@@ -35,7 +35,6 @@ const appRoutes : Routes = [
     path: 'mynetwork',
     component: MyNetworkComponent
   },
-
   {
     //default route
     path: '' ,

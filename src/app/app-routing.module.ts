@@ -1,6 +1,6 @@
-import { HomeComponent } from './home/home.component';
-import { MessagesComponent } from './messages/messages.component';
-import { MyNetworkComponent } from './my-network/my-network.component';
+import { HomeComponent } from './main-view/home/home.component';
+import { MessagesComponent } from './main-view/messages/messages.component';
+import { MyNetworkComponent } from './main-view/my-network/my-network.component';
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
 
