@@ -12,6 +12,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule, Routes} from "@angular/router";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material/button';
+
+
+
+const materialModules = [
+  MatButtonModule
+];
 
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
@@ -62,7 +71,9 @@ const appRoutes : Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes,{enableTracing:true})
+    RouterModule.forRoot(appRoutes,{enableTracing:true}),
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

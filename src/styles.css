@@ -2,3 +2,6 @@
 html, body{
   background-color: #f3f2ef;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

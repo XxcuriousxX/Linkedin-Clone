@@ -11,12 +11,13 @@ import {AppComponent} from "../app.component";
 
 export class LoginComponent implements OnInit {
 
-
-  constructor() {
-
+  ac : AppComponent;
+  constructor( temp : AppComponent) {
+    this.ac = temp;
   }
 
   ngOnInit(): void {
+
   }
 
 }
