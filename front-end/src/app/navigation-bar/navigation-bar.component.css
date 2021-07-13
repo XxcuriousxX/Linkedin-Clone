@@ -1,0 +1,109 @@
+/*custom fonts*/
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
+
+body{
+  background-color: #f3f2ef;
+}
+
+
+.navbar-custom {
+  background-color: white;
+  height: 53 px;
+  width: 100%;
+}
+
+
+
+
+.nav-item{
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+
+.logo{
+  height: 45px;
+  size: 50px;
+  width: auto;
+  position: relative;
+  left: 150px;
+}
+
+
+
+
+
+.navbar.center .navbar-collapse {
+  text-align: center;
+}
+.navbar.center .navbar-collapse .nav {
+  float: none;
+  display:inline-block;
+  vertical-align: middle;
+}
+
+/*underline animation */
+
+
+.navbar .navbar-nav .nav-link {
+  opacity: 50%;
+}
+
+.icons {
+  margin: 0;
+  padding: 5px;
+  height: 20px;
+  opacity: 100%;
+}
+
+
+.navbar .navbar-nav .nav-link:hover{
+  color: #000000;
+  opacity: 100%;
+}
+
+
+@media only screen and (min-width: 960px) {
+  .navbar .navbar-nav .nav-link {
+    padding: 1em 0.7em;
+  }
+  .navbar {
+    padding: 0;
+  }
+  .navbar .navbar-brand {
+    padding: 0 0.7em;
+  }
+}
+.navbar .navbar-nav .nav-link {
+  position: relative;
+}
+.navbar .navbar-nav .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: #000000;
+  color: transparent;
+  width: 0%;
+  content: '';
+  height: 3px;
+  transition: all 0.3s;
+}
+
+
+
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* icons inside bars */
+
+.input-group{
+  width: 25%;
+  position: relative;
+  left: 180px;
+
+}
