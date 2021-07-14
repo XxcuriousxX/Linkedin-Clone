@@ -14,6 +14,6 @@ Content-Type: application/json
 
 ######
 
-GET http://localhost:8080/user/find/1
+GET http://localhost:8080/user/find/email/@
 
 
