@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 
 import { HomeComponent } from './home/home.component';
 import { MyNetworkComponent } from './my-network/my-network.component';
@@ -15,6 +16,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -69,13 +72,15 @@ const appRoutes : Routes = [
     SignUpComponent,
     MyNetworkComponent
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(appRoutes,{enableTracing:true}),
-    BrowserAnimationsModule,
-    MatButtonModule
-  ],
-  providers: [],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(appRoutes, {enableTracing: true}),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

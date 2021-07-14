@@ -1,25 +1,25 @@
 <div class="wrapper">
-  <form class="login">
+  <form [formGroup]="signUpForm"  class="login" (ngSubmit)="onSubmit()" novalidate>
     <p class="title">Sign Up</p>
-    <input type="text" placeholder="First Name" autofocus />
+    <input type="text" placeholder="First Name" autofocus formControlName="first_name" >
     <i class="fa fa-user"></i>
 
-    <input type="text" placeholder="Last Name" autofocus />
+    <input type="text" placeholder="Last Name" autofocus formControlName="last_name">
     <i class="fa fa-user"></i>
 
-    <input type="text" placeholder="Password" />
+    <input type="text" placeholder="Password" ngModel formControlName="password">
     <i class="fa fa-key"></i>
 
-    <input type="text" placeholder="Email" />
+    <input type="text" placeholder="Email" ngModel formControlName="email">
     <i class="fa fa-envelope"></i>
 
-    <input type="text" placeholder="Phone Number" />
+    <input type="text" placeholder="Phone Number" ngModel formControlName="phone">
     <i class="fa fa-phone"></i>
 
-    <input type="text" placeholder="Works At" />
+    <input type="text" placeholder="Works At" ngModel formControlName="company_name">
     <i class="fa fa-building"></i>
 
-    <button>
+    <button type="submit">
       <i class="spinner"></i>
       <span class="state">Sign Up</span>
     </button>

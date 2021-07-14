@@ -28,9 +28,36 @@ public class UserResource {
         return new ResponseEntity<>(usr, HttpStatus.OK);
     }
 
+    
+     @GetMapping("/find/{email}")
+     public ResponseEntity<user> getUserByEmail (@PathVariable("email") String email) {
+         user usr = userService.findByEmail(email);
+         if (usr == null)
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+         else
+             return new ResponseEntity<>(usr, HttpStatus.OK);
+     }
+
+
     @PostMapping("/add")
-    public ResponseEntity  addUser(@RequestBody user usr) { user newusr =userService.addUser(usr);
-        return new ResponseEntity<>(usr, HttpStatus.CREATED);
+    public ResponseEntity  addUser(@RequestBody user usr) { 
+
+        user ret_usr = userService.findByEmail(usr.getEmail());
+        
+
+        if (ret_usr != null){
+            System.out.println("ALready reported\n");
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        
+        // gia meta
+        // final String encrypted_pass = bCryptPasswordEncoder.encode(usr.getPassword());
+
+        // usr.setPassword(encrypted_pass);
+
+
+        user newusr =userService.addUser(usr);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
