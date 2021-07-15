@@ -1,3 +1,5 @@
+import { UserService } from './user.service';
+import { User } from './user';
 import { AuthService } from './auth.service';
 
 import { HomeComponent } from './home/home.component';
@@ -80,7 +82,7 @@ const appRoutes : Routes = [
         HttpClientModule,
         ReactiveFormsModule
     ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

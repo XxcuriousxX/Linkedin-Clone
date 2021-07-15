@@ -32,11 +32,15 @@ public class UserResource {
      @GetMapping("/find/email/{email}")
      public ResponseEntity<user> getUserByEmail (@PathVariable("email") String email) {
          user usr = userService.findByEmail(email);
-         if (usr == null)
+         if (usr == null) {
+             System.out.println("GET FAILED");
              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         else
-             return new ResponseEntity<>(usr, HttpStatus.OK);
-     }
+         }
+         else {
+            System.out.println("GET RCVD: " + usr.getEmail());
+            return new ResponseEntity<>(usr, HttpStatus.OK);
+         }
+    }
 
 
     @PostMapping("/add")

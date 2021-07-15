@@ -40,7 +40,7 @@ export class AuthService {
 
 
   registerUser(user: User){
-    return this.usrService.getUserByEmail(user.email).subscribe();
+    return this.http.post<User>(this._registerUrl, user).subscribe(res => console.log(res), err => console.log(err));
 
   }
 

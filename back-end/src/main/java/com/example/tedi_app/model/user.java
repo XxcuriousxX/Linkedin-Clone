@@ -22,6 +22,7 @@ public class user implements Serializable {
     // @NotEmpty(message = "Email can not be empty")
     // @Email(message = "Please provide a valid email id")
     // @Column(name = "email", nullable = false, unique = true)
+    @Email
     private  String email;
 //    where image is stored in our server
     private String image_path;

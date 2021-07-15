@@ -1,12 +1,21 @@
 
-export class User {
-    first_name: string = "";
-    last_name: string = "";
-    password: string = "";
-    email : string = "";
-    phone: string = "";
-    company_name: string = "";
+// export interface User {
+//     first_name: string = "";
+//     last_name: string = "";
+//     password: string = "";
+//     email : string = "";
+//     phone: string = "";
+//     company_name: string = "";
 
-    constructor() { }
-  }
-  
+//     constructor() {  }
+//   }
+
+
+export interface User {
+    first_name : string,
+    last_name : string,
+    password : string,
+    email : string,
+    phone : string,
+    company_name : string
+}
