@@ -19,14 +19,16 @@ public class user implements Serializable {
     private  String company_name;
 
     
-    // @NotEmpty(message = "Email can not be empty")
-    // @Email(message = "Please provide a valid email id")
-    // @Column(name = "email", nullable = false, unique = true)
-    @Email
+    @NotEmpty(message = "Email can not be empty")
+    @Email(message = "Please provide a valid email id")
+    @Column(name = "email", nullable = false, unique = true)
     private  String email;
 //    where image is stored in our server
     private String image_path;
     private String password;
+
+
+
     public user() { }
     public user(Long id, String username, String first_name, String last_name, String phone, String company_name, String email, String image_path, String password) {
         this.id = id;
