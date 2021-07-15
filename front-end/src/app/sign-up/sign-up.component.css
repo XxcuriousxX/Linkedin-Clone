@@ -67,7 +67,7 @@ body {
   border: 1px solid #ddd;
   transition: border-width 0.2s ease;
   border-radius: 2px;
-  color: white;
+  color: black;
 }
 .login input + i.fa {
   color: #fff;
@@ -158,4 +158,9 @@ footer a,
 footer a:link {
   color: #fff;
   text-decoration: none;
+}
+
+.login .error{
+  border-color: red;
+  color: red;
 }

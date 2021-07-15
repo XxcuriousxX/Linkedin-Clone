@@ -1,5 +1,3 @@
-import { UserService } from './user.service';
-import { User } from './user';
 import { AuthService } from './auth.service';
 
 import { HomeComponent } from './home/home.component';
@@ -20,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
+// import {NgxWebstorageModule} from 'ngx-webstorage';
 
 
 
@@ -81,8 +80,9 @@ const appRoutes : Routes = [
         MatButtonModule,
         HttpClientModule,
         ReactiveFormsModule
+        // NgxWebstorageModule.forRoot()
     ],
-  providers: [AuthService, UserService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

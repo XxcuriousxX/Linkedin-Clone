@@ -8,7 +8,7 @@ import com.example.tedi_app.model.*;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class UserResource {
     private final UserService userService;
 
@@ -43,7 +43,7 @@ public class UserResource {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("/auth/signup")
     public ResponseEntity  addUser(@RequestBody user usr) { 
 
         user ret_usr = userService.findByEmail(usr.getEmail());
@@ -60,7 +60,8 @@ public class UserResource {
         // usr.setPassword(encrypted_pass);
 
 
-        user newusr =userService.addUser(usr);
+        user newusr = userService.addUser(usr);
+        System.out.println("New user email: " + newusr.getEmail());
         return new ResponseEntity<>("SUCCESS", HttpStatus.CREATED);
     }
 

@@ -1,6 +1,10 @@
 <div class="wrapper">
   <form [formGroup]="signUpForm"  class="login" (ngSubmit)="onSubmit()" novalidate>
     <p class="title">Sign Up</p>
+
+    <input type="text" placeholder="UserName" autofocus formControlName="username" >
+    <i class="fa fa-user"></i>
+
     <input type="text" placeholder="First Name" autofocus formControlName="first_name" >
     <i class="fa fa-user"></i>
 
@@ -10,8 +14,18 @@
     <input type="text" placeholder="Password" ngModel formControlName="password">
     <i class="fa fa-key"></i>
 
-    <input type="text" placeholder="Email" ngModel formControlName="email">
+<!--    <div *ngIf="resp === 'FAIL" else templateName>-->
+<!--        <input me error-->
+<!--    </div>-->
+<!--    <ng-template #templateName>-->
+<!--        <input xoris error-->
+<!--      -->
+<!--    </ng-template>-->
+    <input [ngClass]=" resp === 'FAIL' ? 'error' : '' " type="text"   placeholder="Email" ngModel formControlName="email">
     <i class="fa fa-envelope"></i>
+    <p *ngIf="resp === 'FAIL'" class="error" style="font-size: small"> Email Already Exists !</p>
+<!--    <input   type="text" placeholder=" Email already exists!" ngModel formControlName="email">-->
+
 
     <input type="text" placeholder="Phone Number" ngModel formControlName="phone">
     <i class="fa fa-phone"></i>
@@ -21,7 +35,7 @@
 
     <button type="submit">
       <i class="spinner"></i>
-      <span class="state">Sign Up {{ response }}</span>
+      <span class="state">Sign Up</span>
     </button>
   </form>
 </div>
