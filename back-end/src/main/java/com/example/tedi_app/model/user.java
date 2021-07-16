@@ -1,11 +1,24 @@
 package com.example.tedi_app.model;
 
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.time.Instant;
+
+
 import javax.persistence.*;
 import java.io.Serializable;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class user implements Serializable {
     @Id
@@ -15,21 +28,23 @@ public class user implements Serializable {
     private String username;
     private String first_name;
     private String last_name;
+    private String password;
+    @NotEmpty(message = "Email can not be empty")
+    @Email(message = "Please provide a valid email id")
+    private  String email;
     private  String phone;
     private  String company_name;
 
     
-    @NotEmpty(message = "Email can not be empty")
-    @Email(message = "Please provide a valid email id")
-    @Column(name = "email", nullable = false, unique = true)
-    private  String email;
+
 //    where image is stored in our server
     private String image_path;
-    private String password;
+
+    private Instant created;
+    private boolean enabled;
 
 
 
-    public user() { }
     public user(Long id, String username, String first_name, String last_name, String phone, String company_name, String email, String image_path, String password) {
         this.id = id;
         this.username = username;
@@ -40,6 +55,7 @@ public class user implements Serializable {
         this.phone = phone;
         this.company_name = company_name;
         this.image_path = image_path;
+
 
     }
 
@@ -75,6 +91,22 @@ public class user implements Serializable {
         this.last_name = last_name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -91,14 +123,6 @@ public class user implements Serializable {
         this.company_name = company_name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getImage_path() {
         return image_path;
     }
@@ -107,11 +131,19 @@ public class user implements Serializable {
         this.image_path = image_path;
     }
 
-    public String getPassword() {
-        return password;
+    public Instant getCreated() {
+        return created;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreated(Instant created) {
+        this.created = created;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
