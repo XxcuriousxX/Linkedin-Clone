@@ -34,6 +34,15 @@ export class SignUpComponent implements OnInit {
   constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+      this.signUpForm = this.formBuilder.group({
+      username: '',
+      first_name: '',
+      last_name: '',
+      password: '',
+      email: '',
+      phone: '',
+      company_name: ''
+      });
   }
 
     async onSubmit() {

@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -9,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {  }
+  constructor(private _authService: AuthService, private _router: Router) {  }
 
   ngOnInit(): void {
 
+  }
+
+  logout() {
+    alert("This is the test call!!!.")
+    
+    this._authService.logout();
+    this._router.navigate(['/login'])
   }
 
 }

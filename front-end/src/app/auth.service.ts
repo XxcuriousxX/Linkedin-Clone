@@ -45,6 +45,10 @@ export class AuthService {
   }
 
   signup(user: any) {
+    this.localStorage.clear('authenticationToken');
+    this.localStorage.clear('username');
+    this.localStorage.clear('refreshToken');
+    this.localStorage.clear('expiresAt');
     return this.httpClient.post<any>(this._registerUrl, user, {responseType:'text' as 'json'})
   }
 
@@ -53,7 +57,8 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
       loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
-      console.log("Auth token = ", data.authenticationToken)
+      console.log("Auth token = ", data.authenticationToken);
+
       this.localStorage.store('username', data.username);
       console.log("Auth token = ", data.username)
 
@@ -83,19 +88,20 @@ export class AuthService {
       }));
   }
 
-  // logout() {
-  //   this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
-  //     { responseType: 'text' })
-  //     .subscribe(data => {
-  //       console.log(data);
-  //     }, error => {
-  //       throwError(error);
-  //     })
-  //   this.localStorage.clear('authenticationToken');
-  //   this.localStorage.clear('username');
-  //   this.localStorage.clear('refreshToken');
-  //   this.localStorage.clear('expiresAt');
-  // }
+  logout() {
+    this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
+      { responseType: 'text' })
+      .subscribe(data => {
+        console.log(data);
+      }, error => {
+        throwError(error);
+      })
+    this.localStorage.clear('authenticationToken');
+    this.localStorage.clear('username');
+    this.localStorage.clear('refreshToken');
+    this.localStorage.clear('expiresAt');
+    console.log("Cleared everything");
+  }
 
 
   getUserName() {
