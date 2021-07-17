@@ -1,0 +1,14 @@
+POST http://localhost:8080//api/auth/signup
+Content-Type: application/json
+
+{
+  "username": "pakis",
+  "first_name": "pakis",
+  "last_name": "pakis",
+  "phone": "kati paki",
+  "company_name": "kati",
+  "email": "kati@kati",
+  "password":"123456"
+}
+
+

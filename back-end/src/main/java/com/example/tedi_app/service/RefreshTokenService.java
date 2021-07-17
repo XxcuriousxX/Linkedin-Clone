@@ -1,7 +1,5 @@
 package com.example.tedi_app.service;
-
-
-import com.example.tedi_app.exception.LinkedInException;
+import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.RefreshToken;
 import com.example.tedi_app.repo.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +26,7 @@ public class RefreshTokenService {
 
     void validateRefreshToken(String token) {
         refreshTokenRepository.findByToken(token)
-                .orElseThrow(() -> new LinkedInException("Invalid refresh Token"));
+                .orElseThrow(() -> new SpringTediException("Invalid refresh Token"));
     }
 
     public void deleteRefreshToken(String token) {

@@ -1,4 +1,5 @@
 package com.example.tedi_app.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,6 @@ public class VerificationToken {
     private Long id;
     private String token;
     @OneToOne(fetch = LAZY)
-    private user usr;
+    private User user;
     private Instant expiryDate;
 }

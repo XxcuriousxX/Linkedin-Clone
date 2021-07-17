@@ -1,6 +1,7 @@
 package com.example.tedi_app.service;
-import com.example.tedi_app.model.user;
-import com.example.tedi_app.repo.UserRepo;
+
+import com.example.tedi_app.model.User;
+import com.example.tedi_app.repo.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,19 +19,19 @@ import static java.util.Collections.singletonList;
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepo userRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        Optional<user> userOptional = userRepository.findByUsername(username);
-        user usr = userOptional
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
         return new org.springframework.security
-                .core.userdetails.User(usr.getUsername(), usr.getPassword(),
-                usr.isEnabled(), true, true,
+                .core.userdetails.User(user.getUsername(), user.getPassword(),
+                user.isEnabled(), true, true,
                 true, getAuthorities("USER"));
     }
 
