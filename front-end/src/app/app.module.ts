@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './token-interceptor';
 import { AuthService } from './auth.service';
 
 import { HomeComponent } from './home/home.component';
@@ -16,7 +17,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AuthGuard } from './auth.guard';
@@ -84,8 +85,14 @@ const appRoutes : Routes = [
         ReactiveFormsModule,
         NgxWebstorageModule.forRoot()
     ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  providers: [ AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
+
 })
 export class AppModule {
 

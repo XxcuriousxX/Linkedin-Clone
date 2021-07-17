@@ -46,7 +46,7 @@ export class SignUpComponent implements OnInit {
       this._authService.signup(this.signUpForm.value).subscribe(
         res => {
           this.resp = "SUCCESS";
-          this.router.navigate(['']);
+          this.router.navigate(['/login'], { queryParams: {registered: 'true'} });
         },
         err => {
           this.resp = "FAIL";

@@ -48,11 +48,15 @@ export class AuthService {
     return this.httpClient.post<any>(this._registerUrl, user, {responseType:'text' as 'json'})
   }
 
-  login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
+  login(loginRequestPayload: LoginRequestPayload): Observable<boolean> { 
+    // get auth token, username, refreshtoken and expiration time from backend
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
       loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
+      console.log("Auth token = ", data.authenticationToken)
       this.localStorage.store('username', data.username);
+      console.log("Auth token = ", data.username)
+
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
 
