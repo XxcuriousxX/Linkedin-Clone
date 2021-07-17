@@ -1,9 +1,9 @@
 <div class="wrapper">
-  <form class="login">
+  <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
     <p class="title">Log in</p>
-    <input type="text" placeholder="Username" autofocus />
+    <input type="text" placeholder="Username" autofocus [formControlName]="'username'" name="user_name" required/>
     <i class="fa fa-user"></i>
-    <input type="password" placeholder="Password" />
+    <input type="password" placeholder="Password" [formControlName]="'password'" name="password" required/>
     <i class="fa fa-key"></i>
     <a href="#">Forgot your password?</a>
     <button routerLink="/home">

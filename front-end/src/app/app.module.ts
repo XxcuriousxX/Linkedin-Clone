@@ -18,7 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
-// import {NgxWebstorageModule} from 'ngx-webstorage';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -39,7 +40,8 @@ const appRoutes : Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'messages',
@@ -79,8 +81,8 @@ const appRoutes : Routes = [
         BrowserAnimationsModule,
         MatButtonModule,
         HttpClientModule,
-        ReactiveFormsModule
-        // NgxWebstorageModule.forRoot()
+        ReactiveFormsModule,
+        NgxWebstorageModule.forRoot()
     ],
   providers: [AuthService],
   bootstrap: [AppComponent]

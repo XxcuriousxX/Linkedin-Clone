@@ -31,34 +31,32 @@ export class SignUpComponent implements OnInit {
       });
 
 
-  constructor(private _auth: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
   }
 
     async onSubmit() {
       console.log('eisai gia ton poutso intellij ', this.signUpForm.value);
-      // this._auth.registerUser(<JSON>this.signUpForm.value).subscribe(res =>  console.log(res), err => console.log(err));
 
-        // this._auth.registerUser(<JSON>this.signUpForm.value).subscribe(res =>
-        //   console.log("In success: ", this.signUpForm.value.email),
-        //     err => {
-        //   if (err instanceof HttpErrorResponse) {
-        //     console.log(err);
-        //     // window.alert(err.error);
-        //     if (err.error === "username exists") {
-        //       this.errors=err.error;
-        //       console.log("NAIIIIIIIIIIIIIII");
-        //     }
-        //   }
-        // });
-      await this._auth.getValFromObservable(this.signUpForm.value).then((res:any) => this.resp = "SUCCESS",
-      (err:any) => this.resp = "FAIL");
+      // post
+      // await this._authService.getValFromObservable(this.signUpForm.value).then((res:any) => this.resp = "SUCCESS",
+      // (err:any) => this.resp = "FAIL");
+
+      this._authService.signup(this.signUpForm.value).subscribe(
+        res => {
+          this.resp = "SUCCESS";
+          this.router.navigate(['']);
+        },
+        err => {
+          this.resp = "FAIL";
+        }
+      );
 
 
-      console.log("Our resp from post: ", this.resp);
-      if (this.resp === 'SUCCESS')
-        this.router.navigate(['home'])
+      // console.log("Our resp from post: ", this.resp);
+      // if (this.resp === 'SUCCESS')
+      //   this.router.navigate(['home'])
     }
 
 
