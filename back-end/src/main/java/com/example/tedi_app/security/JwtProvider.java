@@ -25,7 +25,7 @@ import static java.util.Date.from;
 public class JwtProvider {
 
     private KeyStore keyStore;
-//    @Value("${jwt.expiration.time}")
+    @Value("${jwt.expiration.time}")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
@@ -42,10 +42,6 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication){
         User principal = (User) authentication.getPrincipal();
-//        return Jwts.builder()
-//                .setSubject(principal.getUsername())
-//                .signWith(getPrivateKey())
-//                .compact();
         return Jwts.builder()
                 .setSubject(principal.getUsername())
                 .setIssuedAt(from(Instant.now()))
@@ -55,7 +51,6 @@ public class JwtProvider {
     }
 
 
-    // prosthiki
     public String generateTokenWithUserName(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -94,9 +89,9 @@ public class JwtProvider {
     private PrivateKey getPrivateKey() {
         try {
             PrivateKey pk = (PrivateKey) keyStore.getKey("springblog", "secret".toCharArray());
-            if (pk == null)
-                System.out.println("\n\n=== EInai null !!!!");
-            else System.out.println("einai to " + pk);
+//            if (pk == null)
+//                System.out.println("\n\n=== EInai null !!!!");
+//            else System.out.println("einai to " + pk);
             return pk;
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
             throw new SpringTediException("Exception occured while retrieving public key from keystore", e);

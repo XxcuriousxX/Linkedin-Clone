@@ -3,6 +3,7 @@ package com.example.tedi_app.controller;
 
 import com.example.tedi_app.dto.AuthenticationResponse;
 import com.example.tedi_app.dto.LoginRequest;
+import com.example.tedi_app.dto.RefreshTokenRequest;
 import com.example.tedi_app.dto.RegisterRequest;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -49,5 +51,10 @@ public class AuthController {
     public ResponseEntity<String> verifyAccount(@PathVariable String token) throws Exception {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account Activated Successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh/token")
+    public AuthenticationResponse refreshTokens(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
     }
 }
