@@ -30,7 +30,7 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest){
+    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) throws Exception {
 
         Optional<User> exist = userRepository.findByEmail(registerRequest.getEmail());
         if (exist.isPresent()) {

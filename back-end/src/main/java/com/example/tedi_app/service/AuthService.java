@@ -43,7 +43,7 @@ public class AuthService {
 
 
     @Transactional
-    public void signup(RegisterRequest registerRequest) {
+    public void signup(RegisterRequest registerRequest) throws Exception {
 
         User user = new User();
         user.setUsername(registerRequest.getUsername());
@@ -58,6 +58,7 @@ public class AuthService {
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
+        verifyAccount(token); // verify directly
         System.out.println("\n\nNew user token is : http://localhost:8080/api/auth/accountVerification/" + token);
     }
 

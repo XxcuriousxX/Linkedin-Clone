@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    alert("This is the test call!!!.")
     
     this._authService.logout();
     this._router.navigate(['/login'])
