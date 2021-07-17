@@ -1,4 +1,4 @@
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {User } from './../user';
 import {FormBuilder, Validators} from '@angular/forms';
@@ -34,6 +34,7 @@ export class SignUpComponent implements OnInit {
   constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+
       this.signUpForm = this.formBuilder.group({
       username: '',
       first_name: '',

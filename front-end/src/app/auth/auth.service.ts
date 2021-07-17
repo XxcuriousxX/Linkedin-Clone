@@ -1,11 +1,11 @@
 
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+import { User } from '../user';
 import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, throwError } from "rxjs";
 import { map, tap } from 'rxjs/operators';
-import { LoginRequestPayload } from './login-request.payload';
+import { LoginRequestPayload } from '../login/login-request.payload';
 
 
 export interface LoginResponse {
@@ -45,10 +45,6 @@ export class AuthService {
   }
 
   signup(user: any) {
-    this.localStorage.clear('authenticationToken');
-    this.localStorage.clear('username');
-    this.localStorage.clear('refreshToken');
-    this.localStorage.clear('expiresAt');
     return this.httpClient.post<any>(this._registerUrl, user, {responseType:'text' as 'json'})
   }
 

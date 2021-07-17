@@ -1,5 +1,5 @@
 import { TokenInterceptor } from './token-interceptor';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 
 import { HomeComponent } from './home/home.component';
 import { MyNetworkComponent } from './my-network/my-network.component';
@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgxWebstorageModule} from 'ngx-webstorage';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 
 
@@ -31,10 +31,10 @@ const materialModules = [
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
 const appRoutes : Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  // if authenticated then redirect to home
+  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'sign-up', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent },
   {
     path: 'sign-up',
     component: SignUpComponent
@@ -46,11 +46,13 @@ const appRoutes : Routes = [
   },
   {
     path: 'messages',
-    component: MessagesComponent
+    component: MessagesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'mynetwork',
-    component: MyNetworkComponent
+    component: MyNetworkComponent,
+    canActivate: [AuthGuard]
   },
   {
     //default route

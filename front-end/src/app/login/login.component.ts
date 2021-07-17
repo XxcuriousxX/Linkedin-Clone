@@ -1,7 +1,7 @@
-import { LoginRequestPayload } from '../login-request.payload';
+import { LoginRequestPayload } from './login-request.payload';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { throwError } from 'rxjs';
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   registerSuccessMessage: string ;
   isError: boolean;
 
-  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute,
+  constructor(private _authService: AuthService, private activatedRoute: ActivatedRoute,
     private router: Router) {
       this.loginForm = new FormGroup({
         username: new FormControl('', Validators.required),
@@ -36,13 +36,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      const isAuthenticated = this._authService.isLoggedIn();
+      if (isAuthenticated) this.router.navigate(['/home'])
   }
 
   login() {
     this.loginRequestPayload.username = this.loginForm.value.username;
     this.loginRequestPayload.password = this.loginForm.value.password;
 
-    this.authService.login(this.loginRequestPayload).subscribe(data => {
+    this._authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
       this.router.navigateByUrl('/home');
       // this.toastr.success('Login Successful');
