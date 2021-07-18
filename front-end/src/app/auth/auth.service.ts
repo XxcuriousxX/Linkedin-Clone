@@ -37,9 +37,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) { }
 
-  getUsername(){
-    return this.uname;
-  }
+
 
   // // obsolete function
   // async getValFromObservable(user: any) {

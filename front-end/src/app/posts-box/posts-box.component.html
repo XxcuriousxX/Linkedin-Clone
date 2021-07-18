@@ -8,19 +8,19 @@
       <span> . {{post.duration}}</span>
     </span>
     <hr />
-    <div class="post-title">
-      <a class="postname" href="#"> {{post.pa>
-    </div>
+    <!-- <div class="post-title">
+      <a class="postname" href="#"> {{post.postName }}
+    </div> -->
     <div>
       <p class="post-text" [innerHtml]="post.description"></p>
     </div>
     <hr />
     <span>
       <a class="btnCommments" role="button">
-        <fa-icon [icon]="faComments"></fa-icon>
-        Comments({{post.comment_count}})
+        <!-- <fa-icon [icon]="faComments"></fa-icon> -->
+        Comments({{post.commentCount}})
       </a>
-      <button  (click)="goToPost(post.id)">
+      <button  (click)="goToPost(post.postId)">
         Read Post
       </button>
     </span>
