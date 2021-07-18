@@ -33,7 +33,6 @@ const materialModules = [
 const appRoutes : Routes = [
   // if authenticated then redirect to home
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'sign-up', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   {
     path: 'sign-up',

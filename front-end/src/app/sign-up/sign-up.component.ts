@@ -34,7 +34,9 @@ export class SignUpComponent implements OnInit {
   constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-
+      if (this._authService.isLoggedIn())
+        this.router.navigate(['/home'])
+             
       this.signUpForm = this.formBuilder.group({
       username: '',
       first_name: '',
