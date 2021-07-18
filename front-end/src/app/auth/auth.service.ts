@@ -39,10 +39,10 @@ export class AuthService {
 
 
 
-  // obsolete function
-  async getValFromObservable(user: any) {
-    return await this.signup(user).toPromise()
-  }
+  // // obsolete function
+  // async getValFromObservable(user: any) {
+  //   return await this.signup(user).toPromise()
+  // }
 
   signup(user: any) {
     return this.httpClient.post<any>(this._registerUrl, user, {responseType:'text' as 'json'})
