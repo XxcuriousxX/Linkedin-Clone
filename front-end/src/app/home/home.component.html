@@ -21,7 +21,7 @@
               <br>
               <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
               <div class="text_center">
-                Welcome, Paparozoumi!
+                Welcome, {{ _authService.getUsername() }}
               </div>
               <hr>
 
@@ -41,8 +41,8 @@
                 </a>
               </li>
               <li (click)="logout()">
-                <a class="links" href=''> Log out 
-                
+                <a class="links" href=''> Log out
+
                   <i class="fa fa-sign-out" aria-hidden="true"></i>
 
                 </a>
@@ -60,12 +60,14 @@
         <div class="right-box">
           <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
           <div class="post-box">
-            <input type="text" id="post" placeholder=" Start a post">
+            <!--POST FORM-->
+            <form [formGroup]="postForm" (ngSubmit)="createPost()">
+            <input type="text" id="post" [formControlName]="'description'" placeholder=" Start a post"  />
 
 
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                   <!--Photo Button-->
-                  <button type="button" class="btn btn-outline  mb-2">
+                  <button type="submit" class="btn btn-outline  mb-2">
                     <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5"></i>
                     <a class="btn-text" >  Photo </a>
                   </button>
@@ -88,6 +90,7 @@
                     <a class="btn-text"> Write Article</a>
                   </button>
                 </div>
+            </form>
                 <hr style="width: 120%;margin-left:0;position: relative;left: -43px">
 
 

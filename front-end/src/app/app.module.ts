@@ -21,6 +21,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AuthGuard } from './auth/auth.guard';
+import { PostsBoxComponent } from './posts-box/posts-box.component';
+import {LikeComponent} from "./post/like/like.component";
 
 
 
@@ -75,7 +77,9 @@ const appRoutes : Routes = [
     NotFoundComponent,
     LoginComponent,
     SignUpComponent,
-    MyNetworkComponent
+    MyNetworkComponent,
+    PostsBoxComponent,
+    LikeComponent
   ],
     imports: [
         BrowserModule,
