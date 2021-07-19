@@ -3,6 +3,6 @@ export interface PostModel {
     description: string;
     username: string;
     likeCount: number;
-    duration: string;
     commentCount: number;
+    duration: string;
 }

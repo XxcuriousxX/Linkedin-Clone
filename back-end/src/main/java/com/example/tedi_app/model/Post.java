@@ -1,9 +1,6 @@
 package com.example.tedi_app.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -18,6 +15,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Post {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -27,7 +26,9 @@ public class Post {
     @Nullable
     @Lob
     private String description;
-    private Integer voteCount = 0;
+
+    private Integer likeCount = 0;
+    private Integer commentCount = 0;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
@@ -35,4 +36,6 @@ public class Post {
 //    @ManyToOne(fetch = LAZY)
 //    @JoinColumn(name = "id", referencedColumnName = "id")
 //    private Subreddit subreddit;
+
+
 }

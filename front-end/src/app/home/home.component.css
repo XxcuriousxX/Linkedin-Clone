@@ -36,7 +36,7 @@
     padding: 40px;
     width: 70%;
     background-color: #ffffff;
-    height: 300px; /* only for demonstration, should be removed */
+    height: 300px;  /* only for demonstration, should be removed */
   }
 
   /* Clear floats after the columns */

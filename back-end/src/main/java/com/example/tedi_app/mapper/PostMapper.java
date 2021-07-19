@@ -28,11 +28,11 @@ public abstract class PostMapper {
     @Autowired
     private AuthService authService;
 
-
+    // Mapping(target = "return field of map()", source = "argument's field")
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target = "description", source = "postRequest.description")
-//    @Mapping(target = "subreddit", source = "subreddit")
-    @Mapping(target = "voteCount", constant = "0")
+    @Mapping(target = "likeCount", constant = "0")
+    @Mapping(target = "commentCount", constant = "0")
     @Mapping(target = "user", source = "user")
     public abstract Post map(PostRequest postRequest, User user);
 

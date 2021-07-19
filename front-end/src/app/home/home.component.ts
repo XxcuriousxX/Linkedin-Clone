@@ -1,3 +1,4 @@
+import { PostModel } from './../post/post.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
@@ -14,6 +15,8 @@ export class HomeComponent implements OnInit {
   postForm: FormGroup;
   postPayload: CreatePostPayload;
   isError: boolean = false;
+  posts: Array<PostModel> = [];
+
   constructor(public _authService: AuthService, private _router: Router, private _postService: PostService) {
     this.postForm = new FormGroup({
       // username: new FormControl('', Validators.required),
@@ -41,6 +44,7 @@ export class HomeComponent implements OnInit {
       this.isError = true;
       throwError(error);
     });
+    
   }
 
   logout() {
