@@ -1,17 +1,16 @@
 package com.example.tedi_app.dto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class PostResponse {
-    private Long id;
-    private String url;
+    private Long postId;
     private String description;
     private String username;
-    private int like_count;
-    private int comment_count;
+    private int likeCount;
+    private int commentCount;
     private String duration;
 }
