@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       this.isError = true;
       throwError(error);
     });
-    
+      window.location.reload();
   }
 
   logout() {

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../user.service";
+import {User} from "../user";
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-my-network',
@@ -7,10 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyNetworkComponent implements OnInit {
 
-
-  constructor() { }
+  usersList: User[] = [];
+  constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
+    this._userService.getAllConnected().subscribe((res) => {
+      this.usersList = res;
+      console.log("SUCCESS");
+    },
+      err => {
+        console.log("ERR");
+        throwError(err);
+      });
   }
+
+
+
+
+
 
 }

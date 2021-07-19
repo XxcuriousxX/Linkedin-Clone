@@ -45,6 +45,7 @@ export class LikeComponent implements OnInit {
     this.likeService.like(this.likePayload).subscribe(() => {
       this.updateLikesNum();
       this.liked_by_current_user = true;
+      window.location.reload();
       }, error => {
       throwError(error);
     });
