@@ -42,6 +42,17 @@ public class VoteService {
         postRepository.save(post);
     }
 
+    public boolean has_liked(VoteData voteData) {
+        Post post = postRepository.findById(voteData.getPostId())
+                .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
+        System.out.println("Post id to be liked: " + post.getPostId());
+        Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
+        if (voteByPostAndUser.isPresent()) {
+            return true;
+        }
+        else return false;
+    }
+
     private Vote mapToVote(VoteData voteData, Post post) {
         return Vote.builder()  // change
                 .post(post)

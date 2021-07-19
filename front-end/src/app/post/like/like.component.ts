@@ -5,6 +5,7 @@ import { throwError } from 'rxjs';
 import {LikeService} from "./like.service";
 import {AuthService} from "../../auth/auth.service";
 import {PostService} from "../post.service";
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
@@ -16,9 +17,11 @@ export class LikeComponent implements OnInit {
 
   @Input() post: PostModel;
   likePayload : LikePayload;
-
+  liked_by_current_user: boolean;
   constructor(private likeService: LikeService,
               private authService: AuthService, private postService: PostService) {
+     this.liked_by_current_user = false;
+
      this.likePayload = {
        postId : -1
      }
@@ -33,15 +36,27 @@ export class LikeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.updateLikesNum();
+    this.has_liked();
   }
 
   like() {
     this.likePayload.postId = this.post.postId;
     this.likeService.like(this.likePayload).subscribe(() => {
       this.updateLikesNum();
+      this.liked_by_current_user = true;
       }, error => {
       throwError(error);
+    });
+  }
+
+
+  has_liked() {
+    this.likePayload.postId = this.post.postId;
+    this.likeService.has_liked(this.likePayload).subscribe(() => {
+      this.liked_by_current_user = true;
+    }, err => {
+      this.liked_by_current_user = false;
     });
   }
 

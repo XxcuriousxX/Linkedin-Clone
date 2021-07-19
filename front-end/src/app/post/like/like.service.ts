@@ -14,7 +14,9 @@ export class LikeService {
     return this.http.post('http://localhost:8080/api/likes/', likePayload);
   }
 
-
+  has_liked(likePayload: LikePayload): Observable<any> {
+    return this.http.get('http://localhost:8080/api/likes/has_liked/' + likePayload.postId);
+  }
 
 
 

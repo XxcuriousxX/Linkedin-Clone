@@ -19,7 +19,10 @@ export class PostsBoxComponent implements OnInit {
   constructor(private router: Router, private _postService: PostService, private _authService: AuthService) { }
 
   ngOnInit(): void {
-    this._postService.getAllPostsByUser(this._authService.getUserName()).subscribe(post => {
+    // this._postService.getAllPostsByUser(this._authService.getUserName()).subscribe(post => {
+    //   this.posts = post;
+    // });
+    this._postService.getAllPosts().subscribe(post => {
       this.posts = post;
     });
 
