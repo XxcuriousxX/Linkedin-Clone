@@ -23,10 +23,4 @@ export class MyNetworkComponent implements OnInit {
         throwError(err);
       });
   }
-
-
-
-
-
-
 }

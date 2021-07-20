@@ -1,6 +1,7 @@
 package com.example.tedi_app.service;
 
 import com.example.tedi_app.dto.SearchResponse;
+import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.Friends;
 import com.example.tedi_app.model.ListOfFriends;
 import com.example.tedi_app.model.User;
@@ -76,6 +77,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
         }
         return friends_list;
+
+    }
+
+    public void connectWithUser(String sender_username, String receiver_username) {
+        Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
+        User receiver_user = receiverUserOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + receiver_username));
+        Optional<User> senderUserOptional = userRepository.findByUsername(sender_username);
+        User sender_user = senderUserOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + sender_username));
+
+
+        friendsRepository.save(new Friends(sender_user.getUserId(), receiver_user.getUserId()));
 
     }
 

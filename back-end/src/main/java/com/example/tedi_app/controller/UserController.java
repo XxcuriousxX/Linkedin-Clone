@@ -1,15 +1,13 @@
 package com.example.tedi_app.controller;
 
+import com.example.tedi_app.dto.FriendRequest;
 import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,12 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity <List<User>> getAllConnectedUsers(@PathVariable String username){
         return status(HttpStatus.OK).body(userService.get_all_connected_users(username));
+    }
+
+    @PostMapping("/connect/")
+    public ResponseEntity<Void> addUserToConnected(@RequestBody FriendRequest friendRequest) {
+        this.userService.connectWithUser(friendRequest.getSender_username(), friendRequest.getReceiver_username());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
