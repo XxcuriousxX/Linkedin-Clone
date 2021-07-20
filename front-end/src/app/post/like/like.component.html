@@ -1,6 +1,6 @@
 <!-- Section to Display Votes-->
 
-<div *ngIf="liked_by_current_user == true; else notliked">
+<div *ngIf="liked_by_current_user == false; else already_liked">
 <div class="col-md-1">
   <!-- <button mat-raised-button color="accent" (click)="like()" class="fa fa-thumbs-up"  aria-hidden="true" ></button> -->
   <button mat-raised-button color="accent" (click)="like()"  aria-hidden="true" > Like</button>
@@ -9,7 +9,7 @@
 </div>
 </div>
 
-<ng-template #notliked>
+<ng-template #already_liked>
   <div class="col-md-1">
     <!-- <button mat-stroked-button color="primary" (click)="like()" class="fa fa-thumbs-up" aria-hidden="true" ></button> -->
     <button mat-stroked-button color="accent" (click)="like()"   aria-hidden="true"> Liked </button>
