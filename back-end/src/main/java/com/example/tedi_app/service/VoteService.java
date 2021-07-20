@@ -22,14 +22,22 @@ public class VoteService {
     private final AuthService authService;
 
     @Transactional
-    public void like(VoteData voteData) {
+    // returns false if it was already liked, so it will be unliked
+    public boolean like(VoteData voteData) {
 
         Post post = postRepository.findById(voteData.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
         System.out.println("Post id to be liked: " + post.getPostId());
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
-        if (voteByPostAndUser.isPresent()) {
-            throw new SpringTediException("You have already liked this post");
+
+        if (voteByPostAndUser.isPresent()) { // if have already liked, then unlike
+            Vote v = voteByPostAndUser.orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
+            post.setLikeCount(post.getLikeCount() - 1);
+            System.out.println("Vote id to be deleted = " + v.getVoteId() + " \n\n");
+            voteRepository.deleteVoteByMyID(v.getVoteId());
+            postRepository.save(post);
+            return false;
+//            throw new SpringTediException("You have already liked this post");
         }
 //        if (UPVOTE.equals(voteDto.getVoteType())) {
 //            post.setVoteCount(post.getVoteCount() + 1);
@@ -40,6 +48,7 @@ public class VoteService {
         post.setLikeCount(post.getLikeCount() + 1);
         voteRepository.save(mapToVote(voteData, post));
         postRepository.save(post);
+        return true;
     }
 
     public boolean has_liked(VoteData voteData) {

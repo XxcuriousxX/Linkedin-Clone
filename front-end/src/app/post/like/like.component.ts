@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { PostModel } from '../post.model';
 import { LikePayload } from "./like.payload";
@@ -6,6 +7,7 @@ import {LikeService} from "./like.service";
 import {AuthService} from "../../auth/auth.service";
 import {PostService} from "../post.service";
 import {MatButtonModule} from '@angular/material/button';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class LikeComponent implements OnInit {
   likePayload : LikePayload;
   liked_by_current_user: boolean;
   constructor(private likeService: LikeService,
-              private authService: AuthService, private postService: PostService) {
+              private authService: AuthService, private postService: PostService, private router: Router) {
      this.liked_by_current_user = false;
 
      this.likePayload = {
@@ -36,29 +38,44 @@ export class LikeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.liked_by_current_user = false;
     this.updateLikesNum();
     this.has_liked();
   }
 
   like() {
     this.likePayload.postId = this.post.postId;
-    this.likeService.like(this.likePayload).subscribe(() => {
-      this.updateLikesNum();
-      this.liked_by_current_user = true;
-      window.location.reload();
+    this.likeService.like(this.likePayload).subscribe(response => {
+        if (response.has_liked) {
+        	this.updateLikesNum();
+        	this.liked_by_current_user = true;
+        	window.location.reload();
+        }
+        else {
+			this.updateLikesNum();
+        	this.liked_by_current_user = false;
+        	window.location.reload();
+        }
       }, error => {
-      throwError(error);
-    });
+        throwError(error);
+      });
   }
+
+
 
 
   has_liked() {
     this.likePayload.postId = this.post.postId;
-    this.likeService.has_liked(this.likePayload).subscribe(() => {
-      this.liked_by_current_user = true;
+    this.likeService.has_liked(this.likePayload).subscribe(response => {
+        if (response.has_liked) {
+			this.liked_by_current_user = true;
+		}
+		else {
+			this.liked_by_current_user = false;
+		}
     }, err => {
-      this.liked_by_current_user = false;
-    });
+		throwError(err);
+	});
   }
 
   private updateLikesNum() {
