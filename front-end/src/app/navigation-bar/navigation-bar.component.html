@@ -4,12 +4,16 @@
       <img src="/assets/images.png" alt="image" class="logo"> &nbsp;
     </a>
     <div class="input-group rounded ">
-      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+      <form class="login" [formGroup]="searchForm" (ngSubmit)="search()">
+      <input type="search" class="form-control rounded" autofocus [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
              aria-describedby="search-addon" />
-      <span class="input-group-text border-0" id="search-addon">
+<!--      <span class="input-group-text border-0" id="search-addon">-->
         <!--button implementation missing-->
-        <i class="fa fa-search" aria-hidden="true" routerLink="/invalid"></i>
-      </span>
+        <button mat-mini-fab class="fa fa-search mt-0" color="primary" type="submit"></button>
+      </form>
+
+<!--        <i class="fa fa-search" aria-hidden="true" routerLink="/invalid"></i>-->
+
     </div>
 
 

@@ -21,3 +21,14 @@ export class User {
     constructor() { }
 
 }
+
+export class userResponse {
+  userId : number;
+  username:string;
+  password: string;
+  email:string;
+  phone:string;
+  first_name:string;
+  last_name:string;
+  company_name:string;
+}

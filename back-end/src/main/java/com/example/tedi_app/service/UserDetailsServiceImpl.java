@@ -80,7 +80,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     }
 
-    public void connectWithUser(String sender_username, String receiver_username) {
+    public void makeConnectionRequest(String sender_username, String receiver_username) {
         Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
         User receiver_user = receiverUserOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
@@ -90,9 +90,81 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + sender_username));
 
-
+        // create a friends row with accepted value: 'false'
         friendsRepository.save(new Friends(sender_user.getUserId(), receiver_user.getUserId()));
 
     }
 
+    public void acceptRequest(String sender_username,String receiver_username ) {
+        Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
+        User receiver_user = receiverUserOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + receiver_username));
+        Optional<User> senderUserOptional = userRepository.findByUsername(sender_username);
+        User sender_user = senderUserOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + sender_username));
+
+        Optional<Friends> requestOptional = friendsRepository
+                        .getFriendsByUserId1AndUserId2(sender_user.getUserId(), receiver_user.getUserId());
+        Friends request = requestOptional
+                        .orElseThrow(() -> new UsernameNotFoundException("No such connection request was found"));
+        Optional<Boolean> areConnectedOptional = friendsRepository
+                        .CheckForRequest(sender_user.getUserId(), receiver_user.getUserId());
+        if (areConnectedOptional.isPresent()) { // if request exists
+            Boolean areConnected = areConnectedOptional.orElseThrow(() -> new UsernameNotFoundException("No connection " +
+                    "from : " + sender_username));
+            if (areConnected)
+                throw new SpringTediException("Already connected!");
+            // replace the request with the same id, but with accpted = true
+            friendsRepository.save(new Friends(request.getId(), request.getUser_id1(), request.getUser_id2(), true));
+            return;
+        }
+        throw new UsernameNotFoundException("Request from " + sender_username + " to " + receiver_username + " was not found");
+
+    }
+
+
+//    reject request
+public void rejectRequest(String sender_username,String receiver_username ) {
+    Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
+    User receiver_user = receiverUserOptional
+            .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                    "Found with username : " + receiver_username));
+    Optional<User> senderUserOptional = userRepository.findByUsername(sender_username);
+    User sender_user = senderUserOptional
+            .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                    "Found with username : " + sender_username));
+
+    Optional<Friends> requestOptional = friendsRepository
+            .getFriendsByUserId1AndUserId2(sender_user.getUserId(), receiver_user.getUserId());
+    Friends request = requestOptional
+            .orElseThrow(() -> new UsernameNotFoundException("No such connection request was found"));
+    Optional<Boolean> areConnectedOptional = friendsRepository
+            .CheckForRequest(sender_user.getUserId(), receiver_user.getUserId());
+    if (areConnectedOptional.isPresent()) { // if request exists
+        Boolean areConnected = areConnectedOptional.orElseThrow(() -> new UsernameNotFoundException("No connection " +
+                "from : " + sender_username));
+        if (areConnected)
+            throw new SpringTediException("Already connected!");
+
+
+        friendsRepository.deleteById(request.getId());
+        return;
+
+
+    }
+    throw new UsernameNotFoundException("Request from " + sender_username + " to " + receiver_username + " was not found");
+
+}
+
+
+    public List<User> getUsersByQuery(String query) {
+        Optional<List<User>> fetched_users_optional = userRepository.getUsersByQuery(query);
+        if (!fetched_users_optional.isPresent())
+            return new ArrayList<User>(); // empty set
+        List<User> fetched_users = fetched_users_optional.orElseThrow(() -> new UsernameNotFoundException("No such connection request was found"));
+        System.out.println(fetched_users);
+        return fetched_users;
+    }
 }

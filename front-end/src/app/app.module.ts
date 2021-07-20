@@ -23,6 +23,8 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AuthGuard } from './auth/auth.guard';
 import { PostsBoxComponent } from './posts-box/posts-box.component';
 import {LikeComponent} from "./post/like/like.component";
+import { SearchComponent } from './search/search.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 
@@ -79,7 +81,8 @@ const appRoutes : Routes = [
     SignUpComponent,
     MyNetworkComponent,
     PostsBoxComponent,
-    LikeComponent
+    LikeComponent,
+    SearchComponent
   ],
     imports: [
         BrowserModule,
@@ -88,7 +91,8 @@ const appRoutes : Routes = [
         MatButtonModule,
         HttpClientModule,
         ReactiveFormsModule,
-        NgxWebstorageModule.forRoot()
+        NgxWebstorageModule.forRoot(),
+        MatGridListModule
     ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,

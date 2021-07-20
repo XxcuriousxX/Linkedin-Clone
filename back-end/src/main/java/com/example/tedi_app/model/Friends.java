@@ -26,8 +26,14 @@ public class Friends {
     @NotBlank
     private Long user_id2;
 
+    private Boolean accepted;
+
     public Friends(Long user_id1, Long user_id2) {
         this.user_id1 = user_id1;
         this.user_id2 = user_id2;
+        this.accepted = false;
+    }
+    public Boolean areConnected(){
+        return this.accepted;
     }
 }
