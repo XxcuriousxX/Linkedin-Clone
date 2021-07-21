@@ -1,6 +1,7 @@
 package com.example.tedi_app.controller;
 
 import com.example.tedi_app.dto.FriendRequest;
+import com.example.tedi_app.dto.FriendResponse;
 import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.status;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @AllArgsConstructor
 public class UserController {
 
@@ -27,16 +28,17 @@ public class UserController {
     }
 
 //    make request for friend connection
-    @PostMapping("/connect_request/")
+    @PostMapping("/connect_request")
     public ResponseEntity<Void> makeConnectionRequest(@RequestBody FriendRequest friendRequest) {
         this.userService.makeConnectionRequest(friendRequest.getSender_username(), friendRequest.getReceiver_username());
+        System.out.println("==makeConnectioRequest just executed\n");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     // Remember: sender of the request, has sent friendRequest = {sender_username, receiver_username}
-    // Receiver user will also send friendRequest = { sender_username, receiver_username}
-    @PostMapping("/accept_connection_request/")
+    // Receiver user will also have to send friendRequest = { sender_username, receiver_username}
+    @PostMapping("/accept_connection_request")
     public ResponseEntity<Void> acceptRequest(@RequestBody FriendRequest friendRequest) {
         this.userService.acceptRequest(friendRequest.getSender_username(), friendRequest.getReceiver_username());
         return new ResponseEntity<>(HttpStatus.OK);
@@ -44,7 +46,7 @@ public class UserController {
 
     // Remember: sender of the request, has sent friendRequest = {sender_username, receiver_username}
     // Receiver user will also send friendRequest = { sender_username, receiver_username}
-    @PostMapping("/reject_connection_request/")
+    @PostMapping("/reject_connection_request")
     public ResponseEntity<Void> rejectRequest(@RequestBody FriendRequest friendRequest) {
         this.userService.rejectRequest(friendRequest.getSender_username(), friendRequest.getReceiver_username());
         return new ResponseEntity<>(HttpStatus.OK);
@@ -54,6 +56,29 @@ public class UserController {
     public ResponseEntity<List<User>> getSearchResults(@PathVariable String query){
 
         return status(HttpStatus.OK).body(this.userService.getUsersByQuery(query));
+    }
+
+    // checks if users are connected. Direction does not matter {sender, receiver} is same with {receiver, sender}
+    @PostMapping("/are_connected")
+    public ResponseEntity<FriendResponse> areConnected(@RequestBody FriendRequest friendRequest) {
+        return  status(HttpStatus.OK).body(this.userService.areConnected(friendRequest.getSender_username()
+                                                    , friendRequest.getReceiver_username()));
+    }
+
+    // checks if a request exists (direction matters)
+    @PostMapping("/pending_request")
+    public ResponseEntity<FriendResponse> isPendingConnectionRequest(@RequestBody FriendRequest friendRequest) {
+        return  status(HttpStatus.OK).body(this.userService.isPendingConnectionRequest(friendRequest.getSender_username()
+                , friendRequest.getReceiver_username()));
+    }
+
+    // removes connection or connection request. Direction does not matter
+    // This function removes the tuple {sender, receiver} or {receiver, sender}
+    @PostMapping("/remove_connection")
+    public ResponseEntity<Void> removeConnection(@RequestBody FriendRequest friendRequest) {
+        this.userService.removeConnection(friendRequest.getSender_username()
+                , friendRequest.getReceiver_username());
+        return  new ResponseEntity<>(HttpStatus.OK);
     }
 }
 

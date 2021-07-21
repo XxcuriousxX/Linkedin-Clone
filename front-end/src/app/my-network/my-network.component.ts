@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {SearchService} from "../search/search.service";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { filter } from 'rxjs/operators';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-my-network',
@@ -59,4 +60,5 @@ export class MyNetworkComponent implements OnInit {
       });
 
   }
+
 }

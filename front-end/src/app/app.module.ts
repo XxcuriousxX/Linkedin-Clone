@@ -1,3 +1,4 @@
+import { ConnectService } from './connect-button/connect.service';
 import { TokenInterceptor } from './token-interceptor';
 import { AuthService } from './auth/auth.service';
 
@@ -25,6 +26,7 @@ import { PostsBoxComponent } from './posts-box/posts-box.component';
 import {LikeComponent} from "./post/like/like.component";
 import { SearchComponent } from './search/search.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import { ConnectButtonComponent } from './connect-button/connect-button.component';
 
 
 
@@ -55,7 +57,10 @@ const appRoutes : Routes = [
   {
     path: 'mynetwork',
     component: MyNetworkComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {path: '?query=:q', component: MyNetworkComponent}
+    ]
   },
   {
     //default route
@@ -82,7 +87,8 @@ const appRoutes : Routes = [
     MyNetworkComponent,
     PostsBoxComponent,
     LikeComponent,
-    SearchComponent
+    SearchComponent,
+    ConnectButtonComponent
   ],
     imports: [
         BrowserModule,
@@ -98,7 +104,7 @@ const appRoutes : Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }],
+  }, ConnectService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 

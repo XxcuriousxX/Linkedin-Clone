@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class FriendRequest {
     private String sender_username;
     private String receiver_username;
+
 }

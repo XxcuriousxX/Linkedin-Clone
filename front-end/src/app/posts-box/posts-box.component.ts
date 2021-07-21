@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PostsBoxComponent implements OnInit {
 
 
-  @Input() posts: PostModel[] = [];
+  posts: PostModel[] = [];
 
 
   constructor(private router: Router, private _postService: PostService, private _authService: AuthService) { }

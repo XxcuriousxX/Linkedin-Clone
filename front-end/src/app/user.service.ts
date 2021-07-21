@@ -12,6 +12,6 @@ export class UserService {
 
 
     getAllConnected() : Observable<any>{
-      return this.http.get("http://localhost:8080/users/" + this._authService.getUserName());
+      return this.http.get("http://localhost:8080/api/users/" + this._authService.getUserName());
     }
 }

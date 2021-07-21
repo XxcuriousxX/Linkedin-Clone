@@ -26,6 +26,6 @@ export class NavigationBarComponent implements OnInit {
     this.query = this.searchForm.value.query_input ; // pass value to parent (which is my-network)
     // navigate to '/my-network/?query=input of user
     console.log("INSERTED QUERY: " + this.query);
-    this._router.navigate(['/mynetwork'], { queryParams: { query: this.searchForm.value.query_input }});//, { queryParams: {input: this.searchForm.value.query_input}});
+    this._router.navigate(['/mynetwork/'], { queryParams: { query: this.searchForm.value.query_input }});//, { queryParams: {input: this.searchForm.value.query_input}});
   }
 }

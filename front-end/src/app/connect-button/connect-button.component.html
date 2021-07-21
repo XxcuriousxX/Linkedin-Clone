@@ -1,0 +1,31 @@
+
+
+<div *ngIf="connection_status == 0">
+    <div class="col-md-1">
+      <!-- <button mat-raised-button color="accent" (click)="like()" class="fa fa-thumbs-up"  aria-hidden="true" ></button> -->
+      <button mat-raised-button color="accent" (click)="sendConnectionRequest()"  aria-hidden="true" > Connect </button>
+    </div>
+</div>
+    
+
+
+<div *ngIf="connection_status == 1">
+      <div class="col-md-1">
+        <button mat-stroked-button color="accent" (click)="remove_or_cancel_connection()"   aria-hidden="true"> Request sent </button>
+      </div>
+</div>
+
+
+<div *ngIf="connection_status == 2">
+  <div class="col-md-1">
+    <button mat-raised-button color="accent" (click)="accept_connection()"   aria-hidden="true"> Accept </button>
+  </div>
+</div>
+
+
+<div *ngIf="connection_status == 3">
+  <div class="col-md-1">
+    <button mat-raised-button color="accent" (click)="remove_or_cancel_connection()"   aria-hidden="true"> Connected </button>
+  </div>
+</div>
+
