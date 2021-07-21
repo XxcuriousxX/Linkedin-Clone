@@ -1,3 +1,4 @@
+import { PostsBoxComponent } from './../posts-box/posts-box.component';
 import { PostModel } from './../post/post.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -44,7 +45,6 @@ export class HomeComponent implements OnInit {
       this.isError = true;
       throwError(error);
     });
-      window.location.reload();
   }
 
   logout() {
