@@ -26,8 +26,8 @@ export class ConnectButtonComponent implements OnInit {
   ngOnInit(): void {
 	this.connection_status = 0; // init to not connected
     // If connected, then set are_connected = true, else set it as false
-    this.connectPayload.sender = this._authService.getUserName();
-    this.connectPayload.receiver = this.receiver_user.username;
+    this.connectPayload.sender_username = this._authService.getUserName();
+    this.connectPayload.receiver_username = this.receiver_user.username;
     this._connectService.areConnected(this.connectPayload).subscribe(con_response => {
       if (con_response.status)
         this.connection_status = 3;
@@ -39,21 +39,21 @@ export class ConnectButtonComponent implements OnInit {
 
         // check if a request has been received, and is awaiting aproval
         // just reverse receiver and sender
-        this.connectPayload.sender = this.receiver_user.username;
-        this.connectPayload.receiver = this._authService.getUserName();
-        this._connectService.isRequestPending(this.connectPayload).subscribe(con => {
-        	if (con.status)
+        this.connectPayload.sender_username = this.receiver_user.username;
+        this.connectPayload.receiver_username = this._authService.getUserName();
+        this._connectService.isRequestPending(this.connectPayload).subscribe(c => {
+        	if (c.status)
             	this.connection_status = 2;
         }, 	err => { throwError(err) });
       }, err => { throwError(err) });
-    }, err => { throwError(err); });
+    }, err => { throwError(err) });
 
   }
 
 
   sendConnectionRequest() { 
-    this.connectPayload.sender = this._authService.getUserName();
-    this.connectPayload.receiver = this.receiver_user.username;
+    this.connectPayload.sender_username = this._authService.getUserName();
+    this.connectPayload.receiver_username = this.receiver_user.username;
     this._connectService.makeConnectionRequest(this.connectPayload).subscribe( res => { 
 		this.connection_status = 1;
 		window.location.reload();
@@ -62,8 +62,8 @@ export class ConnectButtonComponent implements OnInit {
   }
 
   remove_or_cancel_connection() {
-	  this.connectPayload.sender = this._authService.getUserName();
-	  this.connectPayload.receiver = this.receiver_user.username;
+	  this.connectPayload.sender_username = this._authService.getUserName();
+	  this.connectPayload.receiver_username = this.receiver_user.username;
 	  this._connectService.removeConnection(this.connectPayload).subscribe( res => {
 		this.connection_status = 0; 
 		window.location.reload();
@@ -71,8 +71,8 @@ export class ConnectButtonComponent implements OnInit {
   }
 
   accept_connection() {
-	  this.connectPayload.sender = this.receiver_user.username;
-	  this.connectPayload.receiver = this._authService.getUserName();
+	  this.connectPayload.sender_username = this.receiver_user.username;
+	  this.connectPayload.receiver_username = this._authService.getUserName();
 	  this._connectService.acceptConnectionRequest(this.connectPayload).subscribe( res => {
 		  this.connection_status = 3;
 		  window.location.reload();

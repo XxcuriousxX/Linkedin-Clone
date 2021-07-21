@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +9,7 @@ import { ConnectPayload, ConnectResponse } from './Connect';
 })
 export class ConnectService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _authService: AuthService) { }
 
 
   // direction does not matter  { user1, user2 } is the same as { user2, user1 }

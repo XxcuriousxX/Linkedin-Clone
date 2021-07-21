@@ -8,6 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class FriendResponse {
-    private Boolean are_friends = false;
+    private Boolean status = false;
 
 }

@@ -92,6 +92,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         "Found with username : " + sender_username));
 
         // create a friends row with accepted value: 'false'
+        System.out.println("User1= " + sender_user.getUserId() + "  User2= " + receiver_user.getUserId());
         friendsRepository.save(new Friends(sender_user.getUserId(), receiver_user.getUserId()));
 
     }
@@ -110,18 +111,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         .getFriendsByUserId1AndUserId2(sender_user.getUserId(), receiver_user.getUserId());
         Friends request = requestOptional
                         .orElseThrow(() -> new UsernameNotFoundException("No such connection request was found"));
-        Optional<Boolean> areConnectedOptional = friendsRepository
-                        .CheckForRequest(sender_user.getUserId(), receiver_user.getUserId());
-        if (areConnectedOptional.isPresent()) { // if request exists
-            Boolean areConnected = areConnectedOptional.orElseThrow(() -> new UsernameNotFoundException("No connection " +
-                    "from : " + sender_username));
-            if (areConnected)
-                throw new SpringTediException("Already connected!");
-            // replace the request with the same id, but with accpted = true
-            friendsRepository.save(new Friends(request.getId(), request.getUser_id1(), request.getUser_id2(), true));
-            return;
+        Optional<Friends> connectionOptional = friendsRepository
+                        .getConnection(sender_user.getUserId(), receiver_user.getUserId());
+        if (connectionOptional.isPresent()) {
+//            Boolean areConnected = areConnectedOptional.orElseThrow(() -> new UsernameNotFoundException("No connection " +
+//                    "from : " + sender_username));
+            throw new SpringTediException("Already connected!");
         }
-        throw new UsernameNotFoundException("Request from " + sender_username + " to " + receiver_username + " was not found");
+        if (!requestOptional.isPresent())
+            throw new SpringTediException("Request does not exist. Accept operation failed");
+        // replace the request with the same id, but with accepted = true
+        friendsRepository.deleteById(request.getId());
+        friendsRepository.save(new Friends(request.getUser_id1(), request.getUser_id2(), true));
+        //throw new UsernameNotFoundException("Request from " + sender_username + " to " + receiver_username + " was not found");
 
     }
 
@@ -182,37 +184,33 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username2));
 
-        Optional<Boolean> areConnectedOptional = friendsRepository
-                .areConnected(user1.getUserId(), user2.getUserId());
-        if (areConnectedOptional.isPresent()) { // if exists
-            Boolean areConnected = areConnectedOptional.orElseThrow(() -> new UsernameNotFoundException("No connection tuple " +
-                    "between : " + username1 + " and " + username2));
-            if (areConnected)
-                return new FriendResponse(true);
-            else
+        Optional<Friends> areConnectedOptional = friendsRepository
+                .getConnection(user1.getUserId(), user2.getUserId());
+        if (!areConnectedOptional.isPresent()) { // if connection does not exist
                 return new FriendResponse(false);
         } else
-            return new FriendResponse(false);
+            return new FriendResponse(true);
     }
 
 
     // true if sender waits for the receiver to accept it
     // false if there has been no connection request
-    // Just checks if there is a tuple {sender, receiver}  (direction matters)
+    // Just checks if there is a tuple {sender, receiver}  (DIRECTION MATTERS)
     public FriendResponse isPendingConnectionRequest(String username1, String username2) {
-        Optional<User> receiverUserOptional = userRepository.findByUsername(username1);
-        User user1 = receiverUserOptional
+        Optional<User> senderUserOptional = userRepository.findByUsername(username1);
+        User user1 = senderUserOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username1));
-        Optional<User> senderUserOptional = userRepository.findByUsername(username2);
-        User user2 = senderUserOptional
+        Optional<User> receiverUserOptional = userRepository.findByUsername(username2);
+        User user2 = receiverUserOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username2));
-        Optional<Friends> requestOptional = friendsRepository
-                .getFriendsByUserId1AndUserId2(user1.getUserId(), user2.getUserId());
+        // get a pending request from username1 to username2
+        Optional<Friends> pendingRequestOptional = friendsRepository
+                .getPendingRequest(user1.getUserId(), user2.getUserId());
 
 
-        if (requestOptional.isPresent())
+        if (pendingRequestOptional.isPresent()) // if there is a pending request
             return new FriendResponse(true);
         else
             return new FriendResponse(false);
@@ -230,9 +228,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username2));
         Optional<Friends> requestOptional = friendsRepository
-                .getExistingConnection(user1.getUserId(), user2.getUserId());
+                .getExistingTuple(user1.getUserId(), user2.getUserId());
         if (!requestOptional.isPresent())
-            throw new SpringTediException("There is no connection or connection request to be removed");
+            throw new SpringTediException(String.format("There is no connection or connection request between %d and %d to be removed", user1.getUserId(),
+                    user2.getUserId()));
 
         Friends request = requestOptional.orElseThrow(() -> new UsernameNotFoundException("No connection tuple " +
                 "between : " + username1 + " and " + username2));

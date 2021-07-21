@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -21,9 +19,9 @@ public class Friends {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @NotBlank
+//    @NotBlank
     private Long user_id1;
-    @NotBlank
+//    @NotBlank
     private Long user_id2;
 
     private Boolean accepted;
@@ -33,7 +31,14 @@ public class Friends {
         this.user_id2 = user_id2;
         this.accepted = false;
     }
+    public Friends(Long user_id1, Long user_id2, Boolean accepted) {
+        this.user_id1 = user_id1;
+        this.user_id2 = user_id2;
+        this.accepted = accepted;
+    }
     public Boolean areConnected(){
         return this.accepted;
     }
+
+
 }

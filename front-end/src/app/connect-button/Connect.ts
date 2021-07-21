@@ -1,6 +1,6 @@
 export class ConnectPayload {
-    sender: string = ""; //username
-    receiver: string = ""; // username
+    sender_username: string = ""; //username
+    receiver_username: string = ""; // username
 
     constructor() { }
 }

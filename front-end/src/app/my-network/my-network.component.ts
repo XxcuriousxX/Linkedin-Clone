@@ -50,7 +50,7 @@ export class MyNetworkComponent implements OnInit {
 
 
 
-    this._userService.getAllConnected().subscribe((res) => {
+    this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
       console.log("SUCCESS");
     },
