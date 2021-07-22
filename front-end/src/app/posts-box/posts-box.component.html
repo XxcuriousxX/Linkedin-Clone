@@ -7,10 +7,12 @@
       <span>  Posted by <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
       <!-- <span>  {{post.duration}}</span> -->
     </span>
+    <div>{{ post.duration }}</div>
     <hr />
     <!-- <div class="post-title">
       <a class="postname" href="#"> {{post.postName }}
     </div> -->
+    
     <div>
       <p class="post-text" [innerHtml]="post.description"></p>
     </div>

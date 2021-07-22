@@ -13,6 +13,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.Instant;
 import java.util.Optional;
 
 //import static import com.example.tedi_app.model.VoteType.DOWNVOTE;
@@ -40,6 +41,7 @@ public abstract class PostMapper {
     @Mapping(target = "username", source = "user.username")
     @Mapping(target = "commentCount", expression = "java(commentCount(post))")
     @Mapping(target = "duration", expression = "java(getDuration(post))")
+    @Mapping(target = "createdDateLong", expression = "java(getCreatedDate(post))")
     public abstract PostResponse mapToDto(Post post);
 
     Integer commentCount(Post post) {
@@ -49,6 +51,8 @@ public abstract class PostMapper {
     String getDuration(Post post) {
         return TimeAgo.using(post.getCreatedDate().toEpochMilli());
     }
+
+    Long getCreatedDate(Post post) { return post.getCreatedDate().toEpochMilli(); }
 
 //    boolean isPostUpVoted(Post post) {
 //        return checkVoteType(post, UPVOTE);

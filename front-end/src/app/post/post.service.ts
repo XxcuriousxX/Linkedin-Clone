@@ -1,7 +1,7 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PostModel } from './post.model';
-import { Observable } from 'rxjs';
 import { CreatePostPayload } from './create-post.payload';
 
 @Injectable({
@@ -25,5 +25,9 @@ export class PostService {
 
   getAllPostsByUser(name: string): Observable<PostModel[]> {
     return this.http.get<PostModel[]>('http://localhost:8080/api/posts/by-user/' + name);
+  }
+
+  getPostsFromConnectedUsers(username: string): Observable<PostModel[]> {
+    return this.http.get<PostModel[]>('http://localhost:8080/api/posts/get_all_posts_from_connections/' + username);
   }
 }

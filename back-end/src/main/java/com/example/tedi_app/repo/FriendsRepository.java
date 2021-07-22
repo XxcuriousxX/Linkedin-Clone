@@ -19,7 +19,7 @@ public interface FriendsRepository extends JpaRepository<Friends,Long> {
     //@Query(value = "SELECT c from User c")
     //List<User> getAllUsers();
 
-    @Query(value = "select id,user_id1,user_id2,accepted from Friends where user_id1 = :param OR user_id2 = :param",nativeQuery = true)
+    @Query(value = "select * from Friends where (user_id1 = :param OR user_id2 = :param) and accepted = true",nativeQuery = true)
     List<Friends> getAllConnectedUsers(@Param("param") Long user_id);
 
      //@Query( "select u.user_id2 from Friends u where u.user_id1 = ?1 union  select u.user_id1 from Friends u where u.user_id2 = ?1 ")

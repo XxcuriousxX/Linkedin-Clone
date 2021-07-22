@@ -13,4 +13,5 @@ public class PostResponse {
     private int likeCount;
     private int commentCount;
     private String duration;
+    private Long createdDateLong;
 }

@@ -5,4 +5,5 @@ export interface PostModel {
     likeCount: number;
     commentCount: number;
     duration: string;
+    createdDateLong: number;
 }

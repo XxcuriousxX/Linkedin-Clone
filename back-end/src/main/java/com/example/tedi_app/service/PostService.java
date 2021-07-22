@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -29,6 +31,8 @@ public class PostService {
     private final UserRepository userRepository;
     private final AuthService authService;
     private final PostMapper postMapper;
+
+    private final UserDetailsServiceImpl userService;
 
     public void save(PostRequest postRequest) {
       postRepository.save(postMapper.map(postRequest, authService.getCurrentUser()));
@@ -59,5 +63,16 @@ public class PostService {
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Collection<PostResponse> getPostsFromConnectedUsers(String username) {
+        Collection<User> connectedUsers = userService.get_all_connected_users(username);
+        Collection<PostResponse> all_posts = new ArrayList<PostResponse>();
+        all_posts.addAll(this.getPostsByUsername(username)); // add posts of myself
+        for (User u : connectedUsers) {
+            all_posts.addAll(this.getPostsByUsername(u.getUsername()));
+        }
+        return all_posts;
     }
 }

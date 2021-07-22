@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return singletonList(new SimpleGrantedAuthority(role));
     }
 
-    // returns a list of Users who are friendss of username
+    // returns a list of Users who are friends of username
     public List<User> get_all_connected_users(String username) {
 //        return userRepository.getAllUsers(
         Optional<User> userOptional = userRepository.findByUsername(username);
@@ -77,6 +77,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 friends_list.add(u2);
             }
         }
+
+        System.out.println("\n==List of friends!!:\n");
+        for (User u : friends_list)
+            System.out.println("Friend " + u.getUsername());
         return friends_list;
 
     }

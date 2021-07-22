@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
       this.isError = false;
       this._router.navigate(['/home']);
       // this.toastr.success('Login Successful');
+      window.location.reload();
     }, error => {
       this.isError = true;
       throwError(error);
