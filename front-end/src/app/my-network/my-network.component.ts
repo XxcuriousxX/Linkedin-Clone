@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user.service";
 import {User, userResponse} from "../user";
@@ -19,7 +20,8 @@ export class MyNetworkComponent implements OnInit {
   search_result: userResponse[] = [];
   query_param: string = "";
   is_query: boolean = false;
-  constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService) { }
+  constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,
+                                            private _authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -36,7 +38,10 @@ export class MyNetworkComponent implements OnInit {
           this.query_p = this.query_param;
 
           this._searchService.executeQuery(this.query_p).subscribe(res => {
+              // filter myself from the query result
               this.search_result = res;
+              let my_self = this.search_result.find(usr => usr.username == this._authService.getUserName())
+              this.search_result = this.search_result.filter(usr => usr !== my_self);
 
               console.log("kalooo" + res);
             },
