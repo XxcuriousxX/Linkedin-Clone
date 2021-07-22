@@ -49,13 +49,13 @@ export class LikeComponent implements OnInit {
         if (response.has_liked) {
         	this.updateLikesNum();
         	this.liked_by_current_user = true;
-          // this.ngOnInit(); pio sosto
-        	window.location.reload();
+          this.ngOnInit();   // pio sosto
+        	// window.location.reload();
         }
         else {
         	this.liked_by_current_user = false;
-          // this.ngOnInit();
-        	window.location.reload();
+          this.ngOnInit();
+        	// window.location.reload();
         }
       }, error => {
         throwError(error);

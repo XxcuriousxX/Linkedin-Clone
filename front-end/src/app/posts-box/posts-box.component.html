@@ -5,7 +5,7 @@
     <span class="subreddit-info">
       <!-- <span class="subreddit-text"><a class="posturl" routerLink="">TEST 1 </a></span> -->
       <span>  Posted by <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
-      <span>  {{post.duration}}</span>
+      <!-- <span>  {{post.duration}}</span> -->
     </span>
     <hr />
     <!-- <div class="post-title">
@@ -15,16 +15,15 @@
       <p class="post-text" [innerHtml]="post.description"></p>
     </div>
     <hr />
-    <span>
+    <!-- <span>
           Post id = {{ post.postId }}
           <a class="btnComments" role="button">
             {{ post.likeCount}} likes
           </a>
-      <!-- redirect to whole post -->
       <a class="btnComments" role="button" (click)="goToPost(post.postId)">
         {{ post.commentCount}} comments
       </a>
-    </span>
+    </span> -->
   </div>
   <app-like [post]="post"></app-like>
 </div>

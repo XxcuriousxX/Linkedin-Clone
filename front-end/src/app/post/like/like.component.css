@@ -1,2 +1,12 @@
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-
+.btnCommments{
+    border-radius: 2px solid;
+    color: #878A8C;
+    opacity: 1;
+  }
+  
+  .btnCommments:hover{
+    opacity: 0.65;
+    cursor: pointer;
+  }
+  

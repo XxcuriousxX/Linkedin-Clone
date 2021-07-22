@@ -1,20 +1,26 @@
 <!-- Section to Display Votes-->
 
 <div *ngIf="liked_by_current_user == false; else already_liked">
-<div class="col-md-1">
-  <!-- <button mat-raised-button color="accent" (click)="like()" class="fa fa-thumbs-up"  aria-hidden="true" ></button> -->
-  <button mat-raised-button color="accent" (click)="like()"  aria-hidden="true" > Like</button>
-  <div class="d-flex flex-column votebox">
-  </div>
-</div>
+
+
+      
+      Post id = {{ post.postId }}
+      <a class="btnComments" role="button">
+        {{ post.likeCount}} likes  {{ post.commentCount}} comments
+      </a>
+      <hr style="width : 100%;">
+
+      <button mat-raised-button color="accent" (click)="like()"  aria-hidden="true" > Like</button>
 </div>
 
 <ng-template #already_liked>
-  <div class="col-md-1">
+  Post id = {{ post.postId }}
+  <a class="btnComments" role="button">
+    {{ post.likeCount}} likes  {{ post.commentCount}} comments
+  </a>
+  <hr style="width : 100%;">
     <!-- <button mat-stroked-button color="primary" (click)="like()" class="fa fa-thumbs-up" aria-hidden="true" ></button> -->
     <button mat-stroked-button color="accent" (click)="like()"   aria-hidden="true"> Liked </button>
     
-    <div class="d-flex flex-column votebox">
-    </div>
-  </div>
+
 </ng-template>
