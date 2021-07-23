@@ -1,0 +1,14 @@
+
+
+<div class="left-box">
+    <div style="font-weight: bold;text-align:center"> 
+        Conversations
+        <hr>
+           
+    </div>
+
+    <div *ngFor="let user of usersList">
+        <button mat-stroked-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true"> {{user.username}} </button>
+    </div>
+
+</div>

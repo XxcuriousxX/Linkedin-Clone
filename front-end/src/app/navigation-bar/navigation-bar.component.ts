@@ -13,7 +13,7 @@ export class NavigationBarComponent implements OnInit {
   //@Output() query = new EventEmitter<string>();
   query : string = "";
   // @Output() has_done_query = new EventEmitter<string>();
-  searchForm:FormGroup = new FormGroup({
+  searchForm: FormGroup = new FormGroup({
     query_input: new FormControl('', Validators.required)
   });
 

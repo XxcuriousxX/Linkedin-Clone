@@ -5,7 +5,7 @@
     </a>
     <div class="input-group rounded ">
       <form class="login" [formGroup]="searchForm" (ngSubmit)="search()">
-      <input type="search" class="form-control rounded" autofocus [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
+      <input type="search" class="form-control rounded"  [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
              aria-describedby="search-addon" />
 <!--      <span class="input-group-text border-0" id="search-addon">-->
         <!--button implementation missing-->
@@ -42,6 +42,8 @@
 
           <a class="nav-link" routerLink="/messages">Messages</a>
         </li>
+
+
       </ul>
 
 

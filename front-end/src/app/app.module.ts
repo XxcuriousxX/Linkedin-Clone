@@ -27,8 +27,9 @@ import {LikeComponent} from "./post/like/like.component";
 import { SearchComponent } from './search/search.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { ConnectButtonComponent } from './connect-button/connect-button.component';
+import { ConversationsComponent } from './messages/conversations/conversations.component';
 
-
+import { MessagesService } from './messages/messages.service';
 
 const materialModules = [
   MatButtonModule
@@ -88,7 +89,8 @@ const appRoutes : Routes = [
     PostsBoxComponent,
     LikeComponent,
     SearchComponent,
-    ConnectButtonComponent
+    ConnectButtonComponent,
+    ConversationsComponent
   ],
     imports: [
         BrowserModule,
@@ -104,7 +106,7 @@ const appRoutes : Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }, ConnectService],
+  }, ConnectService, MessagesService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 

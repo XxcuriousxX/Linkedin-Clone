@@ -1,0 +1,31 @@
+.conv-box {
+    position:relative;
+    border-radius: 20px;
+    border: 1px solid #cfc9c9;
+    padding: 20px;
+    width: 500px;
+    height: 500px;
+    top: 0px;
+    left:35%;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+    font-family: 'Merriweather', serif;
+  
+  }
+
+
+.input{
+    color: black;
+}
+
+
+.message-input-box{
+    position:relative;
+    top: 400px;
+    width:100%;
+    outline: none;
+    border: 0px solid;
+    border-radius: 10px;
+    box-shadow: 0px;
+    padding-left: 10px;
+}
+
