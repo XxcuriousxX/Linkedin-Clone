@@ -241,4 +241,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 "between : " + username1 + " and " + username2));
         friendsRepository.deleteById(request.getId()); // remove the connection from the DB
     }
+
+
+    public List<String> getAllPendingRequestsSentToUser(String username) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+        List<String> user_list = new ArrayList<>();
+        Optional<List<String>> L = friendsRepository.getAllPendingRequestsSentToUser(user.getUserId());
+        if (L.isPresent())
+            return user_list = L.orElseThrow(() -> new UsernameNotFoundException("List is empty"));
+        else
+            return new ArrayList<>();
+    }
 }

@@ -44,6 +44,9 @@ public interface FriendsRepository extends JpaRepository<Friends,Long> {
 
     @Query(value = "select * from Friends  where (user_id1 = :user1 and user_id2 = :user2) and accepted = false", nativeQuery = true)
     Optional<Friends> getPendingRequest(@Param("user1") Long u1, @Param("user2") Long u2);
+
+    @Query(value = "select user.username from Friends, User where user.user_id = friends.user_id1 and friends.user_id2 = :receiver_id and friends.accepted = false;", nativeQuery = true)
+    Optional<List<String>> getAllPendingRequestsSentToUser(@Param("receiver_id") Long receiver_id);
 }
 
 

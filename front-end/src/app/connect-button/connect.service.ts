@@ -1,5 +1,6 @@
-import { AuthService } from './../auth/auth.service';
+import { User } from './../user';
 import { Observable } from 'rxjs';
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConnectPayload, ConnectResponse } from './Connect';
@@ -37,6 +38,11 @@ export class ConnectService {
 
   removeConnection(connectPayload: ConnectPayload): Observable<any> { // no return
       return this.http.post<any>('http://localhost:8080/api/users/remove_connection', connectPayload);
+  }
+
+  
+  getAllPendingRequestsSentToUser(username: string): Observable<string[]> {
+      return this.http.get<string[]>('http://localhost:8080/api/users/get_all_pending_requests_sent_to_user/' + username);
   }
 
 }

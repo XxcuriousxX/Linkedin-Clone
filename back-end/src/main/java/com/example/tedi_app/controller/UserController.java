@@ -80,6 +80,11 @@ public class UserController {
                 , friendRequest.getReceiver_username());
         return  new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/get_all_pending_requests_sent_by_user/{username}")
+    public ResponseEntity<List<String>> getAllPendingRequestsSentToUser(@PathVariable String username) {
+        return status(HttpStatus.OK).body(this.userService.getAllPendingRequestsSentToUser(username));
+    }
 }
 
 
