@@ -1,7 +1,7 @@
 
 export class MessagePayload {
-    sender_username: string;
-    receiver_username: string;
+    sender_username: string = "";
+    receiver_username: string = "";
     message: string;
 
     constructor() { }

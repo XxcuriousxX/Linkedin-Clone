@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../user.service";
 import {User} from "../../user";
@@ -10,10 +11,11 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class ConversationsComponent implements OnInit {
 
-  @Output() selectedUserConv = new EventEmitter<string>(); // username
+  // @Output() selectedUserConv = new EventEmitter<string>(); // username
+  selectedUserConv : string = "";
   usersList : User[] = []
   // @Output selected_receiver_username = new EventEmitter<string>();
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService, private _router: Router) { }
 
 
   ngOnInit(): void {
@@ -22,8 +24,9 @@ export class ConversationsComponent implements OnInit {
 
 
   selectUser(value: string) {
-    this.selectedUserConv.emit(value);
-    
+    // this.selectedUserConv.emit(value);
+    this.selectedUserConv = value;
+    this._router.navigate(['/messages/'], { queryParams: { conversation_name: this.selectedUserConv }});
   }
 
   get_conversation_names() {

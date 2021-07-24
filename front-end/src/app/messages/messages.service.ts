@@ -18,6 +18,6 @@ export class MessagesService {
     }
 
     getConversation(messagePayload: MessagePayload): Observable<MessageResponse[]> { // dont send message. only send and receiver usernames
-        return this.http.post<MessageResponse[]>('http://localhost:8080/api/messages/get_conversation/', messagePayload, {responseType:'text' as 'json'});
+        return this.http.post<MessageResponse[]>('http://localhost:8080/api/messages/get_conversation/', messagePayload, { responseType: 'json' } );
     }
 }

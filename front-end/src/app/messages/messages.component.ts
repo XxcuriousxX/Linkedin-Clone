@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {MessagesService} from './messages.service';
@@ -22,10 +23,15 @@ export class MessagesComponent implements OnInit {
   });
 
   
-  constructor(private _messagesService: MessagesService, private _authService: AuthService) { }
+  constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute) { }
   ngOnInit(): void {
-    this.getConversation();
-    console.log("PRINTING CONV\n");
+    // this.getConversation();
+    // console.log("PRINTING CONV\n");
+    
+    this.route.queryParams.subscribe( params => {
+      this.receiverUsername = params.conversation_name;
+      this.getConversation();
+    });
     // for (let data of this.conversation) {
     //   console.log(data.message);
     // }
@@ -61,7 +67,7 @@ export class MessagesComponent implements OnInit {
   getConversation() {
     this.payload.sender_username = this._authService.getUserName();
     this.payload.receiver_username = this.receiverUsername;
-    this._messagesService.getConversation(this.payload).subscribe( (res: MessageResponse[]) => {
+    this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
       console.log("GET CONV : " + res);
     }, error => { throwError(error); });

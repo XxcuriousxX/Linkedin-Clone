@@ -27,7 +27,7 @@ export class MyNetworkComponent implements OnInit {
     this.route.queryParams
       //.filter(params => params.query)
       .subscribe(params => {
-          console.log(params); // { order: "popular" }
+          console.log(params); // { query: "popular" }
 
           this.query_param = params.query;
 

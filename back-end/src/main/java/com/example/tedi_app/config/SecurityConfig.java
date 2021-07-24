@@ -53,6 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/api/messages/**")
                 .permitAll()
+                .antMatchers(HttpMethod.POST, "/api/messages/")
+                .permitAll()
+                .antMatchers(HttpMethod.POST, "/api/messages/**")
+                .permitAll()
                 .antMatchers("/v2/api-docs",
                         "/configuration/ui",
                         "/swagger-resources/**",

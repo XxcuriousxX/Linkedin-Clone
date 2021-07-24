@@ -2,33 +2,24 @@
 
 <body style="position:relative;height:fit-content">
 
-    <app-conversations (selectedUserConv)="setReceiverUsername($event)"> </app-conversations>
-
+    <!-- <app-conversations (selectedUserConv)="setReceiverUsername($event)"> </app-conversations> -->
+    <app-conversations></app-conversations>
     
     
 
     <div class="conv-box">
 
 
-        
         <div *ngFor="let msg of conversation">
-                    <div *ngFor = "let m of msg">
-
-
-                        {{ m.message }}
-                    </div>
-        </div>
-        <!-- {{ getConversation() }} -->
+           <div> {{ msg.message }}</div>
             
+        
+        </div>
         
         
         <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
             <hr style="position:relative;top:400px;background-color:black;border-top:1px solid black">
             <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message"/>
-            <button type="submit">
-                <i class="spinner"></i>
-                <span class="state">Log in</span>
-              </button>
         </form>
 
     </div>
