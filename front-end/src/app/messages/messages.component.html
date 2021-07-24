@@ -10,7 +10,9 @@
 
     <div class="conv-box">
 
-        <div class="conversation_messages">
+
+        
+        <div class="conversation_messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <div *ngFor="let msg of conversation">
                 <div> {{ msg.message }} </div>
             </div>

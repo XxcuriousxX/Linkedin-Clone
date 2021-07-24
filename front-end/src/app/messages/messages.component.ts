@@ -6,6 +6,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessagePayload, MessageResponse} from './Message';
 
 import { throwError } from 'rxjs';
+import { ScrollToBottomDirective } from '../scroll-to-bottom.directive'
 
 
 @Component({
@@ -13,7 +14,7 @@ import { throwError } from 'rxjs';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit, AfterViewChecked {
+export class MessagesComponent implements OnInit {
 
   conversation: MessageResponse[] =  [];
   payload : MessagePayload = new MessagePayload();
@@ -23,16 +24,9 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
   });
 
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
 
-  scrollToBottom(): void {
-    try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    } catch(err) { } 
-  }
+  @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
+
   
   constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute) { }
   ngOnInit(): void {
@@ -44,7 +38,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
     });
-    this.scrollToBottom();
     // for (let data of this.conversation) {
     //   console.log(data.message);
     // }
