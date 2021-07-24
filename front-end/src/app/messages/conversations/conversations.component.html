@@ -1,19 +1,18 @@
 
 
+
 <div class="left-box">
-    <div style="font-weight: bold;text-align:center"> 
+    <div style="font-weight: bold;text-align:center">
         Conversations
         <hr>
-           
+
     </div>
 
-    <div *ngFor="let user of usersList">
-        <div *ngIf="user.username === selectedUserConv; else notselected">
-            <button mat-stroked-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true" style="color: #d3d3d3;" > {{user.username}} </button>
-        </div>
-        <ng-template #notselected>
-            <button mat-raised-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true" style="background-color: #d3d3d3;" > {{user.username}} </button>
-        </ng-template>
+    <div class="users" *ngFor="let user of usersList let i = index" [attr.data-index]="i" >
+        <button [ngClass]="toggle ===  i ? 'active' : 'not-active'" style="font-size: 20px" (click)="change_button_state(user.username,i)"  aria-hidden="true">
+          {{user.username}}
+        </button>
+        <hr style="position:relative;right: 95px;border: 0px;width: 80%">
     </div>
 
 </div>

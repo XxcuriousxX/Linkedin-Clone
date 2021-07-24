@@ -14,6 +14,7 @@ public class MessageResponse {
 
     private Long messageId;
     private String senderUsername;
+    private String receiverUsername;
     private String message;
     private Long receiverId;
     private Long senderId;

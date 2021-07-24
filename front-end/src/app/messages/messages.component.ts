@@ -8,6 +8,7 @@ import {MessagePayload, MessageResponse} from './Message';
 
 import { throwError } from 'rxjs';
 import { ScrollToBottomDirective } from '../scroll-to-bottom.directive'
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class MessagesComponent implements OnInit {
     message: new FormControl('')
   });
 
-  @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
+  currentUser: string = this._authService.getUserName();
+  // @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
+  @ViewChild('container') private myScrollContainer: ElementRef;
 
   
   constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute
@@ -38,18 +41,25 @@ export class MessagesComponent implements OnInit {
       this.receiverUsername = params.conversation_name;
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
+        this.scrollToBottom();
+
+
     });
 
   }
 
-
-
-  async getUsernameByUserId(uid: number) {
-    await this._userService.getUserById(uid).subscribe( res => {
-      return res.username;
-    }, err => throwError(err));
+  ngAfterViewChecked() {
+    this.scrollToBottom();
   }
-  
+
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      // this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
+    } catch(err) { }
+  }
+
   
   
   sendMessage() {

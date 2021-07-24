@@ -1,31 +1,55 @@
+
+
 <app-navigation-bar></app-navigation-bar>
 
-<body style="position:relative;height:fit-content">
+<body style="position:fixed;height:fit-content">
 
-    <!-- <app-conversations (selectedUserConv)="setReceiverUsername($event)"> </app-conversations> -->
-    <div class="left-box">
-        <app-conversations></app-conversations>
-    </div>
-    
+    <app-conversations> </app-conversations>
+
+
+
 
     <div class="conv-box">
 
+      <div class="messages-region" #container>
 
-        
-        <div class="conversation_messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-            <div *ngFor="let msg of conversation">
-                <div> [ {{ msg.duration }} ]  <b>{{ msg.senderUsername }}</b>  {{ msg.message }}  </div>
+
+<!--        -->
+        <div  *ngFor="let msg of conversation">
+
+
+          <div  *ngIf=" msg.senderUsername === currentUser ">
+
+
+            <div class="sender">
+
+              {{msg.message}}
+
+              <div class="time">{{ msg.duration }} </div>
+
             </div>
-        
-        </div>
-    
 
-        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
-            <hr style="position:relative;top:400px;background-color:black;border-top:1px solid black">
-            <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message"/>
+          </div>
+
+          <div class="receiver" *ngIf=" msg.receiverUsername === currentUser ">
+
+
+            {{ msg.message }}
+
+            <div class="time">{{msg.duration}} </div>
+
+          </div>
+
+        </div>
+        <!-- {{ getConversation() }} -->
+
+
+      </div>
+        <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+            <hr style="position:relative;top:10px;background-color:black;border-top:1px solid black">
+            <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message" autocomplete="off"/>
         </form>
     </div>
-    
 
 
 

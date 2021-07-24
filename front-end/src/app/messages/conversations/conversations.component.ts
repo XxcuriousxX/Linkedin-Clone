@@ -16,6 +16,7 @@ export class ConversationsComponent implements OnInit {
   usersList : User[] = []
   // @Output selected_receiver_username = new EventEmitter<string>();
   constructor(private _userService: UserService, private _router: Router) { }
+  toggle = -1;
 
 
   ngOnInit(): void {
@@ -27,6 +28,12 @@ export class ConversationsComponent implements OnInit {
     // this.selectedUserConv.emit(value);
     this.selectedUserConv = value;
     this._router.navigate(['/messages/'], { queryParams: { conversation_name: this.selectedUserConv }});
+  }
+
+  
+  change_button_state(value: string,index:number){
+    this.selectUser(value);
+    this.toggle = index;
   }
 
   get_conversation_names() {

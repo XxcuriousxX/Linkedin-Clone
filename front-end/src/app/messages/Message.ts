@@ -10,6 +10,7 @@ export class MessagePayload {
 export class MessageResponse {
     messageId: number = -1;
     senderUsername : string = "";
+    receiverUsername: string = "";
     message: string = "";
     senderId: number = -1;
     receiverId : number = -1;

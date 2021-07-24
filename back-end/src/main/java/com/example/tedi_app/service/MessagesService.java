@@ -64,10 +64,14 @@ public class MessagesService {
         List<MessageResponse> l = new ArrayList<>();
         for (Message m : L) {
             MessageResponse temp = messageMapper.mapToDto(m);
-            if (m.getSenderId() == user_rcv.getUserId())
+            if (m.getSenderId() == user_rcv.getUserId()) {
                 temp.setSenderUsername(user_rcv.getUsername());
-            else
+                temp.setReceiverUsername(user_sender.getUsername());
+            }
+            else {
+                temp.setReceiverUsername(user_rcv.getUsername());
                 temp.setSenderUsername(user_sender.getUsername());
+            }
             l.add(temp);
         }
         return l;
