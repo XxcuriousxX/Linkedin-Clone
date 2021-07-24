@@ -23,7 +23,8 @@ import java.util.Optional;
 @Mapper(componentModel = "spring")
 public abstract class MessageMapper {
 
-
+    @Autowired
+    private AuthService authService;
 //
 //    @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
 //    @Mapping(target = "message", source = "m.message")
@@ -37,6 +38,7 @@ public abstract class MessageMapper {
     @Mapping(target = "receiverId", source = "receiverId")
     @Mapping(target = "timeCreated", source = "timeCreated")
     @Mapping(target = "duration", expression = "java(getDuration(msg))")
+    @Mapping(target = "senderUsername", source = "senderUsername")
     public abstract MessageResponse mapToDto(Message msg);
 
     String getDuration(Message msg) {

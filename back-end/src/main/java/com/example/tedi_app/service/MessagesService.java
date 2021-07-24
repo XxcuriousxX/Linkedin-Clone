@@ -33,7 +33,7 @@ public class MessagesService {
         User sender_user = senderUserOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + sender_username));
-        messagesRepository.save(new Message(sender_user.getUserId(), receiver_user.getUserId(), msg));
+        messagesRepository.save(new Message(sender_user.getUserId(), receiver_user.getUserId(), msg, sender_user.getUsername()));
         System.out.println("Message sent: " + msg + " !!!");
         return;
     }

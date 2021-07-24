@@ -25,7 +25,7 @@ public class Message {
     private String message;
     private Long receiverId;
     private Long senderId;
-
+    private String senderUsername;
 
 //    @ManyToOne(fetch = LAZY)
 //    @JoinColumn(name = "receiverId", referencedColumnName = "userId")
@@ -40,10 +40,11 @@ public class Message {
 
     private Instant timeCreated = Instant.now();
 
-    public Message(Long sender_id, Long receiver_id, String message) {
+    public Message(Long sender_id, Long receiver_id, String message, String sender_username) {
         this.senderId = sender_id;
         this.receiverId = receiver_id;
         this.message = message;
+        this.senderUsername = sender_username;
     }
 
 

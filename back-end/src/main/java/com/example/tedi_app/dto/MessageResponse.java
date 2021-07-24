@@ -13,7 +13,7 @@ import java.time.Instant;
 public class MessageResponse {
 
     private Long messageId;
-
+    private String senderUsername;
     private String message;
     private Long receiverId;
     private Long senderId;

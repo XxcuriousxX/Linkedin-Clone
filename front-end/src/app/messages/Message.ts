@@ -8,12 +8,14 @@ export class MessagePayload {
 }
 
 export class MessageResponse {
+    messageId: number = -1;
+    senderUsername : string = "";
     message: string = "";
+    senderId: number = -1;
     receiverId : number = -1;
     timeCreated: string = "";
-    messageId: number = -1;
-    senderId: number = -1;
     duration: string = "";
+
     constructor()  { }
     
 }
