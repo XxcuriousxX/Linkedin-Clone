@@ -8,7 +8,12 @@
     </div>
 
     <div *ngFor="let user of usersList">
-        <button mat-stroked-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true"> {{user.username}} </button>
+        <div *ngIf="user.username === selectedUserConv; else notselected">
+            <button mat-stroked-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true" style="color: #d3d3d3;" > {{user.username}} </button>
+        </div>
+        <ng-template #notselected>
+            <button mat-raised-button color="accent" (click)="selectUser(user.username)"  aria-hidden="true" style="background-color: #d3d3d3;" > {{user.username}} </button>
+        </ng-template>
     </div>
 
 </div>

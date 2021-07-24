@@ -1,7 +1,7 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user.service";
-import {User, userResponse} from "../user";
+import {User, UserResponse} from "../user";
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import {ActivatedRoute} from "@angular/router";
 import {SearchService} from "../search/search.service";
@@ -17,7 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 export class MyNetworkComponent implements OnInit {
   query_p: string = "";
   usersList: User[] = [];
-  search_result: userResponse[] = [];
+  search_result: UserResponse[] = [];
   query_param: string = "";
   is_query: boolean = false;
   constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,

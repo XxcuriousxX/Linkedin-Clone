@@ -33,7 +33,7 @@ public class MessagesService {
         User sender_user = senderUserOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + sender_username));
-        messagesRepository.save(new Message(sender_user.getUserId(), receiver_user.getUserId(), msg, sender_user.getUsername()));
+        messagesRepository.save(new Message(sender_user.getUserId(), receiver_user.getUserId(), msg));
         System.out.println("Message sent: " + msg + " !!!");
         return;
     }
@@ -63,7 +63,12 @@ public class MessagesService {
 
         List<MessageResponse> l = new ArrayList<>();
         for (Message m : L) {
-            l.add(messageMapper.mapToDto(m));
+            MessageResponse temp = messageMapper.mapToDto(m);
+            if (m.getSenderId() == user_rcv.getUserId())
+                temp.setSenderUsername(user_rcv.getUsername());
+            else
+                temp.setSenderUsername(user_sender.getUsername());
+            l.add(temp);
         }
         return l;
     }

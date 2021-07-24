@@ -1,3 +1,4 @@
+import { UserResponse } from './user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {AuthService} from "./auth/auth.service";
@@ -13,5 +14,10 @@ export class UserService {
 
     getAllConnected() : Observable<any>{
       return this.http.get("http://localhost:8080/api/users/" + this._authService.getUserName());
+    }
+
+    getUserById(uid: number) : Observable<UserResponse> {
+      return this.http.get<UserResponse>("http://localhost:8080/api/users/get_user_by_id/" + uid);
+
     }
 }

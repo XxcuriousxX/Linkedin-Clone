@@ -27,6 +27,10 @@ public class UserController {
         return status(HttpStatus.OK).body(userService.get_all_connected_users(username));
     }
 
+    @GetMapping("/get_user_by_id/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(userService.getUserById(id));
+    }
 //    make request for friend connection
     @PostMapping("/connect_request")
     public ResponseEntity<Void> makeConnectionRequest(@RequestBody FriendRequest friendRequest) {

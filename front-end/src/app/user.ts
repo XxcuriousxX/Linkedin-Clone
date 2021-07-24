@@ -22,7 +22,7 @@ export class User {
 
 }
 
-export class userResponse {
+export class UserResponse {
   userId : number;
   username:string;
   password: string;

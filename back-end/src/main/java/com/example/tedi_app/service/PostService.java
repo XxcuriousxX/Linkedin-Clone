@@ -68,7 +68,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public Collection<PostResponse> getPostsFromConnectedUsers(String username) {
         Collection<User> connectedUsers = userService.get_all_connected_users(username);
-        Collection<PostResponse> all_posts = new ArrayList<PostResponse>();
+        Collection<PostResponse> all_posts = new ArrayList<>();
         all_posts.addAll(this.getPostsByUsername(username)); // add posts of myself
         for (User u : connectedUsers) {
             all_posts.addAll(this.getPostsByUsername(u.getUsername()));

@@ -38,7 +38,6 @@ public abstract class MessageMapper {
     @Mapping(target = "receiverId", source = "receiverId")
     @Mapping(target = "timeCreated", source = "timeCreated")
     @Mapping(target = "duration", expression = "java(getDuration(msg))")
-    @Mapping(target = "senderUsername", source = "senderUsername")
     public abstract MessageResponse mapToDto(Message msg);
 
     String getDuration(Message msg) {

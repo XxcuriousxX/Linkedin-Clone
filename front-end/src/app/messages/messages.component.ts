@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
@@ -23,12 +24,11 @@ export class MessagesComponent implements OnInit {
     message: new FormControl('')
   });
 
-
-
   @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
 
   
-  constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute) {
+  constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute
+                          , private _userService: UserService) {
    }
   ngOnInit(): void {
     // this.getConversation();
@@ -39,18 +39,16 @@ export class MessagesComponent implements OnInit {
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
     });
-    // for (let data of this.conversation) {
-    //   console.log(data.message);
-    // }
+
   }
 
 
-  setReceiverUsername(receiver: string) {
-    
-    this.receiverUsername = receiver;
-  }
 
-  
+  async getUsernameByUserId(uid: number) {
+    await this._userService.getUserById(uid).subscribe( res => {
+      return res.username;
+    }, err => throwError(err));
+  }
   
   
   
@@ -61,8 +59,7 @@ export class MessagesComponent implements OnInit {
     this.payload.receiver_username = this.receiverUsername;
     this.payload.message = this.messageForm.value.message;
     this._messagesService.sendMessage(this.payload).subscribe(data => {
-      // this.toastr.success('Login Successful');
-      // window.location.reload();
+
       this.ngOnInit();
     }, error => {
       throwError(error);

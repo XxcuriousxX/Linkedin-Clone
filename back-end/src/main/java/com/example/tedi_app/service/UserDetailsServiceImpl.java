@@ -42,6 +42,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 true, getAuthorities("USER"));
     }
 
+    public User getUserById(Long uid) {
+        Optional<User> userOptional = userRepository.findByUserId(uid);
+        User user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with id : " + uid));
+        return user;
+    }
+
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
     }
