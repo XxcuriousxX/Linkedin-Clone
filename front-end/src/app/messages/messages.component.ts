@@ -28,7 +28,8 @@ export class MessagesComponent implements OnInit {
   @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
 
   
-  constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute) { }
+  constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute) {
+   }
   ngOnInit(): void {
     // this.getConversation();
     // console.log("PRINTING CONV\n");
@@ -47,7 +48,6 @@ export class MessagesComponent implements OnInit {
   setReceiverUsername(receiver: string) {
     
     this.receiverUsername = receiver;
-    console.log("this val: " + this.receiverUsername);
   }
 
   
@@ -75,7 +75,6 @@ export class MessagesComponent implements OnInit {
     this.payload.receiver_username = this.receiverUsername;
     this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
-      console.log("GET CONV : " + res);
     }, error => { throwError(error); });
   }
 

@@ -13,6 +13,7 @@ export class MessageResponse {
     timeCreated: string = "";
     messageId: number = -1;
     senderId: number = -1;
+    duration: string = "";
     constructor()  { }
     
 }

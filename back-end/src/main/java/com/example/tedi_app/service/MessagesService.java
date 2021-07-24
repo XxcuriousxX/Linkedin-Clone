@@ -1,5 +1,6 @@
 package com.example.tedi_app.service;
 
+import com.example.tedi_app.dto.MessageResponse;
 import com.example.tedi_app.mapper.MessageMapper;
 import com.example.tedi_app.model.Message;
 import com.example.tedi_app.model.User;
@@ -9,16 +10,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class MessagesService {
 
     private final MessagesRepository messagesRepository;
     private final UserRepository userRepository;
+    private final MessageMapper messageMapper;
 
     public void sendMessage(String sender_username, String receiver_username, String msg) {
         Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
@@ -34,7 +38,7 @@ public class MessagesService {
         return;
     }
 
-    public List<Message> getConversation(String sender_username, String receiver_username) {
+    public List<MessageResponse> getConversation(String sender_username, String receiver_username) {
 
         Optional<User> userOptional1 = userRepository.findByUsername(receiver_username);
         User user_rcv = userOptional1
@@ -57,7 +61,10 @@ public class MessagesService {
         if (msgListOpt.isEmpty())
             return new ArrayList();
 
-
-        return L;
+        List<MessageResponse> l = new ArrayList<>();
+        for (Message m : L) {
+            l.add(messageMapper.mapToDto(m));
+        }
+        return l;
     }
 }

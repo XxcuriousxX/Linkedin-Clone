@@ -62,13 +62,13 @@ public abstract class PostMapper {
 //        return checkVoteType(post, DOWNVOTE);
 //    }
 
-    private boolean checkVoteType(Post post) {
-        if (authService.isLoggedIn()){
-            Optional<Vote> voteForPostByUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post,
-                        authService.getCurrentUser());
-            return voteForPostByUser != null;
-        }
-        return false;
-    }
+//    private boolean checkVoteType(Post post) {
+//        if (authService.isLoggedIn()){
+//            Optional<Vote> voteForPostByUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post,
+//                        authService.getCurrentUser());
+//            return voteForPostByUser != null;
+//        }
+//        return false;
+//    }
 
 }

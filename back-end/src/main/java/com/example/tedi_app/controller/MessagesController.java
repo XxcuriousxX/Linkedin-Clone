@@ -1,6 +1,7 @@
 package com.example.tedi_app.controller;
 
 import com.example.tedi_app.dto.MessageRequest;
+import com.example.tedi_app.dto.MessageResponse;
 import com.example.tedi_app.model.Message;
 import com.example.tedi_app.service.MessagesService;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class MessagesController {
     }
 
     @PostMapping("/get_conversation/")
-    public ResponseEntity<List<Message>> getConversation(@RequestBody MessageRequest msgRequest) {
+    public ResponseEntity<List<MessageResponse>> getConversation(@RequestBody MessageRequest msgRequest) {
         return status(HttpStatus.OK).body(messagesService.getConversation(msgRequest.getSender_username(), msgRequest.getReceiver_username()));
 
     }
