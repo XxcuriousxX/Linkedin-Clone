@@ -9,20 +9,20 @@
 
     <div class="conv-box">
 
-
-        <div *ngFor="let msg of conversation">
-           <div> {{ msg.message }}</div>
-            
+        <div class="conversation_messages">
+            <div *ngFor="let msg of conversation">
+                <div> {{ msg.message }} </div>
+            </div>
         
         </div>
-        
-        
-        <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+    
+
+        <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
             <hr style="position:relative;top:400px;background-color:black;border-top:1px solid black">
             <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message"/>
         </form>
-
     </div>
+    
 
 
 

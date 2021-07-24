@@ -53,7 +53,10 @@ const appRoutes : Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {path: '?conversation_name=:name', component: MessagesComponent}
+    ]
   },
   {
     path: 'mynetwork',

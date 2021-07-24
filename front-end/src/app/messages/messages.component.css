@@ -1,5 +1,6 @@
+
 .conv-box {
-    position:relative;
+    position: relative;
     border-radius: 20px;
     border: 1px solid #cfc9c9;
     padding: 20px;
@@ -9,8 +10,16 @@
     left:35%;
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
     font-family: 'Merriweather', serif;
-  
-  }
+}
+
+.conversation_messages {
+    overflow: auto;
+    height: 80%;
+    width: 100%;
+    position: relative;
+    top:0px;
+    /* bottom:0; */
+}
 
 
 .input{
@@ -18,14 +27,20 @@
 }
 
 
+
+
 .message-input-box{
-    position:relative;
-    top: 400px;
+    position: relative;
+    bottom: 0;
     width:100%;
     outline: none;
     border: 0px solid;
     border-radius: 10px;
-    box-shadow: 0px;
+    
+    height: 20%;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+
+
     padding-left: 10px;
 }
 
