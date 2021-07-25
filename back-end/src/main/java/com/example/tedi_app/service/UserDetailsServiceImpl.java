@@ -1,5 +1,6 @@
 package com.example.tedi_app.service;
 
+import com.example.tedi_app.dto.ChangeInfoRequest;
 import com.example.tedi_app.dto.FriendResponse;
 import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.exceptions.SpringTediException;
@@ -270,5 +271,36 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         return returning_list;
+    }
+
+    public void changeInfo(ChangeInfoRequest changeInfoRequest) {
+
+
+        Optional<User>  existing = this.userRepository.findByUsername(changeInfoRequest.getUsername());
+        User user1 = existing
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + changeInfoRequest.getUsername()));
+
+
+        if(changeInfoRequest.getEmail() != null && !changeInfoRequest.getEmail().isEmpty())
+            user1.setEmail(changeInfoRequest.getEmail());
+        if(changeInfoRequest.getPassword() != null && !changeInfoRequest.getPassword().isEmpty())
+            user1.setPassword(changeInfoRequest.getPassword());
+
+
+        userRepository.save(user1);
+
+    }
+
+    public User get_user_info(String username) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+
+        System.out.println(user.getEmail());
+
+
+        return user;
     }
 }

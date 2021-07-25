@@ -13,7 +13,7 @@ export class NavigationBarComponent implements OnInit {
   //@Output() query = new EventEmitter<string>();
   query : string = "";
   // @Output() has_done_query = new EventEmitter<string>();
-  searchForm: FormGroup = new FormGroup({
+  searchForm:FormGroup = new FormGroup({
     query_input: new FormControl('', Validators.required)
   });
 
@@ -27,5 +27,6 @@ export class NavigationBarComponent implements OnInit {
     // navigate to '/my-network/?query=input of user
     console.log("INSERTED QUERY: " + this.query);
     this._router.navigate(['/mynetwork/'], { queryParams: { query: this.searchForm.value.query_input }});//, { queryParams: {input: this.searchForm.value.query_input}});
+    this.searchForm.reset();
   }
 }

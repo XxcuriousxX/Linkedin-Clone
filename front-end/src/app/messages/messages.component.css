@@ -10,7 +10,7 @@
     padding: 20px;
     width: 500px;
     height: 500px;
-    top: 10px;
+    top: 100px;
     left: 125%;
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
     font-family: 'Merriweather', serif;
@@ -107,8 +107,20 @@
 
 .time{
   font-size: 15px;
-  color: #fcfcfc;
+  color: #000000;
   text-align: right;
-  opacity: 60%;
+  opacity: 80%;
   font-family: 'Zen Loop', cursive;
+}
+
+
+/* hide scrollbar but allow scrolling */
+div {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+div::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }

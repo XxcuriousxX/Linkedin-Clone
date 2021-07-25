@@ -1,20 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light  navbar-custom" xmlns="http://www.w3.org/1999/html">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light  navbar-custom" xmlns="http://www.w3.org/1999/html" style="background-color: #8e8e8e">
   <div class="container-fluid no-padding">
     <a class="nav-link" routerLink="/home">
       <img src="/assets/images.png" alt="image" class="logo"> &nbsp;
     </a>
     <div class="input-group rounded ">
-      <form class="login" [formGroup]="searchForm" (ngSubmit)="search()">
-      <input type="search" class="form-control rounded"  [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
-             aria-describedby="search-addon" />
-<!--      <span class="input-group-text border-0" id="search-addon">-->
-        <!--button implementation missing-->
-        <button mat-mini-fab class="fa fa-search mt-0" color="primary" type="submit"></button>
+
+      <form class="form-group has-search" [formGroup]="searchForm" (ngSubmit)="search()">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input type="text" class="form-control rounded"  [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
+               aria-describedby="search-addon" />
       </form>
 
-<!--        <i class="fa fa-search" aria-hidden="true" routerLink="/invalid"></i>-->
+
 
     </div>
+
+
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,32 +26,52 @@
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active_route">Home</a>
         </li>
         <li class="nav-item">
           <div class="icons">
             <i class="fa fa-users fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link" routerLink="/mynetwork">My Network</a>
+          <a class="nav-link" routerLink="/mynetwork" routerLinkActive="active_route">My Network</a>
         </li>
+
+        <li class="nav-item">
+
+          <div class="icons">
+            <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+          </div>
+
+          <a class="nav-link" routerLink="/mysettings" routerLinkActive="active_route">Settings</a>
+        </li>
+
         <li class="nav-item">
 
           <div class="icons">
             <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
           </div>
 
-          <a class="nav-link" routerLink="/messages">Messages</a>
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active_route">Messages</a>
         </li>
+        <li class="nav-item">
+
+          <div class="icons">
+            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+          </div>
+
+          <a class="nav-link" routerLink="/personal-Info" routerLinkActive="active_route">Personal Info</a>
+        </li>
+
+
 
 
       </ul>
 
 
-<!--      <form class="d-flex">-->
-<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--      </form>-->
+      <!--      <form class="d-flex">-->
+      <!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+      <!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
+      <!--      </form>-->
 
     </div>
   </div>

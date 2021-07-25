@@ -82,9 +82,20 @@ export class MessagesComponent implements OnInit {
     this.payload.receiver_username = this.receiverUsername;
     this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
+      for (let x=0; x < this.conversation.length; x++){
+        this.conversation[x].timeCreated = this.split_date(this.conversation[x].timeCreated);
+    }
     }, error => { throwError(error); });
   }
 
 
+  split_date(_date:string):string{
+
+    let time = _date.substring(11,16);
+    let date  = _date.substring(0,10);
+    date = date.split('-').reverse().join('');
+    date = date.substring(0,2) + '/' + date.substring(2,4) + '/' + date.substring(6,8);
+    return time + "      " + date;
+  }
 
 }

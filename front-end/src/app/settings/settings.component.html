@@ -1,0 +1,44 @@
+<!--<div class="left-box" >-->
+<app-navigation-bar xmlns="http://www.w3.org/1999/html"> </app-navigation-bar>
+
+<body>
+
+<br>
+
+
+<div class="wrapper">
+  <div class="box">
+    <p class="title" style="text-align: center;font-weight: bold;font-size: x-large">Settings</p>
+    <hr>
+    <form class="settings" [formGroup]="settingsForm" (ngSubmit)="submit_changes()">
+      <div class="txt">   Username: <span class="ins-txt"> {{this.userInfo.username}} </span>  </div>
+      <hr class="line">
+      <div class="txt">  First Name: <span class="ins-txt"> {{this.userInfo.first_name}} </span>  </div>
+      <hr class="line">
+      <div class="txt">  Last Name: <span class="ins-txt"> {{this.userInfo.last_name}} </span>  </div>
+      <hr class="line">
+      <div class="txt">  Works At: <span class="ins-txt"> {{this.userInfo.company_name}} </span>  </div>
+      <hr class="line">
+      <div class="txt">  Email: <span class="ins-txt"> {{this.userInfo.email}} </span>  </div>
+      <hr class="line">
+
+      <input [ngClass]="email_exists == true ? 'form-rounded-exists' : 'form-rounded' " type="text" [placeholder]=" email_exists == true ? 'Email Exists' : 'Change email' "
+             [formControlName]="'email'" name="email" required />
+
+      <button class="btn btn-primary btn-round" type="submit">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button><br><br>
+
+      <input class="form-rounded"  type="password" placeholder="Change Password" [formControlName]="'password'" name="password" required autocomplete="off"/>
+      <button  class="btn btn-primary btn-round" type="submit">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+<!--<app-public-options class="public-toggle"></app-public-options>-->
+
+</body>

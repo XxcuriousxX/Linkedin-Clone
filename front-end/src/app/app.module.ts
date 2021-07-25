@@ -1,3 +1,5 @@
+import { SettingsComponent } from './settings/settings.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ConnectService } from './connect-button/connect.service';
 import { TokenInterceptor } from './token-interceptor';
 import { AuthService } from './auth/auth.service';
@@ -79,6 +81,16 @@ const appRoutes : Routes = [
     pathMatch : 'full'
   },
   {
+    path: 'personal-Info',
+    component: PersonalInfoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'mysettings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     // ** -> none of our routes are hit wildcard route
     path: '**',
     component: NotFoundComponent
@@ -100,7 +112,9 @@ const appRoutes : Routes = [
     SearchComponent,
     ConnectButtonComponent,
     ConversationsComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    SettingsComponent,
+    PersonalInfoComponent
   ],
     imports: [
         BrowserModule,

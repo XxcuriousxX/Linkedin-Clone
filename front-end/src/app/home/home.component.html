@@ -1,11 +1,10 @@
-<html>
-<header>
+
 <app-navigation-bar ></app-navigation-bar>
-</header>
+
 <!-- <div class="right">
     Dexia
 </div> -->
-<body>
+<body >
 
 
 
@@ -28,7 +27,7 @@
             <ul>
               <li>
                 <br>
-                <a class="links" routerLink="/settings">
+                <a class="links" routerLink="/mysettings">
                   My Settings
                   <i class="fa fa-cog " aria-hidden="true"></i>
                 </a>
@@ -62,7 +61,7 @@
           <div class="post-box">
             <!--POST FORM-->
             <form [formGroup]="postForm" (ngSubmit)="createPost()">
-            <input type="text" id="post" [formControlName]="'description'" placeholder=" Start a post"  />
+            <input type="text" id="post" [formControlName]="'description'" placeholder=" Start a post"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
 
 
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -91,8 +90,8 @@
                   </button>
                 </div>
             </form>
-                <!--  <hr style="width: 120%;margin-left:20px; position: relative; left: -43px"> -->
-                
+                  <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:-20px">
+
 
         </div>
 
@@ -106,10 +105,11 @@
 <!--            </button>-->
 <!--        </form>-->
         </div>
-        <app-posts-box></app-posts-box>
+        <app-posts-box style="position: relative;top:105px"></app-posts-box>
+
     </article>
   </section>
 
 
 </body>
-</html>
+

@@ -1,9 +1,11 @@
 package com.example.tedi_app.controller;
 
+import com.example.tedi_app.dto.ChangeInfoRequest;
 import com.example.tedi_app.dto.FriendRequest;
 import com.example.tedi_app.dto.FriendResponse;
 import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.model.User;
+import com.example.tedi_app.repo.UserRepository;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ import static org.springframework.http.ResponseEntity.status;
 public class UserController {
 
     private final UserDetailsServiceImpl userService;
+    private UserRepository userRepository;
 
 
     @GetMapping("/{username}")
@@ -88,6 +91,25 @@ public class UserController {
     @GetMapping("/get_all_pending_requests_sent_to_user/{username}")
     public ResponseEntity<List<User>> getAllPendingRequestsSentToUser(@PathVariable String username) {
         return status(HttpStatus.OK).body(this.userService.getAllPendingRequestsSentToUser(username));
+    }
+
+
+    @PostMapping("/changeinfo")
+    public ResponseEntity<String> ChangeInfo(@RequestBody ChangeInfoRequest changeInfoRequest){
+
+        if(this.userRepository.findByEmail(changeInfoRequest.getEmail()).isPresent()){
+            return new ResponseEntity<>("email exists", HttpStatus.BAD_REQUEST);
+        }
+
+        userService.changeInfo(changeInfoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+
+    @GetMapping("/userInfo/{username}")
+    public ResponseEntity <User> getUserInfo(@PathVariable String username){
+        return status(HttpStatus.OK).body(userService.get_user_info(username));
     }
 }
 
