@@ -7,7 +7,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessagePayload, MessageResponse} from './Message';
 
 import { throwError } from 'rxjs';
-import { ScrollToBottomDirective } from '../scroll-to-bottom.directive'
 import { ThisReceiver } from '@angular/compiler';
 
 
