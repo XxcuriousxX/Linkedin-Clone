@@ -85,8 +85,8 @@ public class UserController {
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/get_all_pending_requests_sent_by_user/{username}")
-    public ResponseEntity<List<String>> getAllPendingRequestsSentToUser(@PathVariable String username) {
+    @GetMapping("/get_all_pending_requests_sent_to_user/{username}")
+    public ResponseEntity<List<User>> getAllPendingRequestsSentToUser(@PathVariable String username) {
         return status(HttpStatus.OK).body(this.userService.getAllPendingRequestsSentToUser(username));
     }
 }

@@ -1,0 +1,29 @@
+
+<app-navigation-bar></app-navigation-bar>
+
+
+<div *ngFor="let user of connectionRequests">
+  <div class="box-view">
+
+      <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
+      
+      To kouti
+      <div class="text_center">
+          <p style="position: center"> koutaki </p>
+      </div>
+
+      <!-- <div class="button-connect" >con</div> -->
+      <div class="button-connect">
+        <app-connect-button [receiver_user]="user"></app-connect-button>
+      </div>
+  </div>
+
+</div>
+
+
+<hr style="margin-right: 150px; margin-left: 80px;">
+
+<div class="box-view">
+
+    To 2o kouti
+</div>

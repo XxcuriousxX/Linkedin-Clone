@@ -251,16 +251,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-    public List<String> getAllPendingRequestsSentToUser(String username) {
+    public List<User> getAllPendingRequestsSentToUser(String username) {
         Optional<User> userOptional = userRepository.findByUsername(username);
         User user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
-        List<String> user_list = new ArrayList<>();
+        List<User> returning_list = new ArrayList<>();
+        List<String> username_list = new ArrayList<>();
         Optional<List<String>> L = friendsRepository.getAllPendingRequestsSentToUser(user.getUserId());
-        if (L.isPresent())
-            return user_list = L.orElseThrow(() -> new UsernameNotFoundException("List is empty"));
-        else
-            return new ArrayList<>();
+        username_list = L.orElseThrow(() -> new UsernameNotFoundException("List is empty"));
+        for (String uname : username_list) {
+            Optional<User> u_optional = userRepository.findByUsername(uname);
+            User tempUser = u_optional
+                    .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                            "Found with username : " + username));
+            System.out.println(tempUser.toString());
+            returning_list.add(tempUser);
+        }
+
+        return returning_list;
     }
 }

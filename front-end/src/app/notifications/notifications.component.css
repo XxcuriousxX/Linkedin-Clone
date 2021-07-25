@@ -1,0 +1,39 @@
+
+
+
+.box-view {
+    position: relative;
+    border: 1px solid #cfc9c9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+
+.avatar {
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: relative;
+    left: 0px;
+    top: 50%;
+  
+}
+
+  
+.text_center{
+    text-align: center;
+}
+
+.button-connect {
+    position: absolute;
+    vertical-align:middle;
+    bottom: 30px;
+    right: 150px;
+    width: 10px
+}

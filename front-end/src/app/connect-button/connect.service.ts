@@ -41,8 +41,8 @@ export class ConnectService {
   }
 
   
-  getAllPendingRequestsSentToUser(username: string): Observable<string[]> {
-      return this.http.get<string[]>('http://localhost:8080/api/users/get_all_pending_requests_sent_to_user/' + username);
+  getAllPendingRequestsSentToUser(username: string): Observable<User[]> {
+      return this.http.get<User[]>('http://localhost:8080/api/users/get_all_pending_requests_sent_to_user/' + username);
   }
 
 }

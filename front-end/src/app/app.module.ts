@@ -30,6 +30,7 @@ import { ConnectButtonComponent } from './connect-button/connect-button.componen
 import { ConversationsComponent } from './messages/conversations/conversations.component';
 
 import { MessagesService } from './messages/messages.service';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const materialModules = [
   MatButtonModule
@@ -67,6 +68,11 @@ const appRoutes : Routes = [
     ]
   },
   {
+    path: 'notifications',
+    component: NotificationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     //default route
     path: '' ,
     component: LoginComponent ,
@@ -93,7 +99,8 @@ const appRoutes : Routes = [
     LikeComponent,
     SearchComponent,
     ConnectButtonComponent,
-    ConversationsComponent
+    ConversationsComponent,
+    NotificationsComponent
   ],
     imports: [
         BrowserModule,
