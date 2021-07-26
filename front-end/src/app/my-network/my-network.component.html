@@ -13,22 +13,20 @@
 <!--      <mat-grid-tile class="list"> {{user.username}} </mat-grid-tile>-->
 <!--    </mat-grid-list>-->
 
-      <div class="left-box" >
+      <div class="box-view">
 
-
-        <br>
         <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
-
+        
+        {{ user.username }}
         <div class="text_center">
-          <p style="position: center"> {{ user.username}}</p>
+            <p style="position: center"> koutaki </p>
+        </div>
+
+        <!-- <div class="button-connect" >con</div> -->
+        <div class="button-connect">
+          <app-connect-button [receiver_user]="user"></app-connect-button>
         </div>
       </div>
-      <!-- <button mat-raised-button color="accent" (click)=""  aria-hidden="true" > Connect</button> -->
-      <app-connect-button [receiver_user]="user"></app-connect-button>
-      <!--list-->
-
-
-    </div>
   </div>
 
 

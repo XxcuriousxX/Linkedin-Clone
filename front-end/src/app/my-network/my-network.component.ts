@@ -12,7 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-my-network',
   templateUrl: './my-network.component.html',
-  styleUrls: ['./my-network.component.css']
+  styleUrls: ['./my-network.component.css', '../notifications/notifications.component.css']
 })
 export class MyNetworkComponent implements OnInit {
   query_p: string = "";
