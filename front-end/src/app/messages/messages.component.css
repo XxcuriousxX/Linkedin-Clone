@@ -124,3 +124,13 @@ div {
 div::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
+
+
+
+hr {
+  border: none;
+  height: 1px;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}

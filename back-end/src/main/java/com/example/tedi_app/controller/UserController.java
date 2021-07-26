@@ -1,11 +1,11 @@
 package com.example.tedi_app.controller;
 
-import com.example.tedi_app.dto.ChangeInfoRequest;
-import com.example.tedi_app.dto.FriendRequest;
-import com.example.tedi_app.dto.FriendResponse;
-import com.example.tedi_app.dto.SearchResponse;
+import com.example.tedi_app.dto.*;
+import com.example.tedi_app.model.Action;
+
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.UserRepository;
+import com.example.tedi_app.service.ActionsService;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +23,7 @@ public class UserController {
 
     private final UserDetailsServiceImpl userService;
     private UserRepository userRepository;
+    private final ActionsService actionsService;
 
 
     @GetMapping("/{username}")
@@ -94,6 +95,8 @@ public class UserController {
     }
 
 
+    /// User info
+
     @PostMapping("/changeinfo")
     public ResponseEntity<String> ChangeInfo(@RequestBody ChangeInfoRequest changeInfoRequest){
 
@@ -108,8 +111,14 @@ public class UserController {
 
 
     @GetMapping("/userInfo/{username}")
-    public ResponseEntity <User> getUserInfo(@PathVariable String username){
+    public ResponseEntity<User> getUserInfo(@PathVariable String username){
         return status(HttpStatus.OK).body(userService.get_user_info(username));
+    }
+
+    // Actions - notifications
+    @GetMapping("/get_notifications/{username}")
+    public ResponseEntity<List<ActionResponse>> getAllUserNotifications(@PathVariable String username) {
+        return status(HttpStatus.OK).body(actionsService.getAllNotificationsByUsername(username));
     }
 }
 

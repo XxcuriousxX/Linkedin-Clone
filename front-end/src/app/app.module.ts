@@ -33,6 +33,7 @@ import { ConversationsComponent } from './messages/conversations/conversations.c
 
 import { MessagesService } from './messages/messages.service';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { FullPostComponent } from './post/full-post/full-post.component';
 
 const materialModules = [
   MatButtonModule
@@ -56,10 +57,12 @@ const appRoutes : Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {path: '?conversation_name=:name', component: MessagesComponent}
-    ]
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'post/:id',
+    component: FullPostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'mynetwork',
@@ -114,7 +117,8 @@ const appRoutes : Routes = [
     ConversationsComponent,
     NotificationsComponent,
     SettingsComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
+    FullPostComponent
   ],
     imports: [
         BrowserModule,
