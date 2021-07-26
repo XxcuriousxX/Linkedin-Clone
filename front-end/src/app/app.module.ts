@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { AuthGuard } from './auth/auth.guard';
 import { PostsBoxComponent } from './posts-box/posts-box.component';
@@ -33,6 +33,7 @@ import { ConversationsComponent } from './messages/conversations/conversations.c
 
 import { MessagesService } from './messages/messages.service';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PublicButtonsComponent } from './personal-info/public-buttons/public-buttons.component';
 
 const materialModules = [
   MatButtonModule
@@ -114,7 +115,8 @@ const appRoutes : Routes = [
     ConversationsComponent,
     NotificationsComponent,
     SettingsComponent,
-    PersonalInfoComponent
+    PersonalInfoComponent,
+    PublicButtonsComponent
   ],
     imports: [
         BrowserModule,
@@ -124,7 +126,8 @@ const appRoutes : Routes = [
         HttpClientModule,
         ReactiveFormsModule,
         NgxWebstorageModule.forRoot(),
-        MatGridListModule
+        MatGridListModule,
+        FormsModule
     ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,

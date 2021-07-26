@@ -1,11 +1,12 @@
 package com.example.tedi_app.controller;
 
-import com.example.tedi_app.dto.ChangeInfoRequest;
-import com.example.tedi_app.dto.FriendRequest;
-import com.example.tedi_app.dto.FriendResponse;
-import com.example.tedi_app.dto.SearchResponse;
+import com.example.tedi_app.dto.*;
+import com.example.tedi_app.model.PublicButton;
 import com.example.tedi_app.model.User;
+import com.example.tedi_app.repo.PersonalinfoRepository;
 import com.example.tedi_app.repo.UserRepository;
+import com.example.tedi_app.service.PersonalinfoService;
+import com.example.tedi_app.service.PublicButtonService;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class UserController {
 
     private final UserDetailsServiceImpl userService;
     private UserRepository userRepository;
+    private PersonalinfoRepository personalinfoRepository;
+    private PersonalinfoService personalinfoService;
+    private PublicButtonService publicButtonService;
 
 
     @GetMapping("/{username}")
@@ -93,7 +97,35 @@ public class UserController {
         return status(HttpStatus.OK).body(this.userService.getAllPendingRequestsSentToUser(username));
     }
 
+//    Personal Info (Work exp , Studies , Abilities)
 
+    @PostMapping("/changepersonalinfo")
+    public ResponseEntity<String> ChangePersonalInfo(@RequestBody ChangePersonInfoRequest changePersonInfoRequest){
+
+        personalinfoService.changePersonalInfo(changePersonInfoRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+//    buttons ---- Change / Fetch State
+    @PostMapping("/changebuttonstate")
+    public ResponseEntity<String> ChangeButtonState(@RequestBody ChangeButtonStateRequest changeButtonStateRequest){
+
+        publicButtonService.changeButtonState(changeButtonStateRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+
+    @GetMapping("/buttonstate/{username}")
+    public ResponseEntity <PublicButton> getButtonState(@PathVariable String username){
+        return status(HttpStatus.OK).body(publicButtonService.get_button_state(username));
+    }
+
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------
     @PostMapping("/changeinfo")
     public ResponseEntity<String> ChangeInfo(@RequestBody ChangeInfoRequest changeInfoRequest){
 

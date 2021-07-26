@@ -1,17 +1,18 @@
-
-<app-navigation-bar></app-navigation-bar>
+<app-navigation-bar xmlns="http://www.w3.org/1999/html"></app-navigation-bar>
 
 <body>
 
 
 <div class="big-box">
+
+  <form class="login" [formGroup]="infoForm" (ngSubmit)="changePersonalinfo()">
   <div class="f-box">
   <div style="font-weight: bold;font-family: 'Yanone Kaffeesatz', sans-serif;font-size: 23px"> Work Experience: </div>
     <br>
 
-    <div class="form-group">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your Work Experience"></textarea>
-    </div>
+
+      <textarea formControlName="work" rows="3" placeholder="Write your Work Experience"></textarea>
+
 
 
   </div>
@@ -20,9 +21,9 @@
     <div style="font-weight: bold;font-family: 'Yanone Kaffeesatz', sans-serif;font-size: 23px"> Studies: </div>
     <br>
 
-    <div class="form-group">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your Studies"></textarea>
-    </div>
+
+      <textarea formControlName="studies" rows="3" placeholder="Write your Studies"></textarea>
+
 
 
   </div>
@@ -32,9 +33,9 @@
     <div style="font-weight: bold;font-family: 'Yanone Kaffeesatz', sans-serif;font-size: 23px"> Abilities: </div>
     <br>
 
-    <div class="form-group">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your Abilities"></textarea>
-    </div>
+
+      <textarea rows="3" formControlName="abilities" placeholder="Write your Abilities"></textarea>
+
 
   </div>
 
@@ -42,6 +43,10 @@
 <!--  publish button  -->
   <button  class="animated-border-button">Publish</button>
 
+  </form>
 </div>
+
+<app-public-buttons></app-public-buttons>
+
 
 </body>

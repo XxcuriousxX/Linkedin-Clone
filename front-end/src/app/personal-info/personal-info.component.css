@@ -10,7 +10,13 @@
 
 textarea{
   resize: none;
-
+  box-shadow: none!important;
+  outline: 0 none;
+  border-color: #cfc9c9;
+  width: 400px;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-top: 10px;
 }
 
 textarea:focus{
@@ -63,7 +69,7 @@ textarea:focus{
   padding: 12px 40px 10px;
   position: relative;
   left: 35%;
-  top: 10px;
+  top: 35px;
 }
 
 .animated-border-button:before,

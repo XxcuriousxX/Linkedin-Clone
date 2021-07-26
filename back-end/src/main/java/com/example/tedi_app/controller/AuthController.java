@@ -1,13 +1,11 @@
 package com.example.tedi_app.controller;
 
 
-import com.example.tedi_app.dto.AuthenticationResponse;
-import com.example.tedi_app.dto.LoginRequest;
-import com.example.tedi_app.dto.RefreshTokenRequest;
-import com.example.tedi_app.dto.RegisterRequest;
+import com.example.tedi_app.dto.*;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.UserRepository;
 import com.example.tedi_app.service.AuthService;
+import com.example.tedi_app.service.PublicButtonService;
 import com.example.tedi_app.service.RefreshTokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +22,7 @@ public class AuthController {
 
 
     private final AuthService authService;
+    private final PublicButtonService publicButtonService;
     UserRepository userRepository;
     private final RefreshTokenService refreshTokenService;
 
@@ -38,6 +37,12 @@ public class AuthController {
         }
 
         authService.signup(registerRequest);
+
+        ChangeButtonStateRequest changeButtonStateRequest = new ChangeButtonStateRequest();
+        changeButtonStateRequest.setUsername(registerRequest.getUsername());
+
+        publicButtonService.changeButtonState(changeButtonStateRequest);
+
         return new ResponseEntity<>("User registered success!",HttpStatus.OK);
     }
 

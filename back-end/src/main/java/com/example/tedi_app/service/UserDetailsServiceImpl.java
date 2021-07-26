@@ -1,6 +1,7 @@
 package com.example.tedi_app.service;
 
 import com.example.tedi_app.dto.ChangeInfoRequest;
+import com.example.tedi_app.dto.ChangePersonInfoRequest;
 import com.example.tedi_app.dto.FriendResponse;
 import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.exceptions.SpringTediException;
@@ -273,6 +274,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return returning_list;
     }
 
+
+
     public void changeInfo(ChangeInfoRequest changeInfoRequest) {
 
 
@@ -303,4 +306,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return user;
     }
+
+
 }
