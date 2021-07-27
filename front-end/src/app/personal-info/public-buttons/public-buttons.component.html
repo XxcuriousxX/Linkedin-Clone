@@ -8,9 +8,11 @@
   <p style=" font-family: 'Merriweather', serif;font-weight: bold;font-size: 18px"> Public / Private</p>
   <br>
   <br>
+
+<!--  work -->
   <label class="switch" >
-    <input type="checkbox">
-    <span class="slider round"></span>
+    <input type="checkbox" [(ngModel)]="buttonInfo.work_exp" (ngModelChange)="changeButtonInfo()">
+    <span class="slider round" ></span>
     <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"> Work </div>
   </label>
 
@@ -20,7 +22,7 @@
 
   <!--studies-->
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="buttonInfo.studies" (ngModelChange)="changeButtonInfo()">
     <span class="slider round"></span>
     <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"> Studies </div>
   </label>
@@ -29,7 +31,7 @@
   <br>
   <!--abilities-->
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="buttonInfo.abilities" (ngModelChange)="changeButtonInfo()">
     <span class="slider round"></span>
     <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"> Abilities </div>
   </label>
@@ -38,7 +40,7 @@
   <br>
   <!--company-->
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="buttonInfo.company" (ngModelChange)="changeButtonInfo()">
     <span class="slider round"></span>
     <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"> Company </div>
   </label>
@@ -47,7 +49,7 @@
   <br>
   <!--phone-->
   <label class="switch">
-    <input type="checkbox">
+    <input type="checkbox" [(ngModel)]="buttonInfo.phone" (ngModelChange)="changeButtonInfo()" >
     <span class="slider round"></span>
     <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"> Phone </div>
   </label>

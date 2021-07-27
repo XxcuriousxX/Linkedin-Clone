@@ -28,14 +28,14 @@ export class MessagesComponent implements OnInit {
   // @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
   @ViewChild('container') private myScrollContainer: ElementRef;
 
-  
+
   constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute
                           , private _userService: UserService) {
    }
   ngOnInit(): void {
     // this.getConversation();
     // console.log("PRINTING CONV\n");
-    
+
     this.route.queryParams.subscribe( params => {
       this.receiverUsername = params.conversation_name;
       if (params.conversation_name !== undefined) // if conversation has been selected
@@ -59,8 +59,8 @@ export class MessagesComponent implements OnInit {
     } catch(err) { }
   }
 
-  
-  
+
+
   sendMessage() {
 
     console.log("\nOur name is " , this._authService.getUserName());
@@ -70,6 +70,7 @@ export class MessagesComponent implements OnInit {
     this._messagesService.sendMessage(this.payload).subscribe(data => {
 
       this.ngOnInit();
+      this.messageForm.reset();
     }, error => {
       throwError(error);
     });

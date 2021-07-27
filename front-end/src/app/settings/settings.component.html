@@ -23,7 +23,7 @@
       <hr class="line">
 
       <input [ngClass]="email_exists == true ? 'form-rounded-exists' : 'form-rounded' " type="text" [placeholder]=" email_exists == true ? 'Email Exists' : 'Change email' "
-             [formControlName]="'email'" name="email" required />
+             [formControlName]="'email'" name="email" required autocomplete="off"/>
 
       <button class="btn btn-primary btn-round" type="submit">
         <i class="fa fa-check" aria-hidden="true"></i>

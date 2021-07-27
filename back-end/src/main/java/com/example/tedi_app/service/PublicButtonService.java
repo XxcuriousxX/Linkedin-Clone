@@ -28,6 +28,11 @@ public class PublicButtonService {
 
     public void changeButtonState(ChangeButtonStateRequest changeButtonStateRequest) {
 
+        System.out.println("heloooo abil " + changeButtonStateRequest.isAbilities());
+        System.out.println("heloooo work " + changeButtonStateRequest.isWork_exp());
+        System.out.println("heloooo stud " + changeButtonStateRequest.isStudies());
+        System.out.println("heloooo phne "  + changeButtonStateRequest.isPhone());
+
         Optional<User> user_opt = userRepository.findByUsername(changeButtonStateRequest.getUsername());
         User user = user_opt
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
@@ -35,12 +40,20 @@ public class PublicButtonService {
 
         Optional<PublicButton> usr_btn_opt = publicButtonsRepository.findByUserId(user.getUserId());
 
+
         if ( publicButtonsRepository.findByUserId(user.getUserId()).isPresent() ) {
             PublicButton usr_btn = usr_btn_opt
                     .orElseThrow(() -> new UsernameNotFoundException("No user " +
                             "Found with username : "));
 
+            usr_btn.setAbilities(changeButtonStateRequest.isAbilities());
+            usr_btn.setCompany(changeButtonStateRequest.isCompany());
+            usr_btn.setPhone(changeButtonStateRequest.isPhone());
+            usr_btn.setStudies(changeButtonStateRequest.isStudies());
+            usr_btn.setWork_exp(changeButtonStateRequest.isWork_exp());
+
             publicButtonsRepository.save(usr_btn);
+            return;
 
         }
         else {
