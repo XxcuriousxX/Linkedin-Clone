@@ -1,5 +1,8 @@
 package com.example.tedi_app.controller;
 
+import com.example.tedi_app.dto.CommentRequest;
+import com.example.tedi_app.dto.CommentResponse;
+import com.example.tedi_app.model.Comment;
 import com.example.tedi_app.model.Post;
 import com.example.tedi_app.service.PostService;
 import com.example.tedi_app.dto.PostRequest;
@@ -49,5 +52,21 @@ public class PostController {
     @GetMapping("/get_all_posts_from_connections/{username}")
     public  ResponseEntity<Collection<PostResponse>> getPostsFromConnected(@PathVariable String username) {
         return status(HttpStatus.OK).body(postService.getPostsFromConnectedUsers(username));
+    }
+
+    /////// comments
+
+    @GetMapping("/get_all_comments_by_post/{post_id}")
+    public ResponseEntity<List<CommentResponse>> getAllCommentsByPost(@PathVariable String post_id) {
+        Long postId = Long.parseLong(post_id);
+        return status(HttpStatus.OK).body(postService.getAllCommentsByPostId(postId));
+    }
+
+    @PostMapping("/add_comment")
+    public ResponseEntity<List<Comment>> addComment(@RequestBody CommentRequest commentRequest) {
+        postService.addComment(commentRequest);
+        System.out.println("Addded comment!!!!");
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 }
