@@ -10,3 +10,52 @@
     cursor: pointer;
   }
   
+
+.notpressed {
+  background-color: #A5CDDF;
+}
+
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #419EE8;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #419EE8;
+  box-shadow: 0px 3px 10px #419EE8;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.likedbutton.button {
+
+  background-color: #419EE8;
+  color: #fff;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}

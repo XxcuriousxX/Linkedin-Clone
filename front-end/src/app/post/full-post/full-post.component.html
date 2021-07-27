@@ -6,11 +6,10 @@
 
 
 <div class="box-view">
-    <div class="top-left">
+    
         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
         {{ post.username }} <br>
         
-    </div>
     <div class="topright">
         {{ post.duration }}
     </div>
@@ -18,5 +17,6 @@
     <hr>
     {{ post.description }}
     <hr>
-    comments
+    <app-like [post]="this.post"></app-like>
+    <hr>
 </div>

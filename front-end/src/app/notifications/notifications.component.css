@@ -4,12 +4,14 @@
 .box-view {
     position: relative;
     border: 1px solid #cfc9c9;
-    padding: 15px;
+    padding: 20px;
     border-radius: 12px;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    top: 100px;
+    margin-top: 35px;
+    bottom: 100px;
+    margin-bottom: 10px;
     margin-right: 150px;
-    margin-left: 80px;
+    margin-left: 150px;
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -30,10 +32,26 @@
     text-align: center;
 }
 
-.button-connect {
+
+/* places the connect button at the right side of a box */
+.button-connect { 
     position: absolute;
-    vertical-align:middle;
-    bottom: 30px;
+    vertical-align: middle;
     right: 150px;
     width: 10px;
+    bottom: 45px;
 }
+
+.links{
+
+    color: black;
+    opacity: 50%;
+  }
+  
+  .links:hover{
+    text-decoration: none;
+    opacity: 100%;
+  }
+  
+
+  

@@ -32,15 +32,12 @@
     top: 40px;
 }
 
-.topleft {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-}
+
 
 
 
 hr {
+    width: 100%;
     border: none;
     height: 1px;
     /* Set the hr color */

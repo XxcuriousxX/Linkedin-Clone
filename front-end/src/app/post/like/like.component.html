@@ -5,22 +5,24 @@
 
       
       Post id = {{ post.postId }}
-      <a class="btnComments" role="button">
+      <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
         {{ post.likeCount}} likes  {{ post.commentCount}} comments
       </a>
-      <hr style="width : 100%;">
-
-      <button mat-raised-button color="accent" (click)="like()"  aria-hidden="true" > Like</button>
+      <br>
+      <br>
+      <button class="button" mat-raised-button color="accent" (click)="like()"  aria-hidden="true" > Like</button>
 </div>
 
 <ng-template #already_liked>
   Post id = {{ post.postId }}
-  <a class="btnComments" role="button">
+  <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
     {{ post.likeCount}} likes  {{ post.commentCount}} comments
   </a>
-  <hr style="width : 100%;">
+  
+    <br>
+    <br>
     <!-- <button mat-stroked-button color="primary" (click)="like()" class="fa fa-thumbs-up" aria-hidden="true" ></button> -->
-    <button mat-stroked-button color="accent" (click)="like()"   aria-hidden="true"> Liked </button>
+    <button class="likedbutton button" mat-stroked-button color="accent" (click)="like()"   aria-hidden="true"> Liked </button>
     
 
 </ng-template>

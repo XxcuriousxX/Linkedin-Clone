@@ -8,9 +8,7 @@
       <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
       
       {{ user.username }}
-      <div class="text_center">
-          <p style="position: center"> koutaki </p>
-      </div>
+
 
       <!-- <div class="button-connect" >con</div> -->
       <div class="button-connect">
@@ -21,15 +19,15 @@
 </div>
 
 
-<hr style="margin-right: 150px; margin-left: 80px;">
-
-
+<!-- <hr> -->
 
 <div *ngFor="let notification of notificationList">
+  <a class="links" routerLink="/post/{{ notification.postId }}">
   <div class="box-view">
       <!-- <div *nfIf="notification.actionType == 1"> -->
         {{ notification.text }}
       <!-- </div> -->
   </div>
+  </a>
 
 </div>
