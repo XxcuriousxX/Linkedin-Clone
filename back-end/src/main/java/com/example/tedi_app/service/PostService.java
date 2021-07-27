@@ -4,8 +4,10 @@ import com.example.tedi_app.mapper.PostMapper;
 import com.example.tedi_app.dto.PostRequest;
 import com.example.tedi_app.dto.PostResponse;
 import com.example.tedi_app.exceptions.PostNotFoundException;
+import com.example.tedi_app.model.Action;
 import com.example.tedi_app.model.Post;
 import com.example.tedi_app.model.User;
+import com.example.tedi_app.repo.ActionsRepository;
 import com.example.tedi_app.repo.PostRepository;
 import com.example.tedi_app.repo.UserRepository;
 import lombok.AllArgsConstructor;
@@ -35,7 +37,7 @@ public class PostService {
     private final UserDetailsServiceImpl userService;
 
     public void save(PostRequest postRequest) {
-      postRepository.save(postMapper.map(postRequest, authService.getCurrentUser()));
+        postRepository.save(postMapper.map(postRequest, authService.getCurrentUser()));
     }
 
     @Transactional(readOnly = true)

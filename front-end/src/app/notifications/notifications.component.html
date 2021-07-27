@@ -23,7 +23,13 @@
 
 <hr style="margin-right: 150px; margin-left: 80px;">
 
-<div class="box-view">
 
-    To 2o kouti
+
+<div *ngFor="let notification of notificationList">
+  <div class="box-view">
+      <!-- <div *nfIf="notification.actionType == 1"> -->
+        {{ notification.text }}
+      <!-- </div> -->
+  </div>
+
 </div>

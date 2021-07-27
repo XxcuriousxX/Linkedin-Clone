@@ -1,7 +1,7 @@
+import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../user';
 import { UserService } from '../user.service';

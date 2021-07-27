@@ -3,9 +3,12 @@ package com.example.tedi_app.service;
 import com.example.tedi_app.dto.VoteData;
 import com.example.tedi_app.exceptions.PostNotFoundException;
 import com.example.tedi_app.exceptions.SpringTediException;
+import com.example.tedi_app.model.Action;
 import com.example.tedi_app.model.Post;
 import com.example.tedi_app.model.Vote;
+import com.example.tedi_app.repo.ActionsRepository;
 import com.example.tedi_app.repo.PostRepository;
+import com.example.tedi_app.repo.UserRepository;
 import com.example.tedi_app.repo.VoteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,9 @@ public class VoteService {
 
     private final VoteRepository voteRepository;
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final AuthService authService;
+    private final ActionsRepository actionsRepository;
 
     @Transactional
     // returns false if it was already liked, so it will be unliked
@@ -45,7 +50,9 @@ public class VoteService {
 //            post.setVoteCount(post.getVoteCount() - 1);
 //        }
 
+        Action a;
         post.setLikeCount(post.getLikeCount() + 1);
+        actionsRepository.save(Action.new_like_action(post, authService.getCurrentUser(), post.getUser()));
         voteRepository.save(mapToVote(voteData, post));
         postRepository.save(post);
         return true;
