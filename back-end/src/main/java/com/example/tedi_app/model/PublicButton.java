@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
 @Getter
