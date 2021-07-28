@@ -1,17 +1,16 @@
 package com.example.tedi_app.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
 
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 
@@ -43,5 +42,11 @@ public class User {
 
         private Instant created;
         private boolean enabled;
+
+
+        @OneToOne(fetch = LAZY,cascade = {CascadeType.ALL})
+        @JoinColumn(name = "personalInfoId", referencedColumnName = "infoId")
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+        public Personalinfo personalinfo;
 }
 

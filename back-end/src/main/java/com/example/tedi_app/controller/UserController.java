@@ -11,6 +11,8 @@ import com.example.tedi_app.service.PersonalinfoService;
 import com.example.tedi_app.service.PublicButtonService;
 import com.example.tedi_app.service.ActionsService;
 import com.example.tedi_app.service.UserDetailsServiceImpl;
+import com.example.tedi_app.service.UserProfileService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,7 @@ public class UserController {
     private PersonalinfoService personalinfoService;
     private PublicButtonService publicButtonService;
     private final ActionsService actionsService;
+    private final UserProfileService userProfileService;
 
 
     @GetMapping("/{username}")
@@ -158,6 +161,15 @@ public class UserController {
     public ResponseEntity<List<ActionResponse>> getAllUserNotifications(@PathVariable String username) {
         return status(HttpStatus.OK).body(actionsService.getAllNotificationsByUsername(username));
     }
+
+
+
+    @GetMapping("/userProfile/{username}")
+    public ResponseEntity<UserProfileResponse> getUserProfile(@PathVariable String username){
+        return status(HttpStatus.OK).body(userProfileService.getUserProfileInfo(username));
+    }
+
+
 }
 
 

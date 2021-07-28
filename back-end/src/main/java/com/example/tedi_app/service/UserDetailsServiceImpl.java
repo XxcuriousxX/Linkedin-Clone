@@ -294,6 +294,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.save(user1);
 
     }
+    
 
     public User get_user_info(String username) {
         Optional<User> userOptional = userRepository.findByUsername(username);

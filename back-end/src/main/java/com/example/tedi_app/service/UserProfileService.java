@@ -25,7 +25,6 @@ public class UserProfileService {
 
     public UserProfileResponse getUserProfileInfo(String username){
 
-
         User usr = userDetailsService.get_user_info(username);
 
         Personalinfo user_personal_info = personalinfoService.getPersonalInfo(username);

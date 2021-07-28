@@ -3,10 +3,9 @@ package com.example.tedi_app.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -24,6 +23,9 @@ public class Personalinfo {
 
 
     private Long userId;
+
+
+
     private String work_desc;
     private String stud_desc;
     private String abilities_desc;
@@ -33,5 +35,14 @@ public class Personalinfo {
         this.work_desc = work_desc;
         this.stud_desc = stud_desc;
         this.abilities_desc = abilities_desc;
+    }
+
+
+    public Personalinfo(Long userId) {
+        // this.infoId = infoId;
+        this.userId = userId;
+        this.work_desc = "";
+        this.stud_desc = "";
+        this.abilities_desc = "";
     }
 }

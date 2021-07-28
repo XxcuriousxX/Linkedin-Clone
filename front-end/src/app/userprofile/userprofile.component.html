@@ -1,13 +1,6 @@
 <app-navigation-bar></app-navigation-bar>
 
 
-<!--  <div class="user-profile-box">-->
-
-<!--    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">-->
-
-<!--    <div class="user-prof-details">-->
-<!--        details-->
-<!--    </div>-->
 
 <div class="flip-card">
   <div class="flip-card-inner">
@@ -16,10 +9,12 @@
     </div>
     <div class="flip-card-back">
       <br><br>
-      <p >First Name: Fanis</p>
-      <p>Last Name: Marantidis</p>
-      <p>Company: Apple</p>
-      <p>Phone:  698099101</p>
+      <p >Username: {{ user_profile_info.username }}</p>
+      <p >First Name: {{ user_profile_info.first_name }} </p>
+      <p >Last Name: {{ user_profile_info.last_name }} </p>
+    
+      <p>Company: {{ user_profile_info.company_name }}</p>
+      <p>Phone:   {{ user_profile_info.phone }} </p>
     </div>
   </div>
 </div>

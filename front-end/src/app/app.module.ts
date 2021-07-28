@@ -91,7 +91,7 @@ const appRoutes : Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'in',
+    path: 'user/:username',
     component: UserprofileComponent,
     canActivate: [AuthGuard]
   },

@@ -6,6 +6,7 @@ import com.example.tedi_app.dto.LoginRequest;
 import com.example.tedi_app.dto.RefreshTokenRequest;
 import com.example.tedi_app.dto.RegisterRequest;
 import com.example.tedi_app.exceptions.SpringTediException;
+import com.example.tedi_app.model.Personalinfo;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.model.VerificationToken;
 import com.example.tedi_app.repo.UserRepository;
@@ -56,6 +57,9 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false); // false
+        userRepository.save(user);
+        User u = userRepository.findByEmail(registerRequest.getEmail()).orElseThrow(() -> new SpringTediException("Problem"));
+        u.personalinfo = new Personalinfo(u.getUserId());
         userRepository.save(user);
 
         String token = generateVerificationToken(user);

@@ -58,7 +58,7 @@ public class PersonalinfoService {
             return;
         }
 
-
+        //
         personalinfoRepository.save(new Personalinfo(user.getUserId(),work_desc,stud_desc,abilities_desc) );
 
 
@@ -73,12 +73,18 @@ public class PersonalinfoService {
 
 
     public Personalinfo getPersonalInfo(String username){
-        Optional<Personalinfo> userOptional = personalinfoRepository.findByUsername(username);
-        Personalinfo user = userOptional
+
+        Optional<User> user_opt = userRepository.findByUsername(username);
+        User user = user_opt
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        return user;
+        Optional<Personalinfo> userPersonal_opt = personalinfoRepository.findByUserId(user.getUserId());
+        Personalinfo  userPersonal = userPersonal_opt
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+
+        return userPersonal;
 
     }
 

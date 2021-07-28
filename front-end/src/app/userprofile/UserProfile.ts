@@ -1,4 +1,4 @@
-export class UserProfile {
+export class UserProfileResponse {
   username:string = '';
   first_name:string = '';
   last_name:string = '';
