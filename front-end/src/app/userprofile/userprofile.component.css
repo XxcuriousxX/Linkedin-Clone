@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@500&display=swap');
+
+.profile-pic{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  top: 35px;
+  border-radius: 55px;
+}
+
+
+.flip-card {
+  position: relative;
+  top: 150px;
+  left: 25%;
+  background-color: transparent;
+  width: 700px;
+  height: 250px;
+  border: 2px solid #ffffff;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  border-radius: 15px;
+
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #e5e5e5;
+  color: black;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, #1F4E79 0%, #1F4E79 35%, #f3f3f3 20%, #efefef 100%);
+}
+
+/* Style the back side */
+.flip-card-back {
+  font-family: 'Baloo Chettan 2', cursive;
+  background-color: #1F4E79;
+  color: white;
+  transform: rotateY(180deg);
+  border-radius: 15px;
+}

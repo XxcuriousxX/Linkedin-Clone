@@ -37,10 +37,7 @@ public class PersonalinfoService {
                         "Found with username : " + username));
 
         Optional<Personalinfo> usr_pinfo_opt = personalinfoRepository.findByUserId(user.getUserId());
-//
-//        Personalinfo usr_pinfo = usr_pinfo_opt
-//                .orElseThrow(() -> new UsernameNotFoundException("No user " +
-//                        "Found with username : " + username));
+
 
 
         if ( personalinfoRepository.findByUserId(user.getUserId()).isPresent() ) {
@@ -62,28 +59,8 @@ public class PersonalinfoService {
         }
 
 
+        personalinfoRepository.save(new Personalinfo(user.getUserId(),work_desc,stud_desc,abilities_desc) );
 
-//        if user has entered at least one time personal info
-//        if ( usr_pinfo_opt != null){
-//            Personalinfo usr_pinfo = usr_pinfo_opt
-//                    .orElseThrow(() -> new UsernameNotFoundException("No user " +
-//                            "Found with username : " + username));
-//            if ( !usr_pinfo.getAbilities_desc().isBlank())
-//                usr_pinfo.setAbilities_desc(abilities_desc);
-//            if ( !usr_pinfo.getStud_desc().isBlank())
-//                usr_pinfo.setStud_desc(stud_desc);
-//            if ( !usr_pinfo.getWork_desc().isBlank())
-//                usr_pinfo.setWork_desc(work_desc);
-//
-//            personalinfoRepository.save(usr_pinfo);
-//            return;
-//        }
-//        else{
-
-            personalinfoRepository.save(new Personalinfo(user.getUserId(),work_desc,stud_desc,abilities_desc) );
-
-
-//        personalinfoRepository.save(usr_pinfo);
 
 
 
@@ -93,5 +70,18 @@ public class PersonalinfoService {
         return;
 
     }
+
+
+    public Personalinfo getPersonalInfo(String username){
+        Optional<Personalinfo> userOptional = personalinfoRepository.findByUsername(username);
+        Personalinfo user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+
+        return user;
+
+    }
+
+
 
 }

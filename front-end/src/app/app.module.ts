@@ -35,6 +35,7 @@ import { MessagesService } from './messages/messages.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PublicButtonsComponent } from './personal-info/public-buttons/public-buttons.component';
 import { FullPostComponent } from './post/full-post/full-post.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
 
 const materialModules = [
   MatButtonModule
@@ -90,6 +91,11 @@ const appRoutes : Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'in',
+    component: UserprofileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'mysettings',
     component: SettingsComponent,
     canActivate: [AuthGuard]
@@ -120,7 +126,8 @@ const appRoutes : Routes = [
     SettingsComponent,
     PersonalInfoComponent,
     PublicButtonsComponent,
-    FullPostComponent
+    FullPostComponent,
+    UserprofileComponent
   ],
     imports: [
         BrowserModule,
