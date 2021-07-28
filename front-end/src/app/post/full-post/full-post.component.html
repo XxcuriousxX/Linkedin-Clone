@@ -29,7 +29,7 @@
         <form [formGroup]="commentForm" (ngSubmit)="addComment()">
             <input type="text" id="post" [formControlName]="'comment_text'" placeholder=" Add a comment"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
 
-            <button type="submit"></button>
+            <!-- <button type="submit"></button> -->
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <!--Photo Button-->
                 <!-- <button type="submit"> -->
@@ -49,6 +49,8 @@
 
 <div *ngFor="let comment of commentsList">
     <div class="box-view">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
+
         {{ comment.username }} : {{ comment.text }}
     </div>
     <br>
