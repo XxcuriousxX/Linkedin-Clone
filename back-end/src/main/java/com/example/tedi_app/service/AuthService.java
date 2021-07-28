@@ -9,6 +9,7 @@ import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.Personalinfo;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.model.VerificationToken;
+import com.example.tedi_app.repo.PersonalinfoRepository;
 import com.example.tedi_app.repo.UserRepository;
 import com.example.tedi_app.repo.VerificationTokenRepository;
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     private final RefreshTokenService refreshTokenService;
-
+    private final PersonalinfoRepository personalInfoRepository;
 
     @Transactional
     public void signup(RegisterRequest registerRequest) throws Exception {
@@ -57,10 +58,12 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setCreated(Instant.now());
         user.setEnabled(false); // false
+//        user.personalinfo = new Personalinfo();
         userRepository.save(user);
-        User u = userRepository.findByEmail(registerRequest.getEmail()).orElseThrow(() -> new SpringTediException("Problem"));
-        u.personalinfo = new Personalinfo(u.getUserId());
-        userRepository.save(user);
+        User u = userRepository.findByUserId(user.getUserId())
+                        .orElseThrow(() -> new SpringTediException("Invalid Token"));
+        personalInfoRepository.save(new Personalinfo(u));
+
 
         String token = generateVerificationToken(user);
         verifyAccount(token); // verify directly

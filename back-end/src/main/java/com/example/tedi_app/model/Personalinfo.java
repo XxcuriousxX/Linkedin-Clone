@@ -1,6 +1,7 @@
 package com.example.tedi_app.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,31 +19,28 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Personalinfo {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long infoId;
+//    private Long userId;
+    private String work_desc = "";
+    private String stud_desc = "";
+    private String abilities_desc = "";
 
 
-    private Long userId;
+    @OneToOne(fetch = LAZY,cascade = {CascadeType.ALL})
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private User user;
 
-
-
-    private String work_desc;
-    private String stud_desc;
-    private String abilities_desc;
-
-    public Personalinfo(Long userId, String work_desc, String stud_desc, String abilities_desc) {
-        this.userId = userId;
+    public Personalinfo(User u, String work_desc, String stud_desc, String abilities_desc) {
+//        this.userId = userId;
+        this.user = u;
         this.work_desc = work_desc;
         this.stud_desc = stud_desc;
         this.abilities_desc = abilities_desc;
     }
 
-
-    public Personalinfo(Long userId) {
-        // this.infoId = infoId;
-        this.userId = userId;
-        this.work_desc = "";
-        this.stud_desc = "";
-        this.abilities_desc = "";
+    public Personalinfo(User user) {
+        this.user = user;
     }
 }

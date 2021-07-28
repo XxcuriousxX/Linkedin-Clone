@@ -36,11 +36,11 @@ public class PersonalinfoService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        Optional<Personalinfo> usr_pinfo_opt = personalinfoRepository.findByUserId(user.getUserId());
+        Optional<Personalinfo> usr_pinfo_opt = personalinfoRepository.findByUserUserId(user.getUserId());
 
 
 
-        if ( personalinfoRepository.findByUserId(user.getUserId()).isPresent() ) {
+        if ( personalinfoRepository.findByUserUserId(user.getUserId()).isPresent() ) {
             Personalinfo usr_pinfo = usr_pinfo_opt
                     .orElseThrow(() -> new UsernameNotFoundException("No user " +
                             "Found with username : " + username));
@@ -59,7 +59,7 @@ public class PersonalinfoService {
         }
 
         //
-        personalinfoRepository.save(new Personalinfo(user.getUserId(),work_desc,stud_desc,abilities_desc) );
+        personalinfoRepository.save(new Personalinfo(user, work_desc,stud_desc,abilities_desc) );
 
 
 
@@ -79,7 +79,7 @@ public class PersonalinfoService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        Optional<Personalinfo> userPersonal_opt = personalinfoRepository.findByUserId(user.getUserId());
+        Optional<Personalinfo> userPersonal_opt = personalinfoRepository.findByUserUserId(user.getUserId());
         Personalinfo  userPersonal = userPersonal_opt
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));

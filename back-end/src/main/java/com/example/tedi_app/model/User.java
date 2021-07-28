@@ -42,11 +42,5 @@ public class User {
 
         private Instant created;
         private boolean enabled;
-
-
-        @OneToOne(fetch = LAZY,cascade = {CascadeType.ALL})
-        @JoinColumn(name = "personalInfoId", referencedColumnName = "infoId")
-        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-        public Personalinfo personalinfo;
 }
 
