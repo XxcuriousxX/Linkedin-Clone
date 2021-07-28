@@ -1,13 +1,17 @@
 package com.example.tedi_app.service;
 
+import com.example.tedi_app.dto.CommentRequest;
+import com.example.tedi_app.dto.CommentResponse;
 import com.example.tedi_app.mapper.PostMapper;
 import com.example.tedi_app.dto.PostRequest;
 import com.example.tedi_app.dto.PostResponse;
 import com.example.tedi_app.exceptions.PostNotFoundException;
 import com.example.tedi_app.model.Action;
+import com.example.tedi_app.model.Comment;
 import com.example.tedi_app.model.Post;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.ActionsRepository;
+import com.example.tedi_app.repo.CommentRepository;
 import com.example.tedi_app.repo.PostRepository;
 import com.example.tedi_app.repo.UserRepository;
 import lombok.AllArgsConstructor;
@@ -33,6 +37,7 @@ public class PostService {
     private final UserRepository userRepository;
     private final AuthService authService;
     private final PostMapper postMapper;
+    private final CommentRepository commentRepository;
 
     private final UserDetailsServiceImpl userService;
 
@@ -76,5 +81,29 @@ public class PostService {
             all_posts.addAll(this.getPostsByUsername(u.getUsername()));
         }
         return all_posts;
+    }
+
+
+    /////// Comments
+    public void addComment(CommentRequest commentRequest) {
+        User user = userRepository.findByUsername(commentRequest.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(commentRequest.getUsername()));
+        Post post = postRepository.getById(commentRequest.getPostId());
+
+        this.commentRepository.save(new Comment(post, user, commentRequest.getText()));
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<CommentResponse> getAllCommentsByPostId(Long postId) {
+//        User user = userRepository.findByUsername(commentRequest.getUsername())
+//                .orElseThrow(() -> new UsernameNotFoundException(commentRequest.getUsername()));
+        Post post = postRepository.getById(postId);
+        List<Comment> C = this.commentRepository.findByPost(post);
+        List<CommentResponse> respList = new ArrayList<>();
+        for (Comment c : C) {
+            respList.add(new CommentResponse(c.getId(), c.getUser().getUsername(), c.getText(), c.getCreatedDate()));
+        }
+        return respList;
     }
 }

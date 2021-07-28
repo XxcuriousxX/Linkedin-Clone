@@ -63,7 +63,7 @@
 
 .left-box {
 
-  border-radius: 20px;
+  border-radius: 15px;
   border: 1px solid #cfc9c9;
   padding: 20px;
   width: 300px;
@@ -105,7 +105,7 @@
 
 
 .right-box {
-  border-radius: 20px;
+  border-radius: 12px;
   border: 1px solid #cfc9c9;
   padding: 20px;
   width: 500px;

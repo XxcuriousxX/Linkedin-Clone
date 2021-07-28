@@ -24,8 +24,16 @@ public class Comment {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
     private Post post;
-    private Instant createdDate;
+    private Instant createdDate = Instant.now();
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
+
+
+    public Comment(Post post, User user, String text) {
+        this.post = post;
+        this.user = user;
+        this.text = text;
+
+    }
 }
