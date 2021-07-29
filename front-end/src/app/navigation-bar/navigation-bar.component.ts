@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {SearchService} from "../search/search.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Output, EventEmitter, Input } from '@angular/core';
+import { HostListener } from "@angular/core";
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
@@ -17,9 +18,23 @@ export class NavigationBarComponent implements OnInit {
     query_input: new FormControl('', Validators.required)
   });
 
+
+  screenHeight: number = -1;
+  screenWidth: number = -1;
+
+
   constructor(private _searchService: SearchService, private _router: Router) { }
 
   ngOnInit(): void {
+    this.getScreenSize();
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+        console.log(this.screenHeight, this.screenWidth);
   }
 
   search() {
