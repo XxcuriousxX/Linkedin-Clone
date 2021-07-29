@@ -1,8 +1,6 @@
 package com.example.tedi_app.repo;
 
 import com.example.tedi_app.model.Friends;
-import com.example.tedi_app.model.ListOfFriends;
-import com.example.tedi_app.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

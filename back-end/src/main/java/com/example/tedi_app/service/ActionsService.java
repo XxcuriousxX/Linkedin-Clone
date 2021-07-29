@@ -1,31 +1,17 @@
 package com.example.tedi_app.service;
 
 import com.example.tedi_app.dto.ActionResponse;
-import com.example.tedi_app.dto.ChangeInfoRequest;
-import com.example.tedi_app.dto.FriendResponse;
-import com.example.tedi_app.dto.SearchResponse;
-import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.Action;
-import com.example.tedi_app.model.Friends;
-import com.example.tedi_app.model.ListOfFriends;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.ActionsRepository;
 import com.example.tedi_app.repo.FriendsRepository;
 import com.example.tedi_app.repo.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.*;
 import java.util.Optional;
-
-import static java.util.Collections.singletonList;
 
 @Service
 @AllArgsConstructor

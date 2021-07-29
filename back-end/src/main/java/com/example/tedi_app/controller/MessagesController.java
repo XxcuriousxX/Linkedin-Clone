@@ -32,6 +32,5 @@ public class MessagesController {
     @PostMapping("/get_conversation/")
     public ResponseEntity<List<MessageResponse>> getConversation(@RequestBody MessageRequest msgRequest) {
         return status(HttpStatus.OK).body(messagesService.getConversation(msgRequest.getSender_username(), msgRequest.getReceiver_username()));
-
     }
 }

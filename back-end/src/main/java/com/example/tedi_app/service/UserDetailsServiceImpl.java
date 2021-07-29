@@ -1,12 +1,9 @@
 package com.example.tedi_app.service;
 
 import com.example.tedi_app.dto.ChangeInfoRequest;
-import com.example.tedi_app.dto.ChangePersonInfoRequest;
 import com.example.tedi_app.dto.FriendResponse;
-import com.example.tedi_app.dto.SearchResponse;
 import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.Friends;
-import com.example.tedi_app.model.ListOfFriends;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.FriendsRepository;
 import com.example.tedi_app.repo.UserRepository;
