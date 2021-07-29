@@ -6,8 +6,8 @@
   <br>
 <!--</div>-->
 <!--My newtwork search view-->
-  <div *ngIf="is_query">
-    <div *ngFor="let user of search_result">
+<div *ngIf="is_query">
+  <div *ngFor="let user of search_result">
 <!--      <mat-grid-list  cols="1" rowHeight="2:1" >-->
 <!--      <mat-grid-tile class="list"> {{user.username}} </mat-grid-tile>-->
 <!--    </mat-grid-list>-->
@@ -25,22 +25,36 @@
         </div>
       </div>
   </div>
-
+</div>
 
 <!--My newtwork default view-->
 
-  <div *ngIf="!is_query">
+  <br>
+  <br>
+  <br>
 
-    <h1> not a KOYRIII</h1>
-    <div *ngFor="let user of usersList" >
-      <!--grid-->
+<div *ngIf="!is_query">
+  <div class="tiles-template">
+    <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
+    
+      <div *ngFor="let user of usersList" >
+        <!--grid-->
+        <mat-grid-tile >
+          <div class="box">
+            <a class="cl" routerLink="/user/{{user.username}}">
+              <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
+            </a>
 
-
-
-
-    </div>
-
+            <div class="text-center username">  <a class="cl" routerLink="/user/{{user.username}}">{{ user.username }}</a> </div>
+            <div class="con-button"> <app-connect-button [receiver_user]="user"></app-connect-button> </div>
+          </div>
+        </mat-grid-tile>
+        
+      </div>
+    </mat-grid-list>
   </div>
+
+</div>
 <!--<div class="" *ngFor="let user of search_result" >-->
 <!--  <h1> {{user.username}} </h1>-->
 <!--  <br>-->
