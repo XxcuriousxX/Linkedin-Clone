@@ -38,6 +38,7 @@ public class PostService {
     private final AuthService authService;
     private final PostMapper postMapper;
     private final CommentRepository commentRepository;
+    private final ActionsRepository actionsRepository;
 
     private final UserDetailsServiceImpl userService;
 
@@ -89,8 +90,10 @@ public class PostService {
         User user = userRepository.findByUsername(commentRequest.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(commentRequest.getUsername()));
         Post post = postRepository.getById(commentRequest.getPostId());
-
-        this.commentRepository.save(new Comment(post, user, commentRequest.getText()));
+        Action a;
+        Comment c = new Comment(post, user, commentRequest.getText());
+        this.actionsRepository.save(Action.new_comment_action(post, authService.getCurrentUser(), post.getUser(), c));
+        this.commentRepository.save(c);
     }
 
 

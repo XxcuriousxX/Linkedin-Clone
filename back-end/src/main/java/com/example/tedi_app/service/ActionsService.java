@@ -51,9 +51,8 @@ public class ActionsService {
                 "found, directed to: "+ username));
         List<ActionResponse> actRespList = new ArrayList<>();
         for (Action a : actList) {
-            if (a.getFromUser().equals(username)) // skip actions done by myself
+            if (a.getFromUser().getUserId() == user.getUserId()) // skip actions done by myself
                 continue;
-            System.out.println("Action " + a.toString());
             actRespList.add(mapToDto(a));
         }
         return actRespList;
