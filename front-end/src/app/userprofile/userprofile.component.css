@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100&display=swap');
 
 .profile-pic{
   position: relative;
@@ -62,4 +65,75 @@
   color: white;
   transform: rotateY(180deg);
   border-radius: 15px;
+}
+
+
+.one{
+  position: relative;
+  top: 230px;
+  width: 25%;
+  background-color: #1F4E79;
+  left: 30px;
+  min-height: fit-content;
+}
+
+
+
+
+
+.two{
+  position: fixed;
+  background-color: #1F4E79;
+  top: 482px;
+  width: 25%;
+  left: 520px;
+  min-height: fit-content;
+}
+
+
+.three{
+  position: fixed;
+  background-color: #1F4E79;
+  top: 482px;
+  width: 25%;
+  left: 960px;
+  min-height: fit-content;
+}
+
+
+.title{
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.one-dis{
+  position: relative;
+  top: 230px;
+  width: 25%;
+  background-color: #cecfd4;
+  color: black;
+  left: 30px;
+  min-height: fit-content;
+}
+
+.two-dis{
+  position: fixed;
+  background-color: #cecfd4;
+  color: black;
+  top: 482px;
+  width: 25%;
+  left: 520px;
+  min-height: fit-content;
+}
+
+
+.three-dis{
+  position: fixed;
+  background-color: #cecfd4;
+  color: black;
+  top: 482px;
+  width: 25%;
+  left: 960px;
+  min-height: fit-content;
 }

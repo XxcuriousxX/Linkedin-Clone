@@ -15,6 +15,7 @@ import {PersonalInfoService} from "../personal-info/personal-info.service";
 export class UserprofileComponent implements OnInit {
 
   buttonInfo: PublicButton = new PublicButton();
+  usersList : User[] = []
   username: string = "";
   constructor(private _activatedRoute: ActivatedRoute, private _userProfileService: UserprofileService, private _personalinfoService: PersonalInfoService) { }
   user_profile_info : UserProfileResponse = new UserProfileResponse();
@@ -26,10 +27,19 @@ export class UserprofileComponent implements OnInit {
     this.username = this._activatedRoute.snapshot.params.username;
     // this.username = this._activatedRoute.params.pipe(pluck('username'));
     this.getUserProfile();
+
     this._userProfileService.getButtonState(this.username).subscribe(info => {
       this.buttonInfo = info;
       console.log(this.buttonInfo.abilities);
     });
+
+
+    this._userProfileService.getAllConnected(this.username).subscribe( L => {
+      this.usersList = L;
+    });
+
+
+
   }
 
   getUserProfile() {

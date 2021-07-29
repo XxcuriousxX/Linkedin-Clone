@@ -20,4 +20,9 @@ export class UserprofileService{
     getButtonState(username: string): Observable<any>{
         return this.http.get("http://localhost:8080/api/users/buttonstate/" + username);
     }
+
+    getAllConnected(username: string) : Observable<any>{
+      return this.http.get("http://localhost:8080/api/users/" + username);
+    }
+
 }

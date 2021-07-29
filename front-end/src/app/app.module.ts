@@ -36,6 +36,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PublicButtonsComponent } from './personal-info/public-buttons/public-buttons.component';
 import { FullPostComponent } from './post/full-post/full-post.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 const materialModules = [
   MatButtonModule
@@ -138,7 +139,8 @@ const appRoutes : Routes = [
         ReactiveFormsModule,
         NgxWebstorageModule.forRoot(),
         MatGridListModule,
-        FormsModule
+        FormsModule,
+        MatExpansionModule
     ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,
