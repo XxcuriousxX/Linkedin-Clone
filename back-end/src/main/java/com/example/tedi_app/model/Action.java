@@ -44,10 +44,10 @@ public class Action {
     private Instant timeCreated = Instant.now();
 
 
-//    @Nullable
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "commentId", referencedColumnName = "commentId")
-//    private Comment comment;
+    @Nullable
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "commentId", referencedColumnName = "id")
+    private Comment comment;
 
     // 0: a like action on post, 1: a comment notification on post
     private Integer actionType = -1;
@@ -65,11 +65,11 @@ public class Action {
         return a;
     }
 
-//    public static Action new_comment_action(Post post, User fromUser, User toUser, Comment c) {
-//        Action a = new Action(post, fromUser, toUser);
-//        a.actionType = 2;
-//        a.comment = c;
-//        return a;
-//    }
+    public static Action new_comment_action(Post post, User fromUser, User toUser, Comment c) {
+        Action a = new Action(post, fromUser, toUser);
+        a.actionType = 2;
+        a.comment = c;
+        return a;
+    }
 
 }

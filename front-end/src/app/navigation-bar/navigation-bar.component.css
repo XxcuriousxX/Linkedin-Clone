@@ -82,6 +82,8 @@ body{
 
 }
 
+
+
 .navbar .navbar-nav .nav-link {
   position: relative;
 }
@@ -124,7 +126,7 @@ body{
 /* icons inside bars */
 
 .input-group{
-  width: 25%;
+  width: 200px;
   position: relative;
   left: 180px;
 

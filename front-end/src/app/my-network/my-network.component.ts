@@ -8,6 +8,7 @@ import {SearchService} from "../search/search.service";
 import {MatGridListModule} from '@angular/material/grid-list';
 import { filter } from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-my-network',
@@ -24,6 +25,8 @@ export class MyNetworkComponent implements OnInit {
                                             private _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.getScreenSize();
+
     this.route.queryParams
       //.filter(params => params.query)
       .subscribe(params => {
@@ -57,6 +60,10 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
+      for (let u of this.usersList) {
+        console.log(u.username)
+      }
+
       console.log("SUCCESS");
     },
       err => {
@@ -66,4 +73,13 @@ export class MyNetworkComponent implements OnInit {
 
   }
 
+  screenHeight: number = -1;
+  screenWidth: number = -1;
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+        console.log(this.screenHeight, this.screenWidth);
+  }
 }
