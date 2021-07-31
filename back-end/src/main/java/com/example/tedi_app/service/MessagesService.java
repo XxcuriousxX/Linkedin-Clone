@@ -65,7 +65,7 @@ public class MessagesService {
         List<MessageResponse> l = new ArrayList<>();
         for (Message m : L) {
             MessageResponse temp = messageMapper.mapToDto(m);
-            if (m.getSenderId() == user_rcv.getUserId()) {
+            if (m.getSenderId().equals(user_rcv.getUserId())) {
                 temp.setSenderUsername(user_rcv.getUsername());
                 temp.setReceiverUsername(user_sender.getUsername());
             }

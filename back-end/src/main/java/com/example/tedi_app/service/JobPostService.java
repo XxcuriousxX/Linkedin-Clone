@@ -64,7 +64,7 @@ public class JobPostService {
 
 
     public double[] get_line(double[][] x, int k) {
-        int num_cols = x.length;
+        int num_cols = x[0].length;
         double[] result = new double[num_cols];
         for (int i = 0; i < num_cols; i++)
             result[i] = x[k][i];
@@ -123,7 +123,7 @@ public class JobPostService {
                     if (R[i][j] > 0){
                         eij = R[i][j] - dot(get_line(P, i), get_col(Q, j));
                         for (int k = 0; k < K; k++){
-                            P[i][j] = P[i][k] + alpha * (2 * eij * Q[k][j] - beta * P[i][k]);
+                            P[i][k] = P[i][k] + alpha * (2 * eij * Q[k][j] - beta * P[i][k]);
                             Q[k][j] = Q[k][j] + alpha * (2 * eij * P[i][k] - beta * Q[k][j]);
                         }
                     }
@@ -200,7 +200,7 @@ public class JobPostService {
         List<User> users_list = new ArrayList<>();
 
         for (Friends f : L_friends) {
-            Long friend_id = (user.getUserId() == f.getUser_id1() ? f.getUser_id2() : f.getUser_id1());
+            Long friend_id = (user.getUserId().equals(f.getUser_id1()) ? f.getUser_id2() : f.getUser_id1());
 //            Optional<JobPostViews> jobPostViewsOpt = jobPostViewsRepository.findByUserUserId(  );
             Collection<JobPostViews> jobPostsViewsOpt = jobPostViewsRepository.findAllByUser_UserId(friend_id);
 //            JobPostViews jobPostViews = jobPostViewsOpt
@@ -218,11 +218,15 @@ public class JobPostService {
 
         
         users_list.add(user);
+
         int N = users_list.size();
         int M = jobPosts.size();
         System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < M; j++)
+                R[i][j] = 0.0;
 
         Long[] userIds = new Long[N];
         Long[] jobPostsIds = new Long[M];
@@ -240,7 +244,7 @@ public class JobPostService {
             for (j = 0; j < M; j++) {
                 Long jobpost_id = jobPostsIds[j];
                 for (JobPostViews jp : jobPosts) {
-                    if (jp.getUser().getUserId() == user_id && jp.getJobPost().getJobPostId() == jobpost_id) {
+                    if (jp.getUser().getUserId().equals(user_id) && jp.getJobPost().getJobPostId().equals(jobpost_id)) {
                         R[i][j] = jp.getViews();
                         break;
                     }
@@ -252,6 +256,7 @@ public class JobPostService {
         int K = 10;
         double[][] P = random_array(N,K);
         double[][] Q = random_array(M,K);
+
         pair<double[][], double[][]> p = matrix_factorization(R,P,Q,K);
         P = p.a;
         Q = p.b;

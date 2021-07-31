@@ -72,13 +72,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("\nID = " + id);
 
         for (Friends friend : F) {
-            System.out.println("Friend = " + friend.getUser_id1() + "  " + friend.getUser_id2());
-            if (friend.getUser_id1() != id) {
+            if (!friend.getUser_id1().equals(id)) {
                 User u1 = userRepository.findByUserId(friend.getUser_id1()).orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
                 friends_list.add(u1);
             }
-            if (friend.getUser_id2() != id) {
+            if (!friend.getUser_id2().equals(id)) {
                 User u2 = userRepository.findByUserId(friend.getUser_id2()).orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
                 friends_list.add(u2);
