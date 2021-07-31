@@ -1,3 +1,4 @@
+import { JobsService } from './jobs/jobs.service';
 import { SettingsComponent } from './settings/settings.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ConnectService } from './connect-button/connect.service';
@@ -37,6 +38,7 @@ import { PublicButtonsComponent } from './personal-info/public-buttons/public-bu
 import { FullPostComponent } from './post/full-post/full-post.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { JobsComponent } from './jobs/jobs.component';
 
 const materialModules = [
   MatButtonModule
@@ -78,6 +80,11 @@ const appRoutes : Routes = [
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'jobs',
+    component: JobsComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -128,7 +135,8 @@ const appRoutes : Routes = [
     PersonalInfoComponent,
     PublicButtonsComponent,
     FullPostComponent,
-    UserprofileComponent
+    UserprofileComponent,
+    JobsComponent
   ],
     imports: [
         BrowserModule,
@@ -146,7 +154,7 @@ const appRoutes : Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }, ConnectService, MessagesService],
+  }, ConnectService, MessagesService, JobsService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 

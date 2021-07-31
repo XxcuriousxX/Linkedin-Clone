@@ -1,9 +1,6 @@
 package com.example.tedi_app.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import com.example.tedi_app.dto.JobPostResponse;
 import com.example.tedi_app.model.Friends;
@@ -14,13 +11,13 @@ import com.example.tedi_app.repo.JobPostRepository;
 import com.example.tedi_app.repo.JobPostViewsRepository;
 import com.example.tedi_app.repo.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class JobPostService {
 
     private final UserRepository userRepository;
@@ -39,14 +36,26 @@ public class JobPostService {
 
     public double[][] dot_arrays(double[][] x, double[][] y){
 
-        double[][] z = new double[x[0].length][y.length];
-        for(int i=0; i < x[0].length ;i++){
-            for(int j=0;j < y.length;j++){
-                z[i][j] = x[i][j] * y[j][i];
+        double[][] z = new double[x.length][y[0].length];
+//        for(int i=0; i < x[0].length ;i++){
+//            for(int j=0;j < y.length;j++){
+//                z[i][j] = x[i][j] * y[j][i];
+//            }
+//
+//        }
+
+        int Nrowx = x.length;
+        int Ncolx = x[0].length;
+        int Nrowy = y.length;
+        int Ncoly = y[0].length;
+
+        for(int i = 0; i < Nrowx; i++) {
+            for (int j = 0; j < Ncoly; j++) {
+                for (int k = 0; k < Nrowy; k++) {
+                    z[i][j] = z[i][j] + x[i][k] * y[k][j];
+                }
             }
-
         }
-
         return z;
 
     }
@@ -100,21 +109,17 @@ public class JobPostService {
         double beta = (double) 0.02;
         int steps = 5000;
 
-        for ( int i = 0; i < Q[0].length ; i++){
-            for ( int j = 0; j < Q.length ; j++){
-                Q[i][j] = Q[j][i];
-            }
-        }
+        Q = Transpose(Q);
 
 
 
 
         double eij = 0;
-        for (int step = steps; step < steps; step++) {
+        for (int step = 0; step < steps; step++) {
             
             
             for ( int i = 0; i < R.length; i++){
-                for( int j = 0; j < R[i].length; i++){
+                for( int j = 0; j < R[0].length; j++){
                     if (R[i][j] > 0){
                         eij = R[i][j] - dot(get_line(P, i), get_col(Q, j));
                         for (int k = 0; k < K; k++){
@@ -175,8 +180,7 @@ public class JobPostService {
     
     
     
-    
-    public JobPostResponse[] getSuggestions(String username) {
+    public List<JobPostResponse> getSuggestions(String username) {
         
 
 
@@ -189,18 +193,23 @@ public class JobPostService {
 
         List<Friends> L_friends = friendsRepository.getAllConnectedUsers(user.getUserId());
         if (L_friends.isEmpty())
-            return new JobPostResponse[]{};
+            return new ArrayList<>();
+
 
         List<JobPostViews> jobPosts = new ArrayList<>();
         List<User> users_list = new ArrayList<>();
 
         for (Friends f : L_friends) {
-            Optional<JobPostViews> jobPostViewsOpt = jobPostViewsRepository.findByUserUserId( (user.getUserId() == f.getUser_id1() ? f.getUser_id2() : f.getUser_id1()) );
-            JobPostViews jobPostViews = jobPostViewsOpt.orElseThrow(() -> new UsernameNotFoundException("No user " +
-                    "Found with username: "+ username));
-            jobPosts.add(jobPostViews);
+            Long friend_id = (user.getUserId() == f.getUser_id1() ? f.getUser_id2() : f.getUser_id1());
+//            Optional<JobPostViews> jobPostViewsOpt = jobPostViewsRepository.findByUserUserId(  );
+            Collection<JobPostViews> jobPostsViewsOpt = jobPostViewsRepository.findAllByUser_UserId(friend_id);
+//            JobPostViews jobPostViews = jobPostViewsOpt
+//                    .orElseThrow(() -> new UsernameNotFoundException("No user " +
+//                    "Found with username: "+ username));
+            jobPosts.addAll(jobPostsViewsOpt);
+
             
-            Optional<User> user_opt1 = userRepository.findByUserId((user.getUserId() == f.getUser_id1() ? f.getUser_id2() : f.getUser_id1()));
+            Optional<User> user_opt1 = userRepository.findByUserId(friend_id);
             User user1 = user_opt1.orElseThrow(() -> new UsernameNotFoundException("No user " +
                 "Found with username: "+ username));
             users_list.add(user1);
@@ -211,6 +220,7 @@ public class JobPostService {
         users_list.add(user);
         int N = users_list.size();
         int M = jobPosts.size();
+        System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
 
@@ -248,21 +258,23 @@ public class JobPostService {
         Q = Transpose(Q);
 
         double[][] nR = dot_arrays(P,Q);
-        for (i = 0; i < nR.length; i++) {
-            System.out.println();
-            for (j = 0; j < nR[0].length; j++) {
-                System.out.print(nR[i][j] + " ");
-            }
-        }
+        print_array(nR);
 
 
 
-        return new JobPostResponse[]{};
+        return new ArrayList<>();
     }
 
 
 
-
+    public void print_array(double[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println();
+            for (int j = 0; j < arr[0].length; j++) {
+                System.out.print(arr[i][j] + "\t");
+            }
+        }
+    }
 
 
 

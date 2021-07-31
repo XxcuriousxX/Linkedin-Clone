@@ -1,0 +1,22 @@
+<app-navigation-bar></app-navigation-bar>
+
+
+<div class="tiles-template">
+    <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
+    
+      <div *ngFor="let jobPost of suggestionsList" >
+        <!--grid-->
+        <mat-grid-tile >
+          <div class="box">
+
+            <div class="text-center username">  
+                <a class="cl" routerLink="/jobs/{{jobPost.jobPostId}}">
+                    {{ jobPost.jobPostId }}
+                </a> 
+            </div>
+          </div>
+        </mat-grid-tile>
+        
+      </div>
+    </mat-grid-list>
+  </div>

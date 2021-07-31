@@ -11,4 +11,7 @@ import lombok.*;
 public class JobPostResponse {
     private Long jobPostId;
     private String title;
+
+    private String details;
+    private String requiredSkills;
 }

@@ -60,9 +60,9 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
-      for (let u of this.usersList) {
-        console.log(u.username)
-      }
+      // for (let u of this.usersList) {
+      //   console.log(u.username)
+      // }
 
       console.log("SUCCESS");
     },
