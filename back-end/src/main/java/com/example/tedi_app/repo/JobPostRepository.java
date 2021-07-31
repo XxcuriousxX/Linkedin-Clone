@@ -11,5 +11,5 @@ public interface JobPostRepository extends JpaRepository<JobPost,Long> {
 
 
     Optional<JobPost> findByUserUserId(Long aLong);
-
+    JobPost getByJobPostId(Long jp_id);
 }

@@ -197,7 +197,7 @@ public class JobPostService {
             return new ArrayList<>();
 
 
-        List<JobPostViews> jobPostsViews = new ArrayList<>();
+        List<JobPostViews> jobPostViewsList = new ArrayList<>();
         List<User> users_list = new ArrayList<>();
 
         for (Friends f : L_friends) {
@@ -207,7 +207,7 @@ public class JobPostService {
 //            JobPostViews jobPostViews = jobPostViewsOpt
 //                    .orElseThrow(() -> new UsernameNotFoundException("No user " +
 //                    "Found with username: "+ username));
-            jobPostsViews.addAll(jobPostsViewsOpt);
+            jobPostViewsList.addAll(jobPostsViewsOpt);
 
             
             Optional<User> user_opt1 = userRepository.findByUserId(friend_id);
@@ -217,11 +217,15 @@ public class JobPostService {
 
         }
 
-        
+        // add my job post views
         users_list.add(user);
+        Collection<JobPostViews> all_my_job_post_views = jobPostViewsRepository.findAllByUser_UserId(user.getUserId());
+        jobPostViewsList.addAll(all_my_job_post_views);
 
+
+        List<JobPost> jobPostsList = getAllInvolvedJobPosts(jobPostViewsList);
         int N = users_list.size();
-        int M = jobPostsViews.size();
+        int M = jobPostsList.size();
         System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
@@ -231,23 +235,21 @@ public class JobPostService {
 
         Long[] userIds = new Long[N];
         Long[] jobPostsIds = new Long[M];
-        int i = 0; 
+        int i = 0;
+        int j;
         for (User u : users_list) {
             userIds[i++] = u.getUserId();
-        }
-        int j = 0;
-        for (JobPostViews jp : jobPostsViews) {
-            jobPostsIds[j++] = jp.getJobPost().getJobPostId();
+            System.out.println("ID=== "+ u.getUserId());
         }
 
-        for (i = 0; i < N; i++) {
+        for (i = 0; i < N; i++) { // for each user
             Long user_id = userIds[i];
-            for (j = 0; j < M; j++) {
-                Long jobpost_id = jobPostsIds[j];
-                for (JobPostViews jp : jobPostsViews) {
-                    if (jp.getUser().getUserId().equals(user_id) && jp.getJobPost().getJobPostId().equals(jobpost_id)) {
-                        R[i][j] = jp.getViews();
-                        break;
+            for (j = 0; j < M; j++) {   // for each jobPost
+                Long job_post_id = jobPostsList.get(j).getJobPostId();
+                for (JobPostViews jpv : jobPostViewsList) {
+                    if (jpv.getJobPost().getJobPostId().equals(job_post_id)
+                            && jpv.getUser().getUserId().equals(user_id)) {
+                        R[i][j] = jpv.getViews();
                     }
                 }
             }
@@ -274,21 +276,23 @@ public class JobPostService {
 
 
 
-    private boolean id_exists(Long id, List<JobPost> jobPostsList) {
-        for (JobPost jp : jobPostsList) {
-            if (id.equals(jp.getJobPostId()))
-                return true;
-        }
-        return false;
-    }
+
     public List<JobPost> getAllInvolvedJobPosts(List<JobPostViews> jobPostViewsList) {
         List<JobPost> jobPostList = new ArrayList<>();
         for (JobPostViews jpv : jobPostViewsList) {
-            if (id_exists(jpv.getJobPost().getJobPostId(), jobPostList)) // if job post exists
+            if (id_exists(jpv.getJobPost().getJobPostId(), jobPostList)) // if job post exists in jobPostList
                 continue;
-            jobPostList.add(jobPostRepository.getById(jpv.getJobPost().getJobPostId()));
+            jobPostList.add(jobPostRepository.getByJobPostId(jpv.getJobPost().getJobPostId()));
         }
         return jobPostList;
+    }
+
+    private boolean id_exists(Long jp_id, List<JobPost> jobPostsList) {
+        for (JobPost jp : jobPostsList) {
+            if (jp_id.equals(jp.getJobPostId()))
+                return true;
+        }
+        return false;
     }
 
     public void print_array(double[][] arr) {
