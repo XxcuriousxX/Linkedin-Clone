@@ -239,7 +239,6 @@ public class JobPostService {
         int j;
         for (User u : users_list) {
             userIds[i++] = u.getUserId();
-            System.out.println("ID=== "+ u.getUserId());
         }
 
         for (i = 0; i < N; i++) { // for each user
@@ -269,7 +268,9 @@ public class JobPostService {
         double[][] nR = dot_arrays(P,Q);
         print_array(nR);
 
-
+        for (JobPost jp : jobPostsList) {
+            System.out.println(jp.getKeywords());
+        }
 
         return new ArrayList<>();
     }
