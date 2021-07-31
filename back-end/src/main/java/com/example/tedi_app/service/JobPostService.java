@@ -252,7 +252,8 @@ public class JobPostService {
             }
         }
 
-
+        print_array(R);
+        System.out.println("\n");
         int K = 10;
         double[][] P = random_array(N,K);
         double[][] Q = random_array(M,K);
@@ -276,7 +277,7 @@ public class JobPostService {
         for (int i = 0; i < arr.length; i++) {
             System.out.println();
             for (int j = 0; j < arr[0].length; j++) {
-                System.out.print(arr[i][j] + "\t");
+                System.out.print(String.format("%.2f\t", arr[i][j]));
             }
         }
     }
