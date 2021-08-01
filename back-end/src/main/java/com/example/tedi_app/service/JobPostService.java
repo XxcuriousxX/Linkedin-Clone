@@ -72,7 +72,6 @@ public class JobPostService {
         return result;
     }
 
-
     public double[] get_col(double[][] x, int k){
         double[] res = new double[x.length];
         
@@ -86,23 +85,15 @@ public class JobPostService {
 
     }
 
-
     public double[][] Transpose(double[][] Q){
-
         double[][] Q_T = new double[Q[0].length][Q.length];
-
         for ( int i = 0; i < Q[0].length ; i++){
             for ( int j = 0; j < Q.length ; j++){
                 Q_T[i][j] = Q[j][i];
             }
         }
-
         return Q_T;
     }
-
-
-    
-
 
     public pair<double[][], double[][]> matrix_factorization(double[][] R, double[][] P, double[][] Q, int K) {
 
@@ -111,9 +102,6 @@ public class JobPostService {
         int steps = 5000;
 
         Q = Transpose(Q);
-
-
-
 
         double eij = 0;
         for (int step = 0; step < steps; step++) {
@@ -131,9 +119,6 @@ public class JobPostService {
                 }
             }
 
-
-
-
             double[][] eR = dot_arrays(P, Q);
             double e = 0.0;
             for (int i = 0; i < R.length; i++) {
@@ -148,27 +133,17 @@ public class JobPostService {
                     }
                 }
             }
-
             if (e < 0.001)
                 break;
-            
-
         }
-
-
         return new pair(P, Transpose(Q));
-        
-    
     }
 
 
 
-    // random arr of size L x K   
+    // random arr of size N x K
     public double[][] random_array(int N, int K) {
         double[][] arr = new double[N][K];
-        
-
-
         Random rand = new Random();       
         for ( int n = 0; n < N; n++){
             for ( int k = 0; k < K; k++){
@@ -176,10 +151,19 @@ public class JobPostService {
             }
         }
         return arr;
-
     }
-    
-    
+
+    // random arr of size N x K in range [a, b]
+    public double[][] random_array_in_range(int N, int K, double a, double b) {
+        double[][] arr = new double[N][K];
+        Random rand = new Random();
+        for ( int n = 0; n < N; n++){
+            for ( int k = 0; k < K; k++){
+                arr[n][k] = a + (b - a) * rand.nextDouble();
+            }
+        }
+        return arr;
+    }
     
     public List<JobPostResponse> getSuggestions(String username) {
         
@@ -256,9 +240,9 @@ public class JobPostService {
 
         print_array(R);
         System.out.println("\n");
-        int K = 10;
+        int K = 6;
         double[][] P = random_array(N,K);
-        double[][] Q = random_array(M,K);
+        double[][] Q = random_array(M,K);  //_in_range(M,K, 1.0, 5.0);
 
         pair<double[][], double[][]> p = matrix_factorization(R,P,Q,K);
         P = p.a;
@@ -304,7 +288,5 @@ public class JobPostService {
             }
         }
     }
-
-
 
 }
