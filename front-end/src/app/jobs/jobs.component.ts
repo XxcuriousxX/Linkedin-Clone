@@ -28,11 +28,12 @@ export class JobsComponent implements OnInit {
         this.screenWidth = window.innerWidth;
         console.log(this.screenHeight, this.screenWidth);
   }
-  
+
 
   getSuggestions() {
     this._jobsService.getSuggestions().subscribe( suggestions => {
         this.suggestionsList = suggestions;
+        console.log(this.suggestionsList);
     }, err => throwError(err));
   }
 

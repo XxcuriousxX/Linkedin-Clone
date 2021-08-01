@@ -24,7 +24,7 @@ export class PostsBoxComponent implements OnInit {
 
     this._postService.getPostsFromConnectedUsers(this._authService.getUserName()).subscribe(posts => {
       this.posts = posts;
-      this.posts.sort((a, b) => (a.createdDateLong < b.createdDateLong) ? 1 : -1);
+      // this.posts.sort((a, b) => (a.createdDateLong < b.createdDateLong) ? 1 : -1);
     });
 
   }

@@ -233,6 +233,7 @@ public class JobPostService {
                     if (jpv.getJobPost().getJobPostId().equals(job_post_id)
                             && jpv.getUser().getUserId().equals(user_id)) {
                         R[i][j] = jpv.getViews();
+                        break;
                     }
                 }
             }
@@ -240,7 +241,15 @@ public class JobPostService {
 
         print_array(R);
         System.out.println("\n");
-        int K = 6;
+        System.out.println("\n");
+        List<String> categories_list = new ArrayList<>();
+
+        for (JobPost jp : jobPostsList) {
+            if (!categories_list.contains(jp.getKeywords()))
+                categories_list.add(jp.getKeywords());
+        }
+        int K = categories_list.size();
+//        int K = 6;
         double[][] P = random_array(N,K);
         double[][] Q = random_array(M,K);  //_in_range(M,K, 1.0, 5.0);
 
@@ -256,7 +265,35 @@ public class JobPostService {
             System.out.println(jp.getKeywords());
         }
 
-        return new ArrayList<>();
+        int row = R.length - 1;
+        System.out.println("IDDDDDD = >" + userIds[row]);
+        double[] results = new double[M];
+        for (j = 0; j < M; j++) {
+            results[j] = nR[row][j];
+        }
+
+        int max1_col_index = 0;
+        double max1_col = results[0];
+        for (j = 0; j < M; j++) {
+            if (max1_col < results[j]){
+                max1_col = results[j];
+                max1_col_index = j;
+            }
+        }
+
+//        System.out.println("results before select: ");
+
+
+        List<JobPostResponse> jobPostResponseList = new ArrayList<>();
+        for (j = 0; j < M; j++) {
+            JobPost JP = jobPostsList.get(j);
+            System.out.println(results[j] + " " + JP.getJobPostId() + "\n");
+            if (results[j] > 2.5) {
+                jobPostResponseList.add(new JobPostResponse(JP.getJobPostId(), JP.getDetails(), JP.getRequiredSkills()));
+            }
+        }
+
+        return jobPostResponseList;
     }
 
 

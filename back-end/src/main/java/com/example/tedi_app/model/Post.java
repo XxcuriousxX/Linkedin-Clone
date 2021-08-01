@@ -1,7 +1,7 @@
 package com.example.tedi_app.model;
 
 import lombok.*;
-import org.springframework.lang.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

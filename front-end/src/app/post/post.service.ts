@@ -3,16 +3,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PostModel } from './post.model';
 import { CreatePostPayload } from './create-post.payload';
+import {AuthService} from "../auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _authService: AuthService) { }
 
   getAllPosts(): Observable<Array<PostModel>> {
-    return this.http.get<Array<PostModel>>('http://localhost:8080/api/posts/');
+    // return this.http.get<Array<PostModel>>('http://localhost:8080/api/posts/');
+    return this.http.get<Array<PostModel>>('http://localhost:8080/api/posts/suggestions/' + this._authService.getUserName());
   }
 
   createPost(postPayload: CreatePostPayload): Observable<any> {
@@ -28,6 +30,7 @@ export class PostService {
   }
 
   getPostsFromConnectedUsers(username: string): Observable<PostModel[]> {
-    return this.http.get<PostModel[]>('http://localhost:8080/api/posts/get_all_posts_from_connections/' + username);
+    // return this.http.get<PostModel[]>('http://localhost:8080/api/posts/get_all_posts_from_connections/' + username);
+    return this.http.get<PostModel[]>('http://localhost:8080/api/posts/suggestions/' + this._authService.getUserName());
   }
 }

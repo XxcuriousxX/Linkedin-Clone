@@ -1,12 +1,10 @@
 package com.example.tedi_app.controller;
 
-import com.example.tedi_app.dto.CommentRequest;
-import com.example.tedi_app.dto.CommentResponse;
+import com.example.tedi_app.dto.*;
 import com.example.tedi_app.model.Comment;
 import com.example.tedi_app.model.Post;
+import com.example.tedi_app.service.PostRecommendationService;
 import com.example.tedi_app.service.PostService;
-import com.example.tedi_app.dto.PostRequest;
-import com.example.tedi_app.dto.PostResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +21,7 @@ import static org.springframework.http.ResponseEntity.status;
 public class PostController {
 
     private final PostService postService;
+    private  final PostRecommendationService postRecommendationService;
 
     @PostMapping
     public ResponseEntity<String> createPost(@RequestBody PostRequest postRequest) {
@@ -69,4 +68,24 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
+
+
+    @GetMapping("suggestions/{username}")
+    public ResponseEntity<Collection<PostResponse>> getSuggestions(@PathVariable String username) {
+        System.out.println("ALL SUggestions COMMENTS - LIKES - VIEWS!!!");
+        Collection<PostResponse> col = postService.getPostsFromConnectedUsers(username);
+        List<PostResponse> suggested = postRecommendationService.get_all_post_suggestions(username);
+        for (PostResponse p : col) {
+            if (suggested.contains(p)) {
+                suggested.remove(p);
+            }
+        }
+
+        col.addAll(suggested);
+
+
+        return status(HttpStatus.OK).body(col);
+    }
+
+
 }
