@@ -80,6 +80,8 @@ public class PostRecommendationService {
 
 
         List<Post> postsList = getAllInvolvedPosts(postViewsList);
+        if(postsList.isEmpty()) return new ArrayList<>(){};
+
         int N = users_list.size();
         int M = postsList.size();
         System.out.println("N = " + N + "   M = " + M);
@@ -152,7 +154,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 2.5) {
+            if (results[j] > 1.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -219,6 +221,8 @@ public class PostRecommendationService {
 
 
         List<Post> postsList = getAllInvolvedPostsFromVotes(voteList);
+        if(postsList.isEmpty()) return new ArrayList<>(){};
+
         int N = users_list.size();
         int M = postsList.size();
 
@@ -296,7 +300,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 2.5) {
+            if (results[j] > 1.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -364,7 +368,7 @@ public class PostRecommendationService {
 
 
         List<Post> postsList = getAllInvolvedPostsFromComments(commentList);
-
+        if(postsList.isEmpty()) return new ArrayList<>(){};
 
         int N = users_list.size();
         int M = postsList.size();
@@ -443,7 +447,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 2.5) {
+            if (results[j] > 1.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -509,11 +513,26 @@ public class PostRecommendationService {
         List<PostResponse> finalList = new ArrayList<>();
 
 
+        Comparator<PostResponse> compareById = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
+
+//        Collections.sort(fromComments, compareById);
+//        Collections.sort(fromLikes, compareById);
+//        Collections.sort(fromViews, compareById);
         
         finalList.addAll(fromComments);
         finalList.addAll(fromLikes);
         finalList.addAll(fromViews);
-        Collections.sort(finalList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+
+        //original
+        //        Collections.sort(finalList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+
+
+
+//        Collections.sort(finalList, compareById);
+
+        Collections.sort(finalList, compareById);
+
+
         List<PostResponse> top_responses = new ArrayList<>();
         
         int k = ( 5 > finalList.size() ? finalList.size() : 5);
@@ -535,18 +554,22 @@ public class PostRecommendationService {
         finalList_false.addAll(fromViews);
 
 
+        Collections.sort(finalList_false, compareById);
+
         k = ( 5 > finalList_false.size() ? finalList_false.size() : 5);
 
 
         for (int i = 0; i < k; i++) {
             top_responses.add(finalList_false.get(i));
         }
-        //top_responses.addAll(finalList_false);
+
+//        top_responses.addAll(finalList_false);
+
+        Collections.sort(top_responses, compareById);
 
 
-//         this.posts.sort((a, b) => (a.createdDateLong < b.createdDateLong) ? 1 : -1);
 
-        return finalList;
+        return top_responses;
 
     }
 

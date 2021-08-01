@@ -10,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static org.springframework.http.ResponseEntity.status;
 
@@ -72,19 +71,28 @@ public class PostController {
 
     @GetMapping("suggestions/{username}")
     public ResponseEntity<Collection<PostResponse>> getSuggestions(@PathVariable String username) {
+
         System.out.println("ALL SUggestions COMMENTS - LIKES - VIEWS!!!");
+
         Collection<PostResponse> col = postService.getPostsFromConnectedUsers(username);
+        ArrayList<PostResponse> col_n = new ArrayList<>(col);
+
         List<PostResponse> suggested = postRecommendationService.get_all_post_suggestions(username);
+
         for (PostResponse p : col) {
             if (suggested.contains(p)) {
                 suggested.remove(p);
             }
         }
 
-        col.addAll(suggested);
 
+        col_n.addAll(suggested);
 
-        return status(HttpStatus.OK).body(col);
+        Comparator<PostResponse> compareById = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
+
+        Collections.sort(col_n, compareById);
+
+        return status(HttpStatus.OK).body(col_n);
     }
 
 
