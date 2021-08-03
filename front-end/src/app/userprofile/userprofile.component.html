@@ -1,6 +1,6 @@
 <app-navigation-bar></app-navigation-bar>
 
-
+<body>
 
 <div class="flip-card">
   <div class="flip-card-inner">
@@ -22,70 +22,144 @@
 </div>
 
 
-<mat-expansion-panel hideToggle class="one" [ngClass]="buttonInfo.studies ==true ? 'one' : 'one-dis'">
-  <mat-expansion-panel-header>
-    <mat-panel-title style="position: relative;left: 40%"
-                     [ngStyle]="{'color': buttonInfo.studies == true ? '' : 'black' }">
-      Studies
-    </mat-panel-title>
+<!--  <div class="modified-mc-content">-->
 
-  </mat-expansion-panel-header>
-  <p *ngIf="buttonInfo.studies && user_profile_info.studies.length != 0">{{user_profile_info.studies}}</p>
-  <p *ngIf="buttonInfo.studies && user_profile_info.studies.length == 0"> No Studies Added! </p>
-  <div *ngIf="!buttonInfo.studies">
-    <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>
-    <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>
-  </div>
+<!--  <mat-expansion-panel hideToggle class="one" [ngClass]="buttonInfo.studies ==true ? 'one' : 'one-dis'">-->
+<!--    <mat-expansion-panel-header>-->
+<!--      <mat-panel-title style="position: relative;left: 40%"-->
+<!--                       [ngStyle]="{'color': buttonInfo.studies == true ? '' : 'black' }">-->
+<!--        Studies-->
+<!--      </mat-panel-title>-->
 
-
-</mat-expansion-panel>
-
-
-<mat-expansion-panel hideToggle [ngClass]="buttonInfo.work_exp ==true ? 'two' : 'two-dis'">
-  <mat-expansion-panel-header>
-    <mat-panel-title style="position: relative;left: 32%"
-                     [ngStyle]="{'color': buttonInfo.work_exp == true ? '' : 'black' }">
-      Work Description
-    </mat-panel-title>
-<!--    <mat-panel-description>-->
-<!--      This is a summary of the content-->
-<!--    </mat-panel-description>-->
-  </mat-expansion-panel-header>
-  <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length != 0">{{user_profile_info.work_experience}}</p>
-  <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length == 0"> No Work Experience Added! </p>
-  <div *ngIf="!buttonInfo.work_exp">
-    <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>
-    <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>
-  </div>
-</mat-expansion-panel>
+<!--    </mat-expansion-panel-header>-->
+<!--    <p *ngIf="buttonInfo.studies && user_profile_info.studies.length != 0">{{user_profile_info.studies}}</p>-->
+<!--    <p *ngIf="buttonInfo.studies && user_profile_info.studies.length == 0"> No Studies Added! </p>-->
+<!--    <div *ngIf="!buttonInfo.studies">-->
+<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
+<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
+<!--    </div>-->
 
 
-
-<mat-expansion-panel hideToggle [ngClass]="buttonInfo.abilities ==true ? 'three' : 'three-dis'">
-  <mat-expansion-panel-header>
-    <mat-panel-title style="position: relative;left: 42%"
-                     [ngStyle]="{'color': buttonInfo.abilities == true ? '' : 'black' }">
-      Abilities
-    </mat-panel-title>
-<!--    <mat-panel-description>-->
-<!--      This is a summary of the content-->
-<!--    </mat-panel-description>-->
-  </mat-expansion-panel-header >
-  <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length != 0"> {{user_profile_info.abilities}}</p>
-  <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length == 0"> No Abilities Added! </p>
-  <div *ngIf="!buttonInfo.abilities">
-    <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>
-    <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>
-  </div>
-</mat-expansion-panel>
+<!--  </mat-expansion-panel>-->
 
 
+<!--  <mat-expansion-panel  [ngClass]="buttonInfo.work_exp ==true ? 'two' : 'two-dis'">-->
+<!--    <mat-expansion-panel-header>-->
+<!--      <mat-panel-title style="position: relative;left: 34%"-->
+<!--                       [ngStyle]="{'color': buttonInfo.work_exp == true ? '' : 'black' }">-->
+<!--        Work Description-->
+<!--      </mat-panel-title>-->
+<!--  &lt;!&ndash;    <mat-panel-description>&ndash;&gt;-->
+<!--  &lt;!&ndash;      This is a summary of the content&ndash;&gt;-->
+<!--  &lt;!&ndash;    </mat-panel-description>&ndash;&gt;-->
+<!--    </mat-expansion-panel-header>-->
+
+<!--    <div class="cont">-->
+<!--      <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length != 0">{{user_profile_info.work_experience}}</p>-->
+<!--    </div>-->
+<!--    <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length == 0"> No Work Experience Added! </p>-->
+<!--    <div *ngIf="!buttonInfo.work_exp">-->
+<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
+<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
+<!--    </div>-->
+<!--  </mat-expansion-panel>-->
+
+
+
+<!--  <mat-expansion-panel  [ngClass]="buttonInfo.abilities ==true ? 'three' : 'three-dis'">-->
+<!--    <mat-expansion-panel-header>-->
+<!--      <mat-panel-title style="position: relative;left: 42%"-->
+<!--                       [ngStyle]="{'color': buttonInfo.abilities == true ? '' : 'black' }">-->
+<!--        Abilities-->
+<!--      </mat-panel-title>-->
+<!--  &lt;!&ndash;    <mat-panel-description>&ndash;&gt;-->
+<!--  &lt;!&ndash;      This is a summary of the content&ndash;&gt;-->
+<!--  &lt;!&ndash;    </mat-panel-description>&ndash;&gt;-->
+<!--    </mat-expansion-panel-header >-->
+<!--    <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length != 0"> {{user_profile_info.abilities}}</p>-->
+<!--    <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length == 0"> No Abilities Added! </p>-->
+<!--    <div *ngIf="!buttonInfo.abilities">-->
+<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
+<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
+<!--    </div>-->
+<!--  </mat-expansion-panel>-->
+
+<!--  </div>-->
 
 <!--{{buttonInfo.work_exp}}-->
 <!--{{buttonInfo.studies}}-->
 <!--{{buttonInfo.abilities}}-->
 <!--{{buttonInfo.company}}-->
 <!--{{buttonInfo.phone}}-->
+
+<br>
+<br>
+
+
+<div class="active-tabs">
+
+  <input type="radio" name="active_tabs" id="btn-1" class="btn-1" checked >
+  <label for="btn-1" class="btn" ><i class="fa fa-briefcase" aria-hidden="true"></i> Work</label>
+
+  <input type="radio" name="active_tabs" id="btn-2" class="btn-2">
+  <label for="btn-2" class="btn" ><i class="fa fa-graduation-cap" aria-hidden="true"></i> Studies</label>
+
+  <input type="radio" name="active_tabs" id="btn-3" class="btn-3">
+  <label for="btn-3" class="btn" ><i class="fa fa-user" aria-hidden="true"></i> Abilities</label>
+
+
+  <div class="tabs-container">
+
+    <div class="tab-1">
+      <p *ngIf="(buttonInfo.work_exp && user_profile_info.work_experience.length != 0) || connection_status == 3">{{user_profile_info.work_experience}}</p>
+          <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length == 0"> No Work Experience Added! </p>
+          <div *ngIf="connection_status != 3 && !buttonInfo.work_exp">
+            <p> Private Field.</p>
+            <p> You must be connected with {{username}} to access it.</p>
+          </div>
+
+    </div>
+
+    <div class="tab-3">
+      <p *ngIf="(buttonInfo.abilities && user_profile_info.abilities.length != 0) || connection_status == 3"> {{user_profile_info.abilities}}</p>
+          <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length == 0"> No Abilities Added! </p>
+          <div *ngIf="connection_status != 3 && !buttonInfo.abilities">
+            <p > Private Field.</p>
+            <p > You must be connected with {{username}} to access it.</p>
+          </div>
+    </div>
+
+    <div class="tab-2">
+      <p *ngIf="(buttonInfo.studies && user_profile_info.studies.length != 0) || connection_status == 3">{{user_profile_info.studies}}</p>
+          <p *ngIf="buttonInfo.studies && user_profile_info.studies.length == 0"> No Studies Added! </p>
+          <div *ngIf="connection_status != 3 && !buttonInfo.studies">
+            <p> Private Field. </p>
+            <p> You must be connected with {{username}} to access it.</p>
+          </div>
+    </div>
+
+    </div>
+
+  </div>
+
+<div *ngIf="canrender" class="connect-btn">
+  <app-connect-button  [receiver_user]="user"></app-connect-button>
+</div>
+
+<br>
+<div *ngIf="connection_status == 3" class="message-btn">
+<!--  <button class="button" title="button" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton">Disabled</button>-->
+  <button mat-raised-button class="button" color="accent" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton"  aria-hidden="true" >
+    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
+</div>
+
+<div *ngIf="connection_status != 3" class="message-btn">
+  <button mat-raised-button class="button-dis" color="accent" aria-hidden="true">
+    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
+</div>
+
+</body>
+
 
 
 

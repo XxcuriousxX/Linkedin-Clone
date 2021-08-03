@@ -18,11 +18,11 @@ export class ConnectButtonComponent implements OnInit {
   @Input() receiver_user: User;
 
   // 0: not connected and not request sent or received, 1: request has been sent, 2: request has been received, 3: already connected
-  connection_status: number = 0; 
+  connection_status: number = 0;
   connectPayload: ConnectPayload = new ConnectPayload();
 
   constructor(private _connectService: ConnectService, private _authService: AuthService) { }
-  
+
   ngOnInit(): void {
 	this.connection_status = 0; // init to not connected
     // If connected, then set are_connected = true, else set it as false
@@ -31,7 +31,7 @@ export class ConnectButtonComponent implements OnInit {
     this._connectService.areConnected(this.connectPayload).subscribe(con_response => {
       if (con_response.status)
         this.connection_status = 3;
-      
+
         // request has been sent
       this._connectService.isRequestPending(this.connectPayload).subscribe(con => {
         if (con.status)
@@ -51,10 +51,10 @@ export class ConnectButtonComponent implements OnInit {
   }
 
 
-  sendConnectionRequest() { 
+  sendConnectionRequest() {
     this.connectPayload.sender_username = this._authService.getUserName();
     this.connectPayload.receiver_username = this.receiver_user.username;
-    this._connectService.makeConnectionRequest(this.connectPayload).subscribe( res => { 
+    this._connectService.makeConnectionRequest(this.connectPayload).subscribe( res => {
 		  this.connection_status = 1;
       this.ngOnInit()
 		// window.location.reload();

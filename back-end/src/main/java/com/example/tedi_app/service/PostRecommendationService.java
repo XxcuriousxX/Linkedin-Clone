@@ -154,7 +154,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 1.5) {
+            if (results[j] > 3.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -300,7 +300,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 1.5) {
+            if (results[j] > 1.2) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -447,7 +447,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 1.5) {
+            if (results[j] > 2.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -513,24 +513,15 @@ public class PostRecommendationService {
         List<PostResponse> finalList = new ArrayList<>();
 
 
-        Comparator<PostResponse> compareById = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
+        Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
 
-//        Collections.sort(fromComments, compareById);
-//        Collections.sort(fromLikes, compareById);
-//        Collections.sort(fromViews, compareById);
         
         finalList.addAll(fromComments);
         finalList.addAll(fromLikes);
         finalList.addAll(fromViews);
 
-        //original
-        //        Collections.sort(finalList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
 
-
-
-//        Collections.sort(finalList, compareById);
-
-        Collections.sort(finalList, compareById);
+        Collections.sort(finalList, compareByTime.reversed());
 
 
         List<PostResponse> top_responses = new ArrayList<>();
@@ -554,7 +545,7 @@ public class PostRecommendationService {
         finalList_false.addAll(fromViews);
 
 
-        Collections.sort(finalList_false, compareById);
+        Collections.sort(finalList_false, compareByTime.reversed());
 
         k = ( 5 > finalList_false.size() ? finalList_false.size() : 5);
 
@@ -563,9 +554,7 @@ public class PostRecommendationService {
             top_responses.add(finalList_false.get(i));
         }
 
-//        top_responses.addAll(finalList_false);
-
-        Collections.sort(top_responses, compareById);
+        Collections.sort(top_responses, compareByTime.reversed());
 
 
 

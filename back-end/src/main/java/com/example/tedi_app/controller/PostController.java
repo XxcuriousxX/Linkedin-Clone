@@ -79,18 +79,38 @@ public class PostController {
 
         List<PostResponse> suggested = postRecommendationService.get_all_post_suggestions(username);
 
-        for (PostResponse p : col) {
-            if (suggested.contains(p)) {
-                suggested.remove(p);
+        List<PostResponse> check = new ArrayList<PostResponse>();
+        Set<Long> ids = new HashSet<Long>();
+
+        for( PostResponse item : suggested ) {
+            if( ids.add( item.getPostId() )) {
+                check.add( item );
             }
         }
 
 
-        col_n.addAll(suggested);
+        if (!check.isEmpty()) {
 
-        Comparator<PostResponse> compareById = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
+            for (PostResponse colx : col_n) {
+                for (PostResponse sugx : check) {
+                    if ( colx.getPostId() == sugx.getPostId() ){
+                        check.remove(sugx);
+                        break;
+                    }
 
-        Collections.sort(col_n, compareById);
+                }
+            }
+
+
+        }
+
+
+        col_n.addAll(check);
+
+
+        Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
+
+        Collections.sort(col_n, compareByTime.reversed());
 
         return status(HttpStatus.OK).body(col_n);
     }

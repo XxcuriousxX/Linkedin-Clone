@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 
 .profile-pic{
   position: relative;
@@ -68,72 +70,200 @@
 }
 
 
-.one{
+
+
+
+
+
+* {
+  margin:  0;
+  padding: 0;
+  outline: 0 none;
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  clear: both;
+  content: "";
+  display: block;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  overflow-x: hidden;
+
+}
+
+.active-tabs {
+  width: 100%;
+  padding: 10px;
   position: relative;
-  top: 230px;
-  width: 25%;
-  background-color: #1F4E79;
-  left: 30px;
-  min-height: fit-content;
+  top: 20%;
+  right: 0%;
+  margin: 20px auto;
+
 }
 
-
-
-
-
-.two{
-  position: fixed;
-  background-color: #1F4E79;
-  top: 482px;
-  width: 25%;
-  left: 520px;
-  min-height: fit-content;
+.active-tabs input {
+  opacity: 0;
+  display: none;
+  visibility: hidden;
 }
 
-
-.three{
-  position: fixed;
-  background-color: #1F4E79;
-  top: 482px;
-  width: 25%;
-  left: 960px;
-  min-height: fit-content;
-}
-
-
-.title{
+.btn {
+  background: #dddddd;
+  color: #1F4E79;
+  cursor: pointer;
+  display: block;
+  float: left;
+  font-family: "open sans";
+  font-size: 13px;
+  height: 40px;
+  line-height: 35px;
+  margin-right: 1px;
   text-align: center;
-  vertical-align: middle;
+  width: 100px;
+  opacity: 0.8;
+  transition: all 0.4s;
 }
 
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
 
-.one-dis{
+.active-tabs input:checked + label {
+  background: #1F4E79;
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0px 0 0 0 rgba(0,0,0,0.3);
+  color: #ffffff;
+}
+
+.tabs-container {
+  width: 100%;
   position: relative;
-  top: 230px;
-  width: 25%;
-  background-color: #cecfd4;
-  color: black;
-  left: 30px;
-  min-height: fit-content;
+  float: left;
+  top: -5px;
+  background: #1F4E79;
 }
 
-.two-dis{
-  position: fixed;
-  background-color: #cecfd4;
-  color: black;
-  top: 482px;
-  width: 25%;
-  left: 520px;
-  min-height: fit-content;
+.tab-1 ,
+.tab-2 ,
+.tab-3
+{
+  min-height: 200px;
+  max-height: fit-content;
+  width: 100%;
+  box-shadow: 2px 2px 0 0 rgba(0,0,0,0.3);
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  visibility: hidden;
+  transition: all 0.0s;
 }
 
 
-.three-dis{
-  position: fixed;
-  background-color: #cecfd4;
-  color: black;
-  top: 482px;
-  width: 25%;
-  left: 960px;
-  min-height: fit-content;
+
+.tab-1 p ,
+.tab-2 p ,
+.tab-3 p
+{
+  color: #ffffff;
+  font-family: "Open Sans";
+  font-size: 20px;
+  position: relative;
+  top: 25px;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding-left: 23px;
+  padding-right: 23px;
+  /*outline-color: #cccccc;*/
+}
+
+/*.tab-2 p ,*/
+/*.tab-4 p ,*/
+/*.tab-6 p {*/
+/*  line-height: 300px;*/
+/*  outline-color: #cccccc;*/
+/*}*/
+
+.btn-1:checked ~ .tabs-container .tab-1 ,
+.btn-2:checked ~ .tabs-container .tab-2 ,
+.btn-3:checked ~ .tabs-container .tab-3 ,
+.btn-4:checked ~ .tabs-container .tab-4 ,
+.btn-5:checked ~ .tabs-container .tab-5 ,
+.btn-6:checked ~ .tabs-container .tab-6 ,
+.btn-7:checked ~ .tabs-container .tab-7 {
+  position: relative;
+  visibility: visible;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}
+
+.button {
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #419EE8;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #419EE8;
+  box-shadow: 0px 3px 10px #419EE8;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+
+
+.connect-btn{
+  position: relative;
+  top: -50%;
+  left: 80%;
+}
+
+.message-btn{
+  position: relative;
+  top: -47%;
+  left: 81%;
+}
+
+.button-dis {
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000000;
+  background-color: #d5d5d5;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: not-allowed;
+  outline: none;
+  opacity: 50%;
+}
+
+.button-dis:hover {
+  cursor: not-allowed;
+  background-color: #d5d5d5;
+  box-shadow: none;
+  color: #000000;
+  transform: translateY(0px);
 }

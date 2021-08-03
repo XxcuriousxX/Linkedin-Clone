@@ -1,0 +1,13 @@
+-- INSERT INTO user (user_id, company_name, email, enabled, first_name, last_name, password, phone, username) values
+-- (100, "Georgianne", "Georgianne@gmail", 1, "Georgianne", "Georgianne", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Georgianne", "Georgianne"),
+-- (101, "Georgie", "Georgie@gmail", 1, "Georgie", "Georgie", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Georgie", "Georgie"),
+-- (102, "Georgina", "Georgina@gmail", 1, "Georgina", "Georgina", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Georgina", "Georgina"),
+-- (103, "Georgine", "Georgine@gmail", 1, "Georgine", "Georgine", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Georgine", "Georgine"),
+-- (104, "Ger", "Ger@gmail", 1, "Ger", "Ger", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Ger", "Ger"),
+-- (105, "Gerald", "Gerald@gmail", 1, "Gerald", "Gerald", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Gerald", "Gerald"),
+-- (106, "Geralda", "Geralda@gmail", 1, "Geralda", "Geralda", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Geralda", "Geralda"),
+-- (107, "Geraldine", "Geraldine@gmail", 1, "Geraldine", "Geraldine", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Geraldine", "Geraldine"),
+-- (108, "Geralene", "Geralene@gmail", 1, "Geralene", "Geralene", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Geralene", "Geralene"),
+-- (109, "Gerard", "Gerard@gmail", 1, "Gerard", "Gerard", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Gerard", "Gerard"),
+-- (110, "Gerardjan", "Gerardjan@gmail", 1, "Gerardjan", "Gerardjan", "$2a$10$TTgPJFOXqzTzJdCOMXRRSuJ1Ih1lg9ajrUi8ZLwukZZE2VDK0vszG", "Gerardjan", "Gerardjan");
+

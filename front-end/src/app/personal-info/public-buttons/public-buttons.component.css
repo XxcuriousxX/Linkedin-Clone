@@ -89,7 +89,7 @@ input:checked + .slider:before {
   min-height: 400px;
   max-height: fit-content;
   top: -495px;
-  left: 73%;
+  left: 7%;
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
   font-family: 'Merriweather', serif;
   font-size: 15px;

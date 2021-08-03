@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {AuthService} from "../auth/auth.service";
 import {Observable} from "rxjs";
 import {UserProfileResponse} from './UserProfile'
+import {User} from "../user";
 
 @Injectable({
     providedIn: 'root'
@@ -24,5 +25,10 @@ export class UserprofileService{
     getAllConnected(username: string) : Observable<any>{
       return this.http.get("http://localhost:8080/api/users/" + username);
     }
+
+    getUserInfo(username: string): Observable<User>{
+      return this.http.get<User>("http://localhost:8080/api/users/userInfo/" + username);
+    }
+
 
 }

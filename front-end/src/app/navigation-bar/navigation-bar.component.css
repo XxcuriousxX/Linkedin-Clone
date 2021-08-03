@@ -16,8 +16,7 @@ body{
   background-color: #eaeaea;
   width: 100%;
   border:1px solid #e8e8e8;
-  opacity: 95%;
-
+  opacity: 100%;
 }
 
 .nav-item{
@@ -41,6 +40,10 @@ body{
 .navbar.center .navbar-collapse {
   text-align: center;
 }
+
+
+
+
 .navbar.center .navbar-collapse .nav {
   float: none;
   display:inline-block;
