@@ -53,4 +53,13 @@
   
   }
   
-  
+.upload-job-box{
+  position: relative;
+  left: 45%;
+  top: 330px;
+  width: 400px;
+  height: 500px;
+  border-radius: 10px solid black;
+
+
+}

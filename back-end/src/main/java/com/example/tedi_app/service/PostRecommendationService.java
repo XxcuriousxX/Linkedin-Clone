@@ -44,7 +44,7 @@ public class PostRecommendationService {
 
                 Long friend_id = (user.getUserId().equals(f.getUser_id1()) ? f.getUser_id2() : f.getUser_id1());
                 for (Friends ff: friendsRepository.getAllConnectedUsers(friend_id)) { // get all friends of f
-                    Long friend_of_friend_id = (user.getUserId().equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
+                    Long friend_of_friend_id = (friend_id.equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
 
                     Collection<PostViews> postCollection = postViewsRepository.findAllByUser_UserId(friend_of_friend_id);
                     postViewsList.addAll(postCollection);
@@ -183,7 +183,7 @@ public class PostRecommendationService {
 
                 Long friend_id = (user.getUserId().equals(f.getUser_id1()) ? f.getUser_id2() : f.getUser_id1());
                 for (Friends ff: friendsRepository.getAllConnectedUsers(friend_id)) { // get all friends of f
-                    Long friend_of_friend_id = (user.getUserId().equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
+                    Long friend_of_friend_id = (friend_id.equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
 
                     Collection<Vote> voteCollection = voteRepository.findAllByUser_UserId(friend_of_friend_id);
                     voteList.addAll(voteCollection);
@@ -330,7 +330,7 @@ public class PostRecommendationService {
 
                 Long friend_id = (user.getUserId().equals(f.getUser_id1()) ? f.getUser_id2() : f.getUser_id1());
                 for (Friends ff: friendsRepository.getAllConnectedUsers(friend_id)) { // get all friends of f
-                    Long friend_of_friend_id = (user.getUserId().equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
+                    Long friend_of_friend_id = (friend_id.equals(ff.getUser_id1()) ? ff.getUser_id2() : ff.getUser_id1());
 
                     Collection<Comment> commentCollection = commentRepository.findAllByUser_UserId(friend_of_friend_id);
                     commentList.addAll(commentCollection);

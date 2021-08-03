@@ -15,16 +15,25 @@
 
 
 .flip-card {
-  position: relative;
+  position: absolute;
   top: 150px;
-  left: 25%;
+  align-items: center;
+  /* justify-content: center; */
+  left: 540px;
   background-color: transparent;
-  width: 700px;
+  width: 50%;
   height: 250px;
   border: 2px solid #ffffff;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   border-radius: 15px;
 
+}
+
+@media screen and (max-width: 1000px) {
+  .flip-card {
+    width: 50%;
+    left: 20px;
+  }
 }
 
 /* This container is needed to position the front and back side */
@@ -90,6 +99,7 @@
 }
 
 body {
+  position: relative;
   background: rgb(255, 255, 255);
   overflow-x: hidden;
 
@@ -98,8 +108,8 @@ body {
 .active-tabs {
   width: 100%;
   padding: 10px;
-  position: relative;
-  top: 20%;
+  position: absolute;
+  top: 60%;
   right: 0%;
   margin: 20px auto;
 
@@ -231,15 +241,16 @@ body {
 
 
 .connect-btn{
-  position: relative;
-  top: -50%;
-  left: 80%;
+  position: absolute;
+  /* top: 100px; */
+  top: 415px;
+  left: 36%;
 }
 
-.message-btn{
-  position: relative;
-  top: -47%;
-  left: 81%;
+.message-btn {
+  position: absolute;
+  top: 434px;
+  left: 60%;
 }
 
 .button-dis {

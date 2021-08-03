@@ -1,5 +1,6 @@
 package com.example.tedi_app.controller;
 
+import com.example.tedi_app.dto.JobPostRequest;
 import com.example.tedi_app.dto.JobPostResponse;
 import com.example.tedi_app.model.JobPost;
 
@@ -7,10 +8,7 @@ import com.example.tedi_app.service.JobPostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +26,14 @@ public class JobsController {
         System.out.println("SUggestions!!!");
         return status(HttpStatus.OK).body(jobPostService.getSuggestions(username));
     }
+
+
+    @PostMapping("create/")
+    public ResponseEntity<String> createJobPost(@RequestBody JobPostRequest jobPostRequest) {
+        
+        jobPostService.createJobPost(jobPostRequest);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 }

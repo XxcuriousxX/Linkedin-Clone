@@ -95,6 +95,26 @@
 <br>
 <br>
 
+<div *ngIf="canrender" class="connect-btn">
+  <app-connect-button  [receiver_user]="user"></app-connect-button>
+</div>
+
+<div *ngIf="connection_status == 3" class="message-btn">
+<!--  <button class="button" title="button" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton">Disabled</button>-->
+  <button mat-raised-button class="button" color="accent" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton"  aria-hidden="true" >
+    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
+</div>
+
+<div *ngIf="connection_status != 3" class="message-btn">
+  <button mat-raised-button class="button-dis" color="accent" aria-hidden="true">
+    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
+</div>
+
+
+
+<br>
+<br>
+
 
 <div class="active-tabs">
 
@@ -142,21 +162,21 @@
 
   </div>
 
-<div *ngIf="canrender" class="connect-btn">
+<!-- <div *ngIf="canrender" class="connect-btn">
   <app-connect-button  [receiver_user]="user"></app-connect-button>
 </div>
 
 <br>
 <div *ngIf="connection_status == 3" class="message-btn">
-<!--  <button class="button" title="button" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton">Disabled</button>-->
-  <button mat-raised-button class="button" color="accent" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton"  aria-hidden="true" >
+ <button class="button" title="button" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton">Disabled</button>-->
+  <!-- <button mat-raised-button class="button" color="accent" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton"  aria-hidden="true" >
     <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
 </div>
 
 <div *ngIf="connection_status != 3" class="message-btn">
   <button mat-raised-button class="button-dis" color="accent" aria-hidden="true">
     <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
-</div>
+</div> -->
 
 </body>
 

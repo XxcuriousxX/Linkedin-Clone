@@ -1,6 +1,26 @@
 <app-navigation-bar></app-navigation-bar>
 
 
+<div class="upload-job-box">
+  <form [formGroup]="jobForm" (ngSubmit)="createJobPost()">
+    <input type="text" [formControlName]="'details'" placeholder="details"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'requiredSkills'" placeholder="required"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'keywords'" placeholder="keywords"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'location'" placeholder="location"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <button type="submit" class="btn btn-outline  mb-2">
+      <!-- <i class="fa fa-newspaper-o fa-lg" aria-hidden="true" style="color: #ff5858"></i>
+      <a class="btn-text"> hey</a> -->
+    </button>
+
+  </form>
+
+
+</div>
+
+
+
 <div class="tiles-template">
     <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
     

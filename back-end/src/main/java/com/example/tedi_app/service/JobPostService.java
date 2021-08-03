@@ -2,6 +2,7 @@ package com.example.tedi_app.service;
 
 import java.util.*;
 
+import com.example.tedi_app.dto.JobPostRequest;
 import com.example.tedi_app.dto.JobPostResponse;
 import com.example.tedi_app.model.Friends;
 import com.example.tedi_app.model.JobPost;
@@ -289,13 +290,17 @@ public class JobPostService {
             JobPost JP = jobPostsList.get(j);
             System.out.println(results[j] + " " + JP.getJobPostId() + "\n");
             if (results[j] > 2.5) {
-                jobPostResponseList.add(new JobPostResponse(JP.getJobPostId(), JP.getDetails(), JP.getRequiredSkills()));
+                jobPostResponseList.add(mapToDto(JP));
             }
         }
 
         return jobPostResponseList;
     }
 
+    public JobPostResponse mapToDto(JobPost JP) {
+        return new JobPostResponse(JP.getJobPostId(), JP.getTitle(), JP.getLocation()
+                    , JP.getKeywords(), JP.EmploymentType(), JP.getDetails(), JP.getRequiredSkills());
+    }
 
 
 
@@ -325,5 +330,27 @@ public class JobPostService {
             }
         }
     }
+
+    
+
+
+    // create job post 
+    public void createJobPost(JobPostRequest jobPostRequest){
+        
+    
+        Optional<User> user_opt1 = userRepository.findByUsername(jobPostRequest.getAuthorUsername());
+            User user1 = user_opt1.orElseThrow(() -> new UsernameNotFoundException("No user " +
+                "Found with username:" + jobPostRequest.getAuthorUsername()));
+        
+        JobPost jobPost = new JobPost(user1, jobPostRequest.getTitle(), jobPostRequest.getLocation(),
+                                            jobPostRequest.getEmploymentType(), jobPostRequest.getDetails(),jobPostRequest.getRequiredSkills()
+                                            ,jobPostRequest.getKeywords());
+        
+        jobPostRepository.save(jobPost);
+
+
+    }
+
+
 
 }
