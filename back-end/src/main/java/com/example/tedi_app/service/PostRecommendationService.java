@@ -238,7 +238,7 @@ public class PostRecommendationService {
         Long[] userIds = new Long[N];
         Long[] jobPostsIds = new Long[M];
         int i = 0;
-        int j;
+        int j = 0;
         for (User u : users_list) {
             userIds[i++] = u.getUserId();
         }
@@ -293,7 +293,7 @@ public class PostRecommendationService {
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 1.2) {
+            if (results[j] > 0.6) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -424,23 +424,12 @@ public class PostRecommendationService {
             results[j] = nR[row][j];
         }
 
-        int max1_col_index = 0;
-        double max1_col = results[0];
-        for (j = 0; j < M; j++) {
-            if (max1_col < results[j]){
-                max1_col = results[j];
-                max1_col_index = j;
-            }
-        }
-
-
-
 
         List<PostResponse> postResponseList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
             System.out.println(results[j] + " " + JP.getPostId() + "\n");
-            if (results[j] > 2.5) {
+            if (results[j] > 1.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
         }
@@ -522,7 +511,7 @@ public class PostRecommendationService {
                 for (PostResponse p2 : suggestedList) {  // if p.postId exists in suggestedList, then delete it!
                     if (p2.getPostId().equals(p.getPostId())) {
                         suggestedList.remove(p2);
-                        //break;
+                        break;
                     }
                 }
             }

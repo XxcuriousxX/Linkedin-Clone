@@ -15,6 +15,7 @@ import { CommentResponse, CommentRequest } from '../comment';
   styleUrls: ['./full-post.component.css']
 })
 export class FullPostComponent implements OnInit {
+	isLoaded = false
 	postId: number = -1;
 	post: PostModel = {
 		postId: -1,
@@ -36,7 +37,6 @@ export class FullPostComponent implements OnInit {
 		 // get id from "/post/:id"
 		 // to make it work, in router module, we must specify the "post/:id" path
 		
-		// while (this.postId == -1)
 		this.postId = this._activatedRoute.snapshot.params.id;
 
 		this.commentForm = new FormGroup({
@@ -48,18 +48,27 @@ export class FullPostComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.isLoaded = false;
 		this.postId = this._activatedRoute.snapshot.params.id;
-
+		// this._activatedRoute.params.subscribe((p) => {
+		// 	this.postId = p.id;
+		// 	this.getPostById();
+		// 	this.getAllComments();
+		// })
 		this.getPostById();
-		this.getAllComments();
+		// this.getAllComments();
+		
 	}
 
 	getPostById() {
 		this._postService.getPost(this.postId).subscribe(res => {
 			this.post = res;
+			this._commentService.getAllCommentsByPost(this.postId).subscribe(res => {
+				this.commentsList = res;
+				this.isLoaded = true;
+			}, err => throwError(err));
 		}, err => throwError(err))
 	}
-
 
 	addComment() {
 		this.commentRequest.username = this._authService.getUserName();
