@@ -33,4 +33,8 @@ export class PostService {
     // return this.http.get<PostModel[]>('http://localhost:8080/api/posts/get_all_posts_from_connections/' + username);
     return this.http.get<PostModel[]>('http://localhost:8080/api/posts/suggestions/' + this._authService.getUserName());
   }
+
+  getMorePostSuggestions(alreadySuggested : PostModel[]) {
+    return this.http.post<PostModel[]>('http://localhost:8080/api/posts/more_suggestions/', alreadySuggested);
+  }
 }

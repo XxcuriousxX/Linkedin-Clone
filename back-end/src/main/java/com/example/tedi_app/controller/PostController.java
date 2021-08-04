@@ -69,6 +69,11 @@ public class PostController {
     }
 
 
+    @PostMapping("more_suggestions/")
+    public ResponseEntity<List<PostResponse>> getMorePostSuggestions(@RequestBody List<PostResponse> L) {
+        return status(HttpStatus.OK).body(postRecommendationService.getMorePostSuggestions(L));
+    }
+
     @GetMapping("suggestions/{username}")
     public ResponseEntity<Collection<PostResponse>> getSuggestions(@PathVariable String username) {
 
@@ -103,7 +108,6 @@ public class PostController {
 
         }
 
-
         col_n.addAll(check);
 
 
@@ -113,6 +117,8 @@ public class PostController {
 
         return status(HttpStatus.OK).body(suggested);
     }
+
+
 
 
 }
