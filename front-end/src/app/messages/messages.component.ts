@@ -42,9 +42,7 @@ export class MessagesComponent implements OnInit {
         this.getConversation();
         this.scrollToBottom();
 
-
     });
-
   }
 
   ngAfterViewChecked() {
@@ -83,6 +81,7 @@ export class MessagesComponent implements OnInit {
     this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
       for (let x=0; x < this.conversation.length; x++){
+        // this.conversation[x].instantTimeCreated = this.conversation[x].timeCreated;
         this.conversation[x].timeCreated = this.split_date(this.conversation[x].timeCreated);
     }
     }, error => { throwError(error); });
