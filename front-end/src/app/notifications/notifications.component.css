@@ -1,3 +1,12 @@
+body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
 
 
 
@@ -24,17 +33,17 @@
     position: relative;
     left: 0px;
     top: 50%;
-  
+
 }
 
-  
+
 .text_center{
     text-align: center;
 }
 
 
 /* places the connect button at the right side of a box */
-.button-connect { 
+.button-connect {
     position: absolute;
     vertical-align: middle;
     right: 150px;
@@ -47,11 +56,11 @@
     color: black;
     opacity: 50%;
   }
-  
+
   .links:hover{
     text-decoration: none;
     opacity: 100%;
   }
-  
 
-  
+
+

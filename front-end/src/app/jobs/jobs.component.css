@@ -1,11 +1,22 @@
+body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
 
 .cl {
     text-decoration:none;
     color: black;
-  
+
   }
-  
-  
+
+
   img.avatar {
     width: 55px;
     height: 55px;
@@ -15,18 +26,18 @@
     left: 95px;
     right: 125px;
   }
-  
+
   .username {
     top: 70px;
     position: relative;
   }
-  
-  
+
+
   .text_center{
     text-align: center;
   }
-  
-  
+
+
   .tiles-template {
     margin-left: 100px;
     margin-right: 100px;
@@ -36,23 +47,23 @@
     margin-right: 40px;
     height: 100%;
   }
-  
+
   .box {
     position: relative;
     border: 1px solid #cfc9c9;
     padding: 25px;
     border-radius: 14px;
-  
+
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-  
+
     width: 250px;
     height: 300px;
-  
-  
+
+
     /* height: 300px; */
-  
+
   }
-  
+
 .upload-job-box{
   position: relative;
   left: 45%;

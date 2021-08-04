@@ -21,12 +21,14 @@ export class NavigationBarComponent implements OnInit {
 
   screenHeight: number = -1;
   screenWidth: number = -1;
+  is_active: Boolean = false;
 
 
   constructor(private _searchService: SearchService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getScreenSize();
+
   }
 
 
@@ -43,5 +45,9 @@ export class NavigationBarComponent implements OnInit {
     console.log("INSERTED QUERY: " + this.query);
     this._router.navigate(['/mynetwork/'], { queryParams: { query: this.searchForm.value.query_input }});//, { queryParams: {input: this.searchForm.value.query_input}});
     this.searchForm.reset();
+  }
+
+  active() {
+    this.is_active = true;
   }
 }

@@ -3,76 +3,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
 
-
-
+.tt{
+  position: relative;
+  align-items: center;
+  text-align: center;
+  right: 80%;
+}
 
 body{
   background-color: #f3f2ef;
-  overflow-y: scroll; overflow-x: hidden;
 }
 
 
-.navbar-custom {
-  background-color: #eaeaea;
+.navbar {
+  background-color: #ffffff;
   width: 100%;
-  border:1px solid #e8e8e8;
+  border:1px solid #c1c1c1;
   opacity: 100%;
 }
 
 .nav-item{
+  position: relative;
+  display:inline-block;
+  left: 300px;
   font-family: 'Lato', sans-serif;
   text-align: center;
 }
 
 
-.logo{
-  height: 45px;
-  size: 50px;
-  width: auto;
-  position: relative;
-  left: 150px;
-}
 
 
-
-
-
-.navbar.center .navbar-collapse {
-  text-align: center;
-}
-
-
-
-
-.navbar.center .navbar-collapse .nav {
-  float: none;
-  display:inline-block;
-  vertical-align: middle;
-}
-
-/*underline animation */
-
-
-.navbar .navbar-nav .nav-link {
-  opacity: 50%;
-}
-
-
-.icons {
-  margin: 0;
-  padding: 5px;
-  height: 20px;
-  opacity: 100%;
-}
-
-
-.navbar .navbar-nav .nav-link:hover{
-  color: #000000;
-  opacity: 100%;
-}
-
-
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 560px) {
   .navbar .navbar-nav .nav-link {
     padding: 1em 0.7em;
   }
@@ -87,81 +48,265 @@ body{
 
 
 
-.navbar .navbar-nav .nav-link {
-  position: relative;
-}
-
-
-/*.navbar .navbar-nav .nav-link::after {*/
-/*  position: absolute;*/
-/*  bottom: 0;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  margin: auto;*/
-/*  background-color: #000000;*/
-/*  color: transparent;*/
-/*  width: 0%;*/
-/*  content: '';*/
-/*  height: 3px;*/
-/*  transition: all 0.3s;*/
-/*}*/
-
-
-
-/*.navbar .navbar-nav .nav-link:hover::after {*/
-/*  width: 100%;*/
-/*}*/
-
 .active_route {
   border-bottom: 1px solid #000000;
   color: #000000;
-  padding-bottom: 2px;
+  padding-bottom: 12px;
   opacity: 100%;
   text-decoration: #000000;
 }
 
-.nav-link .active_route > a
-{
-  background:#759ad6;
-}
 
-
-/* icons inside bars */
-
-.input-group{
-  width: 200px;
+.navbar img {
+  /*border-radius: 50%;*/
+  /*width: 36px;*/
+  /*height: 36px;*/
+  margin-right: 10px;
+  height: 41px;
+  top: -4px;
+  size: 45px;
+  width: auto;
   position: relative;
-  left: 180px;
-
+  /*left: 150px;*/
 }
 
 
-.has-search .form-control {
-  padding-left: 2.375rem;
-  box-shadow: none;
+.navbar .navbar-brand {
+  position: relative;
+  height: 34px;
+  left: 100px;
+  color: #000000;
+  padding-left: 0;
+  padding-right: 50px;
+  font-size: 24px;
+}
+
+
+.navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+  color: #7d7d7d;
+}
+
+.navbar .navbar-brand i {
+  font-size: 25px;
+  margin-right: 5px;
+}
+
+.search-box {
+  position: absolute;
+  left:128px;
+}
+
+.search-box input {
+  padding-right: 15px;
+  height: 38px;
+  min-height: 38px;
+  border: none;
+  background: #eaeaea;
+  border-radius: 3px !important;
+}
+
+.search-box input:focus {
   outline: none;
+  background: #dcdcdc;
+  box-shadow: none;
+  border: none;
 }
 
-.has-search .form-control-feedback {
+.search-box .input-group-addon {
   position: absolute;
   z-index: 2;
   display: block;
   width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
+  height: 1.975rem;
+  line-height: 2.795rem;
   text-align: center;
   pointer-events: none;
   color: #aaa;
-  height: 3px;
+}
+
+.search-box i {
+  color: #a0a5b1;
+  font-size: 19px;
+}
+
+
+@media (min-width: 1200px){
+  .form-inline .input-group {
+    width: 450px;
+    margin-left: 30px;
+  }
+}
+
+
+input[type=text] {
+  width: 280px;
+  padding-left: 2.375rem;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+  width: 100%;
+}
+
+
+.navbar-custom {
+  background-color: #eaeaea;
+  width: 100%;
+  border:1px solid #e8e8e8;
+  opacity: 100%;
 }
 
 
 
-input:focus, textarea:focus
-{
-  border: 1px solid #aaa;
-  box-shadow: none;
+.navbar.center .navbar-collapse {
+  text-align: center;
+}
+
+
+.navbar.center .navbar-collapse .nav {
+  float: none;
+  display:inline-block;
+  vertical-align: middle;
+}
+
+
+.icons {
+  margin: 0;
+  padding: 5px;
+  height: 20px;
+  opacity: 50%;
+}
+
+
+.navbar .navbar-nav .nav-link:hover{
+  color: #000000;
+  opacity: 100%;
+}
+
+.navbar .navbar-nav .nav-link {
+  opacity: 50%;
+  position: relative;
+}
+
+.nav-link span {
+  display:block;
+}
+
+li > a.active_route {
+  color: black !important;
+  opacity: 100% !important;
+}
+
+
+@media screen and (max-width:980px) {
+  .navbar {
+    float: none;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .navbar .navbar-brand {
+    position: relative;
+    height: 40px;
+    left: 20px;
+    color: #000000;
+    padding-left: 0;
+    padding-right: 50px;
+    font-size: 24px;
+  }
+}
+
+.button {
+  display: inline-block;
+  margin: 4px 2px;
+  background-color: rgba(255, 255, 255, 0.33);
+  font-size: 14px;
+  padding-left: 32px;
+  padding-right: 32px;
+  height: 45px;
+  line-height: 50px;
+  text-align: center;
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button:hover {
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+}
+
+.search-container {
+  position: relative;
+  display: inline-block;
+  left: -20px;
+  margin: 3px 1px;
+  height: 60px;
+  width: 60px;
+  top: 20px;
+  vertical-align: bottom;
+}
+
+.mglass {
+  display: inline-block;
+  pointer-events: none;
+}
+
+.searchbutton {
+  position: absolute;
+  font-size: 22px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.search:focus + .searchbutton {
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  background-color: white;
+  color: black;
+}
+
+.search {
+  position: absolute;
+  left: auto; /* Button width-1px (Not 50px/100% because that will sometimes show a 1px line between the search box and button) */
+  background-color: rgb(232, 232, 232);
   outline: none;
+  border-radius: 10px;
+  border: none;
+  padding: 0;
+  width: 0;
+  height: 100%;
+  z-index: 10;
+  transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
 }
 
+.search:focus {
+  width: 563px; /* Bar width+1px */
+  padding: 0 16px 0 0;
+}
 
+.expandright {
+  left: 49px;
+  right: auto; /* Button width-1px */
+}
+
+.expandright:focus {
+  padding: 0 0 0 16px;
+}

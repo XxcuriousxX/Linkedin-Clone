@@ -1,12 +1,12 @@
 
 <app-navigation-bar></app-navigation-bar>
-
+<body>
 
 <div *ngFor="let user of connectionRequests">
   <div class="box-view">
 
       <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
-      
+
       {{ user.username }}
 
 
@@ -31,3 +31,5 @@
   </a>
 
 </div>
+
+</body>

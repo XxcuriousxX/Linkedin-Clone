@@ -1,97 +1,135 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light  navbar-custom" xmlns="http://www.w3.org/1999/html" style="background-color: #8e8e8e">
-  <div class="container-fluid no-padding">
-    <a class="nav-link" routerLink="/home">
-      <img src="/assets/images.png" alt="image" class="logo"> &nbsp;
-    </a>
-    <div *ngIf="screenWidth > 1300">
-      <div class="input-group rounded ">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+  <a href="#" class="navbar-brand"><img src="/assets/images.png" alt="image"></a>
 
-        <form class="form-group has-search" [formGroup]="searchForm" (ngSubmit)="search()">
-          <span class="fa fa-search form-control-feedback"></span>
-          <input type="text" class="form-control rounded"  [formControlName]="'query_input'" placeholder="Search" aria-label="Search"
-                aria-describedby="search-addon" />
-        </form>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+
+
+    <div *ngIf="screenWidth > 1200">
+    <form class="navbar-form form-inline" [formGroup]="searchForm" (ngSubmit)="search()">
+      <div class="input-group search-box">
+        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+        <input type="text" id="search" placeholder="Search" autocomplete="off" [formControlName]="'query_input'">
       </div>
+    </form>
     </div>
 
-    
+    <!-- tabs -->
+    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
 
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-        
-
+      <div *ngIf="screenWidth < 1200" class="tt">
 
         <li class="nav-item">
 
-          <div class="icons">
+          <div class="search-container">
+            <form [formGroup]="searchForm" (ngSubmit)="search()">
+              <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search" autocomplete="off" [formControlName]="'query_input'">
+              <label class="button searchbutton" for="searchright"><span class="mglass"><i class="fa fa-search" aria-hidden="true"></i></span></label>
+            </form>
+          </div>
+
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active_route">
             <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active_route">Home</a>
+          </a>
         </li>
+
         <li class="nav-item">
-          <div class="icons">
+          <a class="nav-link" routerLink="/mynetwork" routerLinkActive="active_route">
             <i class="fa fa-users fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link" routerLink="/mynetwork" routerLinkActive="active_route">My Network</a>
+          </a>
         </li>
 
         <li class="nav-item">
-          <div class="icons">
+          <a class="nav-link" aria-current="page" routerLink="/jobs" routerLinkActive="active_route">
             <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
-          </div>
-          <a class="nav-link active" aria-current="page" routerLink="/jobs" routerLinkActive="active_route">Jobs</a>
+          </a>
         </li>
 
         <li class="nav-item">
-
-          <div class="icons">
+          <a class="nav-link" routerLink="/mysettings" routerLinkActive="active_route">
             <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link" routerLink="/mysettings" routerLinkActive="active_route">Settings</a>
+          </a>
         </li>
 
         <li class="nav-item">
-
-          <div class="icons">
+          <a class="nav-link" routerLink="/messages" routerLinkActive="active_route">
             <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link" routerLink="/messages" routerLinkActive="active_route">Messages</a>
+          </a>
         </li>
-        <li class="nav-item">
 
-          <div class="icons">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personal-Info" routerLinkActive="active_route">
             <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link" routerLink="/personal-Info" routerLinkActive="active_route">Personal Info</a>
+          </a>
         </li>
 
         <li class="nav-item">
-
-          <div class="icons">
+          <a class="nav-link" routerLink="/notifications" routerLinkActive="active_route">
             <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
-          </div>
-
-          <a class="nav-link" routerLink="/notifications" routerLinkActive="active_route">Notifications</a>
+          </a>
         </li>
+      </div>
+
+      <div *ngIf="screenWidth >= 1200">
+
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active_route">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            <span>Home</span>
+          </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/mynetwork" routerLinkActive="active_route">
+          <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+          <span>My Network</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" routerLink="/jobs" routerLinkActive="active_route">
+          <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
+          <span>Jobs</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/mysettings" routerLinkActive="active_route">
+          <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/messages" routerLinkActive="active_route">
+          <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
+          <span>Messages</span>
+        </a>
+      </li>
 
 
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/personal-Info" routerLinkActive="active_route">
+          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+          <span>Personal Info</span>
+        </a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/notifications" routerLinkActive="active_route">
+          <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
+          <span>Notifications</span>
+        </a>
+      </li>
 
+      </div>
 
-      </ul>
-
-
-      <!--      <form class="d-flex">-->
-      <!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-      <!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
-      <!--      </form>-->
-
+    </ul>
     </div>
-  </div>
 </nav>
