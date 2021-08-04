@@ -25,6 +25,7 @@ public class PostRecommendationService {
     private PostMapper postMapper;
     private final VoteRepository voteRepository;
     private final CommentRepository commentRepository;
+    private final PostService postService;
 
     public List<PostResponse> getSuggestionsFromViews(String username,boolean from_friends) {
         Optional<User> user_opt = userRepository.findByUsername(username);
@@ -221,7 +222,7 @@ public class PostRecommendationService {
 
 
         List<Post> postsList = getAllInvolvedPostsFromVotes(voteList);
-        if(postsList.isEmpty()) return new ArrayList<>(){};
+        if(postsList.isEmpty()) return new ArrayList<>();
 
         int N = users_list.size();
         int M = postsList.size();
@@ -244,7 +245,7 @@ public class PostRecommendationService {
 
         for (i = 0; i < N; i++) { // for each user
             Long user_id = userIds[i];
-            for (j = 0; j < M; j++) {   // for each jobPost
+            for (j = 0; j < M; j++) {   // for each Post
                 Long post_id = postsList.get(j).getPostId();
                 for (Vote jpv : voteList) {
                     if (jpv.getPost().getPostId().equals(post_id)
@@ -499,59 +500,111 @@ public class PostRecommendationService {
 
 
     public List<PostResponse> get_all_post_suggestions(String username){
+        List<PostResponse> allPostsFromConnected = postService.getPostsFromConnectedUsers(username);
         List<PostResponse> fromComments = getSuggestionsFromComments(username,true);
         List<PostResponse> fromLikes = getSuggestionsFromLikes(username,true);
         List<PostResponse> fromViews = getSuggestionsFromViews(username,true);
-        List<PostResponse> finalList = new ArrayList<>();
+        List<PostResponse> onlyFriends = new ArrayList<>();
+        List<PostResponse> suggestedList = new ArrayList<>();
+        int N_top_recent = 5;
 
 
         Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
 
         
-        finalList.addAll(fromComments);
-        finalList.addAll(fromLikes);
-        finalList.addAll(fromViews);
+        suggestedList.addAll(fromComments);
+        suggestedList.addAll(fromLikes);
+        suggestedList.addAll(fromViews);
 
 
-        Collections.sort(finalList, compareByTime.reversed());
-
-
-        List<PostResponse> top_responses = new ArrayList<>();
-        
-        int k = ( 5 > finalList.size() ? finalList.size() : 5);
-
-
-        for (int i = 0; i < k; i++) {
-            top_responses.add(finalList.get(i));
+        if (!suggestedList.isEmpty()) {
+            for (PostResponse p : allPostsFromConnected) { // for each p in allPostsFromConnected
+                for (PostResponse p2 : suggestedList) {  // if p.postId exists in suggestedList, then delete it!
+                    if (p2.getPostId().equals(p.getPostId())) {
+                        suggestedList.remove(p2);
+                        //break;
+                    }
+                }
+            }
         }
 
 
-
-        List<PostResponse> fromComments_false = getSuggestionsFromComments(username,false);
-        List<PostResponse> fromLikes_false = getSuggestionsFromLikes(username,false);
-        List<PostResponse> fromViews_false = getSuggestionsFromViews(username,false);
-        List<PostResponse> finalList_false = new ArrayList<>();
-
-        finalList_false.addAll(fromComments);
-        finalList_false.addAll(fromLikes);
-        finalList_false.addAll(fromViews);
-
-
-        Collections.sort(finalList_false, compareByTime.reversed());
-
-        k = ( 5 > finalList_false.size() ? finalList_false.size() : 5);
-
-
-        for (int i = 0; i < k; i++) {
-            top_responses.add(finalList_false.get(i));
+        // sort friends posts
+        Collections.sort(allPostsFromConnected, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+        int k = (allPostsFromConnected.size() < N_top_recent ? allPostsFromConnected.size() : N_top_recent);
+        for (int i = 0; i < k; i++) {       // add top 5 recent posts to the onlyFriends list
+            onlyFriends.add(allPostsFromConnected.get(i));
         }
 
-        Collections.sort(top_responses, compareByTime.reversed());
+        // sort the suggested posts from friends
+        Collections.sort(suggestedList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+        // add top 5 recent posts to the onlyFriends list from the suggested lists of friends
+        k = (suggestedList.size() < 5 ? suggestedList.size() : 5);
+        for (int i = 0; i < k; i++) {
+            onlyFriends.add(suggestedList.get(i));
+        }
+        // order the suggestion list
+        Collections.sort(suggestedList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+        // sort again the posts from friends (suggested + top_5_recent) combined
+//        Collections.sort(onlyFriends, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+        suggestedList = removeDuplicates(suggestedList);
+        onlyFriends.addAll(suggestedList); // add suggestions at the end
+        return onlyFriends;
+        //////////////////////////////////////////
+
+//        Collections.sort(onlyFriends, compareByTime.reversed());
+//
+//
+//        List<PostResponse> top_responses = new ArrayList<>();
+//
+//        int k = ( 5 > onlyFriends.size() ? onlyFriends.size() : 5);
+//
+//
+//        for (int i = 0; i < k; i++) {
+//            top_responses.add(onlyFriends.get(i));
+//        }
+//
+//
+//
+//        List<PostResponse> fromComments_false = getSuggestionsFromComments(username,false);
+//        List<PostResponse> fromLikes_false = getSuggestionsFromLikes(username,false);
+//        List<PostResponse> fromViews_false = getSuggestionsFromViews(username,false);
+//        List<PostResponse> finalList_false = new ArrayList<>();
+//
+//        finalList_false.addAll(fromComments);
+//        finalList_false.addAll(fromLikes);
+//        finalList_false.addAll(fromViews);
+//
+//
+//        Collections.sort(finalList_false, compareByTime.reversed());
+//
+//        k = ( 5 > finalList_false.size() ? finalList_false.size() : 5);
+//
+//
+//        for (int i = 0; i < k; i++) {
+//            top_responses.add(finalList_false.get(i));
+//        }
+//        Collections.sort(top_responses, compareByTime.reversed());
+//        return top_responses;
+
+    }
 
 
-
-        return top_responses;
-
+    public List<PostResponse> removeDuplicates(List<PostResponse> L) {
+        List<PostResponse> L2 = new ArrayList<>();
+        boolean exists = false;
+        for (PostResponse p : L) {
+            exists = false;
+            for (PostResponse p2 : L2) {
+                if (p2.getPostId().equals(p.getPostId())) {
+                    exists = true;
+                    break;
+                }
+                if (!exists)
+                    L2.add(p);
+            }
+        }
+        return L2;
     }
 
 

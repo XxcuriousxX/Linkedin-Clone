@@ -74,8 +74,7 @@ public class PostController {
 
         System.out.println("ALL SUggestions COMMENTS - LIKES - VIEWS!!!");
 
-        Collection<PostResponse> col = postService.getPostsFromConnectedUsers(username);
-        ArrayList<PostResponse> col_n = new ArrayList<>(col);
+        List<PostResponse> col_n = postService.getPostsFromConnectedUsers(username);
 
         List<PostResponse> suggested = postRecommendationService.get_all_post_suggestions(username);
 
@@ -108,11 +107,11 @@ public class PostController {
         col_n.addAll(check);
 
 
-        Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
+//        Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
 
-        Collections.sort(col_n, compareByTime.reversed());
+//        Collections.sort(col_n, compareByTime.reversed());
 
-        return status(HttpStatus.OK).body(col_n);
+        return status(HttpStatus.OK).body(suggested);
     }
 
 
