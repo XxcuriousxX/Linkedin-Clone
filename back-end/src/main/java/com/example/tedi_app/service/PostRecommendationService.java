@@ -287,14 +287,6 @@ public class PostRecommendationService {
             results[j] = nR[row][j];
         }
 
-        int max1_col_index = 0;
-        double max1_col = results[0];
-        for (j = 0; j < M; j++) {
-            if (max1_col < results[j]){
-                max1_col = results[j];
-                max1_col_index = j;
-            }
-        }
 
         List<PostResponse> postResponseList = new ArrayList<>();
         for (j = 0; j < M; j++) {
