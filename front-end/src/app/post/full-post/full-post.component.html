@@ -3,56 +3,62 @@
 
 
 <div *ngIf="isLoaded">
-<div class="box-view">
-    
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
-        {{ post.username }} <br>
-        
-    <div class="topright">
-        {{ post.duration }}
-    </div>
-    
-    <hr>
-    {{ post.description }}
-    <hr>
-    <app-like [post]="this.post"></app-like>
-    <hr>
-</div>
 
-<br>
-
-
-<div class="box-view" style="height: 100px;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
-      <!--POST FORM-->
-        <form [formGroup]="commentForm" (ngSubmit)="addComment()">
-            <input type="text" id="post" [formControlName]="'comment_text'" placeholder=" Add a comment"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
-
-            <!-- <button type="submit"></button> -->
-            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <!--Photo Button-->
-                <!-- <button type="submit"> -->
-                <!-- <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5"></i> -->
-                <!-- <a class="btn-text" >  Photo </a> -->
-                <!-- </button> -->
-            </div>
-        
-        </form>
-    
-</div>
-
-
-<br>
-
-<!-- <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:-20px"> -->
-
-<div *ngFor="let comment of commentsList">
     <div class="box-view">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
-
-        {{ comment.username }} : {{ comment.text }}
+        
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
+             <div class="username-post">{{ post.username }}</div> 
+             <br>
+            
+        <div class="topright">
+            {{ post.duration }}
+        </div>
+        
+        <hr>
+        <div class="text"> {{ post.description }} </div>
+        <hr>
+        <app-like [post]="this.post"></app-like>
+        <hr>
     </div>
+
     <br>
-</div>
+
+
+    <div class="box-view" style="height: 100px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
+        <!--POST FORM-->
+            <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+                <input type="text" id="post" [formControlName]="'comment_text'" placeholder=" Add a comment"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+
+                <!-- <button type="submit"></button> -->
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <!--Photo Button-->
+                    <!-- <button type="submit"> -->
+                    <!-- <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5"></i> -->
+                    <!-- <a class="btn-text" >  Photo </a> -->
+                    <!-- </button> -->
+                </div>
+            
+            </form>
+        
+    </div>
+
+
+    <br>
+
+    <!-- <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:-20px"> -->
+
+    <div *ngFor="let comment of commentsList">
+        <div class="box-view">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar2">
+            <div class="username-on-comment"> {{ comment.username }} </div>
+            <div class="date-on-comment"> {{ comment.createdDate }} </div>
+
+            <div class="shift">
+                <div class="text">{{ comment.text }}</div>
+            </div>
+        </div>
+        <br>
+    </div>
 
 </div>

@@ -1,4 +1,4 @@
-<body>
+
 <div class="row post" *ngFor="let post of posts" style="background-color: #ffffff">
 
 
@@ -8,7 +8,7 @@
     <span>  Posted by <a class="username" routerLink="/user/{{post.username}}">{{post.username}}</a></span>
     <!-- <span>  {{post.duration}}</span> -->
   </span>
-  <div>{{ post.duration }}</div>
+  <div class="duration"> <div>{{ post.duration }}</div> </div>
   <!-- <div class="post-title">
     <a class="postname" href="#"> {{post.postName }}
   </div> -->
@@ -33,5 +33,3 @@
 <app-like [post]="post"></app-like>
 
 </div>
-
-</body>

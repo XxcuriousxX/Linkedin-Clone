@@ -13,7 +13,7 @@ import { HostListener } from "@angular/core";
 @Component({
   selector: 'app-my-network',
   templateUrl: './my-network.component.html',
-  styleUrls: ['./my-network.component.css', '../notifications/notifications.component.css']
+  styleUrls: ['./my-network.component.css']
 })
 export class MyNetworkComponent implements OnInit {
   query_p: string = "";
