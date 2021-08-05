@@ -46,7 +46,9 @@ export class LoginComponent implements OnInit {
 
     this._authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
-      this.router.navigateByUrl('/home');
+      // this.router.navigateByUrl('/');
+      if (this._authService.getUserName() == "admin") this.router.navigate(['/admin']);
+      else this.router.navigate(['/home']);
       // this.toastr.success('Login Successful');
     }, error => {
       this.isError = true;
