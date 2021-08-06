@@ -6,8 +6,10 @@ import {MessagesService} from './messages.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessagePayload, MessageResponse} from './Message';
 
-import { throwError } from 'rxjs';
+import {interval, throwError} from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
+import {startWith} from "rxjs-compat/operator/startWith";
+import {switchMap} from "rxjs-compat/operator/switchMap";
 
 
 @Component({
@@ -44,6 +46,8 @@ export class MessagesComponent implements OnInit {
 
 
     });
+
+
 
   }
 

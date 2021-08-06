@@ -299,7 +299,7 @@ public class JobPostService {
 
     public JobPostResponse mapToDto(JobPost JP) {
         return new JobPostResponse(JP.getJobPostId(), JP.getTitle(), JP.getLocation()
-                    , JP.getKeywords(), JP.EmploymentType(), JP.getDetails(), JP.getRequiredSkills());
+                    , JP.getKeywords(), JP.getEmploymentType(), JP.getDetails(), JP.getRequiredSkills());
     }
 
 
