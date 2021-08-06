@@ -16,8 +16,10 @@ import { ThisReceiver } from '@angular/compiler';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
-
+export class MessagesComponent implements OnInit, AfterViewChecked {
+  
+  mylistener : any ; 
+  containsmessage : boolean = false;
   conversation: MessageResponse[] =  [];
   payload : MessagePayload = new MessagePayload();
   receiverUsername: string = "";
@@ -32,6 +34,7 @@ export class MessagesComponent implements OnInit {
 
   constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute
                           , private _userService: UserService) {
+
    }
   ngOnInit(): void {
     // this.getConversation();
@@ -41,17 +44,26 @@ export class MessagesComponent implements OnInit {
       this.receiverUsername = params.conversation_name;
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
-        this.scrollToBottom();
+        
 
     });
-
-
+    
+    
+    
+    this.mylistener = setInterval( () => {
+      this.loadMoreMessages()
+      console.log("TIMEE")
+      }, 10000);
 
   }
 
+
+  
   ngAfterViewChecked() {
-    this.scrollToBottom();
+      this.scrollToBottom();
+      this.containsmessage = false;
   }
+
 
 
   scrollToBottom(): void {
@@ -61,6 +73,20 @@ export class MessagesComponent implements OnInit {
     } catch(err) { }
   }
 
+  loadMoreMessages() {
+    if (this.receiverUsername != "")
+      this._messagesService.loadMoreMessages(this.conversation[this.conversation.length-1]).subscribe( extra_messages => {
+        console.log("ena dio tria apo ngafter   " + extra_messages.length);
+        if (extra_messages.length != 0){
+          this.containsmessage = true;
+          for (let message of extra_messages) {
+            this.conversation.push(message);
+          }        
+        }
+        this.scrollToBottom();
+          
+      });
+  }
 
 
   sendMessage() {
@@ -70,9 +96,10 @@ export class MessagesComponent implements OnInit {
     this.payload.receiver_username = this.receiverUsername;
     this.payload.message = this.messageForm.value.message;
     this._messagesService.sendMessage(this.payload).subscribe(data => {
-
+      // this.loadMoreMessages();
       this.ngOnInit();
       this.messageForm.reset();
+      this.containsmessage = true;
     }, error => {
       throwError(error);
     });
@@ -85,9 +112,11 @@ export class MessagesComponent implements OnInit {
     this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
       for (let x=0; x < this.conversation.length; x++){
-        // this.conversation[x].instantTimeCreated = this.conversation[x].timeCreated;
-        this.conversation[x].timeCreated = this.split_date(this.conversation[x].timeCreated);
-    }
+        this.conversation[x].timeCreated = this.conversation[x].timeCreated;
+        this.conversation[x].stringTimeCreated = this.split_date(this.conversation[x].timeCreated);
+        
+      }
+      this.scrollToBottom();
     }, error => { throwError(error); });
   }
 
@@ -99,6 +128,10 @@ export class MessagesComponent implements OnInit {
     date = date.split('-').reverse().join('');
     date = date.substring(0,2) + '/' + date.substring(2,4) + '/' + date.substring(6,8);
     return time + "      " + date;
+  }
+
+  ngOnDestroy() {
+      clearInterval(this.mylistener)
   }
 
 }

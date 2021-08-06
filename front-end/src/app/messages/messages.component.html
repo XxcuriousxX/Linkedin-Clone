@@ -25,18 +25,18 @@
 
               {{msg.message}}
 
-              <div class="time">{{ msg.timeCreated }} </div>
+              <div class="time">{{ msg.stringTimeCreated }} </div>
 
             </div>
 
           </div>
 
           <div class="receiver" *ngIf=" msg.receiverUsername === currentUser ">
-
-
+            
+            
             {{ msg.message }}
 
-            <div class="time">{{msg.timeCreated}} </div>
+            <div class="time">{{msg.stringTimeCreated}} </div>
 
           </div>
 

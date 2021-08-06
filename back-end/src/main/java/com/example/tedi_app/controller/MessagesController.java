@@ -33,4 +33,13 @@ public class MessagesController {
     public ResponseEntity<List<MessageResponse>> getConversation(@RequestBody MessageRequest msgRequest) {
         return status(HttpStatus.OK).body(messagesService.getConversation(msgRequest.getSender_username(), msgRequest.getReceiver_username()));
     }
+
+    @PostMapping("/more_messages/")
+    public ResponseEntity<List<MessageResponse>> more_messages(@RequestBody MessageResponse msgResponse) {
+        System.out.println("elaaaa trexei reeeee");
+        return status(HttpStatus.OK).body(messagesService.loadMoreMessages(msgResponse));
+    }
+
+    
+
 }

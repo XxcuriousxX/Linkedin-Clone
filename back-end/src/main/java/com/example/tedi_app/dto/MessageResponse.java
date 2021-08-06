@@ -20,4 +20,5 @@ public class MessageResponse {
     private Long senderId;
     private Instant timeCreated;
     private String duration;
+    private String stringTimeCreated;
 }
