@@ -16,6 +16,9 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./like.component.css']
 })
 export class LikeComponent implements OnInit {
+  isLoaded: boolean = false;
+  update_likes_num_computed = false;
+  has_liked_computed = false;
 
   @Input() post: PostModel;
   likePayload : LikePayload;
@@ -39,9 +42,12 @@ export class LikeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.update_likes_num_computed = false;
+    this.has_liked_computed = false;
+    this.isLoaded = false;
     this.liked_by_current_user = false;
-    this.updateLikesNum();
-    this.has_liked();
+    // this.updateLikesNum();
+    this.updateLikesNum_and_has_liked();
   }
 
   like() {
@@ -66,21 +72,25 @@ export class LikeComponent implements OnInit {
 
 
 
-  has_liked() {
+  updateLikesNum_and_has_liked() {
     this.likePayload.postId = this.post.postId;
     this.likeService.has_liked(this.likePayload).subscribe(response => {
         if (response.has_liked) {
-			this.liked_by_current_user = true;
-		}
-		else {
-			this.liked_by_current_user = false;
-		}
+			    this.liked_by_current_user = true;
+		    }
+		    else {
+			    this.liked_by_current_user = false;
+		    }
+        this.postService.getPost(this.post.postId).subscribe(post => {
+        this.post = post;
+        this.isLoaded = true;
+    });
     }, err => {
 		throwError(err);
 	});
   }
 
-  private updateLikesNum() {
+   updateLikesNum() {
     this.postService.getPost(this.post.postId).subscribe(post => {
       this.post = post;
     });

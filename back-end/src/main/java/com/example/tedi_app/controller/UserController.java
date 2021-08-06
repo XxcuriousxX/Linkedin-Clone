@@ -38,6 +38,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     public ResponseEntity <List<User>> getAllConnectedUsers(@PathVariable String username){
+        System.out.println("________________________________________________________ " + username);
         return status(HttpStatus.OK).body(userService.get_all_connected_users(username));
     }
 

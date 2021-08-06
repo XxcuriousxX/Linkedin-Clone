@@ -1,7 +1,7 @@
 import { PostsBoxComponent } from './../posts-box/posts-box.component';
 import { PostModel } from './../post/post.model';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+
 
   createPost() {
     this.postPayload.description = this.postForm.value.description;

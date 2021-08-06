@@ -1,5 +1,6 @@
 <!-- Section to Display Votes-->
 
+<div *ngIf="isLoaded">
 <div *ngIf="liked_by_current_user == false; else already_liked">
 
 
@@ -26,3 +27,5 @@
     
 
 </ng-template>
+
+</div>

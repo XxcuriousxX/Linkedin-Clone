@@ -209,6 +209,8 @@ public class JobPostService {
 
 
         List<JobPost> jobPostsList = getAllInvolvedJobPosts(jobPostViewsList);
+        if(jobPostsList.isEmpty()) return new ArrayList<>();
+
         int N = users_list.size();
         int M = jobPostsList.size();
         System.out.println("N = " + N + "   M = " + M);

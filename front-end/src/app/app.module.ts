@@ -1,3 +1,4 @@
+import { AdminAuthGuard } from './admin/admin-auth.guard';
 import { JobsService } from './jobs/jobs.service';
 import { SettingsComponent } from './settings/settings.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
@@ -39,6 +40,7 @@ import { FullPostComponent } from './post/full-post/full-post.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { JobsComponent } from './jobs/jobs.component';
+import { AdminComponent } from './admin/admin.component';
 
 const materialModules = [
   MatButtonModule
@@ -47,7 +49,10 @@ const materialModules = [
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
 const appRoutes : Routes = [
+
   // if authenticated then redirect to home
+  { path: '', component: AdminComponent, canActivate: [AdminAuthGuard]},
+  // { path: 'home', component: AdminComponent, canActivate: [AdminAuthGuard]},
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   {
@@ -109,6 +114,11 @@ const appRoutes : Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
     // ** -> none of our routes are hit wildcard route
     path: '**',
     component: NotFoundComponent
@@ -136,7 +146,8 @@ const appRoutes : Routes = [
     PublicButtonsComponent,
     FullPostComponent,
     UserprofileComponent,
-    JobsComponent
+    JobsComponent,
+    AdminComponent
   ],
     imports: [
         BrowserModule,

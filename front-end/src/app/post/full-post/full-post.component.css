@@ -11,6 +11,7 @@
     width: 500px;
     /* height: 300px; */
     block-size: fit-content;
+    height: fit-content;
 }
 
 
@@ -29,10 +30,16 @@
     position: absolute;
     right: 40px;
     top: 40px;
+    font-style: italic;
+    opacity: 45%;
 }
 
 
-
+.username-post {
+  position: absolute;
+  top: 40px;
+  left: 90px;
+}
 
 
 hr {
@@ -119,4 +126,30 @@ input {
   }
 
 
+
+
+
+  .username-on-comment {
+    position: absolute;
+    top: 30px;
+    left: 90px;
+  }
  
+  .date-on-comment {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    font-style: italic;
+    opacity: 45%;
+  }
+
+  .box-view .text {
+    text-align: left;
+    word-wrap: break-word;
+  }
+
+  .shift {
+    top: 10px;
+    position: relative;
+    left: 10px;
+  }

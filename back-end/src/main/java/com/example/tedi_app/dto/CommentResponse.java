@@ -24,7 +24,7 @@ public class CommentResponse {
         this.username = username;
         this.text = txt;
         Date d = Date.from(dateInstant);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd/mm/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         this.createdDate = formatter.format(d);
     }
 }

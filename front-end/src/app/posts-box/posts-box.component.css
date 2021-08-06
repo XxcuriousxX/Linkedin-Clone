@@ -44,3 +44,7 @@
   margin-top: 10px;
 }
 
+.duration {
+    font-style: italic;
+    opacity: 45%;
+}

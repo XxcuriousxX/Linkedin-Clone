@@ -21,8 +21,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long postId;
-    @Nullable
-    private String url;
+
     @Nullable
     @Lob
     private String description;

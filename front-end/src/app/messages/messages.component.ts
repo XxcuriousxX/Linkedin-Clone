@@ -8,8 +8,7 @@ import {MessagePayload, MessageResponse} from './Message';
 
 import {interval, throwError} from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
-import {startWith} from "rxjs-compat/operator/startWith";
-import {switchMap} from "rxjs-compat/operator/switchMap";
+
 
 
 @Component({
@@ -43,7 +42,6 @@ export class MessagesComponent implements OnInit {
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
         this.scrollToBottom();
-
 
     });
 
@@ -87,6 +85,7 @@ export class MessagesComponent implements OnInit {
     this._messagesService.getConversation(this.payload).subscribe(  res => {
       this.conversation = res;
       for (let x=0; x < this.conversation.length; x++){
+        // this.conversation[x].instantTimeCreated = this.conversation[x].timeCreated;
         this.conversation[x].timeCreated = this.split_date(this.conversation[x].timeCreated);
     }
     }, error => { throwError(error); });
