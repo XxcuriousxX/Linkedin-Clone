@@ -55,7 +55,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     // returns a list of Users who are friends of username
     public List<User> get_all_connected_users(String username) {
-//        return userRepository.getAllUsers(
         Optional<User> userOptional = userRepository.findByUsername(username);
         User user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
@@ -64,7 +63,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("\nUser = " + user.getUsername());
 
         List<Friends> F = friendsRepository.getAllConnectedUsers(user.getUserId());
-
         System.out.println("\nUser11111111 = " + user.getUsername());
 
         ArrayList<User> friends_list = new ArrayList<>();
@@ -72,6 +70,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("\nID = " + id);
 
         for (Friends friend : F) {
+            System.out.println("friend tuple : " + friend.getUser_id1() + "   " + friend.getUser_id2());
             if (!friend.getUser_id1().equals(id)) {
                 User u1 = userRepository.findByUserId(friend.getUser_id1()).orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
