@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+
+body{
+  overflow-x: hidden;
+}
+
+.txt{
+  position: absolute;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  top: 80px;
+  left: -270px;
+  font-size: 30px;
+}
+
+input::-webkit-input-placeholder {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.box {
+  position: relative;
+  border: 1px solid #cfc9c9;
+  padding: 25px;
+  border-radius: 14px;
+  left: 40%;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+  top: 100px;
+  width: 350px;
+  height: 500px;
+  font-family: 'Montserrat', sans-serif;
+  /* height: 300px; */
+
+}
+
+input{
+  width: 250px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+  outline: none;
+}
+
+input:focus{
+  outline: none;
+}
+
+textarea{
+  resize: none;
+  box-shadow: none!important;
+  outline: 0 none;
+  border-color: #cfc9c9;
+  width: 250px;
+  height: 80px;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-top: 10px;
+}
+
+textarea:focus{
+  box-shadow: none!important;
+  outline: 0 none;
+  border-color: #cfc9c9;
+}
+
+
+.button {
+  border-radius: 4px;
+  background-color: #090403;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  width: 150px;
+  height: 40px;
+  position: absolute;
+  left: -200px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  top: -23px;
+  font-size: 20px;
+}
+
+.button span:after {
+  content: '\f0f2';
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 32px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}

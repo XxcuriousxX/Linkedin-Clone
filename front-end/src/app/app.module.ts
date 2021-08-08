@@ -41,6 +41,8 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { JobsComponent } from './jobs/jobs.component';
 import { AdminComponent } from './admin/admin.component';
+import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
+import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
 
 const materialModules = [
   MatButtonModule
@@ -90,6 +92,11 @@ const appRoutes : Routes = [
   {
     path: 'jobs',
     component: JobsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'createjobpost',
+    component: CreateJobPostComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -147,7 +154,9 @@ const appRoutes : Routes = [
     FullPostComponent,
     UserprofileComponent,
     JobsComponent,
-    AdminComponent
+    AdminComponent,
+    CreateJobPostComponent,
+    FullJobPostViewComponent
   ],
     imports: [
         BrowserModule,

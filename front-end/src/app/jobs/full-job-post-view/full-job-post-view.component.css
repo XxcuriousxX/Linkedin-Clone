@@ -1,0 +1,155 @@
+.box-view {
+  position: relative;
+  border: 1px solid #cfc9c9;
+  padding: 25px;
+  border-radius: 14px;
+  top: 100px;
+  right: 70%;
+  left: 30%;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+
+  width: 500px;
+  /* height: 300px; */
+  block-size: fit-content;
+  height: fit-content;
+}
+
+
+.avatar {
+  vertical-align: middle;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  position: relative;
+  left: 0px;
+  top: 50%;
+
+}
+
+.topright {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  font-style: italic;
+  opacity: 45%;
+}
+
+
+.username-post {
+  position: absolute;
+  top: 40px;
+  left: 90px;
+}
+
+
+hr {
+  width: 100%;
+  border: none;
+  height: 1px;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+}
+
+
+
+/*remove focus when writing */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.btn-toolbar{
+  margin: 5px;
+  position: relative;
+  top: -25px;
+  left: 0px;
+
+}
+
+
+.btn {
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
+.btn-text{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  color: #878787;
+  font-weight: 550;
+}
+
+.btn-text:hover{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background-color: #e3e3e3;
+}
+
+input {
+  background-color: lightgray;
+  position: relative;
+  left: 60px;
+  top: -37px;
+  width: 350px;
+  bottom: 10px;
+  height: fit-content;
+  border: 2px solid grey;
+  border-radius: 15px;
+  opacity: 40%;
+}
+
+.btn-toolbar{
+  margin: 5px;
+  position: relative;
+  top: -25px;
+  left: 0px;
+
+}
+
+
+
+.avatar2 {
+
+  vertical-align: left;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+  left: 10px;
+}
+
+
+
+
+
+.username-on-comment {
+  position: absolute;
+  top: 30px;
+  left: 90px;
+}
+
+.date-on-comment {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  font-style: italic;
+  opacity: 45%;
+}
+
+.box-view .text {
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.shift {
+  top: 10px;
+  position: relative;
+  left: 10px;
+}

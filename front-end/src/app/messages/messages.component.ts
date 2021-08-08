@@ -6,9 +6,12 @@ import {MessagesService} from './messages.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessagePayload, MessageResponse} from './Message';
 
-import {interval, throwError} from 'rxjs';
+import {interval, Observable, Subscription, throwError, timer} from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
-
+import {switchMap} from "rxjs-compat/operator/switchMap";
+import {retry} from "rxjs-compat/operator/retry";
+import {share} from "rxjs-compat/operator/share";
+import { startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -17,8 +20,10 @@ import { ThisReceiver } from '@angular/compiler';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit, AfterViewChecked {
-  
-  mylistener : any ; 
+
+  timeInterval: Subscription;
+
+  mylistener : any;
   containsmessage : boolean = false;
   conversation: MessageResponse[] =  [];
   payload : MessagePayload = new MessagePayload();
@@ -44,12 +49,21 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
       this.receiverUsername = params.conversation_name;
       if (params.conversation_name !== undefined) // if conversation has been selected
         this.getConversation();
-        
+
 
     });
-    
-    
-    
+
+
+    // interval(5000) // run every 5 seconds
+    //   .pipe(
+    //     startWith(0),
+    //     switchMap(() => { this.loadMoreMessages() })
+    //   )
+    //   .subscribe(
+    //
+    //   );
+
+
     this.mylistener = setInterval( () => {
       this.loadMoreMessages()
       console.log("TIMEE")
@@ -58,7 +72,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
   }
 
 
-  
+
   ngAfterViewChecked() {
       this.scrollToBottom();
       this.containsmessage = false;
@@ -73,19 +87,21 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
     } catch(err) { }
   }
 
-  loadMoreMessages() {
-    if (this.receiverUsername != "")
+  loadMoreMessages() : MessageResponse[] {
+    if (this.receiverUsername != ""){
       this._messagesService.loadMoreMessages(this.conversation[this.conversation.length-1]).subscribe( extra_messages => {
         console.log("ena dio tria apo ngafter   " + extra_messages.length);
         if (extra_messages.length != 0){
           this.containsmessage = true;
           for (let message of extra_messages) {
             this.conversation.push(message);
-          }        
+          }
         }
-        this.scrollToBottom();
-          
+        return this.conversation;
       });
+    }
+    return this.conversation;
+
   }
 
 
@@ -114,7 +130,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
       for (let x=0; x < this.conversation.length; x++){
         this.conversation[x].timeCreated = this.conversation[x].timeCreated;
         this.conversation[x].stringTimeCreated = this.split_date(this.conversation[x].timeCreated);
-        
+
       }
       this.scrollToBottom();
     }, error => { throwError(error); });

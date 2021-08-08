@@ -1,0 +1,29 @@
+<body>
+
+<app-navigation-bar></app-navigation-bar>
+
+
+
+<div class="box">
+  <div class="txt">
+    Create Job Post
+  </div>
+  <form [formGroup]="jobForm" (ngSubmit)="createJobPost()">
+
+    <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+
+    <br>
+    <br>
+    <textarea [formControlName]="'details'" rows="3" placeholder="details"></textarea>
+    <textarea [formControlName]="'requiredSkills'" rows="3" placeholder="requiredSkills"></textarea>
+    <textarea [formControlName]="'keywords'" rows="3" placeholder="keywords"></textarea>
+    <textarea [formControlName]="'location'" rows="3" placeholder="location"></textarea>
+    <br>
+    <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+
+
+    <button  class="button"><span>Publish</span></button>
+
+  </form>
+</div>
+</body>
