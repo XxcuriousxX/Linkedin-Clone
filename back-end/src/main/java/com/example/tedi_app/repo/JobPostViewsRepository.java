@@ -13,5 +13,6 @@ import java.util.Optional;
 public interface JobPostViewsRepository extends JpaRepository<JobPostViews,Long> {
 
     Optional<JobPostViews> findByUserUserId(Long id);
+    JobPostViews getByJobPostJobPostIdAndUserUserId(Long jobpost_id, Long user_id);
     Collection<JobPostViews> findAllByUser_UserId(Long id);
 }

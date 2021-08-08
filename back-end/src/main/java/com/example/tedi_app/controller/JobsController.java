@@ -36,4 +36,9 @@ public class JobsController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<JobPostResponse> getJobPost(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(jobPostService.getJobPost(id));
+    }
+
 }

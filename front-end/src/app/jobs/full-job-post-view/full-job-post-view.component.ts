@@ -21,7 +21,6 @@ export class FullJobPostViewComponent implements OnInit {
   jobpostId: number = -1;
   jobpost : FullJobPostModel = {
     jobPostId :-1,
-    authorUsername:"",
     title:"",
     location:"",
     employmentType:"",

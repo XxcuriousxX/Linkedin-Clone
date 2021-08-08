@@ -1,16 +1,15 @@
 import { UserService } from './../user.service';
 import { ActivatedRoute } from '@angular/router';
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {MessagesService} from './messages.service';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessagePayload, MessageResponse} from './Message';
 
-import {interval, Observable, Subscription, throwError, timer} from 'rxjs';
+import {interval, Observable, Subscription, throwError, timer, Subject} from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
-import {switchMap} from "rxjs-compat/operator/switchMap";
-import {retry} from "rxjs-compat/operator/retry";
-import {share} from "rxjs-compat/operator/share";
+import { switchMap, tap, share, retry, takeUntil } from 'rxjs/operators';
+// import { Observable, timer, Subscription, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
 
@@ -19,10 +18,11 @@ import { startWith } from 'rxjs/operators';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit, AfterViewChecked {
+export class MessagesComponent implements OnInit {
 
   timeInterval: Subscription;
 
+  send_message: boolean = false;
   mylistener : any;
   containsmessage : boolean = false;
   conversation: MessageResponse[] =  [];
@@ -33,14 +33,30 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
   });
 
   currentUser: string = this._authService.getUserName();
-  // @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
-  @ViewChild('container') private myScrollContainer: ElementRef;
 
+  private stopPolling = new Subject();
+  conv$ : Observable<MessageResponse[]>;
+  conversation$: Observable<MessageResponse[]>;
 
   constructor(private _messagesService: MessagesService, private _authService: AuthService, private route: ActivatedRoute
                           , private _userService: UserService) {
 
+
+
+    this.conversation$ = timer(1, 3000).pipe(
+      switchMap(() => {
+        this.payload.sender_username = this._authService.getUserName();
+        this.payload.receiver_username = this.receiverUsername; 
+        return this._messagesService.getConversation(this.payload); 
+      }),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)                       
+      );
    }
+   
+
+
   ngOnInit(): void {
     // this.getConversation();
     // console.log("PRINTING CONV\n");
@@ -48,44 +64,22 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
     this.route.queryParams.subscribe( params => {
       this.receiverUsername = params.conversation_name;
       if (params.conversation_name !== undefined) // if conversation has been selected
-        this.getConversation();
+        this.conv$ = this.getConv();
 
 
     });
 
-
-    // interval(5000) // run every 5 seconds
-    //   .pipe(
-    //     startWith(0),
-    //     switchMap(() => { this.loadMoreMessages() })
-    //   )
-    //   .subscribe(
-    //
-    //   );
-
-
-    this.mylistener = setInterval( () => {
-      this.loadMoreMessages()
-      console.log("TIMEE")
-      }, 10000);
-
+    
   }
 
 
 
-  ngAfterViewChecked() {
-      this.scrollToBottom();
-      this.containsmessage = false;
+
+
+  getConv() : Observable<MessageResponse[]> {
+    return this.conversation$;
   }
 
-
-
-  scrollToBottom(): void {
-    try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      // this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
-    } catch(err) { }
-  }
 
   loadMoreMessages() : MessageResponse[] {
     if (this.receiverUsername != ""){
@@ -113,16 +107,18 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
     this.payload.message = this.messageForm.value.message;
     this._messagesService.sendMessage(this.payload).subscribe(data => {
       // this.loadMoreMessages();
-      this.ngOnInit();
+      // this.chr.detectChanges();
+      this.send_message = true;
+      
+      // this.ngOnInit();
       this.messageForm.reset();
-      this.containsmessage = true;
     }, error => {
       throwError(error);
     });
   }
 
 
-  getConversation() {
+  getConversation(){
     this.payload.sender_username = this._authService.getUserName();
     this.payload.receiver_username = this.receiverUsername;
     this._messagesService.getConversation(this.payload).subscribe(  res => {
@@ -132,7 +128,6 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
         this.conversation[x].stringTimeCreated = this.split_date(this.conversation[x].timeCreated);
 
       }
-      this.scrollToBottom();
     }, error => { throwError(error); });
   }
 
@@ -147,7 +142,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnDestroy() {
-      clearInterval(this.mylistener)
+    this.stopPolling.next();
   }
 
 }

@@ -35,4 +35,15 @@ public class JobPostViews {
 
     int views = 0;
 
+
+    public JobPostViews(JobPost jp, User u) {
+        this.jobPost = jp;
+        this.user = u;
+    }
+
+    public void increaseViews() {
+        this.views++;
+    }
+   
+
 }

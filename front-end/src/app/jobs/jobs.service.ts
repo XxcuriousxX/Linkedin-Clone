@@ -23,7 +23,7 @@ export class JobsService {
   }
 
   getJobPostById(id: number): Observable<FullJobPostModel> {
-    return this.http.get<FullJobPostModel>('http://localhost:8080/api/jobpost/' + id);
+    return this.http.get<FullJobPostModel>('http://localhost:8080/api/jobs/' + id);
   }
 
 }

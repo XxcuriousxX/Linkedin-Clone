@@ -16,7 +16,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 
@@ -25,18 +27,15 @@ public abstract class MessageMapper {
 
     @Autowired
     private AuthService authService;
-//
-//    @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
-//    @Mapping(target = "message", source = "m.message")
-//    @Mapping(target = "receiverUser", source = "receiver")
-//    @Mapping(target = "senderUser", source = "sender")
-//    public abstract  Message map(MessageRequest m, User sender, User receiver);
+
+    
 
     @Mapping(target = "messageId", source = "messageId")
     @Mapping(target = "message", source = "message")
     @Mapping(target = "senderId", source = "senderId")
     @Mapping(target = "receiverId", source = "receiverId")
     @Mapping(target = "timeCreated", source = "timeCreated")
+    @Mapping(target = "stringTimeCreated", expression= "java(getStringTimeCreated(msg))")
     @Mapping(target = "duration", expression = "java(getDuration(msg))")
     public abstract MessageResponse mapToDto(Message msg);
 
@@ -44,6 +43,11 @@ public abstract class MessageMapper {
         return TimeAgo.using(msg.getTimeCreated().toEpochMilli());
     }
 
-
+    String getStringTimeCreated(Message msg) {
+        Date myDate = Date.from(msg.getTimeCreated());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm");
+        String formattedDate = formatter.format(myDate);
+        return formattedDate;
+    }
 
 }

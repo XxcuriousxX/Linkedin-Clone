@@ -9,16 +9,17 @@
 
 
 
-    <div class="conv-box">
+    <div class="conv-box" >
 
-      <div class="messages-region" #container>
+      <div class="messages-region" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
 
 <!--        -->
-        <div  *ngFor="let msg of conversation">
+        <div *ngIf="conv$ | async as conv">
+        <div  *ngFor="let msg of conv">
 
 
-          <div  *ngIf=" msg.senderUsername === currentUser ">
+          <div  *ngIf=" msg.senderUsername === currentUser " >
 
 
             <div class="sender">
@@ -43,7 +44,7 @@
         </div>
         <!-- {{ getConversation() }} -->
 
-
+       </div> <!-- ng if async-->
       </div>
         <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
             <hr style="position:relative;top:10px;background-color:black;border-top:1px solid black">

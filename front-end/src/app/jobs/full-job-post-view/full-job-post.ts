@@ -1,6 +1,5 @@
-export class FullJobPostModel {
+export class FullJobPostModel { // JobPostResponse
   jobPostId: number;
-  authorUsername: string ;
   title:string;
   location:string;
   employmentType:string ;

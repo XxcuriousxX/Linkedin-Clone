@@ -95,6 +95,11 @@ const appRoutes : Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'jobs/:id',
+    component: FullJobPostViewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'createjobpost',
     component: CreateJobPostComponent,
     canActivate: [AuthGuard]

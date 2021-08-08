@@ -26,6 +26,7 @@ public class JobPostService {
     private final FriendsRepository friendsRepository;
     private final JobPostViewsRepository jobPostViewsRepository;
     private final JobPostRepository jobPostRepository;
+    private AuthService authService;
 
 
     public double dot(double[] x, double[] y) {
@@ -351,6 +352,29 @@ public class JobPostService {
         jobPostRepository.save(jobPost);
 
 
+    }
+
+    public JobPostResponse getJobPost(Long id){
+        JobPost jp =  jobPostRepository.getByJobPostId(id);
+        User u = userRepository.findByUsername(authService.getCurrentUser().getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                "Found with username: "+ authService.getCurrentUser().getUsername()));
+        
+                
+        JobPostViews jpv = jobPostViewsRepository.getByJobPostJobPostIdAndUserUserId(id, u.getUserId());
+        
+        if (jpv == null) {
+            jpv = new JobPostViews(jp, u);
+            jpv.increaseViews();
+            jobPostViewsRepository.save(jpv);
+        }
+        else {
+            jpv.increaseViews();
+            System.out.println("Prinint views --- " + jpv.getViews());
+            jobPostViewsRepository.save(jpv);
+        }
+        
+        return mapToDto(jp);
     }
 
 

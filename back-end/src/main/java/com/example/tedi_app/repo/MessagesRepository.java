@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MessagesRepository extends JpaRepository<Message,Long> {
 
-
     @Query( value = "select * from Message where (sender_id = :id1 and receiver_id = :id2) or (sender_id = :id2 and receiver_id = :id1)",nativeQuery = true)
     Optional<List<Message>> getConversation(@Param("id1") Long id1, @Param("id2") Long id2);
 
