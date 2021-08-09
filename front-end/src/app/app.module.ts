@@ -11,7 +11,7 @@ import { MyNetworkComponent } from './my-network/my-network.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MessagesComponent } from './messages/messages.component';
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -43,9 +43,10 @@ import { JobsComponent } from './jobs/jobs.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
 import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
-
+import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY} from '@angular/material/checkbox';
 const materialModules = [
-  MatButtonModule
+  MatButtonModule, 
+  MatCheckboxModule
 ];
 
 //we need to define here the list of all of our routes
@@ -173,15 +174,17 @@ const appRoutes : Routes = [
         NgxWebstorageModule.forRoot(),
         MatGridListModule,
         FormsModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatCheckboxModule
     ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
-  }, ConnectService, MessagesService, JobsService],
+  }, ConnectService, MessagesService, JobsService, {provide: MAT_CHECKBOX_DEFAULT_OPTIONS_FACTORY, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions}],
   bootstrap: [AppComponent],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA  ]
 
 })
 export class AppModule {

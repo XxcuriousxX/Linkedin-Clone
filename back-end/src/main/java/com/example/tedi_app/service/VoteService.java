@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,5 +76,13 @@ public class VoteService {
                 .post(post)
                 .user(authService.getCurrentUser())
                 .build();
+    }
+
+    public static List<VoteData> mapAllToVoteData(List<Vote> vList) {
+        List<VoteData> vdList = new ArrayList<>();
+        for (Vote v : vList) {
+            vdList.add(new VoteData(v.getPost().getPostId()));
+        }
+        return vdList;
     }
 }

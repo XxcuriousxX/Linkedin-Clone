@@ -1,15 +1,9 @@
 package com.example.tedi_app.service;
 
-import com.example.tedi_app.dto.CommentRequest;
-import com.example.tedi_app.dto.CommentResponse;
+import com.example.tedi_app.dto.*;
 import com.example.tedi_app.mapper.PostMapper;
-import com.example.tedi_app.dto.PostRequest;
-import com.example.tedi_app.dto.PostResponse;
 import com.example.tedi_app.exceptions.PostNotFoundException;
-import com.example.tedi_app.model.Action;
-import com.example.tedi_app.model.Comment;
-import com.example.tedi_app.model.Post;
-import com.example.tedi_app.model.User;
+import com.example.tedi_app.model.*;
 import com.example.tedi_app.repo.ActionsRepository;
 import com.example.tedi_app.repo.CommentRepository;
 import com.example.tedi_app.repo.PostRepository;
@@ -33,7 +27,6 @@ import static java.util.stream.Collectors.toList;
 public class PostService {
 
     private final PostRepository postRepository;
-//    private final SubredditRepository subredditRepository;
     private final UserRepository userRepository;
     private final AuthService authService;
     private final PostMapper postMapper;
@@ -103,10 +96,28 @@ public class PostService {
 //                .orElseThrow(() -> new UsernameNotFoundException(commentRequest.getUsername()));
         Post post = postRepository.getById(postId);
         List<Comment> C = this.commentRepository.findByPost(post);
+        System.out.println("Post id = " + post.getPostId());
         List<CommentResponse> respList = new ArrayList<>();
         for (Comment c : C) {
             respList.add(new CommentResponse(c.getId(), c.getUser().getUsername(), c.getText(), c.getCreatedDate()));
         }
         return respList;
     }
+
+
+    public static List<CommentResponse> mapAllCommentsToDto(List<Comment> commList) {
+        List<CommentResponse> comm_respList = new ArrayList<>();
+        for (Comment c : commList) {
+            comm_respList.add(new CommentResponse(c.getId(), c.getUser().getUsername(), c.getText(), c.getCreatedDate()));
+        }
+        return comm_respList;
+    }
+
+//    public static List<PostResponse> mapAllPostsToDto(List<Post> postList) {
+//        List<PostResponse> post_respList = new ArrayList<>();
+//        for (Post p : postList) {
+//            post_respList.add(postMapper.mapToDto(p));
+//        }
+//        return post_respList;
+//    }
 }

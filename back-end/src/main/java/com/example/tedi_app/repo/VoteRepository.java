@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,4 +25,6 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
 
 
     Collection<Vote> findAllByUser_UserId(Long id);
+
+    List<Vote> getAllByUserUserId(Long id);
 }

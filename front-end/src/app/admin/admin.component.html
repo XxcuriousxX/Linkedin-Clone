@@ -1,4 +1,35 @@
 <p>admin works!</p>
-
+<br>
+<br>
 
 <button (click)="logout()"> Patato re trompa</button>
+
+<input type='button' (click)='exportAsJSON()' value='export as JSON'>
+<input type='button' (click)='exportAsXML()' value='export as XML'>
+
+<div *ngIf="isLoaded">
+  <div *ngFor="let user of usersList">
+    <!--      <mat-grid-list  cols="1" rowHeight="2:1" >-->
+    <!--      <mat-grid-tile class="list"> {{user.username}} </mat-grid-tile>-->
+    <!--    </mat-grid-list>-->
+    
+          <div class="box-view">
+            <div class="avater-query-left">
+            <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar-query">
+            </div>
+            <div class="username-on-query">{{ user.username }}</div>
+            
+    
+    
+            <!-- <div class="button-connect" >con</div> -->
+            <div class="button-connect">
+              <!-- <app-connect-button [receiver_user]="user"></app-connect-button> -->
+                <label class="container">Four
+                  <input type="checkbox" value='{{ user.username }}'  id="{{ user.username }}"> 
+                  <span class="checkmark"></span>
+                </label>
+              
+            </div>
+          </div>
+  </div>
+</div>

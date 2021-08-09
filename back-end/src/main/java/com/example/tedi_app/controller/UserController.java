@@ -36,9 +36,20 @@ public class UserController {
     private final UserProfileService userProfileService;
 
 
+
+    @GetMapping("/get_all_users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return status(HttpStatus.OK).body(userService.getAllUsers());
+    }
+
+    @PostMapping("/get_all_detailed_users")
+    public ResponseEntity<List<DetailedUser>> getAllDetailedUsers(@RequestBody String[] usernames) {
+        System.out.println("First user = " + usernames[0]);
+        return status(HttpStatus.OK).body(userService.getAllDetailedUsers(usernames));
+    }
+
     @GetMapping("/{username}")
     public ResponseEntity <List<User>> getAllConnectedUsers(@PathVariable String username){
-        System.out.println("________________________________________________________ " + username);
         return status(HttpStatus.OK).body(userService.get_all_connected_users(username));
     }
 
