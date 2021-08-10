@@ -31,6 +31,7 @@ public class TediAppApplication {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
 		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("https://localhost:4200"));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
@@ -42,6 +43,42 @@ public class TediAppApplication {
 		return new CorsFilter(urlBasedCorsConfigurationSource);
 	}
 
+
+//	ssl
+@Bean
+public ServletWebServerFactory servletContainer() {
+	// Enable SSL Trafic
+	TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
+		@Override
+		protected void postProcessContext(Context context) {
+			SecurityConstraint securityConstraint = new SecurityConstraint();
+			securityConstraint.setUserConstraint("CONFIDENTIAL");
+			SecurityCollection collection = new SecurityCollection();
+			collection.addPattern("/*");
+			securityConstraint.addCollection(collection);
+			context.addConstraint(securityConstraint);
+		}
+	};
+
+	// Add HTTP to HTTPS redirect
+	tomcat.addAdditionalTomcatConnectors(httpToHttpsRedirectConnector());
+
+	return tomcat;
+}
+
+	/*
+    We need to redirect from HTTP to HTTPS. Without SSL, this application used
+    port 8082. With SSL it will use port 8443. So, any request for 8082 needs to be
+    redirected to HTTPS on 8443.
+     */
+	private Connector httpToHttpsRedirectConnector() {
+		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+		connector.setScheme("http");
+		connector.setPort(8080);
+		connector.setSecure(false);
+		connector.setRedirectPort(8443);
+		return connector;
+	}
 
 
 

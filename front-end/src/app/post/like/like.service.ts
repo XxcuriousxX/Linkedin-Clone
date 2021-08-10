@@ -11,11 +11,11 @@ export class LikeService {
   constructor(private http: HttpClient) { }
 
   like(likePayload: LikePayload): Observable<LikeResponse> {
-    return this.http.post<LikeResponse>('http://localhost:8080/api/likes/', likePayload);
+    return this.http.post<LikeResponse>('https://localhost:8443/api/likes/', likePayload);
   }
 
   has_liked(likePayload: LikePayload): Observable<LikeResponse> {
-    return this.http.get<LikeResponse>('http://localhost:8080/api/likes/has_liked/' + likePayload.postId);
+    return this.http.get<LikeResponse>('https://localhost:8443/api/likes/has_liked/' + likePayload.postId);
   }
 
 

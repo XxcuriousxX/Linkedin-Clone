@@ -12,7 +12,7 @@ export class SearchService {
   constructor(private _authService: AuthService, private http : HttpClient) { }
 
   executeQuery(query: string) : Observable<UserResponse[]> {
-    return this.http.get<UserResponse[]>("http://localhost:8080/api/users/search/" + query);
+    return this.http.get<UserResponse[]>("https://localhost:8443/api/users/search/" + query);
   }
 
 
