@@ -14,11 +14,11 @@ export class JobrequestService {
   constructor(private http: HttpClient) { }
 
   like(jobrequestPayload: JobrequestPayload): Observable<JobResponse> {
-    return this.http.post<JobResponse>('https://localhost:8443/api/jobrequest/', jobrequestPayload);
+    return this.http.post<JobResponse>('http://localhost:8080/api/jobrequest/', jobrequestPayload);
   }
 
   has_liked(jobrequestPayload: JobrequestPayload): Observable<JobResponse> {
-    return this.http.get<JobResponse>('https://localhost:8443/api/jobrequest/has_jobrequest/' + jobrequestPayload.postId);
+    return this.http.get<JobResponse>('http://localhost:8080/api/jobrequest/has_jobrequest/' + jobrequestPayload.postId);
   }
 
 

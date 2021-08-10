@@ -12,6 +12,6 @@ export class NotificationsService {
   constructor(private _authService: AuthService, private http: HttpClient) { }
 
   getAllNotificationsForUser(): Observable<ActionResponse[]> {
-    return this.http.get<ActionResponse[]>("https://localhost:8443/api/users/get_notifications/" + this._authService.getUserName());
+    return this.http.get<ActionResponse[]>("http://localhost:8080/api/users/get_notifications/" + this._authService.getUserName());
   }
 }

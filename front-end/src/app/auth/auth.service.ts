@@ -29,9 +29,9 @@ export class AuthService {
     username: this.getUserName()
   }
 
-  private _checkexist = "https://localhost:8443/user/find/";
-  private _registerUrl = "https://localhost:8443/api/auth/signup";
-  private _loginUrl = "https://localhost:8443/";
+  private _checkexist = "http://localhost:8080/user/find/";
+  private _registerUrl = "http://localhost:8080/api/auth/signup";
+  private _loginUrl = "http://localhost:8080/";
 
 
 
@@ -50,7 +50,7 @@ export class AuthService {
 
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
     // get auth token, username, refreshtoken and expiration time from backend
-    return this.httpClient.post<LoginResponse>('https://localhost:8443/api/auth/login',
+    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
       loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
       console.log("Auth token = ", data.authenticationToken);
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.httpClient.post<LoginResponse>('https://localhost:8443/api/auth/refresh/token',
+    return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token',
       this.refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
@@ -87,7 +87,7 @@ export class AuthService {
   }
 
   logout() {
-    this.httpClient.post('https://localhost:8443/api/auth/logout', this.refreshTokenPayload,
+    this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
       { responseType: 'text' })
       .subscribe(data => {
         console.log(data);

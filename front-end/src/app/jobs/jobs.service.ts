@@ -15,15 +15,15 @@ export class JobsService {
   constructor(private http: HttpClient, private _authService: AuthService) { }
 
   getSuggestions(): Observable<JobPostResponse[]> {
-    return this.http.get<JobPostResponse[]>("https://localhost:8443/api/jobs/suggestions/" + this._authService.getUserName());
+    return this.http.get<JobPostResponse[]>("http://localhost:8080/api/jobs/suggestions/" + this._authService.getUserName());
   }
 
   createJobPost(jobPostModel: JobPostModel): Observable<any> {
-    return this.http.post<any>("https://localhost:8443/api/jobs/create/", jobPostModel)
+    return this.http.post<any>("http://localhost:8080/api/jobs/create/", jobPostModel)
   }
 
   getJobPostById(id: number): Observable<FullJobPostModel> {
-    return this.http.get<FullJobPostModel>('https://localhost:8443/api/jobs/' + id);
+    return this.http.get<FullJobPostModel>('http://localhost:8080/api/jobs/' + id);
   }
 
 }

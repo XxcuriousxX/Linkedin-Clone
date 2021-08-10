@@ -110,3 +110,11 @@ textarea:focus{
 .animated-border-button:hover:after {
   width: 100%;
 }
+
+
+@media (max-width: 1250px) {
+  .big-box, .test {
+    width: 30%;
+    height: auto;
+  }
+}

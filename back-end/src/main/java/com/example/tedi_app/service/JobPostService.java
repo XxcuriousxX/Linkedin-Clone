@@ -188,14 +188,9 @@ public class JobPostService {
 
         for (Friends f : L_friends) {
             Long friend_id = (user.getUserId().equals(f.getUser_id1()) ? f.getUser_id2() : f.getUser_id1());
-//            Optional<JobPostViews> jobPostViewsOpt = jobPostViewsRepository.findByUserUserId(  );
             Collection<JobPostViews> jobPostsViewsOpt = jobPostViewsRepository.findAllByUser_UserId(friend_id);
-//            JobPostViews jobPostViews = jobPostViewsOpt
-//                    .orElseThrow(() -> new UsernameNotFoundException("No user " +
-//                    "Found with username: "+ username));
             jobPostViewsList.addAll(jobPostsViewsOpt);
 
-            
             Optional<User> user_opt1 = userRepository.findByUserId(friend_id);
             User user1 = user_opt1.orElseThrow(() -> new UsernameNotFoundException("No user " +
                 "Found with username: "+ username));
@@ -285,7 +280,7 @@ public class JobPostService {
             }
         }
 
-//        System.out.println("results before select: ");
+
 
 
         List<JobPostResponse> jobPostResponseList = new ArrayList<>();
@@ -299,7 +294,8 @@ public class JobPostService {
 
         return jobPostResponseList;
     }
-
+    
+    
     public static JobPostResponse mapToDto(JobPost JP) {
         return new JobPostResponse(JP.getJobPostId(), JP.getTitle(), JP.getLocation()
                     , JP.getKeywords(), JP.getEmploymentType(), JP.getDetails(), JP.getRequiredSkills());
