@@ -1,13 +1,19 @@
-<p>admin works!</p>
 <br>
 <br>
 
-<button (click)="logout()"> Patato re trompa</button>
+<button (click)="logout()"> Logout </button>
 
 <input type='button' (click)='exportAsJSON()' value='export as JSON'>
 <input type='button' (click)='exportAsXML()' value='export as XML'>
+<input type='button' (click)='selectAll()' value='select all'>
 
+<div class="upper-box">
+  Users list
+</div>
+
+<hr>
 <div *ngIf="isLoaded">
+
   <div *ngFor="let user of usersList">
     <!--      <mat-grid-list  cols="1" rowHeight="2:1" >-->
     <!--      <mat-grid-tile class="list"> {{user.username}} </mat-grid-tile>-->
@@ -24,9 +30,10 @@
             <!-- <div class="button-connect" >con</div> -->
             <div class="button-connect">
               <!-- <app-connect-button [receiver_user]="user"></app-connect-button> -->
-                <label class="container">Four
+                <label class="switch">Four
                   <input type="checkbox" value='{{ user.username }}'  id="{{ user.username }}"> 
-                  <span class="checkmark"></span>
+                  <span class="slider round"></span>
+                  <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"></div>
                 </label>
               
             </div>

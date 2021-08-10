@@ -50,6 +50,7 @@ export class AdminComponent implements OnInit {
 
   isLoaded = false;
   usersList : UserResponse[] = [];
+  select_all_is_activated = false;
 
   constructor(private _authService : AuthService, private _router: Router, private _adminService : AdminService) { }
   
@@ -85,6 +86,24 @@ export class AdminComponent implements OnInit {
     })
 
     // this.saveAFile("tpt akoma");
+  }
+
+  selectAll() {
+    if (this.select_all_is_activated) { // if already select all has been triggered, then uncheck all
+      for (let u of this.usersList) {
+        var checkbox = <HTMLInputElement> document.getElementById(u.username);
+        checkbox.checked = false;
+      }
+      this.select_all_is_activated = false;
+    }
+    else {
+      for (let u of this.usersList) {
+        var checkbox = <HTMLInputElement> document.getElementById(u.username);
+        checkbox.checked = true;
+      }
+      this.select_all_is_activated = true;
+    }
+
   }
 
   exportAsXML() {

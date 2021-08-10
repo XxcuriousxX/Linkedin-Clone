@@ -19,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Personalinfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long infoId;
 //    private Long userId;
     private String work_desc = "";
