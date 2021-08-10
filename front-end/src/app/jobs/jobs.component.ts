@@ -12,13 +12,13 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements OnInit {
-  
+
   jobForm: FormGroup;
   jobPayload: JobPostModel = new JobPostModel();
-
+  skills: string[] = [];
   suggestionsList: JobPostResponse[] = [];
-  constructor(private _jobsService: JobsService, private _authService: AuthService) { 
-    
+  constructor(private _jobsService: JobsService, private _authService: AuthService) {
+
     this.jobForm = new FormGroup({
       details: new FormControl('', Validators.required),
       requiredSkills : new FormControl('', Validators.required),
@@ -27,7 +27,7 @@ export class JobsComponent implements OnInit {
       location: new FormControl('', Validators.required),
       employmentType: new FormControl('', Validators.required)
     });
-    
+
   }
 
   ngOnInit(): void {
@@ -49,6 +49,9 @@ export class JobsComponent implements OnInit {
   getSuggestions() {
     this._jobsService.getSuggestions().subscribe( suggestions => {
         this.suggestionsList = suggestions;
+        for(let each of this.suggestionsList){
+          each.skills = each.requiredSkills.split(",");
+        }
         console.log(this.suggestionsList);
     }, err => throwError(err));
   }

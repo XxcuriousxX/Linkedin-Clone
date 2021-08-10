@@ -1,6 +1,7 @@
 export class FullJobPostModel { // JobPostResponse
   jobPostId: number;
   title:string;
+  requestedcount:number;
   location:string;
   employmentType:string ;
   details : string;

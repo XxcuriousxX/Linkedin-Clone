@@ -42,13 +42,8 @@ public class VoteService {
             voteRepository.deleteVoteByMyID(v.getVoteId());
             postRepository.save(post);
             return false;
-//            throw new SpringTediException("You have already liked this post");
         }
-//        if (UPVOTE.equals(voteDto.getVoteType())) {
-//            post.setVoteCount(post.getVoteCount() + 1);
-//        } else {
-//            post.setVoteCount(post.getVoteCount() - 1);
-//        }
+
 
         Action a;
         post.setLikeCount(post.getLikeCount() + 1);

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -35,10 +37,12 @@ body::-webkit-scrollbar {
 
   .text_center{
     text-align: center;
+    font-family: 'Rubik', sans-serif;
   }
 
 
   .tiles-template {
+    top:-330px;
     margin-left: 100px;
     margin-right: 100px;
     position: relative;
@@ -66,7 +70,7 @@ body::-webkit-scrollbar {
 
 .upload-job-box{
   position: relative;
-  left: 45%;
+  left: 45.4%;
   top: 330px;
   width: 400px;
   height: 500px;
@@ -74,3 +78,41 @@ body::-webkit-scrollbar {
 
 
 }
+
+a:hover{
+  text-decoration: none;
+}
+
+.dynamic-shadow {
+  color: black;
+  text-underline: none;
+  position: relative;
+  width: 250px;
+  min-height: 350px;
+  max-height: fit-content;
+  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  z-index: 1;
+}
+
+.dynamic-shadow:after {
+  content: '';
+  width: 100%;
+  min-height: 100%;
+  max-height: fit-content;
+  position: absolute;
+  background: inherit;
+  top: 0.5rem;
+  filter: blur(0.4rem);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+
+ul{
+  text-align: center;
+  list-style-position: inside;
+  position: relative;
+  left:-25px;
+}
+
+

@@ -1,9 +1,11 @@
 
 export class JobPostResponse {
     jobPostId: number = -1;
-    // title: string = "";
+    title: string = "";
     details: string = "";
     requiredSkills: string = "";
+    employmentType:string = "";
+    skills:string[] = [];
 }
 
 export class JobPostModel {
@@ -14,5 +16,4 @@ export class JobPostModel {
     details : string = "";
     requiredSkills : string = ""; // "skill1,skill2,...,skillN"
     keywords : string = "";   // "keyword1,keyword2,...,keywordN"
-    
 }

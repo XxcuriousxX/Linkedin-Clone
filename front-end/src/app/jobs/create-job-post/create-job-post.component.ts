@@ -42,6 +42,7 @@ export class CreateJobPostComponent implements OnInit {
     this.jobPayload.title = this.jobForm.value.title;
     this._jobsService.createJobPost(this.jobPayload).subscribe( info => {
       this.ngOnInit();
+      this.jobForm.reset();
     }, error => {
       throwError(error);
     });

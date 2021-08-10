@@ -17,10 +17,12 @@ import {throwError} from "rxjs";
 
 
 export class FullJobPostViewComponent implements OnInit {
+  skills:string[] = [];
   isLoaded = false
   jobpostId: number = -1;
   jobpost : FullJobPostModel = {
     jobPostId :-1,
+    requestedcount:0,
     title:"",
     location:"",
     employmentType:"",
@@ -40,6 +42,7 @@ export class FullJobPostViewComponent implements OnInit {
 
     this.isLoaded = false;
     this.jobpostId = this._activatedRoute.snapshot.params.id;
+    this.jobpost.jobPostId=this.jobpostId;
     this.getJobPostById();
   }
 
@@ -47,6 +50,8 @@ export class FullJobPostViewComponent implements OnInit {
   getJobPostById() {
     this._jobService.getJobPostById(this.jobpostId).subscribe(res => {
       this.jobpost = res;
+      this.jobpost.jobPostId=this.jobpostId;
+      this.skills = this.jobpost.requiredSkills.split(",");
       this.isLoaded = true;
 
     }, err => throwError(err))

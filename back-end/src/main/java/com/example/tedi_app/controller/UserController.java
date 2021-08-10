@@ -7,11 +7,7 @@ import com.example.tedi_app.model.Action;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.repo.PersonalinfoRepository;
 import com.example.tedi_app.repo.UserRepository;
-import com.example.tedi_app.service.PersonalinfoService;
-import com.example.tedi_app.service.PublicButtonService;
-import com.example.tedi_app.service.ActionsService;
-import com.example.tedi_app.service.UserDetailsServiceImpl;
-import com.example.tedi_app.service.UserProfileService;
+import com.example.tedi_app.service.*;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +24,7 @@ import static org.springframework.http.ResponseEntity.status;
 public class UserController {
 
     private final UserDetailsServiceImpl userService;
+    private final AuthService authService;
     private UserRepository userRepository;
     private PersonalinfoRepository personalinfoRepository;
     private PersonalinfoService personalinfoService;
@@ -146,7 +143,7 @@ public class UserController {
             return new ResponseEntity<>("email exists", HttpStatus.BAD_REQUEST);
         }
 
-        userService.changeInfo(changeInfoRequest);
+        authService.changeInfo(changeInfoRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }

@@ -25,8 +25,10 @@ import static java.util.Collections.singletonList;
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
@@ -270,26 +272,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-
-    public void changeInfo(ChangeInfoRequest changeInfoRequest) {
-
-
-        Optional<User>  existing = this.userRepository.findByUsername(changeInfoRequest.getUsername());
-        User user1 = existing
-                .orElseThrow(() -> new UsernameNotFoundException("No user " +
-                        "Found with username : " + changeInfoRequest.getUsername()));
-
-
-        if(changeInfoRequest.getEmail() != null && !changeInfoRequest.getEmail().isEmpty())
-            user1.setEmail(changeInfoRequest.getEmail());
-        if(changeInfoRequest.getPassword() != null && !changeInfoRequest.getPassword().isEmpty())
-            user1.setPassword(changeInfoRequest.getPassword());
-
-
-        userRepository.save(user1);
-
-    }
-    
 
     public User get_user_info(String username) {
         Optional<User> userOptional = userRepository.findByUsername(username);

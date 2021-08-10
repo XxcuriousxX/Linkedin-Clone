@@ -43,6 +43,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
 import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
+import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
 
 const materialModules = [
   MatButtonModule
@@ -161,7 +162,8 @@ const appRoutes : Routes = [
     JobsComponent,
     AdminComponent,
     CreateJobPostComponent,
-    FullJobPostViewComponent
+    FullJobPostViewComponent,
+    JobrequestComponent
   ],
     imports: [
         BrowserModule,

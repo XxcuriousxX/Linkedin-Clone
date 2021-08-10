@@ -1,28 +1,44 @@
+<body>
+<app-navigation-bar></app-navigation-bar>
 
 
-
-<div class="box-view">
-
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
-  <div class="username-post"> {{ jobpost.title}} </div>
-  <br>
-
-
+<div class="card">
+  <div class="text" style="font-weight: bold"> {{jobpost.title.toUpperCase()}} </div>
   <hr>
-  <div class="text"> {{jobpost.title}} </div>
-  <hr>
-<!--  <app-like [post]=""></app-like>-->
-  <hr>
+  <div class="focus-content">
+    <div class="details" style="font-size: 16px;">
+      <span style="font-size: 18px;font-weight: bold">Details:</span><br>
+      {{ jobpost.details }}
+    </div>
+    <br>
+
+    <div class="details" style="font-size: 16px">
+      <span style="font-size: 18px;font-weight: bold">Required Skills:</span><br>
+      <ul>
+
+        <div *ngFor="let each of skills">
+          <li> {{each}} </li>
+        </div>
+
+      </ul>
+
+    </div>
+
+    <div class="details" style="font-size: 16px">
+      <span style="font-size: 18px;font-weight: bold">Location: </span>
+      <span>{{jobpost.location}}</span>
+    </div>
+
+    <div class="details" style="font-size: 16px">
+      <span style="font-size: 18px;font-weight: bold">Employment Type: </span>
+      <span>{{jobpost.employmentType}}</span>
+    </div>
+
+  </div>
+
+  <app-jobrequest [post]="jobpost" style="position:relative;left: 380px;top: 73px"></app-jobrequest>
 </div>
 
 
-<br>
 
-
-
-
-
-<br>
-
-<!-- <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:-20px"> -->
-
+</body>

@@ -33,7 +33,7 @@ public class JobPost {
     private String details;
     private String requiredSkills;
 
-
+    private Integer requestedcount;
 
     // a list of keywords seperated by commas (ex. "software,kernel,unix,OS")
     private String keywords;
@@ -48,5 +48,6 @@ public class JobPost {
         this.details = details;
         this.requiredSkills = requiredSkills;
         this.keywords = keywords;
+        this.requestedcount = 0;
     }
 }

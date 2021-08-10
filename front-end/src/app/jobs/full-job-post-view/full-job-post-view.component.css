@@ -1,155 +1,66 @@
-.box-view {
+body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.text{
+  text-align: center;
   position: relative;
-  border: 1px solid #cfc9c9;
-  padding: 25px;
-  border-radius: 14px;
-  top: 100px;
-  right: 70%;
+  top: 15px;
+}
+
+
+.card {
+  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  position: absolute;
   left: 30%;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-
   width: 500px;
-  /* height: 300px; */
-  block-size: fit-content;
-  height: fit-content;
+  min-height: 400px;
+  max-height: fit-content;
+  top: 120px;
+  padding: 0;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-
-.avatar {
-  vertical-align: middle;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  position: relative;
-  left: 0px;
-  top: 50%;
-
+.card * {
+  transition: 0.3s ease all;
 }
 
-.topright {
-  position: absolute;
-  right: 40px;
-  top: 40px;
-  font-style: italic;
-  opacity: 45%;
+.card img {
+  margin: 0;
+  width: 300px;
+  height: 224px;
+  object-fit: cover;
+  display: block;
 }
 
-
-.username-post {
-  position: absolute;
-  top: 40px;
-  left: 90px;
+.card h3 {
+  margin: 0;
+  padding: 12px 12px 48px;
+  line-height: 32px;
+  font-weight: 500;
+  font-size: 20px;
 }
 
-
-hr {
-  width: 100%;
-  border: none;
-  height: 1px;
-  /* Set the hr color */
-  color: #333; /* old IE */
-  background-color: #333; /* Modern Browsers */
+.card .focus-content {
+  display: block;
+  padding: 8px 12px;
 }
 
-
-
-/*remove focus when writing */
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-  outline: none;
+.card p {
+  margin: 0;
+  line-height: 1.5;
 }
 
-.btn-toolbar{
-  margin: 5px;
-  position: relative;
-  top: -25px;
-  left: 0px;
-
+.card:hover img, .card:focus-within img {
+  margin-top: -80px;
 }
 
-
-.btn {
-  border-radius: 10px;
-  text-decoration: none;
-}
-
-
-.btn-text{
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  color: #878787;
-  font-weight: 550;
-}
-
-.btn-text:hover{
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.btn:hover{
-  background-color: #e3e3e3;
-}
-
-input {
-  background-color: lightgray;
-  position: relative;
-  left: 60px;
-  top: -37px;
-  width: 350px;
-  bottom: 10px;
-  height: fit-content;
-  border: 2px solid grey;
-  border-radius: 15px;
-  opacity: 40%;
-}
-
-.btn-toolbar{
-  margin: 5px;
-  position: relative;
-  top: -25px;
-  left: 0px;
-
-}
-
-
-
-.avatar2 {
-
-  vertical-align: left;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  position: relative;
-  left: 10px;
-}
-
-
-
-
-
-.username-on-comment {
-  position: absolute;
-  top: 30px;
-  left: 90px;
-}
-
-.date-on-comment {
-  position: absolute;
-  top: 30px;
-  right: 20px;
-  font-style: italic;
-  opacity: 45%;
-}
-
-.box-view .text {
-  text-align: left;
-  word-wrap: break-word;
-}
-
-.shift {
-  top: 10px;
-  position: relative;
-  left: 10px;
+.card:hover h3, .card:focus-within h3 {
+  padding: 8px 12px 0;
 }

@@ -1,10 +1,7 @@
 package com.example.tedi_app.service;
 
 
-import com.example.tedi_app.dto.AuthenticationResponse;
-import com.example.tedi_app.dto.LoginRequest;
-import com.example.tedi_app.dto.RefreshTokenRequest;
-import com.example.tedi_app.dto.RegisterRequest;
+import com.example.tedi_app.dto.*;
 import com.example.tedi_app.exceptions.SpringTediException;
 import com.example.tedi_app.model.Personalinfo;
 import com.example.tedi_app.model.User;
@@ -14,6 +11,7 @@ import com.example.tedi_app.repo.UserRepository;
 import com.example.tedi_app.repo.VerificationTokenRepository;
 import lombok.AllArgsConstructor;
 
+import lombok.Getter;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +31,7 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 @Transactional
+@Getter
 public class AuthService {
 
 
@@ -68,6 +67,27 @@ public class AuthService {
         String token = generateVerificationToken(user);
         verifyAccount(token); // verify directly
         System.out.println("\n\nNew user token is : http://localhost:8080/api/auth/accountVerification/" + token);
+    }
+
+
+    @Transactional
+    public void changeInfo(ChangeInfoRequest changeInfoRequest) {
+
+
+        Optional<User>  existing = this.userRepository.findByUsername(changeInfoRequest.getUsername());
+        User user1 = existing
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + changeInfoRequest.getUsername()));
+
+
+        if(changeInfoRequest.getEmail() != null && !changeInfoRequest.getEmail().isEmpty())
+            user1.setEmail(changeInfoRequest.getEmail());
+        if(changeInfoRequest.getPassword() != null && !changeInfoRequest.getPassword().isEmpty())
+            user1.setPassword(passwordEncoder.encode(changeInfoRequest.getPassword()));
+
+
+        userRepository.save(user1);
+
     }
 
 

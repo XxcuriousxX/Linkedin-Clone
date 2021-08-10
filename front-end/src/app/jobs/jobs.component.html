@@ -2,40 +2,41 @@
 
 <body>
 <div class="upload-job-box">
-<!--  <form [formGroup]="jobForm" (ngSubmit)="createJobPost()">-->
-<!--    <input type="text" [formControlName]="'details'" placeholder="details"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <input type="text" [formControlName]="'requiredSkills'" placeholder="required"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <input type="text" [formControlName]="'keywords'" placeholder="keywords"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <input type="text" [formControlName]="'location'" placeholder="location"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>-->
-<!--    <button type="submit" class="btn btn-outline  mb-2">-->
-<!--      &lt;!&ndash; <i class="fa fa-newspaper-o fa-lg" aria-hidden="true" style="color: #ff5858"></i>-->
-<!--      <a class="btn-text"> hey</a> &ndash;&gt;-->
-<!--    </button>-->
         <button mat-raised-button routerLink="/createjobpost" style="position: absolute;top: -45%;">Create Job Post</button>
         <hr style="position: relative;top: -35%;left: -130px">
-<!--  </form>-->
-
-
 </div>
 
-<br><br>
+
 
 <div class="tiles-template">
-    <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
+    <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="450px" >
 
       <div *ngFor="let jobPost of suggestionsList" >
         <!--grid-->
-        <mat-grid-tile >
-          <div class="box">
+        <mat-grid-tile class="my-tile">
+          <a class="dynamic-shadow" routerLink="/jobs/{{jobPost.jobPostId}}">
+            <div class="text_center">
+              <a class="cl" style="text-align: center;position:relative;top: 17px;font-family: 'Rubik', sans-serif;font-weight: bold;color: black"
+                 routerLink="/jobs/{{jobPost.jobPostId}}">
+                {{jobPost.title.toUpperCase()}}
+              </a>
+              <hr>
+              <!--DETAILS-->
+              <div class="details" style="font-size: 16px;">
+                <span style="font-size: 18px;font-weight: bold">Details</span><br>
+                  {{ (jobPost.details.length> 50)? (jobPost.details | slice:0:50)+'..':(jobPost.details) }}
+              </div>
 
-            <div class="text-center username">
-                <a class="cl" routerLink="/jobs/{{jobPost.jobPostId}}">
-                    {{ jobPost.jobPostId }}
-                </a>
+              <br>
+
+              <div class="details" style="font-size: 16px;">
+                <span style="font-size: 18px;font-weight: bold">Employment Type:</span><br>
+                {{jobPost.employmentType}}
+              </div>
+
             </div>
-          </div>
+
+          </a>
         </mat-grid-tile>
 
       </div>
