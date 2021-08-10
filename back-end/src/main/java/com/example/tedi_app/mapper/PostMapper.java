@@ -26,8 +26,8 @@ public abstract class PostMapper {
     private CommentRepository commentRepository;
     @Autowired
     private VoteRepository voteRepository;
-    @Autowired
-    private AuthService authService;
+//    @Autowired
+//    private AuthService authService;
 
     // Mapping(target = "return field of map()", source = "argument's field")
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")

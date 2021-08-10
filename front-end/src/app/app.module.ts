@@ -11,7 +11,7 @@ import { MyNetworkComponent } from './my-network/my-network.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { MessagesComponent } from './messages/messages.component';
 
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -42,11 +42,11 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { JobsComponent } from './jobs/jobs.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
-import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
 import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
 
+import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
 const materialModules = [
-  MatButtonModule
+  MatButtonModule, 
 ];
 
 //we need to define here the list of all of our routes
@@ -176,14 +176,15 @@ const appRoutes : Routes = [
         MatGridListModule,
         FormsModule,
         MatExpansionModule
-    ],
+      ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   }, ConnectService, MessagesService, JobsService],
   bootstrap: [AppComponent],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA  ]
 
 })
 export class AppModule {

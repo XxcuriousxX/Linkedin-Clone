@@ -15,12 +15,13 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository <User,Long> {
+    @Query(value = "select * from User", nativeQuery = true)
+    Optional<List<User>> getAll();
+
     Optional<User> findByUsername(String username);
     Optional<User> findByUserId(Long userId);
     Optional<User> findByEmail(String email);
 
-    @Query(value = "SELECT c from User c")
-    List<User> getAllUsers();
 
     @Query(value = "select * from User where username like %:param% or first_name like %:param% or last_name like %:param% ", nativeQuery = true)
     Optional<List<User>> getUsersByQuery(@Param("param") String query_input);

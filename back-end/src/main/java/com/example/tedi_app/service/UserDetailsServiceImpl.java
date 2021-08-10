@@ -1,13 +1,12 @@
 package com.example.tedi_app.service;
 
-import com.example.tedi_app.dto.ChangeInfoRequest;
-import com.example.tedi_app.dto.FriendResponse;
+import com.example.tedi_app.dto.*;
 import com.example.tedi_app.exceptions.SpringTediException;
-import com.example.tedi_app.model.Friends;
-import com.example.tedi_app.model.User;
-import com.example.tedi_app.repo.FriendsRepository;
-import com.example.tedi_app.repo.UserRepository;
+import com.example.tedi_app.mapper.PostMapper;
+import com.example.tedi_app.model.*;
+import com.example.tedi_app.repo.*;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +19,9 @@ import java.util.Collection;
 import java.util.*;
 import java.util.Optional;
 
+import static java.util.Collections.list;
 import static java.util.Collections.singletonList;
+
 
 @Service
 @AllArgsConstructor
@@ -28,6 +29,33 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
+    private final PersonalinfoRepository personalInfoRepository;
+    private final PostRepository postRepository;
+    private final JobPostRepository jobPostRepository;
+    private final CommentRepository commentRepository;
+    private final VoteRepository voteRepository;
+    private final PostMapper postMapper;
+
+//    private  JobPostService jobPostService;
+//    private  PostService postService;
+//    private   VoteService voteService;
+
+
+
+//    public List<JobPostResponse> mapAllJobPostsToDto(List<JobPost> jpList) {
+//        List<JobPostResponse> jprList = new ArrayList<>();
+//        for (JobPost jp : jpList) {
+//            jprList.add(JobPostService.mapToDto(jp));
+//        }
+//        return jprList;
+//    }
+    public List<PostResponse> mapAllPostsToDto(List<Post> postList) {
+        List<PostResponse> post_respList = new ArrayList<>();
+        for (Post p : postList) {
+            post_respList.add(postMapper.mapToDto(p));
+        }
+        return post_respList;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -53,6 +81,60 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return singletonList(new SimpleGrantedAuthority(role));
+    }
+
+
+    public List<User> getAllUsers() {
+        Optional<List<User>> listOpt = userRepository.getAll();
+        if (listOpt.isEmpty()) return new ArrayList<>();
+        return listOpt.orElseThrow(() -> new SpringTediException("No users found"));
+    }
+
+    public List<DetailedUser> getAllDetailedUsers(String[] usernames) {
+        List<DetailedUser> L = new ArrayList<>();
+        Optional<List<User>> listOpt = userRepository.getAll();
+        if (listOpt.isEmpty()) return new ArrayList<>();
+        List<User> users = listOpt.orElseThrow(() -> new SpringTediException("No users found"));
+        for (User u : users) {
+            for (String username : usernames) {
+                if (u.getUsername().equals(username)) {
+                    Personalinfo personalInfo = personalInfoRepository.findByUserUserId(u.getUserId()).orElseThrow(() -> new SpringTediException("Personal info not found"));
+                      List<Post> allPosts = postRepository.findByUser(u);
+                      if (allPosts == null) allPosts = new ArrayList<>();
+                        List<PostResponse> allPostResponses = this.mapAllPostsToDto(allPosts);
+
+//                    List<PostResponse> allPostResponses = postService.getPostsByUsername(u.getUsername());
+
+
+                    List<JobPost> allJobPosts = jobPostRepository.getAllByUserUserId(u.getUserId());
+                    if (allJobPosts == null) allJobPosts = new ArrayList<>();
+                    List<JobPostResponse> allJobPostResponses = JobPostService.mapAllJobPostsToDto(allJobPosts);
+
+
+                    List<Comment> comments = commentRepository.getAllByUserUserId(u.getUserId());
+                    if (comments == null) comments = new ArrayList<>();
+                    List<CommentResponse> allCommentResponses = PostService.mapAllCommentsToDto(comments);
+
+                    List<Vote> votes = voteRepository.getAllByUserUserId(u.getUserId());
+                    if (votes == null) votes = new ArrayList<>();
+                    List<VoteData> voteDataList = VoteService.mapAllToVoteData(votes);
+
+                    List<String> friends_usernames = new ArrayList<>();
+                    List<User> friends = this.get_all_connected_users(u.getUsername());
+                    for (User friend : friends) {
+                        friends_usernames.add(friend.getUsername());
+                    }
+                    L.add(new DetailedUser(u.getUserId(), u.getUsername(), u.getEmail(), u.getPhone(),
+                            u.getFirst_name(), u.getLast_name(), u.getCompany_name(),
+                            personalInfo.getWork_desc(), personalInfo.getStud_desc(), personalInfo.getAbilities_desc(),
+                            allPostResponses, allJobPostResponses, allCommentResponses,
+                            voteDataList, friends_usernames));
+                    break;
+                }
+            }
+        }
+
+        return L;
     }
 
     // returns a list of Users who are friends of username

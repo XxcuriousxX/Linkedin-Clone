@@ -300,7 +300,7 @@ public class JobPostService {
         return jobPostResponseList;
     }
 
-    public JobPostResponse mapToDto(JobPost JP) {
+    public static JobPostResponse mapToDto(JobPost JP) {
         return new JobPostResponse(JP.getJobPostId(), JP.getTitle(), JP.getLocation()
                     , JP.getKeywords(), JP.getEmploymentType(), JP.getDetails(), JP.getRequiredSkills());
     }
@@ -354,7 +354,7 @@ public class JobPostService {
 
     }
 
-    public JobPostResponse getJobPost(Long id){
+    public JobPostResponse getJobPost(Long id){ // will also view it
         JobPost jp =  jobPostRepository.getByJobPostId(id);
         User u = userRepository.findByUsername(authService.getCurrentUser().getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
@@ -377,6 +377,12 @@ public class JobPostService {
         return mapToDto(jp);
     }
 
-
+    public static List<JobPostResponse> mapAllJobPostsToDto(List<JobPost> jpList) {
+        List<JobPostResponse> jprList = new ArrayList<>();
+        for (JobPost jp : jpList) {
+            jprList.add(mapToDto(jp));
+        }
+        return jprList;
+    }
 
 }
