@@ -48,3 +48,9 @@
     font-style: italic;
     opacity: 45%;
 }
+
+
+.centered {
+  position: absolute;
+  left: 250px;
+}

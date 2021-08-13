@@ -1,11 +1,21 @@
+
+
 <app-navigation-bar></app-navigation-bar>
+
+
 
 <body>
 <div class="upload-job-box">
         <button mat-raised-button routerLink="/createjobpost" style="position: absolute;top: -45%;">Create Job Post</button>
         <hr style="position: relative;top: -35%;left: -130px">
-</div>
 
+        <br>
+      <div *ngIf="!isLoaded">
+        <div class="centered">
+          <app-loading></app-loading>
+        </div>
+      </div>
+</div>
 
 
 <div class="tiles-template">
@@ -41,6 +51,11 @@
 
       </div>
     </mat-grid-list>
+
   </div>
+
+
+  
+
 
 </body>

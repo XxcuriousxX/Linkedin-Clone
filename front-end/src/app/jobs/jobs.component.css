@@ -116,3 +116,8 @@ ul{
 }
 
 
+.centered {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+}

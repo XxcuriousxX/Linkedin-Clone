@@ -45,6 +45,7 @@ import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.c
 import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
 
 import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
+import { LoadingComponent } from './loading/loading/loading.component';
 const materialModules = [
   MatButtonModule, 
 ];
@@ -163,7 +164,8 @@ const appRoutes : Routes = [
     AdminComponent,
     CreateJobPostComponent,
     FullJobPostViewComponent,
-    JobrequestComponent
+    JobrequestComponent,
+    LoadingComponent
   ],
     imports: [
         BrowserModule,

@@ -1,4 +1,6 @@
 
+
+
 <div class="row post" *ngFor="let post of posts" style="background-color: #ffffff">
 
 
@@ -32,4 +34,12 @@
 
 <app-like [post]="post"></app-like>
 
+</div>
+
+
+<br>
+<div *ngIf="!isLoaded">
+  <div class="centered">
+    <app-loading></app-loading>
+  </div>
 </div>
