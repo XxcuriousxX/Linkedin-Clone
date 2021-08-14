@@ -1,0 +1,18 @@
+<h1 mat-dialog-title style="text-align: center">Users Requested</h1>
+<div mat-dialog-content *ngIf="data.users.length != 0; else no_user">
+  <div *ngFor="let user of data.users" class="users">
+    <a routerLink="user/{{user.username}}" mat-dialog-close> {{user.username}}  </a>
+    <br><br>
+  </div>
+</div>
+
+<ng-template #no_user>
+  <div mat-dialog-content>
+    <h2>No Users Requested for this Job yet!</h2>
+  </div>
+</ng-template>
+
+<br>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>OK</button>
+</div>

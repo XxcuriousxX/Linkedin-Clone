@@ -24,7 +24,8 @@ public class JobVote {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "jobPostId", referencedColumnName = "jobPostId")
     private JobPost jobPost;
-    @ManyToOne(fetch = LAZY)
+
+    @ManyToOne(fetch = LAZY,cascade = {CascadeType.ALL})
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }

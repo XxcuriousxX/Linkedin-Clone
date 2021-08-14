@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  color: black;
+}
+
+
+h2 {
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 15px;
+}
+
+.users:focus{
+  outline: none !important;
+  box-shadow: none;
+}
+
+.users{
+  font-family: 'Raleway', sans-serif;
+  font-size: 17px;
+  max-height: 50px;
+}
+
+a{
+  color: white;
+}
+a:hover{
+  text-decoration: none;
+  color: white;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #309def;        /* color of the tracking area */
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: lightgrey;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid lightgrey;  /* creates padding around scroll thumb */
+
+}
+

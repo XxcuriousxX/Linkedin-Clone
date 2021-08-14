@@ -12,7 +12,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements OnInit {
-
+  username:string = "";
   jobForm: FormGroup;
   jobPayload: JobPostModel = new JobPostModel();
   skills: string[] = [];
@@ -31,6 +31,7 @@ export class JobsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.username = this._authService.getUserName();
     this.getScreenSize();
     this.getSuggestions();
   }

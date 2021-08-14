@@ -10,7 +10,7 @@
   </div>
   <form [formGroup]="jobForm" (ngSubmit)="createJobPost()">
 
-    <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;" autocomplete="off"/>
 
     <br>
     <br>
@@ -19,7 +19,7 @@
     <textarea [formControlName]="'keywords'" rows="3" placeholder="keywords"></textarea>
     <textarea [formControlName]="'location'" rows="3" placeholder="location"></textarea>
     <br>
-    <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
+    <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;" autocomplete="off"/>
 
 
     <button  class="button"><span>Publish</span></button>

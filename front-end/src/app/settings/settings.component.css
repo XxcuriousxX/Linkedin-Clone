@@ -23,10 +23,11 @@
   font-family: 'Merriweather', serif;
   position: relative;
   left: 25%;
-  width: 650px;
+  width: 50%;
   top: 75px;
   min-height: 100px;
-  height: 500px;
+  height: 520px;
+  max-height: fit-content;
 
 }
 

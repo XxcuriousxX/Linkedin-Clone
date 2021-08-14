@@ -39,16 +39,27 @@
 
   </div>
 
- 
+    <div *ngIf="screenWidth >= 1251">
+      <button  class="animated-border-button">Publish</button>
+    </div>
+    <div *ngIf="screenWidth < 1250">
+      <br>
+      <button  class="button">Publish</button>
+    </div>
   <!--  publish button  -->
-  <button  class="animated-border-button">Publish</button>
+
 
   </form>
 </div>
 
 
-<app-public-buttons class="test"></app-public-buttons>
+<div *ngIf="screenWidth >= 1275">
+  <app-public-buttons class="test"></app-public-buttons>
+</div>
 
+<div *ngIf="screenWidth < 1275">
+  <app-public-buttons class="resize-buttons"></app-public-buttons>
+</div>
 
 
 

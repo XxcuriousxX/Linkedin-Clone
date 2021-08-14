@@ -33,6 +33,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import { ConnectButtonComponent } from './connect-button/connect-button.component';
 import { ConversationsComponent } from './messages/conversations/conversations.component';
 
+
 import { MessagesService } from './messages/messages.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PublicButtonsComponent } from './personal-info/public-buttons/public-buttons.component';
@@ -43,11 +44,23 @@ import { JobsComponent } from './jobs/jobs.component';
 import { AdminComponent } from './admin/admin.component';
 import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
 import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
+import { DialogComponent} from "./jobs/myjobs/dialog.component";
 
+import { MatDialogModule } from '@angular/material/dialog';
 import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
+import { MyjobsComponent } from './jobs/myjobs/myjobs.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+
+import { CommonModule } from '@angular/common';
+
+
+import { MatCommonModule } from '@angular/material/core';
+import { MatInputModule  } from '@angular/material/input';
+
 const materialModules = [
-  MatButtonModule, 
+  MatButtonModule,
 ];
+
 
 //we need to define here the list of all of our routes
 // array of route objects -> one path and one component
@@ -96,13 +109,18 @@ const appRoutes : Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'jobs/createjobpost',
+    component: CreateJobPostComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'jobs/:id',
     component: FullJobPostViewComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'createjobpost',
-    component: CreateJobPostComponent,
+    path: 'jobs/myjobs/:username',
+    component: MyjobsComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -163,7 +181,9 @@ const appRoutes : Routes = [
     AdminComponent,
     CreateJobPostComponent,
     FullJobPostViewComponent,
-    JobrequestComponent
+    JobrequestComponent,
+    MyjobsComponent,
+    DialogComponent
   ],
     imports: [
         BrowserModule,
@@ -175,8 +195,16 @@ const appRoutes : Routes = [
         NgxWebstorageModule.forRoot(),
         MatGridListModule,
         FormsModule,
-        MatExpansionModule
-      ],
+        MatExpansionModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatCommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

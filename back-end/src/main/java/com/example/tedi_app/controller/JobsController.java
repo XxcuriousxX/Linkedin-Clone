@@ -2,6 +2,7 @@ package com.example.tedi_app.controller;
 
 import com.example.tedi_app.dto.JobPostRequest;
 import com.example.tedi_app.dto.JobPostResponse;
+import com.example.tedi_app.dto.MyJobResponse;
 import com.example.tedi_app.model.JobPost;
 
 import com.example.tedi_app.service.JobPostService;
@@ -27,6 +28,11 @@ public class JobsController {
         return status(HttpStatus.OK).body(jobPostService.getSuggestions(username));
     }
 
+    @GetMapping("myjobs/{username}")
+    public ResponseEntity<List<MyJobResponse>> getMyJobs(@PathVariable String username) {
+
+        return status(HttpStatus.OK).body(jobPostService.getMyJobs(username));
+    }
 
     @PostMapping("create/")
     public ResponseEntity<String> createJobPost(@RequestBody JobPostRequest jobPostRequest) {
@@ -36,9 +42,22 @@ public class JobsController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PostMapping("delete/")
+    public ResponseEntity<String> deleteJobPost(@RequestBody Long jobPostId) {
+
+        jobPostService.deleteJobPost(jobPostId);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<JobPostResponse> getJobPost(@PathVariable Long id) {
         return status(HttpStatus.OK).body(jobPostService.getJobPost(id));
+    }
+
+    @GetMapping("request/{id}")
+    public ResponseEntity<JobPostResponse> getJobPostRequest(@PathVariable Long id) {
+        return status(HttpStatus.OK).body(jobPostService.getJobPostRequest(id));
     }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../user.service";
@@ -15,7 +15,8 @@ import {throwError} from "rxjs";
 })
 export class PersonalInfoComponent implements OnInit {
 
-
+  screenHeight: number = -1;
+  screenWidth: number = -1;
   infoForm: FormGroup;
   p_info_payload: PersonalInfoPayload = new PersonalInfoPayload();
 
@@ -31,6 +32,12 @@ export class PersonalInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    console.log(this.screenHeight, this.screenWidth);
+  }
 
   changePersonalinfo(){
     this.p_info_payload.username = this._authservice.getUserName();

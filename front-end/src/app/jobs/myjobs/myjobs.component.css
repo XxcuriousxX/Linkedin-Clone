@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Loop&display=swap');
+
+body {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+
+span, .a {
+  position: absolute;
+  left: 70%;
+  top: 110px;
+  font-size: 30px;
+  width: 250px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+
+.text{
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+}
+
+button{
+  position: absolute;
+  left: 50%;
+  top: 250px;
+  transform: translateX(-50%);
+}
+
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  background-color: #1d9bd5;
+  color: #ffffff;
+}
+
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: #ffffff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.dynamic-shadow {
+  color: black;
+  text-underline: none;
+  position: relative;
+  width: 250px;
+  min-height: 150px;
+  max-height: fit-content;
+  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  z-index: 1;
+}
+
+.dynamic-shadow:after {
+  content: '';
+  width: 100%;
+  min-height: 100%;
+  max-height: fit-content;
+  position: absolute;
+  background: inherit;
+  top: 0.5rem;
+  filter: blur(0.4rem);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.text_center{
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+}
+
+.cl {
+  text-decoration:none;
+  color: black;
+
+}
+
+.tiles-template {
+  top:100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  position: relative;
+  width: 90%;
+  margin-left: 80px;
+  margin-right: 40px;
+  height: 100%;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+span:hover{
+  cursor: pointer;
+}
+
+
+.views:hover{
+  cursor: unset;
+}

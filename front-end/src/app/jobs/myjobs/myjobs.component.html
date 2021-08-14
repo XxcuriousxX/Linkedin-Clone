@@ -1,0 +1,50 @@
+<body>
+<app-navigation-bar></app-navigation-bar>
+
+  <div *ngIf="isempty == true; else not_empty" >
+    <span id="text" class="text">You Haven't Posted Any Job Yet.</span>
+    <button class="hover-underline-animation" mat-raised-button routerLink="/jobs/createjobpost">Create Job Post</button>
+  </div>
+
+
+  <ng-template #not_empty>
+  <div class="tiles-template">
+    <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
+
+      <div *ngFor="let jobPost of myjobs" >
+        <!--grid-->
+        <mat-grid-tile class="my-tile">
+          <a class="dynamic-shadow">
+            <div class="text_center">
+              <a class="cl" style="text-align: center;position:relative;top: 17px;font-family: 'Rubik', sans-serif;font-weight: bold;color: black"
+                 routerLink="/jobs/{{jobPost.jobpostid}}">
+                {{jobPost.title.toUpperCase()}}
+              </a>
+              <hr>
+              <div class="text_center" style="position: absolute;left: 0px;top: -30px">
+                <span style="font-size: 18px;font-weight: bold" class="views">Total Views: {{jobPost.views}} </span>
+
+              </div>
+              <!--DETAILS-->
+              <div class="details" style="font-size: 18px;position: absolute;top: -60px">
+                <i class="fa fa-users" style="position: absolute;top:114px;left: 30px;" aria-hidden="true"></i>
+                <span style="font-size: 16px;font-weight: bold" (click)="openDialog(jobPost.user_list)">Requested Users: {{jobPost.user_list.length}}</span>
+                <button mat-button (click)="deleteJob(jobPost.jobpostid)" style="position: absolute;top:170px;left: 125px;color: #ffffff">Delete Job</button>
+              </div>
+
+
+
+
+            </div>
+
+          </a>
+        </mat-grid-tile>
+
+      </div>
+    </mat-grid-list>
+  </div>
+  </ng-template>
+
+
+
+</body>

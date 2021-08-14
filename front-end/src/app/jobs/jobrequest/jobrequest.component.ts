@@ -87,7 +87,7 @@ export class JobrequestComponent implements OnInit {
         this.liked_by_current_user = false;
       }
 
-      this.postService.getJobPostById(this.post.jobPostId).subscribe(post => {
+      this.postService.getJobPostByIdRequest(this.post.jobPostId).subscribe(post => {
         this.post = post;
         this.isLoaded = true;
       });
@@ -98,7 +98,7 @@ export class JobrequestComponent implements OnInit {
 
   updateLikesNum() {
     this.likePayload.postId = this.post.jobPostId;
-    this.postService.getJobPostById(this.post.jobPostId).subscribe(post => {
+    this.postService.getJobPostByIdRequest(this.post.jobPostId).subscribe(post => {
       this.post = post;
     });
   }

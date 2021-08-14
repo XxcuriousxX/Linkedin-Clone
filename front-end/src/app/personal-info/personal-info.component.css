@@ -25,7 +25,7 @@ textarea{
   box-shadow: none!important;
   outline: 0 none;
   border-color: #cfc9c9;
-  width: 400px;
+  width: 85%;
   padding-left: 13px;
   padding-right: 13px;
   padding-top: 10px;
@@ -80,7 +80,8 @@ textarea:focus{
   outline: none;
   padding: 12px 40px 10px;
   position: relative;
-  left: 35%;
+  left: 30%;
+  width: 30%;
   top: 35px;
 }
 
@@ -91,7 +92,8 @@ textarea:focus{
   content: '';
   height: 0;
   position: absolute;
-  width: 24px;
+  /*width: 24px;*/
+  width: 30%;
 }
 
 .animated-border-button:before {
@@ -117,4 +119,50 @@ textarea:focus{
     width: 30%;
     height: auto;
   }
+}
+
+
+.button {
+  position: relative;
+  background-color: #263059;
+  border: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 30%px;
+  left: 15%;
+  height: 60px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #263059;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+
+.resize-buttons{
+  position: relative;
+  top: 760px;
+  left: 10%;
 }

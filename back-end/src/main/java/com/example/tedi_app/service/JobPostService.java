@@ -4,14 +4,12 @@ import java.util.*;
 
 import com.example.tedi_app.dto.JobPostRequest;
 import com.example.tedi_app.dto.JobPostResponse;
+import com.example.tedi_app.dto.MyJobResponse;
 import com.example.tedi_app.model.Friends;
 import com.example.tedi_app.model.JobPost;
 import com.example.tedi_app.model.JobPostViews;
 import com.example.tedi_app.model.User;
-import com.example.tedi_app.repo.FriendsRepository;
-import com.example.tedi_app.repo.JobPostRepository;
-import com.example.tedi_app.repo.JobPostViewsRepository;
-import com.example.tedi_app.repo.UserRepository;
+import com.example.tedi_app.repo.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,6 +23,7 @@ public class JobPostService {
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
     private final JobPostViewsRepository jobPostViewsRepository;
+    private final JobVoteRepository jobVoteRepository;
     private final JobPostRepository jobPostRepository;
     private AuthService authService;
 
@@ -350,6 +349,13 @@ public class JobPostService {
 
     }
 
+    @Transactional
+    public void deleteJobPost(Long id){
+        jobPostViewsRepository.deleteByJobPost_JobPostId(id);
+        jobPostRepository.deleteJobPostByJobPostId(id);
+        return;
+    }
+
     public JobPostResponse getJobPost(Long id){ // will also view it
         JobPost jp =  jobPostRepository.getByJobPostId(id);
         User u = userRepository.findByUsername(authService.getCurrentUser().getUsername())
@@ -366,10 +372,32 @@ public class JobPostService {
         }
         else {
             jpv.increaseViews();
-            System.out.println("Prinint views --- " + jpv.getViews());
+            System.out.println("rPrinint views --- " + jpv.getViews());
             jobPostViewsRepository.save(jpv);
         }
         
+        return mapToDto(jp);
+    }
+
+
+    public JobPostResponse getJobPostRequest(Long id){ // will also view it
+        JobPost jp =  jobPostRepository.getByJobPostId(id);
+        User u = userRepository.findByUsername(authService.getCurrentUser().getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username: "+ authService.getCurrentUser().getUsername()));
+
+
+        JobPostViews jpv = jobPostViewsRepository.getByJobPostJobPostIdAndUserUserId(id, u.getUserId());
+
+        if (jpv == null) {
+            jpv = new JobPostViews(jp, u);
+            jobPostViewsRepository.save(jpv);
+        }
+        else {
+            System.out.println("rPrinint views --- " + jpv.getViews());
+            jobPostViewsRepository.save(jpv);
+        }
+
         return mapToDto(jp);
     }
 
@@ -380,5 +408,59 @@ public class JobPostService {
         }
         return jprList;
     }
+
+    public List<MyJobResponse> getMyJobs(String username) {
+        List<MyJobResponse> myjobs = new ArrayList<>();
+
+        Optional<User> user_opt = userRepository.findByUsername(username);
+        User user = user_opt.orElseThrow(() -> new UsernameNotFoundException("No user " +
+                "Found with username: "+ authService.getCurrentUser().getUsername()));
+
+        List<JobPost> jobs = jobPostRepository.getAllByUserUserId(user.getUserId());
+
+        if(jobs.isEmpty()){
+            System.out.println("edw eimai twra re tetartirrrrrrr" + jobs + " iddd" + user.getUserId());
+            return new ArrayList<MyJobResponse>(){};
+        }
+        else{
+            ArrayList<User> users = new ArrayList<>();
+            Integer views = -1;
+            //for each job find all users and save them to list
+            for( JobPost each : jobs){
+                List<Long> users_id = jobVoteRepository.getUserIdForJobPost(each.getJobPostId());
+                for(Long id: users_id){
+                    System.out.println("edw id: "+ id);
+                    System.out.println("edw views: "+ views);
+                    System.out.println("edw job id: "+ each.getJobPostId());
+                    Optional<User> usr_opt = userRepository.findByUserId(id);
+                    User usr = usr_opt.orElseThrow(() -> new UsernameNotFoundException("No user " +
+                            "Found with username: "+ authService.getCurrentUser().getUsername()));
+                    users.add(usr);
+                }
+
+                if (jobPostViewsRepository.getJobPostViews(each.getJobPostId(),user.getUserId()).size() != 0){
+                    views = jobPostViewsRepository.getJobPostViews(each.getJobPostId(),user.getUserId()).get(0);
+                }else{
+                    views = 0;
+                }
+                myjobs.add(new MyJobResponse(each.getJobPostId(),each.getTitle(),users,views));
+                users.clear();
+            }
+
+        }
+
+        for( MyJobResponse eeach : myjobs){
+            System.out.println("edw eimai twra re tetarti: "+ eeach.getTitle());
+            System.out.println("edw eimai twra re tetarti: "+ eeach.getJobpostid());
+            System.out.println("edw eimai twra re tetarti size: "+ eeach.getUser_list().size());
+        }
+
+        return myjobs;
+    }
+
+
+
+
+
 
 }
