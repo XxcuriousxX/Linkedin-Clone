@@ -5,6 +5,7 @@ import java.util.*;
 import com.example.tedi_app.dto.JobPostRequest;
 import com.example.tedi_app.dto.JobPostResponse;
 import com.example.tedi_app.dto.MyJobResponse;
+import com.example.tedi_app.dto.PostResponse;
 import com.example.tedi_app.model.Friends;
 import com.example.tedi_app.model.JobPost;
 import com.example.tedi_app.model.JobPostViews;
@@ -25,7 +26,9 @@ public class JobPostService {
     private final JobPostViewsRepository jobPostViewsRepository;
     private final JobVoteRepository jobVoteRepository;
     private final JobPostRepository jobPostRepository;
+    private final PersonalinfoService personalinfoService;
     private AuthService authService;
+
 
 
     public double dot(double[] x, double[] y) {
@@ -270,31 +273,81 @@ public class JobPostService {
             results[j] = nR[row][j];
         }
 
-        int max1_col_index = 0;
-        double max1_col = results[0];
-        for (j = 0; j < M; j++) {
-            if (max1_col < results[j]){
-                max1_col = results[j];
-                max1_col_index = j;
-            }
-        }
-
-
-
-
-        List<JobPostResponse> jobPostResponseList = new ArrayList<>();
+        List<JobPostResponse> allJobPostsMapped = new ArrayList<>(); // jobPostsList mapped to
+        List<JobPostResponse> suggestionsList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             JobPost JP = jobPostsList.get(j);
             System.out.println(results[j] + " " + JP.getJobPostId() + "\n");
+            allJobPostsMapped.add(mapToDto(JP));
             if (results[j] > 2.5) {
-                jobPostResponseList.add(mapToDto(JP));
+                suggestionsList.add(mapToDto(JP));
             }
         }
 
-        return jobPostResponseList;
+        // "ability1,ability2,...,abilityN" --> ["ability1", "ability2", ..., "abilityN"]
+        String[] myAbilities = personalinfoService.getPersonalInfo(user.getUsername())
+                                .getAbilities_desc().split(",");
+
+        System.out.println("Basics");
+        for (String a : myAbilities)
+            System.out.println(" + " + a);
+        // {key: jobPostId, value: num of required skills matched with my abilites}
+        LinkedHashMap<Long, Integer> matches = new LinkedHashMap<>();
+        // calculate all values for the matches hashmap to get the number of matching abilities per job post
+        for (JobPostResponse suggestion: allJobPostsMapped) {
+            matches.put(suggestion.getJobPostId(), 0);  // init  match[jobPostId] = 0
+            String[] requiredSkills = suggestion.getRequiredSkills().split(",");
+
+            for (String skill : requiredSkills) {
+                System.out.println("Sk: " + skill);
+                for (String a : myAbilities) {
+                    if (a.equals(skill)) {
+                        matches.replace(suggestion.getJobPostId(), matches.get(suggestion.getJobPostId()) + 1);
+                        break;
+                    }
+                }
+            }
+        }
+        orderByValue(matches, Collections.reverseOrder());
+        for (Long id : matches.keySet()) {
+            System.out.println(" ---- " + matches.get(id));
+        }
+
+        List<JobPostResponse> suggestionsFromMatches = new ArrayList<>();
+        int m = 0;
+        for (Long id : matches.keySet()) { // get top 5 more related according to abilites matching
+            if (matches.get(id).equals(0) || m == 5) break;
+            suggestionsFromMatches.add(getJobPost(id));
+        }
+
+        suggestionsList.addAll(suggestionsFromMatches);
+        removeDuplicates(suggestionsList);
+        List<JobPostResponse> finalList = new ArrayList<>();
+        // remove job posts I posted
+        for (JobPostResponse jpr : suggestionsList)
+            if (!jobPostRepository.getByJobPostId(jpr.getJobPostId()).getUser().getUsername().equals(username))
+                finalList.add(jpr);
+        return finalList;
     }
-    
-    
+
+
+    static <K, V> void orderByValue(
+            LinkedHashMap<K, V> m, final Comparator<? super V> c) {
+        List<Map.Entry<K, V>> entries = new ArrayList<>(m.entrySet());
+
+        Collections.sort(entries, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> lhs, Map.Entry<K, V> rhs) {
+                return c.compare(lhs.getValue(), rhs.getValue());
+            }
+        });
+
+        m.clear();
+        for(Map.Entry<K, V> e : entries) {
+            m.put(e.getKey(), e.getValue());
+        }
+    }
+
     public static JobPostResponse mapToDto(JobPost JP) {
         return new JobPostResponse(JP.getJobPostId(), JP.getTitle(), JP.getLocation()
                     , JP.getKeywords(), JP.getEmploymentType(), JP.getDetails(), JP.getRequiredSkills());
@@ -373,7 +426,7 @@ public class JobPostService {
         }
         else {
             jpv.increaseViews();
-            System.out.println("rPrinint views --- " + jpv.getViews());
+            System.out.println("Prinint views --- " + jpv.getViews());
             jobPostViewsRepository.save(jpv);
         }
         
@@ -460,7 +513,22 @@ public class JobPostService {
     }
 
 
-
+    public List<JobPostResponse> removeDuplicates(List<JobPostResponse> L) {
+        List<JobPostResponse> L2 = new ArrayList<>();
+        boolean exists = false;
+        for (JobPostResponse p : L) {
+            exists = false;
+            for (JobPostResponse p2 : L2) {
+                if (p2.getJobPostId().equals(p.getJobPostId())) {
+                    exists = true;
+                    break;
+                }
+                if (!exists)
+                    L2.add(p);
+            }
+        }
+        return L2;
+    }
 
 
 

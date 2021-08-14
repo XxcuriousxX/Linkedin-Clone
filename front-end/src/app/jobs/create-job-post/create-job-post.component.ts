@@ -13,7 +13,8 @@ import {JobPostModel} from "../Jobs";
 export class CreateJobPostComponent implements OnInit {
 
   jobForm: FormGroup;
-  skills : string[] = [];
+  keywords : string[] = [];
+  skills: string[] = []
   jobPayload: JobPostModel = new JobPostModel();
   constructor(private _jobsService: JobsService, private _authService: AuthService) {
 
@@ -37,6 +38,15 @@ export class CreateJobPostComponent implements OnInit {
 
   }
 
+  addKeyword(keyword) {
+    if (!keyword) return;
+    this.keywords.push(keyword.value);
+  }
+
+  removeKeyword(i) {
+    this.keywords.splice(i, 1);
+  }
+
   addSkill(skill) {
     if (!skill) return;
     this.skills.push(skill.value);
@@ -49,6 +59,11 @@ export class CreateJobPostComponent implements OnInit {
   createJobPost() {
     this.jobPayload.authorUsername = this._authService.getUserName();
     this.jobPayload.details = this.jobForm.value.details;
+    this.jobPayload.keywords = "";
+    for (let i = 0; i < this.keywords.length; i++) {
+      if (i == 0) this.jobPayload.keywords = this.keywords[i];
+      else this.jobPayload.keywords += "," + this.keywords[i];
+    }
     this.jobPayload.requiredSkills = "";
     for (let i = 0; i < this.skills.length; i++) {
       if (i == 0) this.jobPayload.requiredSkills = this.skills[i];
@@ -60,6 +75,7 @@ export class CreateJobPostComponent implements OnInit {
     this.jobPayload.title = this.jobForm.value.title;
     this._jobsService.createJobPost(this.jobPayload).subscribe( info => {
       console.log("Job post sent");
+      this.keywords = [];
       this.skills = [];
       this.ngOnInit();
       
