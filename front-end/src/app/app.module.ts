@@ -47,7 +47,6 @@ import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
 import { DialogComponent} from "./jobs/myjobs/dialog.component";
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
 import { MyjobsComponent } from './jobs/myjobs/myjobs.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 
@@ -57,6 +56,8 @@ import { CommonModule } from '@angular/common';
 import { MatCommonModule } from '@angular/material/core';
 import { MatInputModule  } from '@angular/material/input';
 
+import { FullJobPostViewComponent } from './jobs/full-job-post-view/full-job-post-view.component';
+import { LoadingComponent } from './loading/loading/loading.component';
 const materialModules = [
   MatButtonModule,
 ];
@@ -183,7 +184,8 @@ const appRoutes : Routes = [
     FullJobPostViewComponent,
     JobrequestComponent,
     MyjobsComponent,
-    DialogComponent
+    DialogComponent,
+    LoadingComponent
   ],
     imports: [
         BrowserModule,

@@ -5,7 +5,7 @@ import { JobPostResponse, JobPostModel } from './Jobs';
 import { JobsService } from './jobs.service';
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-
+import { LoadingComponent } from '../loading/loading/loading.component';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -14,6 +14,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class JobsComponent implements OnInit {
   username:string = "";
   jobForm: FormGroup;
+  isLoaded = false;
   jobPayload: JobPostModel = new JobPostModel();
   skills: string[] = [];
   suggestionsList: JobPostResponse[] = [];
@@ -32,6 +33,7 @@ export class JobsComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this._authService.getUserName();
+    this.isLoaded = false;
     this.getScreenSize();
     this.getSuggestions();
   }
@@ -53,6 +55,7 @@ export class JobsComponent implements OnInit {
         for(let each of this.suggestionsList){
           each.skills = each.requiredSkills.split(",");
         }
+        this.isLoaded = true;
         console.log(this.suggestionsList);
     }, err => throwError(err));
   }

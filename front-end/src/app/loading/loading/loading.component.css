@@ -1,0 +1,50 @@
+
+.dot-shuttle {
+    position: relative;
+    left: -15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: black;
+    color: transparent;
+    margin: -1px 0;
+    filter: blur(2px);
+  }
+  
+  .dot-shuttle::before, .dot-shuttle::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: black;
+    color: transparent;
+    filter: blur(2px);
+  }
+  
+  .dot-shuttle::before {
+    left: 15px;
+    animation: dotShuttle 2s infinite ease-out;
+  }
+  
+  .dot-shuttle::after {
+    left: 30px;
+  }
+  
+  @keyframes dotShuttle {
+    0%,
+    50%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-45px);
+    }
+    75% {
+      transform: translateX(45px);
+    }
+  }
+
+
