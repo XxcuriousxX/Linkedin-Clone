@@ -8,21 +8,31 @@
   <div class="txt">
     Create Job Post
   </div>
-  <form [formGroup]="jobForm" (ngSubmit)="createJobPost()">
+  <form [formGroup]="jobForm">
 
     <input type="text" [formControlName]="'title'" placeholder="title"  style="padding-left: 13px;padding-right:13px;" autocomplete="off"/>
 
     <br>
     <br>
     <textarea [formControlName]="'details'" rows="3" placeholder="details"></textarea>
-    <textarea [formControlName]="'requiredSkills'" rows="3" placeholder="requiredSkills"></textarea>
-    <textarea [formControlName]="'keywords'" rows="3" placeholder="keywords"></textarea>
+    <!-- <textarea [formControlName]="'requiredSkills'" rows="3" placeholder="requiredSkills"></textarea> -->
+    <div *ngFor="let s of skills; let i = index">
+      {{ s }}
+      <button  (click)="removeSkill(i)" id="mdiv"> 
+        <div class="mdiv">
+          <div class="md">   </div>
+        </div>
+    </button>
+    </div>
+    <input id="new_skill" type="text" #input placeholder="enter a skill here" rows="3" />
+    <button id="add_skill_btn" class="addskill" (click)="addSkill(input)"> Add skill  </button>
+    <!-- <textarea [formControlName]="'keywords'" rows="3" placeholder="keywords"></textarea> -->
     <textarea [formControlName]="'location'" rows="3" placeholder="location"></textarea>
     <br>
     <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;" autocomplete="off"/>
 
 
-    <button  class="button"><span>Publish</span></button>
+    <button  class="button" (click)="createJobPost()"><span>Publish</span></button>
 
   </form>
 </div>

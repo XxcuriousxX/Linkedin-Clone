@@ -13,6 +13,7 @@ import {JobPostModel} from "../Jobs";
 export class CreateJobPostComponent implements OnInit {
 
   jobForm: FormGroup;
+  skills : string[] = [];
   jobPayload: JobPostModel = new JobPostModel();
   constructor(private _jobsService: JobsService, private _authService: AuthService) {
 
@@ -25,23 +26,43 @@ export class CreateJobPostComponent implements OnInit {
       employmentType: new FormControl('', Validators.required)
     });
 
+
   }
+
+  
+
 
   ngOnInit(): void {
+
+
   }
 
+  addSkill(skill) {
+    if (!skill) return;
+    this.skills.push(skill.value);
+  }
 
+  removeSkill(i) {
+    this.skills.splice(i, 1);
+  }
 
   createJobPost() {
     this.jobPayload.authorUsername = this._authService.getUserName();
     this.jobPayload.details = this.jobForm.value.details;
-    this.jobPayload.requiredSkills = this.jobForm.value.requiredSkills;
-    this.jobPayload.keywords = this.jobForm.value.keywords;
+    this.jobPayload.requiredSkills = "";
+    for (let i = 0; i < this.skills.length; i++) {
+      if (i == 0) this.jobPayload.requiredSkills = this.skills[i];
+      else this.jobPayload.requiredSkills += "," + this.skills[i];
+    }
+    // this.jobPayload.keywords = this.jobForm.value.keywords;
     this.jobPayload.employmentType = this.jobForm.value.employmentType;
     this.jobPayload.location = this.jobForm.value.location;
     this.jobPayload.title = this.jobForm.value.title;
     this._jobsService.createJobPost(this.jobPayload).subscribe( info => {
+      console.log("Job post sent");
+      this.skills = [];
       this.ngOnInit();
+      
       this.jobForm.reset();
     }, error => {
       throwError(error);
