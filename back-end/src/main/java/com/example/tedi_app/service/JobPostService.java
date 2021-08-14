@@ -351,7 +351,8 @@ public class JobPostService {
 
     @Transactional
     public void deleteJobPost(Long id){
-        jobPostViewsRepository.deleteByJobPost_JobPostId(id);
+        jobVoteRepository.deleteByJobPost_JobPostId(id);
+//        jobPostViewsRepository.deleteByJobPost_JobPostId(id);
         jobPostRepository.deleteJobPostByJobPostId(id);
         return;
     }

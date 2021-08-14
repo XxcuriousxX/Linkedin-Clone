@@ -3,14 +3,11 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
 
 .left-box{
-    position:fixed;
     border-radius: 20px;
     border: 1px solid #cfc9c9;
     padding: 20px;
     width: 350px;
     height: 400px;
-    left: 230px;
-    top: 100px;
     box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
     font-family: 'Merriweather', serif;
     font-family: 'Lato', sans-serif;

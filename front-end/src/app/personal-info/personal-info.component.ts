@@ -30,6 +30,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getScreenSize();
   }
 
   @HostListener('window:resize', ['$event'])

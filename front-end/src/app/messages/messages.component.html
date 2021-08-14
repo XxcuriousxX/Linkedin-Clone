@@ -2,14 +2,14 @@
 
 <app-navigation-bar></app-navigation-bar>
 
-<body style="position:fixed;height:fit-content">
+<body>
 
-    <app-conversations> </app-conversations>
-
-
+    <app-conversations class="conv-select"> </app-conversations>
 
 
-    <div class="conv-box" >
+
+
+    <div class="conv-box">
 
       <div class="messages-region" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
@@ -33,8 +33,8 @@
           </div>
 
           <div class="receiver" *ngIf=" msg.receiverUsername === currentUser ">
-            
-            
+
+
             {{ msg.message }}
 
             <div class="time">{{msg.stringTimeCreated}} </div>
@@ -46,10 +46,12 @@
 
        </div> <!-- ng if async-->
       </div>
-        <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
-            <hr style="position:relative;top:10px;background-color:black;border-top:1px solid black">
-            <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message" autocomplete="off"/>
-        </form>
+
+      <form class="message" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <hr style="position:relative;top:10px;background-color:black;border-top:1px solid black">
+        <input class="message-input-box" type="text" placeholder="Message" [formControlName]="'message'" name="message" autocomplete="off"/>
+      </form>
+
     </div>
 
 
