@@ -40,16 +40,16 @@
 }
 
 .button:hover {
-  background-color: #00ff2a;
-  box-shadow: 0px 3px 10px #00ff2a;
-  color: #000000;
+  background-color: #201d1d;
+  box-shadow: 0px 3px 10px #201d1d;
+  color: #f7f7f7;
   transform: translateY(-3px);
 }
 
 .likedbutton.button {
 
-  background-color: #00ff2a;
-  color: #000000;
+  background-color: #201d1d;
+  color: #f7f7f7;
 }
 
 hr {

@@ -323,7 +323,7 @@ public class JobPostService {
         suggestionsList.addAll(suggestionsFromMatches);
         removeDuplicates(suggestionsList);
         List<JobPostResponse> finalList = new ArrayList<>();
-        // remove job posts I posted
+        // dont add job posts I posted
         for (JobPostResponse jpr : suggestionsList)
             if (!jobPostRepository.getByJobPostId(jpr.getJobPostId()).getUser().getUsername().equals(username))
                 finalList.add(jpr);
