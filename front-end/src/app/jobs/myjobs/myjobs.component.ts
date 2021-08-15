@@ -47,7 +47,6 @@ export class MyjobsComponent implements OnInit {
   getScreenSize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    console.log(this.screenHeight, this.screenWidth);
   }
 
   getmyjobs() {
@@ -56,10 +55,8 @@ export class MyjobsComponent implements OnInit {
       if (this.myjobs.length == 0) {
         this.isempty = true;
       }
-      console.log("ok " + this.isempty);
       for (let e of this.myjobs) {
         for (let k of e.user_list) {
-          console.log("ok edw" + k.username);
         }
       }
     }, err => throwError(err));
@@ -76,7 +73,6 @@ export class MyjobsComponent implements OnInit {
 
   deleteJob(jobpostid: number) {
     this._jobsService.deleteJob(jobpostid).subscribe(data => {
-      console.log("ok")
       this.ngOnInit();
     }, err => throwError(err));
 

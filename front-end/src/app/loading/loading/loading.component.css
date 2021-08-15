@@ -5,8 +5,8 @@
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    background-color: black;
-    color: transparent;
+    background-color: #201d1d;
+    /* color: transparent; */
     margin: -1px 0;
     filter: blur(2px);
   }
@@ -19,9 +19,9 @@
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    background-color: black;
+    background-color: #201d1d;
     color: transparent;
-    filter: blur(2px);
+    /* filter: blur(2px); */
   }
   
   .dot-shuttle::before {

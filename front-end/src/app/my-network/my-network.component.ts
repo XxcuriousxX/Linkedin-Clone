@@ -30,7 +30,6 @@ export class MyNetworkComponent implements OnInit {
     this.route.queryParams
       //.filter(params => params.query)
       .subscribe(params => {
-          console.log(params); // { query: "popular" }
 
           this.query_param = params.query;
 
@@ -46,10 +45,8 @@ export class MyNetworkComponent implements OnInit {
               let my_self = this.search_result.find(usr => usr.username == this._authService.getUserName())
               this.search_result = this.search_result.filter(usr => usr !== my_self);
 
-              console.log("kalooo" + res);
             },
             error => {
-              console.log("gtp query");
               throwError(error);
             });
 
@@ -60,14 +57,10 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
-      // for (let u of this.usersList) {
-      //   console.log(u.username)
-      // }
 
-      console.log("SUCCESS");
+
     },
       err => {
-        console.log("ERR");
         throwError(err);
       });
 
@@ -80,6 +73,5 @@ export class MyNetworkComponent implements OnInit {
   getScreenSize(event?) {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
-        console.log(this.screenHeight, this.screenWidth);
   }
 }

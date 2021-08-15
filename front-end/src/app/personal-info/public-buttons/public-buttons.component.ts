@@ -52,7 +52,7 @@ export class PublicButtonsComponent implements OnInit {
 
 
     this._personalinfoService.changeButtonState(this.button_payload).subscribe( data => {
-        console.log("OK");
+
       },
       error => { throwError(error); });
   }

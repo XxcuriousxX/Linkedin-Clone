@@ -54,12 +54,11 @@ export class SettingsComponent implements OnInit {
 
     this._userService.submitchanges(this.settingsRequestPayload).subscribe(data => {
 
-      console.log("SUCCESSEFUL CHANGED")
       this.ngOnInit();
       this.settingsForm.reset();
 
     }, error => {
-      console.log("ERROR CHANGED")
+
       this.email_exists = true;
       this.settingsForm.reset();
 

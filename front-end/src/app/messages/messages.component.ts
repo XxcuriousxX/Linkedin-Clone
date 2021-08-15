@@ -58,8 +58,7 @@ export class MessagesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.getConversation();
-    // console.log("PRINTING CONV\n");
+
 
     this.route.queryParams.subscribe( params => {
       this.receiverUsername = params.conversation_name;
@@ -84,7 +83,6 @@ export class MessagesComponent implements OnInit {
   loadMoreMessages() : MessageResponse[] {
     if (this.receiverUsername != ""){
       this._messagesService.loadMoreMessages(this.conversation[this.conversation.length-1]).subscribe( extra_messages => {
-        console.log("ena dio tria apo ngafter   " + extra_messages.length);
         if (extra_messages.length != 0){
           this.containsmessage = true;
           for (let message of extra_messages) {
@@ -101,7 +99,6 @@ export class MessagesComponent implements OnInit {
 
   sendMessage() {
 
-    console.log("\nOur name is " , this._authService.getUserName());
     this.payload.sender_username = this._authService.getUserName();
     this.payload.receiver_username = this.receiverUsername;
     this.payload.message = this.messageForm.value.message;
