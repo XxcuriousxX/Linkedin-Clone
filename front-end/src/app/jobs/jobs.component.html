@@ -29,20 +29,20 @@
             <div class="text_center">
               <a class="cl" style="text-align: center;position:relative;top: 17px;font-family: 'Rubik', sans-serif;font-weight: bold;color: black"
                  routerLink="/jobs/{{jobPost.jobPostId}}">
-                {{jobPost.title.toUpperCase()}}
+                <div class="text-col" >{{jobPost.title.toUpperCase()}} </div>
               </a>
               <hr>
               <!--DETAILS-->
               <div class="details" style="font-size: 16px;">
-                <span style="font-size: 18px;font-weight: bold">Details</span><br>
-                  {{ (jobPost.details.length> 50)? (jobPost.details | slice:0:50)+'..':(jobPost.details) }}
+                <span style="font-size: 18px;font-weight: bold"><div class="text-col" >Details</div></span><br>
+                  <div class="text-col" >{{ (jobPost.details.length> 50)? (jobPost.details | slice:0:50)+'..':(jobPost.details) }}</div>
               </div>
 
               <br>
 
               <div class="details" style="font-size: 16px;">
-                <span style="font-size: 18px;font-weight: bold">Employment Type:</span><br>
-                {{jobPost.employmentType}}
+                <span style="font-size: 18px;font-weight: bold"><div class="text-col">Employment Type:</div></span><br>
+                <div class="text-col">{{jobPost.employmentType}}</div>
               </div>
 
             </div>

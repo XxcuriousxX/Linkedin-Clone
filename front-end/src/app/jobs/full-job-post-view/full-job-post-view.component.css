@@ -8,12 +8,13 @@ body {
 .text{
   text-align: center;
   position: relative;
+  color: rgb(233, 233, 233);
   top: 15px;
 }
 
 
 .card {
-  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  background: linear-gradient(75deg, #2066a8, #67a7e8);
   position: absolute;
   left: 30%;
   width: 500px;
@@ -63,4 +64,8 @@ body {
 
 .card:hover h3, .card:focus-within h3 {
   padding: 8px 12px 0;
+}
+
+.details {
+  color: rgb(217, 230, 230);
 }

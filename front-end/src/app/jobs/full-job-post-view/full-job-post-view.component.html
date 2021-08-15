@@ -7,36 +7,36 @@
   <hr>
   <div class="focus-content">
     <div class="details" style="font-size: 16px;">
-      <span style="font-size: 18px;font-weight: bold">Details:</span><br>
-      {{ jobpost.details }}
+      <span style="font-size: 18px;font-weight: bold;">Details:</span><br>
+      <div style="color: rgb(217, 230, 230);"> {{ jobpost.details }} </div>
     </div>
     <br>
 
-    <div class="details" style="font-size: 16px">
+    <div class="details" style="font-size: 16px; ">
       <span style="font-size: 18px;font-weight: bold">Required Skills:</span><br>
       <ul>
 
         <div *ngFor="let each of skills">
-          <li> {{each}} </li>
+          <li style="color: rgb(217, 230, 230)"> {{each}} </li>
         </div>
 
       </ul>
 
     </div>
 
-    <div class="details" style="font-size: 16px">
+    <div class="details" style="font-size: 16px;">
       <span style="font-size: 18px;font-weight: bold">Location: </span>
       <span>{{jobpost.location}}</span>
     </div>
 
-    <div class="details" style="font-size: 16px">
+    <div class="details" style="font-size: 16px;">
       <span style="font-size: 18px;font-weight: bold">Employment Type: </span>
       <span>{{jobpost.employmentType}}</span>
     </div>
 
   </div>
 
-  <app-jobrequest [post]="jobpost" style="position:relative;left: 380px;top: 73px"></app-jobrequest>
+  <app-jobrequest [post]="jobpost" style="position:absolute; left: 380px; bottom: 10px;"></app-jobrequest>
 </div>
 
 

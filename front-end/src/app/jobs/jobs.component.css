@@ -10,7 +10,9 @@ body::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
 
-
+.my-tile {
+  border-radius: 8px;
+}
 
 .cl {
     text-decoration:none;
@@ -64,6 +66,7 @@ body::-webkit-scrollbar {
     height: 300px;
 
 
+
     /* height: 300px; */
 
   }
@@ -90,8 +93,9 @@ a:hover{
   width: 250px;
   min-height: 350px;
   max-height: fit-content;
-  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  background: linear-gradient(75deg, #2066a8, #67a7e8);
   z-index: 1;
+  border-radius: 8px;
 }
 
 .dynamic-shadow:after {
@@ -120,4 +124,9 @@ ul{
   position: absolute;
   top: 5%;
   left: 15%;
+}
+
+
+.text-col {
+  color: rgb(217, 230, 230);
 }

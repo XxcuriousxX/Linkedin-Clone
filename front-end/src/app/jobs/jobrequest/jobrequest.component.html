@@ -2,12 +2,12 @@
 
 <div *ngIf="isLoaded">
   <div *ngIf="liked_by_current_user == false; else already_liked">
-    <button class="button" mat-raised-button color="primary" (click)="like()"  aria-hidden="true" > Request</button>
+    <button class="button" mat-raised-button color="primary" (click)="like()"  aria-hidden="true" > Apply</button>
   </div>
 
   <ng-template #already_liked>
     <!-- <button mat-stroked-button color="primary" (click)="like()" class="fa fa-thumbs-up" aria-hidden="true" ></button> -->
-    <button class="likedbutton button" mat-stroked-button color="primary" (click)="like()"   aria-hidden="true"> Requested </button>
+    <button class="likedbutton button" mat-stroked-button color="primary" (click)="like()"   aria-hidden="true"> Applied </button>
 
 
   </ng-template>
