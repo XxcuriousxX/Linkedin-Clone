@@ -21,11 +21,11 @@ public class JobVote {
     @GeneratedValue(strategy = IDENTITY)
     private Long voteId;
     @NotNull
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY,cascade = {CascadeType.ALL})
     @JoinColumn(name = "jobPostId", referencedColumnName = "jobPostId")
     private JobPost jobPost;
 
-    @ManyToOne(fetch = LAZY,cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 }

@@ -23,7 +23,7 @@ public class JobPostViews {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = LAZY,cascade = {CascadeType.ALL})
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
 
