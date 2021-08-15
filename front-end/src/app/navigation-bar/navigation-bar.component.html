@@ -6,7 +6,7 @@
   <div id="" class="navbar navbar-expand justify-content-start">
 
 
-    <div *ngIf="screenWidth > 1200">
+    <div *ngIf="screenWidth > 1380">
     <form class="navbar-form form-inline" [formGroup]="searchForm" (ngSubmit)="search()">
       <div class="input-group search-box">
         <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
@@ -19,7 +19,7 @@
     <!-- tabs -->
     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
 
-      <div *ngIf="screenWidth < 1200" class="tt">
+      <div *ngIf="screenWidth < 1380" class="tt">
 
         <li class="nav-item">
           <a href="#" class="navbar-brand-small"><img src="/assets/images.png" alt="image"></a>
@@ -78,7 +78,7 @@
 
       </div>
 
-      <div *ngIf="screenWidth >= 1200">
+      <div *ngIf="screenWidth >= 1380">
 
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active_route">
