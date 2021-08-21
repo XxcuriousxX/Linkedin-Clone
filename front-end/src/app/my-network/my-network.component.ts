@@ -21,16 +21,17 @@ export class MyNetworkComponent implements OnInit {
   search_result: UserResponse[] = [];
   query_param: string = "";
   is_query: boolean = false;
+  isLoaded = false;
   constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,
                                             private _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoaded = false;
     this.getScreenSize();
 
     this.route.queryParams
       //.filter(params => params.query)
       .subscribe(params => {
-          console.log(params); // { query: "popular" }
 
           this.query_param = params.query;
 
@@ -45,11 +46,9 @@ export class MyNetworkComponent implements OnInit {
               this.search_result = res;
               let my_self = this.search_result.find(usr => usr.username == this._authService.getUserName())
               this.search_result = this.search_result.filter(usr => usr !== my_self);
-
-              console.log("kalooo" + res);
+              this.isLoaded = true;
             },
             error => {
-              console.log("gtp query");
               throwError(error);
             });
 
@@ -60,14 +59,11 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
-      // for (let u of this.usersList) {
-      //   console.log(u.username)
-      // }
+      this.isLoaded = true;
 
-      console.log("SUCCESS");
+
     },
       err => {
-        console.log("ERR");
         throwError(err);
       });
 
@@ -80,6 +76,5 @@ export class MyNetworkComponent implements OnInit {
   getScreenSize(event?) {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
-        console.log(this.screenHeight, this.screenWidth);
   }
 }

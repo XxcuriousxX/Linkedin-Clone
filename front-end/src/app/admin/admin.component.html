@@ -1,17 +1,19 @@
 <br>
 <br>
+<button mat-raised-button color="accent" class="four-buttons" (click)="logout()"   aria-hidden="true"> Logout </button>
 
-<button (click)="logout()"> Logout </button>
+<button mat-raised-button color="accent" class="four-buttons" (click)="exportAsJSON()"  aria-hidden="true"> Export as JSON </button>
 
-<input type='button' (click)='exportAsJSON()' value='export as JSON'>
-<input type='button' (click)='exportAsXML()' value='export as XML'>
-<input type='button' (click)='selectAll()' value='select all'>
+<button mat-raised-button color="accent" class="four-buttons" (click)="exportAsXML()"  aria-hidden="true"> Export as XML </button>
 
+<button mat-raised-button color="accent" class="four-buttons" (click)="selectAll()"  aria-hidden="true"> Select All </button>
+
+<br>
+<br>
 <div class="upper-box">
   Users list
 </div>
 
-<hr>
 <div *ngIf="isLoaded">
 
   <div *ngFor="let user of usersList">

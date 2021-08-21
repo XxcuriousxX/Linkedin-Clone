@@ -56,7 +56,7 @@ export class AuthService {
       console.log("Auth token = ", data.authenticationToken);
 
       this.localStorage.store('username', data.username);
-      console.log("Auth token = ", data.username);
+      // console.log("Auth token = ", data.username);
 
       this.uname = data.username
 
@@ -98,7 +98,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
-    console.log("Cleared everything");
+    // console.log("Cleared everything");
   }
 
 

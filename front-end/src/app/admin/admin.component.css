@@ -335,9 +335,8 @@ input:checked + .slider:before {
 
 .upper-box{
   position: relative;
-  left: 50%;
-  right: 50%;
-  width: 200px;
+  left: 45%;
+  width: 100px;
   height: 20px;
   font-weight: 400;
   font-size: x-large;
@@ -345,15 +344,9 @@ input:checked + .slider:before {
 
 }
 
-hr {
-  position: absolute;
-  margin: 0 auto;
-  height: 1px;
-  width:800px;
-  top:200px;
-  left: 50%;
-  right: 50%;
 
-  color: #333; /* old IE */
-  background-color: #333; /* Modern Browsers */
+.four-buttons {
+  width: 20%;
+  margin-right: 10px;
+  margin-left: 10px;
 }

@@ -74,7 +74,6 @@ export class CreateJobPostComponent implements OnInit {
     this.jobPayload.location = this.jobForm.value.location;
     this.jobPayload.title = this.jobForm.value.title;
     this._jobsService.createJobPost(this.jobPayload).subscribe( info => {
-      console.log("Job post sent");
       this.keywords = [];
       this.skills = [];
       this.ngOnInit();

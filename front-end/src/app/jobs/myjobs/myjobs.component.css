@@ -70,7 +70,9 @@ button{
   width: 250px;
   min-height: 150px;
   max-height: fit-content;
-  background: linear-gradient(75deg, #1F4E79, #67a7e8);
+  background: linear-gradient(75deg, #2066a8, #67a7e8);
+  border-radius: 8px;
+
   z-index: 1;
 }
 
@@ -120,4 +122,8 @@ span:hover{
 
 .views:hover{
   cursor: unset;
+}
+
+.text-col {
+  color: rgb(217, 230, 230);
 }

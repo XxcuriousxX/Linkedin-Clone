@@ -37,7 +37,6 @@ export class PersonalInfoComponent implements OnInit {
   getScreenSize(event?) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    console.log(this.screenHeight, this.screenWidth);
   }
 
   changePersonalinfo(){
@@ -47,7 +46,6 @@ export class PersonalInfoComponent implements OnInit {
     this.p_info_payload.studies =   this.infoForm.value.studies;
 
     this._personalinfoService.changePersonalInfo(this.p_info_payload).subscribe( data => {
-          console.log("OK");
           this.infoForm.reset();
       },
       error => { throwError(error); });

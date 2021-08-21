@@ -18,18 +18,18 @@
             <div class="text_center">
               <a class="cl" style="text-align: center;position:relative;top: 17px;font-family: 'Rubik', sans-serif;font-weight: bold;color: black"
                  routerLink="/jobs/{{jobPost.jobpostid}}">
-                {{jobPost.title.toUpperCase()}}
+                <div class="text-col">{{jobPost.title.toUpperCase()}}</div>
               </a>
               <hr>
-              <div class="text_center" style="position: absolute;left: 0px;top: -30px">
-                <span style="font-size: 18px;font-weight: bold" class="views">Total Views: {{jobPost.views}} </span>
+              <div class="text_center" style="position: absolute;left: 0px;top: -30px;color: rgb(217, 230, 230);">
+                <span style="font-size: 18px;font-weight: bold;" class="views">Total Views: {{jobPost.views}} </span>
 
               </div>
               <!--DETAILS-->
               <div class="details" style="font-size: 18px;position: absolute;top: -60px">
-                <i class="fa fa-users" style="position: absolute;top:114px;left: 30px;" aria-hidden="true"></i>
-                <span style="font-size: 16px;font-weight: bold" (click)="openDialog(jobPost.user_list)">Requested Users: {{jobPost.user_list.length}}</span>
-                <button mat-button (click)="deleteJob(jobPost.jobpostid)" style="position: absolute;top:170px;left: 125px;color: #ffffff">Delete Job</button>
+                <i class="fa fa-users" style="position: absolute;top:114px;left: 30px; color: rgb(217, 230, 230);" aria-hidden="true"></i>
+                <span style="font-size: 16px;font-weight: bold;color: rgb(217, 230, 230);" (click)="openDialog(jobPost.user_list)">Requested Users: {{jobPost.user_list.length}}</span>
+                <button mat-button (click)="deleteJob(jobPost.jobpostid)" style="position: absolute;top:170px;left: 125px;color: rgb(217, 230, 230);">Delete Job</button>
               </div>
 
 

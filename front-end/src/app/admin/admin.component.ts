@@ -56,7 +56,8 @@ export class AdminComponent implements OnInit {
   
   ngOnInit(): void {
     this._adminService.getAllUsers().subscribe( users => {
-      this.usersList = users;
+      var uList = users;
+      this.usersList = uList.filter( (usr) => usr.username !== "admin");
       this.isLoaded = true;
     }, err => throwError(err));
 
