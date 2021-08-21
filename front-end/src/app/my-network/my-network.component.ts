@@ -21,10 +21,12 @@ export class MyNetworkComponent implements OnInit {
   search_result: UserResponse[] = [];
   query_param: string = "";
   is_query: boolean = false;
+  isLoaded = false;
   constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,
                                             private _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoaded = false;
     this.getScreenSize();
 
     this.route.queryParams
@@ -44,7 +46,7 @@ export class MyNetworkComponent implements OnInit {
               this.search_result = res;
               let my_self = this.search_result.find(usr => usr.username == this._authService.getUserName())
               this.search_result = this.search_result.filter(usr => usr !== my_self);
-
+              this.isLoaded = true;
             },
             error => {
               throwError(error);
@@ -57,6 +59,7 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
+      this.isLoaded = true;
 
 
     },

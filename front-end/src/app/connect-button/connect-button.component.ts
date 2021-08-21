@@ -16,7 +16,7 @@ import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality
 export class ConnectButtonComponent implements OnInit {
 
   @Input() receiver_user: User;
-
+  isLoaded = false;
   // 0: not connected and not request sent or received, 1: request has been sent, 2: request has been received, 3: already connected
   connection_status: number = 0;
   connectPayload: ConnectPayload = new ConnectPayload();
@@ -24,6 +24,7 @@ export class ConnectButtonComponent implements OnInit {
   constructor(private _connectService: ConnectService, private _authService: AuthService) { }
 
   ngOnInit(): void {
+  this.isLoaded = false;
 	this.connection_status = 0; // init to not connected
     // If connected, then set are_connected = true, else set it as false
     this.connectPayload.sender_username = this._authService.getUserName();
@@ -44,6 +45,7 @@ export class ConnectButtonComponent implements OnInit {
         this._connectService.isRequestPending(this.connectPayload).subscribe(c => {
         	if (c.status)
             	this.connection_status = 2;
+          this.isLoaded = true;
         }, 	err => { throwError(err) });
       }, err => { throwError(err) });
     }, err => { throwError(err) });
