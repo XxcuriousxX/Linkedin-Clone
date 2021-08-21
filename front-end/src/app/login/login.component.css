@@ -160,3 +160,21 @@ footer a:link {
   color: #fff;
   text-decoration: none;
 }
+
+.alert{
+  height: 20px;
+}
+.alert-danger{
+  top: -10px;
+  height: 20px;
+}
+
+.text-error{
+  position: relative;
+  top: -12px;
+  width: fit-content;
+}
+
+
+
+

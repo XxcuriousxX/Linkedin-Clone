@@ -164,3 +164,13 @@ footer a:link {
   border-color: red;
   color: red;
 }
+
+
+.alert-danger{
+  position: fixed;
+  left: 15%;
+  top: 30px;
+}
+
+
+

@@ -21,12 +21,12 @@ export class SignUpComponent implements OnInit {
 
 
   signUpForm = this.formBuilder.group({
-      username: '',
-      first_name: '',
-      last_name: '',
-      password: '',
-      email: '',
-      phone: '',
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      first_name: ['', [Validators.required, Validators.minLength(3)]],
+      last_name: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.minLength(4)]],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       company_name: ''
       });
 
@@ -36,18 +36,17 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
       if (this._authService.isLoggedIn())
         this.router.navigate(['/home'])
-             
+
       this.signUpForm = this.formBuilder.group({
-      username: '',
-      first_name: '',
-      last_name: '',
-      password: '',
-      email: '',
-      phone: '',
-      company_name: ''
+        username: ['', [Validators.required, Validators.minLength(4)]],
+        first_name: ['', [Validators.required, Validators.minLength(3)]],
+        last_name: ['', [Validators.required, Validators.minLength(3)]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        email: ['', [Validators.required, Validators.minLength(4), Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+        phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]+$")]],
+        company_name: ''
       });
   }
-
     async onSubmit() {
       console.log('eisai gia ton poutso intellij ', this.signUpForm.value);
 

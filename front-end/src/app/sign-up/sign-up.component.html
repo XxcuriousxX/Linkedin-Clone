@@ -1,4 +1,6 @@
 <div class="wrapper">
+
+
   <form [formGroup]="signUpForm"  class="login" (ngSubmit)="onSubmit()" novalidate>
     <p class="title">Sign Up</p>
 
@@ -14,28 +16,97 @@
     <input type="text" placeholder="Password" ngModel formControlName="password">
     <i class="fa fa-key"></i>
 
-<!--    <div *ngIf="resp === 'FAIL" else templateName>-->
-<!--        <input me error-->
-<!--    </div>-->
-<!--    <ng-template #templateName>-->
-<!--        <input xoris error-->
-<!--      -->
-<!--    </ng-template>-->
+
     <input [ngClass]=" resp === 'FAIL' ? 'error' : '' " type="text"   placeholder="Email" ngModel formControlName="email">
     <i class="fa fa-envelope"></i>
     <p *ngIf="resp === 'FAIL'" class="error" style="font-size: small"> Email Already Exists !</p>
-<!--    <input   type="text" placeholder=" Email already exists!" ngModel formControlName="email">-->
+
 
 
     <input type="text" placeholder="Phone Number" ngModel formControlName="phone">
     <i class="fa fa-phone"></i>
 
+
     <input type="text" placeholder="Works At" ngModel formControlName="company_name">
     <i class="fa fa-building"></i>
 
-    <button type="submit">
+    <button type="submit" [disabled]="signUpForm.invalid" [ngStyle]="{ backgroundColor: signUpForm.invalid ? 'lightblue' : '#2196f3' }">
       <i class="spinner"></i>
       <span class="state">Sign Up</span>
     </button>
+
+
+      <div *ngIf="  (signUpForm.controls['username'].invalid && (signUpForm.controls['username'].dirty || signUpForm.controls['username'].touched))
+                 || (signUpForm.controls['first_name'].invalid && (signUpForm.controls['first_name'].dirty || signUpForm.controls['first_name'].touched))
+                 || (signUpForm.controls['last_name'].invalid && (signUpForm.controls['last_name'].dirty || signUpForm.controls['last_name'].touched))
+                 || (signUpForm.controls['password'].invalid && (signUpForm.controls['password'].dirty || signUpForm.controls['password'].touched))
+                 || (signUpForm.controls['email'].invalid && (signUpForm.controls['email'].dirty || signUpForm.controls['email'].touched))
+                 || (signUpForm.controls['phone'].invalid && (signUpForm.controls['phone'].dirty || signUpForm.controls['phone'].touched))" class="alert alert-danger">
+
+
+        <div *ngIf="signUpForm.controls['username'].invalid && (signUpForm.controls['username'].dirty || signUpForm.controls['username'].touched)" >
+          <div *ngIf="signUpForm.controls['username'].errors.required" class="text-error">
+            <li>Username is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['username'].errors.minlength" class="text-error">
+            <li>Username length at least 4.</li>
+          </div>
+        </div>
+
+        <div *ngIf="signUpForm.controls['first_name'].invalid && (signUpForm.controls['first_name'].dirty || signUpForm.controls['first_name'].touched)" >
+          <div *ngIf="signUpForm.controls['first_name'].errors.required " class="text-error">
+            <li> First name is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['first_name'].errors.minlength" class="text-error">
+            <li>First Name length at least 3.</li>
+          </div>
+        </div>
+
+
+        <div *ngIf="signUpForm.controls['last_name'].invalid && (signUpForm.controls['last_name'].dirty || signUpForm.controls['last_name'].touched)" >
+          <div *ngIf="signUpForm.controls['last_name'].errors.required" class="text-error">
+            <li>Last name is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['last_name'].errors.minlength" class="text-error">
+            <li>Last  Name length at least 3.</li>
+          </div>
+        </div>
+
+        <div *ngIf="signUpForm.controls['password'].invalid && (signUpForm.controls['password'].dirty || signUpForm.controls['password'].touched)" >
+          <div *ngIf="signUpForm.controls['password'].errors.required" class="text-error">
+            <li>Password is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['password'].errors.minlength" class="text-error">
+            <li>Password length at least 4.</li>
+          </div>
+        </div>
+
+
+        <div *ngIf="signUpForm.controls['email'].invalid && (signUpForm.controls['email'].dirty || signUpForm.controls['email'].touched)">
+          <div *ngIf="signUpForm.controls['email'].errors.required" class="text-error">
+            <li>Email is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['email'].errors.minlength" class="text-error">
+            <li>Email length at least 4.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['email'].errors.pattern" class="text-error">
+            <li>Provide a Valid Email Address</li>
+          </div>
+        </div>
+
+        <div *ngIf="signUpForm.controls['phone'].invalid && (signUpForm.controls['phone'].dirty || signUpForm.controls['phone'].touched)">
+          <div *ngIf="signUpForm.controls['phone'].errors.required" class="text-error">
+            <li>Phone is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['phone'].errors.minlength || signUpForm.controls['phone'].errors.pattern" class="text-error">
+            <li>Provide Valid Phone Number</li>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
   </form>
 </div>

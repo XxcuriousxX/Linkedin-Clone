@@ -24,8 +24,14 @@ export class LoginComponent implements OnInit {
   constructor(private _authService: AuthService, private activatedRoute: ActivatedRoute,
     private router: Router) {
       this.loginForm = new FormGroup({
-        username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required)
+        username: new FormControl('',Validators.compose([
+          Validators.required,
+          Validators.minLength(4)
+        ])),
+        password: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.minLength(3)
+        ]))
       });
       this.loginRequestPayload = {
         username: '',
@@ -52,6 +58,7 @@ export class LoginComponent implements OnInit {
       // this.toastr.success('Login Successful');
     }, error => {
       this.isError = true;
+      this.loginForm.reset();
       throwError(error);
     });
   }

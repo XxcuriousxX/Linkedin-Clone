@@ -1,15 +1,50 @@
 <div class="wrapper">
+
+  <div *ngIf="isError" class="alert alert-danger" style="position: absolute;top: 3%">
+    <div class="text-error">
+      Invalid Username And Password
+    </div>
+
+  </div>
+
   <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
     <p class="title">Log in</p>
-    <input type="text" placeholder="Username" autofocus [formControlName]="'username'" name="username" required/>
+
+    <input type="text" placeholder="Username" autofocus [formControlName]="'username'" name="username" required autocomplete="off"/>
     <i class="fa fa-user"></i>
+    <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="alert alert-danger">
+
+      <div *ngIf="loginForm.controls['username'].errors.required" class="text-error">
+        Username is required.
+      </div>
+      <div *ngIf="loginForm.controls['username'].errors.minlength" class="text-error">
+        Username length at least 4
+      </div>
+    </div>
+
     <input type="password" placeholder="Password" [formControlName]="'password'" name="password" required/>
     <i class="fa fa-key"></i>
-    <a href="#">Forgot your password?</a>
-    <button type="submit">
+
+    <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert alert-danger">
+      <div *ngIf="loginForm.controls['password'].errors.required" class="text-error">
+        Password is required.
+      </div>
+      <div *ngIf="loginForm.controls['password'].errors.minlength" class="text-error">
+        Password length at least 4
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">
       <i class="spinner"></i>
       <span class="state">Log in</span>
     </button>
   </form>
-  <footer><a target="blank" href="#" style="color: black" routerLink="/sign-up">Not having an Account? Sign Up</a></footer>
+
+
+
+
+
+
+
+  <footer><a target="blank"  style="color: black" routerLink="/sign-up">Not having an Account? Sign Up</a></footer>
 </div>
