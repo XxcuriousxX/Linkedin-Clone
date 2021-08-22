@@ -34,14 +34,34 @@
         <i class="fa fa-check" aria-hidden="true"></i>
       </button>
 
-      <div class="text-center">
-        <input class="form-control" type="file"
-               (change)="onChange($event)">
+<!--      <div class="text-center">-->
+<!--        <input class="form-control" type="file"-->
+<!--               (change)="onChange($event)">-->
 
-        <button (click)="changeProfileImage()"
-                class="btn btn-success">
-          Upload
-        </button>
+<!--        <button (click)="changeProfileImage()"-->
+<!--                class="btn btn-success">-->
+<!--          Upload-->
+<!--        </button>-->
+<!--      </div>-->
+
+
+      <div class="image-input-box">
+        <input type="file" id="file" class="inputfile" (change)="onChange($event)" >
+        <label for="file">
+          <span id="file-name" class="file-box"></span>
+          &nbsp;
+          <div *ngIf="img_sz_exceed || img_inv_format">
+            <button (click)="changeProfileImage()" class="btn btn-primary disabled" disabled>
+              Upload Image
+            </button>
+          </div>
+          <div *ngIf="!img_sz_exceed && !img_inv_format">
+            <button (click)="changeProfileImage()" class="btn btn-primary">
+              Upload Image
+            </button>
+          </div>
+
+        </label>
       </div>
 
 

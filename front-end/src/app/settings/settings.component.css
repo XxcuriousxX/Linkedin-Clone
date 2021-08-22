@@ -138,4 +138,22 @@ input:focus, textarea:focus
   height: 1px;
 }
 
+.image-input-box{
+  position: relative;
+  top: -10px;
+}
 
+.inputfile{
+  border: 1px solid #7F7F7FFF;
+  border-radius: 30px;
+}
+
+
+.disabled{
+  color: lightgrey;
+  cursor: not-allowed;
+}
+
+.disable:hover{
+  cursor: not-allowed;
+}
