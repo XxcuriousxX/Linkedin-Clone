@@ -5,7 +5,18 @@
 <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">
+
+
+      <div *ngIf="image != null && image_render == true; else default">
+        <img src="{{image}}" alt="Avatar" class="profile-pic">
+      </div>
+      <ng-template #default>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">
+      </ng-template>
+
+<!--      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">-->
+
+
       <p style="position:relative;top: 90px;font-weight: bold;font-family: 'Barlow Condensed', sans-serif;;font-size: 30px">{{ user_profile_info.username }}</p>
 
     </div>

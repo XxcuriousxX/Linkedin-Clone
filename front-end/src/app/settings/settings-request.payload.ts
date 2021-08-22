@@ -3,3 +3,8 @@ export interface SettingsRequestPayload {
   password: string;
   username: string;
 }
+
+export interface ChangeProfileImageRequestPayload{
+  username: string;
+  file : File;
+}

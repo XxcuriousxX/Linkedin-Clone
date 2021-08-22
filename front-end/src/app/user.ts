@@ -7,6 +7,7 @@ export class User {
     email : string = "";
     phone: string = "";
     company_name: string = "";
+    image: string = "";
 
 
     // constructor(uname :string, fname :string, lname :string
@@ -31,4 +32,5 @@ export class UserResponse {
   first_name:string;
   last_name:string;
   company_name:string;
+  image:string;
 }

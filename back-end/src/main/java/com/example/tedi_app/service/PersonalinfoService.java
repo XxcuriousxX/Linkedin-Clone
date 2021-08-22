@@ -2,6 +2,7 @@ package com.example.tedi_app.service;
 
 
 import com.example.tedi_app.dto.ChangePersonInfoRequest;
+import com.example.tedi_app.dto.ChangeProfileImageRequest;
 import com.example.tedi_app.model.Message;
 import com.example.tedi_app.model.Personalinfo;
 import com.example.tedi_app.model.User;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -22,6 +24,8 @@ public class PersonalinfoService {
 
     private final PersonalinfoRepository personalinfoRepository;
     private final UserRepository userRepository;
+    private final ImageStoreService imageStoreService;
+
 
     public void changePersonalInfo(ChangePersonInfoRequest changePersonInfoRequest) {
 
@@ -88,6 +92,24 @@ public class PersonalinfoService {
 
     }
 
+
+    public void changeProfileImage(ChangeProfileImageRequest changeProfileImageRequest) {
+        Optional<User> user_opt = userRepository.findByUsername(changeProfileImageRequest.getUsername());
+        User user = user_opt
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + changeProfileImageRequest.getUsername()));
+
+        String img;
+        if (changeProfileImageRequest.getMultipartFile() != null) {
+            // Store profile image
+            img = imageStoreService.save_img(changeProfileImageRequest.getMultipartFile());
+        } else {
+            img = null;
+        }
+
+        user.setProfile_picture(img);
+
+    }
 
 
 }

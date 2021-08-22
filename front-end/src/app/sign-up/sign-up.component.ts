@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {User } from './../user';
 import {FormBuilder, Validators} from '@angular/forms';
 import {FormGroup} from "@angular/forms";
-import {HttpErrorResponse} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 
@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
 
 export class SignUpComponent implements OnInit {
   resp : any;
-
+  file : File;
   errors: String = "";
 
 
@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
       });
 
 
-  constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private _authService: AuthService, private formBuilder: FormBuilder, private router: Router,private http: HttpClient) { }
 
   ngOnInit(): void {
       if (this._authService.isLoggedIn())
@@ -53,6 +53,12 @@ export class SignUpComponent implements OnInit {
       // post
       // await this._authService.getValFromObservable(this.signUpForm.value).then((res:any) => this.resp = "SUCCESS",
       // (err:any) => this.resp = "FAIL");
+
+      const formData: FormData = new FormData();
+      formData.append('user', this.signUpForm.value);
+      formData.append('profile_image', this.file);
+
+
 
       this._authService.signup(this.signUpForm.value).subscribe(
         res => {

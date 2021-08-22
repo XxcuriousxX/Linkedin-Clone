@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../auth/auth.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { SettingsRequestPayload } from './settings-request.payload';
+import {ChangeProfileImageRequestPayload, SettingsRequestPayload} from './settings-request.payload';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,6 +18,12 @@ export class SettingsComponent implements OnInit {
   // @ts-ignore
   settingsForm: FormGroup;
   settingsRequestPayload: SettingsRequestPayload;
+
+
+
+  changeprofilepayload : ChangeProfileImageRequestPayload;
+  file:File;
+
   changesSuccessMessage: string ;
   userInfo: User = new User();
   email_exists : boolean = false;
@@ -65,6 +71,26 @@ export class SettingsComponent implements OnInit {
       throwError(error);
 
     });
+  }
+
+  changeProfileImage(){
+    const formData: FormData = new FormData();
+    formData.append('username', this._authservice.getUserName());
+    formData.append('profileImage', this.file);
+    // this.changeprofilepayload.username = this._authservice.getUserName();
+    // this.changeprofilepayload.file = this.file;
+
+    this._userService.changeProfileImage(formData).subscribe(data => {
+      this.ngOnInit();
+    }, error => {
+      throwError(error);
+    });
+
+  }
+
+
+  onChange(event) {
+    this.file = event.target.files[0];
   }
 
 

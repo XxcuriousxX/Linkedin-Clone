@@ -46,6 +46,18 @@ export class MyNetworkComponent implements OnInit {
               this.search_result = res;
               let my_self = this.search_result.find(usr => usr.username == this._authService.getUserName())
               this.search_result = this.search_result.filter(usr => usr !== my_self);
+
+              //get each user's profile image and save it in usersList array
+              for (let user of this.search_result){
+
+                this._userService.retrieveProfileImageByUsername(user.username).subscribe(data => {
+                  user.image = 'data:image/jpeg;base64,' + data.image;
+                }, error => {
+                  throwError(error);
+                });
+
+              }
+
               this.isLoaded = true;
             },
             error => {
@@ -61,11 +73,23 @@ export class MyNetworkComponent implements OnInit {
       this.usersList = res;
       this.isLoaded = true;
 
+        //get each user's profile image and save it in usersList array
+        for (let user of this.usersList){
+
+          this._userService.retrieveProfileImageByUsername(user.username).subscribe(data => {
+            user.image = 'data:image/jpeg;base64,' + data.image;
+          }, error => {
+            throwError(error);
+          });
+
+        }
 
     },
       err => {
         throwError(err);
       });
+
+
 
   }
 
@@ -77,4 +101,8 @@ export class MyNetworkComponent implements OnInit {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
   }
+
+
+
+
 }

@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {throwError} from "rxjs";
 import { CreatePostPayload } from "../post/create-post.payload";
 import { PostService } from "../post/post.service";
+import {UserService} from "../user.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,7 +19,10 @@ export class HomeComponent implements OnInit {
   isError: boolean = false;
   posts: Array<PostModel> = [];
 
-  constructor(public _authService: AuthService, private _router: Router, private _postService: PostService) {
+  image: string = null;
+  is_render: boolean = false;
+
+  constructor(public _authService: AuthService, private _router: Router, private _postService: PostService, private _userService: UserService) {
     this.postForm = new FormGroup({
       // username: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -28,13 +32,25 @@ export class HomeComponent implements OnInit {
     this.postPayload = {
         description: ""
     };
+
+
   }
 
   ngOnInit(): void {
-
+    this.is_render = false;
+    this.getUserProfileImage();
   }
 
+  getUserProfileImage(){
 
+    this._userService.retrieveProfileImage().subscribe(data => {
+      this.image = 'data:image/jpeg;base64,' + data.image;
+      this.is_render = true;
+    }, error => {
+      throwError(error);
+    });
+
+  }
 
   createPost() {
     this.postPayload.description = this.postForm.value.description;

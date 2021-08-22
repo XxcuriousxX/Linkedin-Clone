@@ -22,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.tedi_app.security.JwtProvider;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.time.Instant;
@@ -37,6 +38,7 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final ImageStoreService imageStoreService;
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
     private final JwtProvider jwtProvider;
@@ -55,8 +57,16 @@ public class AuthService {
         user.setFirst_name(registerRequest.getFirst_name());
         user.setLast_name(registerRequest.getLast_name());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+
+        String profile_img = null;
+
+
+        user.setProfile_picture(profile_img);
+
         user.setCreated(Instant.now());
         user.setEnabled(false); // false
+
+
 //        user.personalinfo = new Personalinfo();
         userRepository.save(user);
         User u = userRepository.findByUserId(user.getUserId())

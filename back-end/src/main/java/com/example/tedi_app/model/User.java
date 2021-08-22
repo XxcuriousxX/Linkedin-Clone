@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -41,6 +42,9 @@ public class User {
         private String last_name;
         @NotBlank(message = "Company Name is required")
         private String company_name;
+
+        @Nullable
+        private String profile_picture;
 
         private Instant created;
         private boolean enabled;

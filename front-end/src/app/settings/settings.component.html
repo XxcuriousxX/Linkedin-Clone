@@ -33,6 +33,18 @@
       <button  class="btn btn-primary btn-round" type="submit">
         <i class="fa fa-check" aria-hidden="true"></i>
       </button>
+
+      <div class="text-center">
+        <input class="form-control" type="file"
+               (change)="onChange($event)">
+
+        <button (click)="changeProfileImage()"
+                class="btn btn-success">
+          Upload
+        </button>
+      </div>
+
+
     </form>
   </div>
 </div>

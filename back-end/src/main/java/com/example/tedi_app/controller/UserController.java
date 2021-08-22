@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public class UserController {
     private PublicButtonService publicButtonService;
     private final ActionsService actionsService;
     private final UserProfileService userProfileService;
+    private final ImageStoreService imageStoreService;
+    public static final String Directory = System.getProperty("user.home") + "/Downloads/uploads/";
 
 
 
@@ -134,6 +137,8 @@ public class UserController {
     }
 
 
+
+
     
 
 //    buttons ---- Change / Fetch State
@@ -186,6 +191,36 @@ public class UserController {
     @GetMapping("/userProfile/{username}")
     public ResponseEntity<UserProfileResponse> getUserProfile(@PathVariable String username){
         return status(HttpStatus.OK).body(userProfileService.getUserProfileInfo(username));
+    }
+
+
+    @PostMapping("/changeProfileImage")
+    public ResponseEntity<String> changeProfileImage(@RequestPart("username") String username,
+                                                     @RequestPart("profileImage") MultipartFile profileImage){
+
+        ChangeProfileImageRequest changeProfileImageRequest = new ChangeProfileImageRequest();
+        changeProfileImageRequest.setUsername(username);
+        changeProfileImageRequest.setMultipartFile(profileImage);
+
+        personalinfoService.changeProfileImage(changeProfileImageRequest);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+
+    @GetMapping(path = "/getUserImage/{username}")
+    public ResponseEntity<ImageResponse> userImage(@PathVariable String username){
+
+        String image_name = userService.getUserImage(username);
+        System.out.println("photo of "+ username + " name is " + image_name);
+        if (image_name != null){
+            String image = imageStoreService.retrieve_img(image_name);
+            ImageResponse img = new ImageResponse(image);
+            System.out.println(image);
+            return status(HttpStatus.OK).body(img);
+        }
+        else
+            return status(HttpStatus.OK).body(null);
     }
 
 

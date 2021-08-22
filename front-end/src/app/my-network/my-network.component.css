@@ -39,6 +39,7 @@ img.avatar { /* for the connected users */
   top: 35px;
   left: 95px;
   right: 125px;
+  object-fit:cover;
 }
 
 .username { /* for the connected users */
@@ -53,6 +54,7 @@ img.avatar { /* for the connected users */
 }
 
 img.avatar-query {
+  object-fit: cover;
   width: 55px;
   height: 55px;
   border-radius: 50%;
@@ -143,7 +145,7 @@ img.avatar-query {
 
 
 /* places the connect button at the right side of a box */
-.button-connect { 
+.button-connect {
   position: absolute;
   vertical-align: middle;
   right: 150px;

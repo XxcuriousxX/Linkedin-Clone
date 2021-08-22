@@ -17,15 +17,16 @@ import {ConnectPayload, ConnectResponse} from "../connect-button/Connect";
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
-
+  image : string = null;
   canrender: boolean = false;
+  image_render: boolean = false;
   user : User = new User();
   buttonInfo: PublicButton = new PublicButton();
   usersList : User[] = []
 
   username: string = "";
   constructor(private _connectService: ConnectService,private _activatedRoute: ActivatedRoute, private _userProfileService: UserprofileService, private _personalinfoService: PersonalInfoService
-              ,private _authService: AuthService,private route: ActivatedRoute) { }
+              ,private _authService: AuthService,private route: ActivatedRoute,private _userService: UserService) { }
   user_profile_info : UserProfileResponse = new UserProfileResponse();
   connection_status: number = 0;
 
@@ -51,17 +52,11 @@ export class UserprofileComponent implements OnInit {
 
     // ----------------------------------------------------------------------------------------
 
-    // this._userProfileService.getButtonState(this.username).subscribe(info => {
-    //   this.buttonInfo = info;
-    //   console.log(this.buttonInfo.abilities);
-    // });
-
     this.getButtonState();
     this.getAllConnected();
     this.areConnected();
-    // this._userProfileService.getAllConnected(this.username).subscribe( L => {
-    //   this.usersList = L;
-    // });
+    this.getUserProfileImage();
+
 
 
 
@@ -97,6 +92,15 @@ export class UserprofileComponent implements OnInit {
   }
 
 
+  getUserProfileImage(){
 
+    this._userService.retrieveProfileImageByUsername(this.username).subscribe(data => {
+      this.image = 'data:image/jpeg;base64,' + data.image;
+      this.image_render = true;
+    }, error => {
+      throwError(error);
+    });
+
+  }
 
 }

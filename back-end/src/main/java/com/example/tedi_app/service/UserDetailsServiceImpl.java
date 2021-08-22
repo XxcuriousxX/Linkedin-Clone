@@ -368,6 +368,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
+    public String getUserImage(String username) {
+
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+
+        if ( user.getProfile_picture() != null){
+            return user.getProfile_picture();
+        }
+        else
+            return null;
 
 
+
+    }
 }

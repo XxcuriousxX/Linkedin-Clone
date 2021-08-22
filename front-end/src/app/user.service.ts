@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {AuthService} from "./auth/auth.service";
 import {Observable} from "rxjs";
-import {SettingsRequestPayload} from "./settings/settings-request.payload";
+import {ChangeProfileImageRequestPayload, SettingsRequestPayload} from "./settings/settings-request.payload";
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +29,17 @@ export class UserService {
     submitchanges(settingsRequestPayload: SettingsRequestPayload): Observable<string>{
       return this.http.post<string>('http://localhost:8080/api/users/changeinfo/', settingsRequestPayload);
     }
+
+  changeProfileImage( payload : FormData): Observable<string>{
+    return this.http.post<string>('http://localhost:8080/api/users/changeProfileImage', payload);
+  }
+
+  retrieveProfileImage(): Observable<any> {
+    return this.http.get("http://localhost:8080/api/users/getUserImage/" + this._authService.getUserName());
+  }
+
+  retrieveProfileImageByUsername(username : string): Observable<any> {
+    return this.http.get("http://localhost:8080/api/users/getUserImage/" + username);
+  }
+
 }
