@@ -1,12 +1,16 @@
 
-<div *ngIf="isLoaded">
-
 <body>
-<app-navigation-bar></app-navigation-bar>
+
+  <app-navigation-bar></app-navigation-bar>
   <br>
+  <div *ngIf="isLoaded">
+    <div class="centered"> <app-loading></app-loading> </div>
+  </div>
+  
 <!--</div>-->
 <!--My newtwork search view-->
 <div *ngIf="is_query">
+
   <div *ngFor="let user of search_result">
 
       <div class="box-view">
@@ -40,6 +44,7 @@
   <br>
 
 <div *ngIf="!is_query">
+
   <div class="tiles-template">
     <mat-grid-list cols="{{ screenWidth > 1050 ? 3 : 2 }}" rowHeight="350px" >
 
@@ -69,5 +74,3 @@
 
 
 </body>
-
-</div>

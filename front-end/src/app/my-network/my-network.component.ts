@@ -9,7 +9,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { filter } from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
 import { HostListener } from "@angular/core";
-
 @Component({
   selector: 'app-my-network',
   templateUrl: './my-network.component.html',
@@ -21,13 +20,13 @@ export class MyNetworkComponent implements OnInit {
   search_result: UserResponse[] = [];
   query_param: string = "";
   is_query: boolean = false;
-  isLoaded = false;
+  isLoaded: boolean = false;
   constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,
                                             private _authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoaded = false;
     this.getScreenSize();
+    this.isLoaded = false;
 
     this.route.queryParams
       //.filter(params => params.query)
