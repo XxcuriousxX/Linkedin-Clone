@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserService} from "../user.service";
 import {AuthService} from "../auth/auth.service";
 import {SettingsRequestPayload} from "../settings/settings-request.payload";
-import {PersonalInfoPayload} from "./Personal-info";
+import {PersonalInfoPayload, PersonalInfoResponse} from "./Personal-info";
 import {PersonalInfoService} from "./personal-info.service";
 import {throwError} from "rxjs";
 
@@ -15,6 +15,8 @@ import {throwError} from "rxjs";
 })
 export class PersonalInfoComponent implements OnInit {
 
+  abilities : string[] = [];
+  pr : PersonalInfoResponse = new PersonalInfoResponse();
   screenHeight: number = -1;
   screenWidth: number = -1;
   infoForm: FormGroup;
@@ -30,6 +32,21 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._personalinfoService.getPersonalInfo().subscribe(res => {
+      this.pr = res;
+      this.infoForm.value.work = this.pr.work_desc;
+      var work_elem = <HTMLInputElement> document.getElementById("work_elem") // pass the value for the view
+      work_elem.value = this.pr.work_desc;
+
+      this.infoForm.value.studies = this.pr.stud_desc;
+      var stud_elem = <HTMLInputElement> document.getElementById("stud_elem") // pass the value for the view
+      stud_elem.value = this.pr.stud_desc;
+
+      if (this.pr.abilities_desc == "") 
+        this.abilities = [];
+      else
+        this.abilities = this.pr.abilities_desc.split(",");
+    }, err => throwError(err));
     this.getScreenSize();
   }
 
@@ -39,17 +56,42 @@ export class PersonalInfoComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
-  changePersonalinfo(){
+  changePersonalinfo(){ // the form is not used anymrore
     this.p_info_payload.username = this._authservice.getUserName();
-    this.p_info_payload.work_experience = this.infoForm.value.work ;
-    this.p_info_payload.abilities = this.infoForm.value.abilities ;
-    this.p_info_payload.studies =   this.infoForm.value.studies;
+    
+    // this.p_info_payload.work_experience = this.infoForm.value.work ;
+    var work_elem = <HTMLInputElement> document.getElementById("work_elem");
+    this.p_info_payload.work_experience = work_elem.value;
 
+    // this.p_info_payload.studies =   this.infoForm.value.studies;
+    var stud_elem = <HTMLInputElement> document.getElementById("stud_elem") // pass the value for the view
+    this.p_info_payload.studies = stud_elem.value;
+
+    // this.p_info_payload.abilities = this.infoForm.value.abilities ;
+    
+    var abilities_str = "";
+    var i = 0;
+    for (let a of this.abilities) { // convert from list to "ability1,ability2,..." format
+      if (i > 0) abilities_str += ","
+      abilities_str += a;
+      i++;
+    }
+    console.log("Abilites stringified   ", abilities_str);
+    this.p_info_payload.abilities = abilities_str;
     this._personalinfoService.changePersonalInfo(this.p_info_payload).subscribe( data => {
-          this.infoForm.reset();
+          // this.infoForm.reset();
       },
       error => { throwError(error); });
   }
 
+
+  addAbility(ability) {
+    if (!ability) return;
+    this.abilities.push(ability.value);
+  }
+
+  removeAbility(i) {
+    this.abilities.splice(i, 1);
+  }
 
 }

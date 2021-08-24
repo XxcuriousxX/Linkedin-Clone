@@ -30,6 +30,10 @@ export class PersonalInfoService {
     return this.http.post<any>("http://localhost:8080/api/users/changebuttonstate/", button_payload);
   }
 
+  getPersonalInfo() : Observable<any> {
+    return this.http.get("http://localhost:8080/api/users/get_personal_info/" + this._authService.getUserName());
+  }
+
 
 
 }

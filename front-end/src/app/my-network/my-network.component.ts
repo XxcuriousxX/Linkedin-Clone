@@ -40,6 +40,7 @@ export class MyNetworkComponent implements OnInit {
 
           this.query_p = this.query_param;
 
+          if (this.query_p == "" || this.query_p == undefined) return;
           this._searchService.executeQuery(this.query_p).subscribe(res => {
               // filter myself from the query result
               this.search_result = res;

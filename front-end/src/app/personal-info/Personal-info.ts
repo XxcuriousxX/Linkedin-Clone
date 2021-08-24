@@ -5,3 +5,10 @@ export class PersonalInfoPayload {
   abilities: string = "";
 
 }
+
+export class PersonalInfoResponse {
+  work_desc: string = "";
+  stud_desc: string = "";
+  abilities_desc: string = "";
+
+}

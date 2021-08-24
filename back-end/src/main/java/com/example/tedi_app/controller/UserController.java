@@ -1,6 +1,7 @@
 package com.example.tedi_app.controller;
 
 import com.example.tedi_app.dto.*;
+import com.example.tedi_app.model.Personalinfo;
 import com.example.tedi_app.model.PublicButton;
 import com.example.tedi_app.model.Action;
 
@@ -233,6 +234,13 @@ public class UserController {
     public ResponseEntity<String> changePassword(@RequestBody ChangeInfoRequest settingsPayload) {
         this.authService.changePassword(settingsPayload);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/get_personal_info/{username}")
+    public ResponseEntity<PersonalInfoResponse> getPersonalInfo(@PathVariable String username) {
+        Personalinfo pf = this.personalinfoService.getPersonalInfo(username);
+        PersonalInfoResponse pr = new PersonalInfoResponse(pf.getWork_desc(), pf.getStud_desc(), pf.getAbilities_desc());
+        return status(HttpStatus.OK).body(pr);
     }
 }
 
