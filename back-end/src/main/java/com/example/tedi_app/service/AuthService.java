@@ -100,6 +100,32 @@ public class AuthService {
 
     }
 
+    @Transactional
+    public int changeEmail(ChangeInfoRequest changeInfoRequest) { // returns -1 if email already exists
+        Optional<User>  existing = this.userRepository.findByUsername(changeInfoRequest.getUsername());
+        User user1 = existing
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + changeInfoRequest.getUsername()));
+        Optional<User> u = userRepository.findByEmail(changeInfoRequest.getEmail());
+        if (u.isPresent()) return -1; // unable to change the email, because the new one already exists
+
+        if(changeInfoRequest.getEmail() != null && !changeInfoRequest.getEmail().isEmpty())
+            user1.setEmail(changeInfoRequest.getEmail());
+        userRepository.save(user1);
+        return 0;
+    }
+
+    @Transactional
+    public void changePassword(ChangeInfoRequest changeInfoRequest) {
+        Optional<User>  existing = this.userRepository.findByUsername(changeInfoRequest.getUsername());
+        User user1 = existing
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + changeInfoRequest.getUsername()));
+        if(changeInfoRequest.getPassword() != null && !changeInfoRequest.getPassword().isEmpty())
+            user1.setPassword(passwordEncoder.encode(changeInfoRequest.getPassword()));
+        userRepository.save(user1);
+    }
+
 
     private String generateVerificationToken(User user){
         String token = UUID.randomUUID().toString();

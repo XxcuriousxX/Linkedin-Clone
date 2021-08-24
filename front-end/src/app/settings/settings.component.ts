@@ -1,3 +1,4 @@
+import { SettingsService } from './settings.service';
 import { throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {DialogComponent} from "../jobs/myjobs/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ImageDialogComponent} from "./image.dialog.component";
-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -32,7 +32,7 @@ export class SettingsComponent implements OnInit {
   userInfo: User = new User();
   email_exists : boolean = false;
 
-  constructor(private httpClient: HttpClient,private formBuilder: FormBuilder,private _userService: UserService,public _authservice: AuthService,public dialog: MatDialog) {
+  constructor(private _settingsService : SettingsService, private httpClient: HttpClient,private formBuilder: FormBuilder,private _userService: UserService,public _authservice: AuthService,public dialog: MatDialog) {
     this.settingsForm = new FormGroup({
       email: new FormControl('',Validators.required),
       password: new FormControl('', Validators.required)
@@ -56,6 +56,24 @@ export class SettingsComponent implements OnInit {
 
   }
 
+  changeEmail() {
+    var mailfield = <HTMLInputElement> document.getElementById("new_email");
+    this.settingsRequestPayload.email = mailfield.value;
+    this.settingsRequestPayload.username = this._authservice.getUserName();
+    this._settingsService.changeEmail(this.settingsRequestPayload).subscribe(res => {
+      this.ngOnInit();
+    }, err => { this.email_exists = true; throwError(err); });
+  }
+
+  changePassword() {
+    var passfield = <HTMLInputElement> document.getElementById("new_pass");
+    this.settingsRequestPayload.password = passfield.value;
+    this.settingsRequestPayload.username = this._authservice.getUserName();
+    this._settingsService.changePassword(this.settingsRequestPayload).subscribe(res => {
+      
+      this.ngOnInit();
+    });
+  }
 
   submit_changes(){
     this.settingsRequestPayload.username = this._authservice.getUserName();

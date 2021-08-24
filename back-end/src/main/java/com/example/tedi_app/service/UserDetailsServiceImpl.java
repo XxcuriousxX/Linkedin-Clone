@@ -36,6 +36,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final VoteRepository voteRepository;
     private final PostMapper postMapper;
 
+
+
 //    private  JobPostService jobPostService;
 //    private  PostService postService;
 //    private   VoteService voteService;

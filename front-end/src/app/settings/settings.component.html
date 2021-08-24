@@ -10,7 +10,7 @@
   <div class="box">
     <p class="title" style="text-align: center;font-weight: bold;font-size: x-large">Settings</p>
     <hr>
-    <form class="settings" [formGroup]="settingsForm" (ngSubmit)="submit_changes()">
+    <form class="settings" [formGroup]="settingsForm" >
       <div class="txt">   Username: <span class="ins-txt"> {{this.userInfo.username}} </span>  </div>
       <hr class="line">
       <div class="txt">  First Name: <span class="ins-txt"> {{this.userInfo.first_name}} </span>  </div>
@@ -22,15 +22,15 @@
       <div class="txt">  Email: <span class="ins-txt"> {{this.userInfo.email}} </span>  </div>
       <hr class="line">
 
-      <input [ngClass]="email_exists == true ? 'form-rounded-exists' : 'form-rounded' " type="text" [placeholder]=" email_exists == true ? 'Email Exists' : 'Change email' "
+      <input id="new_email" [ngClass]="email_exists == true ? 'form-rounded-exists' : 'form-rounded' " type="text" [placeholder]=" email_exists == true ? 'Email Exists' : 'Change email' "
              [formControlName]="'email'" name="email" required autocomplete="off"/>
 
-      <button class="btn btn-primary btn-round" type="submit">
+      <button class="btn btn-primary btn-round" (click)="changeEmail()">
         <i class="fa fa-check" aria-hidden="true"></i>
       </button><br><br>
 
-      <input class="form-rounded"  type="password" placeholder="Change Password" [formControlName]="'password'" name="password" required autocomplete="off"/>
-      <button  class="btn btn-primary btn-round" type="submit">
+      <input id="new_pass" class="form-rounded"  type="password" placeholder="Change Password" [formControlName]="'password'" name="password" required autocomplete="off"/>
+      <button  class="btn btn-primary btn-round" (click)="changePassword()">
         <i class="fa fa-check" aria-hidden="true"></i>
       </button>
 

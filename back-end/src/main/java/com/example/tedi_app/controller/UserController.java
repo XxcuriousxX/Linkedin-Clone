@@ -221,7 +221,19 @@ public class UserController {
             return status(HttpStatus.OK).body(null);
     }
 
+    @PostMapping("/change_email")
+    public ResponseEntity<String> changeEmail(@RequestBody ChangeInfoRequest settingsPayload) {
+        if (this.authService.changeEmail(settingsPayload) == 0)
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
 
+    @PostMapping("/change_password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangeInfoRequest settingsPayload) {
+        this.authService.changePassword(settingsPayload);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 
 
