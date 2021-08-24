@@ -6,4 +6,5 @@ export interface PostModel {
     commentCount: number;
     duration: string;
     createdDateLong: number;
+    file_path: string;
 }

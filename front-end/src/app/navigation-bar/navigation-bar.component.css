@@ -364,15 +364,17 @@ li > a.active_route {
 
 }
 
-@media (max-width: 991px){
+@media (max-width: 1380px){
   .navbar .navbar-nav .nav-link {
-    padding: 1.9em 0.7em;
+    padding: 1.7em 0.7em;
   }
 
 
 }
 
 
-@media (max-width: 638px){
-
+@media (max-width: 992px){
+  .navbar .navbar-nav .nav-link {
+    padding: 1.9em 0.7em;
+  }
 }

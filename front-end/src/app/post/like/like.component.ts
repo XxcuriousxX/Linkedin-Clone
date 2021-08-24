@@ -37,7 +37,8 @@ export class LikeComponent implements OnInit {
        likeCount: 0,
        duration: "",
        commentCount:  0,
-       createdDateLong : 0
+       createdDateLong : 0,
+       file_path: ""
      }
   }
 

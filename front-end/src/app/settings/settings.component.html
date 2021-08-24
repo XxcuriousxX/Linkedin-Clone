@@ -1,7 +1,7 @@
-<!--<div class="left-box" >-->
-<app-navigation-bar xmlns="https://www.w3.org/1999/html"> </app-navigation-bar>
+<!--<div class="left-box" >--><body>
+<app-navigation-bar > </app-navigation-bar>
 
-<body>
+
 
 <br>
 
@@ -51,7 +51,7 @@
           <span id="file-name" class="file-box"></span>
           &nbsp;
           <div *ngIf="img_sz_exceed || img_inv_format">
-            <button (click)="changeProfileImage()" class="btn btn-primary disabled" disabled>
+            <button (click)="openDialog(img_sz_exceed,img_inv_format)" class="btn btn-primary" >
               Upload Image
             </button>
           </div>

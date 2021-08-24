@@ -1,0 +1,14 @@
+<h1 mat-dialog-title style="text-align: center;color: #000000;font-weight: bold">Upload Failed</h1>
+<div mat-dialog-content *ngIf="data.img_sz == true; else option2">
+  <h2 style="font-weight: bold">Image size exceeds 4MB.<br> Please Upload a smaller image!</h2>
+  <br><br>
+</div>
+<ng-template #option2>
+  <div mat-dialog-content *ngIf="data.img_type == true">
+    <h2>Please upload a .png or a .jpg file.</h2>
+    <br><br>
+  </div>
+</ng-template>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

@@ -5,16 +5,31 @@
 <div *ngIf="isLoaded">
 
     <div class="box-view">
-        
+
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
-             <div class="username-post">{{ post.username }}</div> 
+             <div class="username-post">{{ post.username }}</div>
              <br>
-            
+
+
         <div class="topright">
             {{ post.duration }}
         </div>
-        
+
+
+
         <hr>
+        <audio *ngIf="post.file_path != null && post.file_path.includes('post_audio')" controls="controls">
+          <source src="{{post.file_path}}" type="audio/x-wav" />
+        </audio>
+
+        <img *ngIf="post.file_path != null && post.file_path.includes('post_images')" src="{{post.file_path}}" width="450" height="300">
+
+        <video *ngIf="post.file_path != null && post.file_path.includes('post_video')" controls>
+          <source src="{{post.file_path}}" type="video/mp4">
+          <source src="{{post.file_path}}" type="video/ogg">
+          Your browser does not support the video tag.
+        </video>
+
         <div class="text"> {{ post.description }} </div>
         <hr>
         <app-like [post]="this.post"></app-like>
@@ -38,9 +53,9 @@
                     <!-- <a class="btn-text" >  Photo </a> -->
                     <!-- </button> -->
                 </div>
-            
+
             </form>
-        
+
     </div>
 
 

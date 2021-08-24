@@ -14,6 +14,7 @@ public class PostResponse implements Comparable<PostResponse>{
     private int commentCount;
     private String duration;
     private Long createdDateLong;
+    private String file_path;
 
     @Override
     public int compareTo(PostResponse u) {

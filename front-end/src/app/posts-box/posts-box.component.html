@@ -11,9 +11,19 @@
     <!-- <span>  {{post.duration}}</span> -->
   </span>
   <div class="duration"> <div>{{ post.duration }}</div> </div>
-  <!-- <div class="post-title">
-    <a class="postname" href="#"> {{post.postName }}
-  </div> -->
+
+  <audio *ngIf="post.file_path != null && post.file_path.includes('post_audio')" controls="controls">
+    <source src="{{post.file_path}}" type="audio/x-wav" />
+  </audio>
+
+  <img *ngIf="post.file_path != null && post.file_path.includes('post_images')" src="{{post.file_path}}" >
+
+  <video *ngIf="post.file_path != null && post.file_path.includes('post_video')" controls>
+    <source src="{{post.file_path}}" type="video/mp4">
+    <source src="{{post.file_path}}" type="video/ogg">
+    Your browser does not support the video tag.
+  </video>
+
   <br>
   <br>
 

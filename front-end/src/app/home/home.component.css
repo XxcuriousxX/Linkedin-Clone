@@ -185,8 +185,8 @@ button:focus {
 .btn-toolbar{
   margin: 5px;
   position: relative;
-  top: -30px;
-  left: 0px;
+  top: -37px;
+  left: 15px;
 
 }
 
@@ -213,6 +213,10 @@ button:focus {
   background-color: #e3e3e3;
 }
 
+.btn-selected{
+  background-color: lightgreen;
+}
+
 .avatar2{
   vertical-align: middle;
   width: 50px;
@@ -222,4 +226,9 @@ button:focus {
   left: 0px;
   object-fit:cover;
   top: -7px;
+}
+
+
+input[type='file'] {
+  color: transparent;
 }

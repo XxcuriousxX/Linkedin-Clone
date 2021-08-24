@@ -212,11 +212,9 @@ public class UserController {
     public ResponseEntity<ImageResponse> userImage(@PathVariable String username){
 
         String image_name = userService.getUserImage(username);
-        System.out.println("photo of "+ username + " name is " + image_name);
         if (image_name != null){
             String image = imageStoreService.retrieve_img(image_name);
             ImageResponse img = new ImageResponse(image);
-            System.out.println(image);
             return status(HttpStatus.OK).body(img);
         }
         else

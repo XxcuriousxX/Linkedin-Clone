@@ -32,7 +32,7 @@ import { SearchComponent } from './search/search.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { ConnectButtonComponent } from './connect-button/connect-button.component';
 import { ConversationsComponent } from './messages/conversations/conversations.component';
-
+import { environment } from "../environments/environment";
 
 import { MessagesService } from './messages/messages.service';
 import { NotificationsComponent } from './notifications/notifications.component';
@@ -45,13 +45,18 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateJobPostComponent } from './jobs/create-job-post/create-job-post.component';
 import { JobrequestComponent } from './jobs/jobrequest/jobrequest.component';
 import { DialogComponent} from "./jobs/myjobs/dialog.component";
+import { ImageDialogComponent } from "./settings/image.dialog.component";
+import { LoadingDialogComponent } from "./home/loading.dialog.component";
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MyjobsComponent } from './jobs/myjobs/myjobs.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { CommonModule } from '@angular/common';
 
+import {AngularFireStorageModule} from '@angular/fire/storage'
+import {AngularFireModule} from '@angular/fire'
 
 import { MatCommonModule } from '@angular/material/core';
 import { MatInputModule  } from '@angular/material/input';
@@ -185,10 +190,13 @@ const appRoutes : Routes = [
     JobrequestComponent,
     MyjobsComponent,
     DialogComponent,
+    ImageDialogComponent,
+    LoadingDialogComponent,
     LoadingComponent
   ],
     imports: [
         BrowserModule,
+        CommonModule,
         RouterModule.forRoot(appRoutes, {enableTracing: true}),
         BrowserAnimationsModule,
         MatButtonModule,
@@ -205,7 +213,17 @@ const appRoutes : Routes = [
         MatButtonModule,
         MatCommonModule,
         MatFormFieldModule,
+        MatProgressBarModule,
         MatInputModule,
+        AngularFireModule.initializeApp({
+          apiKey: "AIzaSyDmg_lauvSO4qBv31BAkNrYQ9nc0KktDIY",
+          authDomain: "linkedit-acf89.firebaseapp.com",
+          projectId: "linkedit-acf89",
+          storageBucket: "linkedit-acf89.appspot.com",
+          messagingSenderId: "687135111948",
+          appId: "1:687135111948:web:6b74228d86a27e59f6e729"
+        }),
+        AngularFireStorageModule
     ],
   providers: [ AuthService, {
     provide: HTTP_INTERCEPTORS,

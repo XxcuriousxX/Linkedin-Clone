@@ -7,6 +7,9 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import {ChangeProfileImageRequestPayload, SettingsRequestPayload} from './settings-request.payload';
 import { Router, ActivatedRoute } from '@angular/router';
+import {DialogComponent} from "../jobs/myjobs/dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ImageDialogComponent} from "./image.dialog.component";
 
 @Component({
   selector: 'app-settings',
@@ -29,7 +32,7 @@ export class SettingsComponent implements OnInit {
   userInfo: User = new User();
   email_exists : boolean = false;
 
-  constructor(private httpClient: HttpClient,private formBuilder: FormBuilder,private _userService: UserService,public _authservice: AuthService) {
+  constructor(private httpClient: HttpClient,private formBuilder: FormBuilder,private _userService: UserService,public _authservice: AuthService,public dialog: MatDialog) {
     this.settingsForm = new FormGroup({
       email: new FormControl('',Validators.required),
       password: new FormControl('', Validators.required)
@@ -103,13 +106,19 @@ export class SettingsComponent implements OnInit {
       console.log('file is bigger than 4MB');
       this.img_sz_exceed = true;
     }
-    if (file_format !="jpg"  && file_format != "png"){
+    if (file_format !="jpg" && file_format != "png"){
       console.log('file is not in jpg format!');
       this.img_inv_format = true;
     }
 
   }
 
-
+  openDialog(img_sz : boolean, img_type : boolean) {
+    this.dialog.open(ImageDialogComponent, {
+      data: { img_sz: img_sz, img_type: img_type },
+      backdropClass: 'backdropBackground',
+      panelClass: 'dialog-container-custom'
+    });
+  }
 
 }

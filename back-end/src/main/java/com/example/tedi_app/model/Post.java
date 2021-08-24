@@ -32,6 +32,10 @@ public class Post {
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
     private Instant createdDate;
+
+    @Nullable
+    private String file_path;
+
 //    @ManyToOne(fetch = LAZY)
 //    @JoinColumn(name = "id", referencedColumnName = "id")
 //    private Subreddit subreddit;

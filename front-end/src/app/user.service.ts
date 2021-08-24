@@ -30,16 +30,20 @@ export class UserService {
       return this.http.post<string>('http://localhost:8080/api/users/changeinfo/', settingsRequestPayload);
     }
 
-  changeProfileImage( payload : FormData): Observable<string>{
-    return this.http.post<string>('http://localhost:8080/api/users/changeProfileImage', payload);
-  }
+    changeProfileImage( payload : FormData): Observable<string>{
+      return this.http.post<string>('http://localhost:8080/api/users/changeProfileImage', payload);
+    }
 
-  retrieveProfileImage(): Observable<any> {
-    return this.http.get("http://localhost:8080/api/users/getUserImage/" + this._authService.getUserName());
-  }
+    retrieveProfileImage(): Observable<any> {
+      return this.http.get("http://localhost:8080/api/users/getUserImage/" + this._authService.getUserName());
+    }
 
-  retrieveProfileImageByUsername(username : string): Observable<any> {
-    return this.http.get("http://localhost:8080/api/users/getUserImage/" + username);
-  }
+    retrieveProfileImageByUsername(username : string): Observable<any> {
+      return this.http.get("http://localhost:8080/api/users/getUserImage/" + username);
+    }
+
+    sendpostfileurl(path : string): Observable<string> {
+      return this.http.post<string>('http://localhost:8080/api/users/sendPostFilePath', path);
+    }
 
 }

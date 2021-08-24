@@ -24,9 +24,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<String> createPost(@RequestBody PostRequest postRequest) {
-        System.out.println("HELLO : " + postRequest.getDescription());
         postService.save(postRequest);
-
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

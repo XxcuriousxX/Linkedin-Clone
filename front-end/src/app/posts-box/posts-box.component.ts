@@ -27,7 +27,7 @@ export class PostsBoxComponent implements OnInit {
     this._postService.getPostsFromConnectedUsers(this._authService.getUserName()).subscribe(posts => {
       this.posts = posts;
       this.isLoaded = true
-      // this.posts.sort((a, b) => (a.createdDateLong < b.createdDateLong) ? 1 : -1);
+      
     });
 
   }
@@ -38,7 +38,6 @@ export class PostsBoxComponent implements OnInit {
       this._postService.getMorePostSuggestions(this.posts).subscribe( more_sug => {
         for (let p of more_sug) {
           this.posts.push(p);
-          console.log("new post id = ", p.postId)
         }
         this.more_suggestions_triggered += 1;
         this.isLoaded = true;

@@ -1,0 +1,7 @@
+<h1 mat-dialog-title style="text-align: center;color: #000000;font-weight: bold"> Uploading File Please Wait</h1>
+<div mat-dialog-content *ngIf="data.percent > 0">
+  <h2 style="font-weight: bold;text-align: center"> Progress </h2>
+  <p style="text-align: center;color: lightgray"> {{data.percent}} %</p>
+  <mat-progress-bar mode="determinate" value="{{data.percent}}" class="prog-bar"></mat-progress-bar>
+  <br><br>
+</div>

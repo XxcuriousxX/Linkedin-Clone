@@ -30,8 +30,10 @@ public abstract class PostMapper {
 //    private AuthService authService;
 
     // Mapping(target = "return field of map()", source = "argument's field")
+
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target = "description", source = "postRequest.description")
+    @Mapping(target = "file_path", source = "postRequest.file_path")
     @Mapping(target = "likeCount", constant = "0")
     @Mapping(target = "commentCount", constant = "0")
     @Mapping(target = "user", source = "user")
@@ -39,6 +41,7 @@ public abstract class PostMapper {
 
     @Mapping(target = "postId", source = "postId")
     @Mapping(target = "username", source = "user.username")
+    @Mapping(target = "file_path", source="file_path")
     @Mapping(target = "commentCount", expression = "java(commentCount(post))")
     @Mapping(target = "duration", expression = "java(getDuration(post))")
     @Mapping(target = "createdDateLong", expression = "java(getCreatedDate(post))")

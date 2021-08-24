@@ -79,37 +79,46 @@
 
               <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:45px">
               <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                  <!--Photo Button-->
-                  <button type="button" class="btn btn-outline  mb-2">
-                    <input class="form-control" type="file" hidden/>
-                    <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5"></i>
-                    <a class="btn-text" >  Photo </a>
 
+
+
+                  <!--Video Button-->
+                  <button type="button" class="btn btn-outline  mb-2" [ngClass]="{'btn-selected' : file_info.filename != null && file_info.type == 'image'}" >
+                    <input type="file" name="uploadfile" id="image" style="display:none;" accept="*.png"  (change)="upload($event,'image')"  />
+                    <label for="image" style="position: relative;top: 4px"><i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5;"></i><a class="btn-text" >  Photo </a></label>
                   </button>
 
-                 <!--Video Button-->
-                  <button type="button " class="btn btn-outline  mb-2">
-                    <i class="fa fa-youtube-play fa-lg" aria-hidden="true" style="color: #20a349"></i>
-                    <a class="btn-text">  Video </a>
+                  <!--Video Button-->
+                  <button type="button" class="btn btn-outline  mb-2" [ngClass]="{'btn-selected' : file_info.filename != null && file_info.type == 'video'}">
+                    <input type="file" name="uploadfile" id="video" accept="*.mp4" style="display:none;" (change)="upload($event,'video')" />
+                    <label for="video" style="position: relative;top: 4px"><i class="fa fa-youtube-play fa-lg" aria-hidden="true" style="color: #20a349"></i><a class="btn-text">  Video </a></label>
                   </button>
+
 
                   <!--Audio Button-->
-                  <button type="button" class="btn btn-outline  mb-2">
-                    <i class="fa fa-volume-up fa-lg" aria-hidden="true" style="color: #aa9218"></i>
-                    <a class="btn-text">  Audio </a>
+                  <button type="button" class="btn btn-outline  mb-2" [ngClass]="{'btn-selected' : file_info.filename != null && file_info.type == 'audio'}" >
+                    <input type="file" name="uploadfile" id="audio" accept="*.mp3" style="display:none;" (change)="upload($event,'audio')" />
+                    <label for="audio" style="position: relative;top: 4px"><i class="fa fa-volume-up fa-lg" aria-hidden="true" style="color: #aa9218"></i><a class="btn-text">  Audio </a></label>
                   </button>
 
+
                   <!--Write Article-->
-                  <button type="button" class="btn btn-outline  mb-2">
-                    <i class="fa fa-newspaper-o fa-lg" aria-hidden="true" style="color: #ff5858"></i>
-                    <a class="btn-text"> Write Article</a>
+                  <button type="submit" class="btn btn-outline  mb-2">
+                    <i class="fa fa-upload fa-lg" aria-hidden="true" style="color: #ff5858"></i>
+                    <a class="btn-text"> Upload Post</a>
                   </button>
                 </div>
+
+
+
             </form>
 
 
 
         </div>
+
+
+
 
 <!--          <i class="fa fa-camera-retro" aria-hidden="true"></i>-->
 

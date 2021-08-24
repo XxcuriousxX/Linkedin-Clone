@@ -24,7 +24,8 @@ export class FullPostComponent implements OnInit {
 		likeCount: 0,
 		commentCount: 0,
 		duration: "",
-		createdDateLong: 0
+		createdDateLong: 0,
+    file_path: ""
 	};
 
 

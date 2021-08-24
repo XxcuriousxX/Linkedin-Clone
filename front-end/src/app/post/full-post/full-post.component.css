@@ -23,7 +23,7 @@
     position: relative;
     left: 0px;
     top: 50%;
-  
+
 }
 
 .topright {
@@ -110,11 +110,11 @@ input {
     position: relative;
     top: -25px;
     left: 0px;
-  
+
   }
 
 
-  
+
 .avatar2 {
 
     vertical-align: left;
@@ -134,7 +134,7 @@ input {
     top: 30px;
     left: 90px;
   }
- 
+
   .date-on-comment {
     position: absolute;
     top: 30px;
@@ -153,3 +153,5 @@ input {
     position: relative;
     left: 10px;
   }
+
+  
