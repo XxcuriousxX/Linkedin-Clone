@@ -38,6 +38,7 @@ body::-webkit-scrollbar {
   min-height: 100px;
   height: 520px;
   max-height: fit-content;
+  height: fit-content;
 
 }
 
@@ -54,6 +55,7 @@ body::-webkit-scrollbar {
 
 
 .form-rounded {
+  position: relative;
   border-radius: 1rem;
   font-family: 'Lato', sans-serif;
 }
@@ -150,7 +152,7 @@ input:focus, textarea:focus
 
 .image-input-box{
   position: relative;
-  top: -10px;
+  top: 10px;
 }
 
 .inputfile{
