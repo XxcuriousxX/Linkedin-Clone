@@ -103,12 +103,12 @@ public class JobPostService {
 
         double alpha = (double) 0.0002;
         double beta = (double) 0.02;
-        int steps = 5000;
+        int iterations = 5000;
 
         Q = Transpose(Q);
 
         double eij = 0;
-        for (int step = 0; step < steps; step++) {
+        for (int step = 0; step < iterations; step++) {
             
             
             for ( int i = 0; i < R.length; i++){
