@@ -4,6 +4,12 @@ cd docker-sql
 docker-compose up -d    
 cd ..
 
+if [ "$1" = "--db-only" ]; then
+    read -r -d '' _ </dev/tty       # wait until ctrl+C is pressed
+    docker stop mysql-backend
+    docker rm  mysql-backend
+    exit
+fi
 
 # create a network named "spring-net"
 docker network create spring-net              
