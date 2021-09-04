@@ -137,7 +137,6 @@ public class PostRecommendationService {
 
         int row = R.length - 1;
 
-        System.out.println("IDDDDDD = >" + userIds[row]);
         double[] results = new double[M];
         for (j = 0; j < M; j++) {
             results[j] = nR[row][j];
@@ -155,7 +154,6 @@ public class PostRecommendationService {
         List<PostResponse> postResponseList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
-            System.out.println(results[j] + " " + JP.getPostId() + "\n");
             if (results[j] > 3.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
@@ -283,7 +281,6 @@ public class PostRecommendationService {
 
         int row = R.length - 1;
 
-        System.out.println("IDDDDDD = >" + userIds[row]);
         double[] results = new double[M];
         for (j = 0; j < M; j++) {
             results[j] = nR[row][j];
@@ -293,7 +290,6 @@ public class PostRecommendationService {
         List<PostResponse> postResponseList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
-            System.out.println(results[j] + " " + JP.getPostId() + "\n");
             if (results[j] > 0.6) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
@@ -401,10 +397,8 @@ public class PostRecommendationService {
         Q = p.b;
         Q = jobPostService.Transpose(Q);
         double[][] nR = jobPostService.dot_arrays(P,Q);
-        System.out.println("Comment nR");
         jobPostService.print_array(nR);
         int row = R.length - 1;
-        System.out.println("IDDDDDD = >" + userIds[row]);
         double[] results = new double[M];
         for (j = 0; j < M; j++) {
             results[j] = nR[row][j];
@@ -412,7 +406,6 @@ public class PostRecommendationService {
         List<PostResponse> postResponseList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             Post JP = postsList.get(j);
-            System.out.println(results[j] + " " + JP.getPostId() + "\n");
             if (results[j] > 1.5) {
                 postResponseList.add(postMapper.mapToDto(JP));
             }
@@ -524,7 +517,6 @@ public class PostRecommendationService {
 
     public List<PostResponse> getMorePostSuggestions(List<PostResponse> alreadySuggested) {
         String username = authService.getCurrentUser().getUsername();
-        System.out.println("THe user is " + username);
         List<PostResponse> allPostsFromConnected = postService.getPostsFromConnectedUsers(username);
         List<PostResponse> fromComments = getSuggestionsFromComments(username,true);
         List<PostResponse> fromLikes = getSuggestionsFromLikes(username,true);

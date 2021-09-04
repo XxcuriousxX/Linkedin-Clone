@@ -119,13 +119,10 @@ export class SettingsComponent implements OnInit {
     this.file = event.target.files[0];
     let file_format : string = event.target.files[0].name.substr( event.target.files[0].name.lastIndexOf('.') + 1);
     //log / access file size in Mb
-    console.log(event.target.files[0].size/1024/1024 + ' MB');
     if (event.target.files[0].size/1024/1024 > 4) {
-      console.log('file is bigger than 4MB');
       this.img_sz_exceed = true;
     }
     if (file_format !="jpg" && file_format != "png"){
-      console.log('file is not in jpg format!');
       this.img_inv_format = true;
     }
 

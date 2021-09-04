@@ -54,7 +54,6 @@ export class AuthService {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
       loginRequestPayload).pipe(map(data => {
       this.localStorage.store('authenticationToken', data.authenticationToken);
-      console.log("Auth token = ", data.authenticationToken);
 
       this.localStorage.store('username', data.username);
       // console.log("Auth token = ", data.username);
@@ -91,7 +90,6 @@ export class AuthService {
     this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
       { responseType: 'text' })
       .subscribe(data => {
-        console.log(data);
       }, error => {
         throwError(error);
       })

@@ -82,7 +82,6 @@ public class MessagesService {
 
     public List<MessageResponse> loadMoreMessages(MessageResponse msg_resp){
 
-        System.out.println("Instant is == > " + msg_resp.getTimeCreated());
         List<Message> more_messages = messagesRepository.loadMessagesAfterDate(msg_resp.getTimeCreated());
     
 
@@ -93,7 +92,6 @@ public class MessagesService {
         List<MessageResponse> new_messages = new ArrayList<>();
         for (Message m : more_messages) {
             MessageResponse new_entry = messageMapper.mapToDto(m);
-            System.out.println("New msg = " + m.getMessage());
             new_messages.add(new_entry);
         }
 

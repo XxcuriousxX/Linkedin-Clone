@@ -76,7 +76,6 @@ export class PersonalInfoComponent implements OnInit {
       abilities_str += a;
       i++;
     }
-    console.log("Abilites stringified   ", abilities_str);
     this.p_info_payload.abilities = abilities_str;
     this._personalinfoService.changePersonalInfo(this.p_info_payload).subscribe( data => {
           // this.infoForm.reset();

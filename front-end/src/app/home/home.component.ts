@@ -85,7 +85,6 @@ export class HomeComponent implements OnInit {
       this.upload_file_create_post().subscribe(
         percentage => {
           this.percentage = Math.round(percentage ? percentage : 0);
-          console.log(this.percentage);
           if (this.dialogRef && this.dialogRef.componentInstance) {
             this.dialogRef.componentInstance.data = {percent: this.percentage};
           }
@@ -93,7 +92,6 @@ export class HomeComponent implements OnInit {
             this.dialogRef.close();
         },
         error => {
-          console.log(error);
         }
       );
       this.openDialog(this.percentage);
@@ -124,15 +122,12 @@ export class HomeComponent implements OnInit {
       switch (this.file_info.type){
         case "image":
           firebase_file_path = "post_images/files"+Math.random()+this.file_info.filename;
-          console.log("file is image");
           break;
         case "video":
           firebase_file_path = "post_video/files"+Math.random()+this.file_info.filename;
-          console.log("file is video");
           break;
         case "audio":
           firebase_file_path = "post_audio/files"+Math.random()+this.file_info.filename;
-          console.log("file is audio");
           break;
       }
 

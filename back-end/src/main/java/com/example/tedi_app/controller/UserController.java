@@ -45,7 +45,6 @@ public class UserController {
 
     @PostMapping("/get_all_detailed_users")
     public ResponseEntity<List<DetailedUser>> getAllDetailedUsers(@RequestBody String[] usernames) {
-        System.out.println("First user = " + usernames[0]);
         return status(HttpStatus.OK).body(userService.getAllDetailedUsers(usernames));
     }
 
@@ -53,7 +52,6 @@ public class UserController {
     public ResponseEntity<List<DetailedUser>> getAllDetailedUsersToXML(@RequestBody String[] usernames) {
         List<DetailedUser> L = userService.getAllDetailedUsers(usernames);
 
-        System.out.println("First user = " + usernames[0]);
         return status(HttpStatus.OK).body(userService.getAllDetailedUsers(usernames));
     }
 
@@ -72,7 +70,6 @@ public class UserController {
     @PostMapping("/connect_request")
     public ResponseEntity<Void> makeConnectionRequest(@RequestBody FriendRequest friendRequest) {
         this.userService.makeConnectionRequest(friendRequest.getSender_username(), friendRequest.getReceiver_username());
-        System.out.println("==makeConnectioRequest just executed\n");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

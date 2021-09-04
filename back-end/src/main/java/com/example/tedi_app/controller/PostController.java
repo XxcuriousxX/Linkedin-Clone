@@ -61,7 +61,6 @@ public class PostController {
     @PostMapping("/add_comment")
     public ResponseEntity<List<Comment>> addComment(@RequestBody CommentRequest commentRequest) {
         postService.addComment(commentRequest);
-        System.out.println("Addded comment!!!!");
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
@@ -75,7 +74,6 @@ public class PostController {
     @GetMapping("suggestions/{username}")
     public ResponseEntity<Collection<PostResponse>> getSuggestions(@PathVariable String username) {
 
-        System.out.println("ALL SUggestions COMMENTS - LIKES - VIEWS!!!");
 
         List<PostResponse> col_n = postService.getPostsFromConnectedUsers(username);
 

@@ -40,7 +40,6 @@ public class VoteService {
         if (voteByPostAndUser.isPresent()) { // if have already liked, then unlike
             Vote v = voteByPostAndUser.orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
             post.setLikeCount(post.getLikeCount() - 1);
-            System.out.println("Vote id to be deleted = " + v.getVoteId() + " \n\n");
             voteRepository.deleteVoteByMyID(v.getVoteId());
             postRepository.save(post);
             return false;

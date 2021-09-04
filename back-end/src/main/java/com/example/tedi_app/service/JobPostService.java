@@ -267,7 +267,6 @@ public class JobPostService {
         }
 
         int row = R.length - 1;
-        System.out.println("IDDDDDD = >" + userIds[row]);
         double[] results = new double[M];
         for (j = 0; j < M; j++) {
             results[j] = nR[row][j];
@@ -277,7 +276,6 @@ public class JobPostService {
         List<JobPostResponse> suggestionsList = new ArrayList<>();
         for (j = 0; j < M; j++) {
             JobPost JP = jobPostsList.get(j);
-            System.out.println(results[j] + " " + JP.getJobPostId() + "\n");
             allJobPostsMapped.add(mapToDto(JP));
             if (results[j] > 2.5) {
                 suggestionsList.add(mapToDto(JP));
@@ -426,7 +424,6 @@ public class JobPostService {
         }
         else {
             jpv.increaseViews();
-            System.out.println("Prinint views --- " + jpv.getViews());
             jobPostViewsRepository.save(jpv);
         }
         
@@ -448,7 +445,6 @@ public class JobPostService {
             jobPostViewsRepository.save(jpv);
         }
         else {
-            System.out.println("rPrinint views --- " + jpv.getViews());
             jobPostViewsRepository.save(jpv);
         }
 
@@ -473,7 +469,6 @@ public class JobPostService {
         List<JobPost> jobs = jobPostRepository.getAllByUserUserId(user.getUserId());
 
         if(jobs.isEmpty()){
-            System.out.println("edw eimai twra re tetartirrrrrrr" + jobs + " iddd" + user.getUserId());
             return new ArrayList<MyJobResponse>(){};
         }
         else{
@@ -483,9 +478,6 @@ public class JobPostService {
             for( JobPost each : jobs){
                 List<Long> users_id = jobVoteRepository.getUserIdForJobPost(each.getJobPostId());
                 for(Long id: users_id){
-                    System.out.println("edw id: "+ id);
-                    System.out.println("edw views: "+ views);
-                    System.out.println("edw job id: "+ each.getJobPostId());
                     Optional<User> usr_opt = userRepository.findByUserId(id);
                     User usr = usr_opt.orElseThrow(() -> new UsernameNotFoundException("No user " +
                             "Found with username: "+ authService.getCurrentUser().getUsername()));
@@ -503,11 +495,6 @@ public class JobPostService {
 
         }
 
-        for( MyJobResponse eeach : myjobs){
-            System.out.println("edw eimai twra re tetarti: "+ eeach.getTitle());
-            System.out.println("edw eimai twra re tetarti: "+ eeach.getJobpostid());
-            System.out.println("edw eimai twra re tetarti size: "+ eeach.getUser_list().size());
-        }
 
         return myjobs;
     }

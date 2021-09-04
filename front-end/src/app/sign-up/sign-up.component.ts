@@ -48,7 +48,6 @@ export class SignUpComponent implements OnInit {
       });
   }
     async onSubmit() {
-      console.log('eisai gia ton poutso intellij ', this.signUpForm.value);
 
       // post
       // await this._authService.getValFromObservable(this.signUpForm.value).then((res:any) => this.resp = "SUCCESS",

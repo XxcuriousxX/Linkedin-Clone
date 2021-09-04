@@ -76,7 +76,6 @@ public class AuthService {
 
         String token = generateVerificationToken(user);
         verifyAccount(token); // verify directly
-        System.out.println("\n\nNew user token is : http://localhost:8080/api/auth/accountVerification/" + token);
     }
 
 

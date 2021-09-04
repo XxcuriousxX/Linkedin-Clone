@@ -28,10 +28,6 @@ public class PublicButtonService {
 
     public void changeButtonState(ChangeButtonStateRequest changeButtonStateRequest) {
 
-        System.out.println("heloooo abil " + changeButtonStateRequest.isAbilities());
-        System.out.println("heloooo work " + changeButtonStateRequest.isWork_exp());
-        System.out.println("heloooo stud " + changeButtonStateRequest.isStudies());
-        System.out.println("heloooo phne "  + changeButtonStateRequest.isPhone());
 
         Optional<User> user_opt = userRepository.findByUsername(changeButtonStateRequest.getUsername());
         User user = user_opt

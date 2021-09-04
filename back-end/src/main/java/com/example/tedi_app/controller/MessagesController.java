@@ -23,7 +23,6 @@ public class MessagesController {
 
     @PostMapping("/send_message/")
     public ResponseEntity<String> sendMessage(@RequestBody MessageRequest msgRequest) {
-        System.out.println("Entered message sent");
         messagesService.sendMessage(msgRequest.getSender_username()
                 , msgRequest.getReceiver_username(), msgRequest.getMessage());
         return new ResponseEntity<>(HttpStatus.OK);
@@ -36,7 +35,6 @@ public class MessagesController {
 
     @PostMapping("/more_messages/")
     public ResponseEntity<List<MessageResponse>> more_messages(@RequestBody MessageResponse msgResponse) {
-        System.out.println("elaaaa trexei reeeee");
         return status(HttpStatus.OK).body(messagesService.loadMoreMessages(msgResponse));
     }
 

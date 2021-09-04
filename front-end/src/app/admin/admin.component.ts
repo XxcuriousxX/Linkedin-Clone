@@ -67,7 +67,6 @@ export class AdminComponent implements OnInit {
 
   exportAsJSON() {
     
-    console.log("getSelected executed!!")
     this.selectedList = []; // re init
     for (let u of this.usersList) {
       var checkbox = <HTMLInputElement> document.getElementById(u.username)

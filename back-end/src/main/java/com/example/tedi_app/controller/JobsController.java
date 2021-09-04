@@ -24,7 +24,6 @@ public class JobsController {
 
     @GetMapping("suggestions/{username}")
     public ResponseEntity<List<JobPostResponse>> getSuggestions(@PathVariable String username) {
-        System.out.println("SUggestions!!!");
         return status(HttpStatus.OK).body(jobPostService.getSuggestions(username));
     }
 

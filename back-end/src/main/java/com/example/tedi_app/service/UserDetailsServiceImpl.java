@@ -146,17 +146,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        System.out.println("\nUser = " + user.getUsername());
 
         List<Friends> F = friendsRepository.getAllConnectedUsers(user.getUserId());
-        System.out.println("\nUser11111111 = " + user.getUsername());
 
         ArrayList<User> friends_list = new ArrayList<>();
         Long id = user.getUserId();
-        System.out.println("\nID = " + id);
 
         for (Friends friend : F) {
-            System.out.println("friend tuple : " + friend.getUser_id1() + "   " + friend.getUser_id2());
             if (!friend.getUser_id1().equals(id)) {
                 User u1 = userRepository.findByUserId(friend.getUser_id1()).orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
@@ -169,9 +165,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
         }
 
-        System.out.println("\n==List of friends!!:\n");
-        for (User u : friends_list)
-            System.out.println("Friend " + u.getUsername());
+
         return friends_list;
 
     }
@@ -187,7 +181,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         "Found with username : " + sender_username));
 
         // create a friends row with accepted value: 'false'
-        System.out.println("User1= " + sender_user.getUserId() + "  User2= " + receiver_user.getUserId());
         friendsRepository.save(new Friends(sender_user.getUserId(), receiver_user.getUserId()));
 
     }
@@ -265,7 +258,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (!fetched_users_optional.isPresent())
             return new ArrayList<User>(); // empty set
         List<User> fetched_users = fetched_users_optional.orElseThrow(() -> new UsernameNotFoundException("No such connection request was found"));
-        System.out.println(fetched_users);
         return fetched_users;
     }
 
@@ -348,7 +340,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             User tempUser = u_optional
                     .orElseThrow(() -> new UsernameNotFoundException("No user " +
                             "Found with username : " + username));
-            System.out.println(tempUser.toString());
             returning_list.add(tempUser);
         }
 
@@ -363,7 +354,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + username));
 
-        System.out.println(user.getEmail());
 
 
         return user;
