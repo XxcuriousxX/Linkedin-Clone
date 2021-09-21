@@ -24,9 +24,12 @@ chmod +x ./frontend.sh
 
 #### 1.2.1. database on docker, spring boot app on intellij IDEA
 ```sh
-cd back-end
-chmod +x ./backend.sh
-./backend.sh --db-only
+cd back-end/docker-sql
+docker-compose up -d
+```
+shutdown with
+```sh
+docker-compose down
 ```
 
 #### 1.2.2. database and spring boot app on docker
