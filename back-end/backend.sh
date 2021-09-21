@@ -1,24 +1,24 @@
 #!/bin/bash
 # Create and run "mysql-backend" container in the background
 cd docker-sql
-docker-compose up -d    
-cd ..
+docker-compose up -d
 
 if [ "$1" = "--db-only" ]; then
     read -r -d '' _ </dev/tty       # wait until ctrl+C is pressed
-    docker stop mysql-backend
-    docker rm  mysql-backend
+    docker-compose down
     exit
 fi
 
+cd ..
+
 # create a network named "spring-net"
-docker network create spring-net              
+docker network create spring-net
 
 # connect mysql-backend with the spring-net network
-docker network connect spring-net mysql-backend   
+docker network connect spring-net mysql-backend
 
 # create a custom image for our spring boot application
-docker build -f Dockerfile -t docker-spring-boot .          
+docker build -f Dockerfile -t docker-spring-boot .
 
 
 # delete the container if already exists
