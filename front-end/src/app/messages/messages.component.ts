@@ -46,15 +46,15 @@ export class MessagesComponent implements OnInit {
     this.conversation$ = timer(1, 3000).pipe(
       switchMap(() => {
         this.payload.sender_username = this._authService.getUserName();
-        this.payload.receiver_username = this.receiverUsername; 
-        return this._messagesService.getConversation(this.payload); 
+        this.payload.receiver_username = this.receiverUsername;
+        return this._messagesService.getConversation(this.payload);
       }),
       retry(),
       share(),
-      takeUntil(this.stopPolling)                       
+      takeUntil(this.stopPolling)
       );
    }
-   
+
 
 
   ngOnInit(): void {
@@ -68,7 +68,7 @@ export class MessagesComponent implements OnInit {
 
     });
 
-    
+
   }
 
 
@@ -103,11 +103,7 @@ export class MessagesComponent implements OnInit {
     this.payload.receiver_username = this.receiverUsername;
     this.payload.message = this.messageForm.value.message;
     this._messagesService.sendMessage(this.payload).subscribe(data => {
-      // this.loadMoreMessages();
-      // this.chr.detectChanges();
       this.send_message = true;
-      
-      // this.ngOnInit();
       this.messageForm.reset();
     }, error => {
       throwError(error);

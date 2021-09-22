@@ -107,10 +107,6 @@ public class PostController {
         col_n.addAll(check);
 
 
-//        Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong());
-
-//        Collections.sort(col_n, compareByTime.reversed());
-
         return status(HttpStatus.OK).body(suggested);
     }
 

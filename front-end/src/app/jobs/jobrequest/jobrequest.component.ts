@@ -51,7 +51,6 @@ export class JobrequestComponent implements OnInit {
     this.has_liked_computed = false;
     this.isLoaded = false;
     this.liked_by_current_user = false;
-    // this.updateLikesNum();
     this.updateLikesNum_and_has_liked();
   }
 
@@ -61,13 +60,12 @@ export class JobrequestComponent implements OnInit {
       if (response.has_liked) {
         this.updateLikesNum();
         this.liked_by_current_user = true;
-        this.ngOnInit();   // pio sosto
-        // window.location.reload();
+        this.ngOnInit();
+
       }
       else {
         this.liked_by_current_user = false;
         this.ngOnInit();
-        // window.location.reload();
       }
     }, error => {
       throwError(error);

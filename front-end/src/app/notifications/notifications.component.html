@@ -10,7 +10,7 @@
       {{ user.username }}
 
 
-      <!-- <div class="button-connect" >con</div> -->
+
       <div class="button-connect">
         <app-connect-button [receiver_user]="user"></app-connect-button>
       </div>
@@ -19,14 +19,14 @@
 </div>
 
 
-<!-- <hr> -->
+
 
 <div *ngFor="let notification of notificationList">
   <a class="links" routerLink="/post/{{ notification.postId }}">
   <div class="box-view">
-      <!-- <div *nfIf="notification.actionType == 1"> -->
+
         {{ notification.text }}
-      <!-- </div> -->
+
   </div>
   </a>
 

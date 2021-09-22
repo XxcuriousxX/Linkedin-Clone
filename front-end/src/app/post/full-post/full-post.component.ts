@@ -37,28 +37,21 @@ export class FullPostComponent implements OnInit {
 												 , private _authService: AuthService) {
 		 // get id from "/post/:id"
 		 // to make it work, in router module, we must specify the "post/:id" path
-		
+
 		this.postId = this._activatedRoute.snapshot.params.id;
 
 		this.commentForm = new FormGroup({
-			// username: new FormControl('', Validators.required),
 			comment_text: new FormControl('', Validators.required),
-			//like_count: new FormControl('', Validators.required),
-			//comment_count: new FormControl('', Validators.required)
 		  });
 	}
 
 	ngOnInit(): void {
 		this.isLoaded = false;
 		this.postId = this._activatedRoute.snapshot.params.id;
-		// this._activatedRoute.params.subscribe((p) => {
-		// 	this.postId = p.id;
-		// 	this.getPostById();
-		// 	this.getAllComments();
-		// })
+
 		this.getPostById();
-		// this.getAllComments();
-		
+
+
 	}
 
 	getPostById() {

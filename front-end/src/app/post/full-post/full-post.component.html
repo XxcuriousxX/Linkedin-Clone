@@ -45,13 +45,9 @@
             <form [formGroup]="commentForm" (ngSubmit)="addComment()">
                 <input type="text" id="post" [formControlName]="'comment_text'" placeholder=" Add a comment"  style="padding-left: 13px;padding-right:13px;font-family: 'Merriweather', serif;" autocomplete="off"/>
 
-                <!-- <button type="submit"></button> -->
+
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                    <!--Photo Button-->
-                    <!-- <button type="submit"> -->
-                    <!-- <i class="fa fa-picture-o fa-lg" aria-hidden="true" style="color: #1d9bd5"></i> -->
-                    <!-- <a class="btn-text" >  Photo </a> -->
-                    <!-- </button> -->
+
                 </div>
 
             </form>
@@ -61,7 +57,7 @@
 
     <br>
 
-    <!-- <hr style="width: 100%;margin-left:20px; position: relative; left: -20px;top:-20px"> -->
+
 
     <div *ngFor="let comment of commentsList">
         <div class="box-view">

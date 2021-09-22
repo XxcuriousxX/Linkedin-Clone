@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.minLength(4)]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      company_name: ''
+      company_name: ['', [Validators.required, Validators.minLength(2)]]
       });
 
 
@@ -49,9 +49,7 @@ export class SignUpComponent implements OnInit {
   }
     async onSubmit() {
 
-      // post
-      // await this._authService.getValFromObservable(this.signUpForm.value).then((res:any) => this.resp = "SUCCESS",
-      // (err:any) => this.resp = "FAIL");
+
 
       const formData: FormData = new FormData();
       formData.append('user', this.signUpForm.value);
@@ -70,9 +68,6 @@ export class SignUpComponent implements OnInit {
       );
 
 
-      // console.log("Our resp from post: ", this.resp);
-      // if (this.resp === 'SUCCESS')
-      //   this.router.navigate(['home'])
     }
 
 

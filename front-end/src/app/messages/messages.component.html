@@ -14,7 +14,7 @@
       <div class="messages-region" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 
 
-<!--        -->
+
         <div *ngIf="conv$ | async as conv">
         <div  *ngFor="let msg of conv">
 
@@ -42,7 +42,7 @@
           </div>
 
         </div>
-        <!-- {{ getConversation() }} -->
+
 
        </div> <!-- ng if async-->
       </div>

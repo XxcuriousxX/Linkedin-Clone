@@ -14,20 +14,10 @@
 }
 
 .users{
-  position: relative;
-  left: 40%;
-
-
+  text-align: center;
 }
 
-/*.not-active{*/
-/*  color: #1d9bd5;*/
-/*  font-weight: bold;*/
-/*  font-family: 'Lato', sans-serif;*/
-/*  background-color: white;*/
-/*  cursor: pointer;*/
-/*  border: 0px;*/
-/*}*/
+
 
 .active{
   position: relative;

@@ -30,7 +30,7 @@ export class CreateJobPostComponent implements OnInit {
 
   }
 
-  
+
 
 
   ngOnInit(): void {
@@ -69,7 +69,6 @@ export class CreateJobPostComponent implements OnInit {
       if (i == 0) this.jobPayload.requiredSkills = this.skills[i];
       else this.jobPayload.requiredSkills += "," + this.skills[i];
     }
-    // this.jobPayload.keywords = this.jobForm.value.keywords;
     this.jobPayload.employmentType = this.jobForm.value.employmentType;
     this.jobPayload.location = this.jobForm.value.location;
     this.jobPayload.title = this.jobForm.value.title;
@@ -77,7 +76,7 @@ export class CreateJobPostComponent implements OnInit {
       this.keywords = [];
       this.skills = [];
       this.ngOnInit();
-      
+
       this.jobForm.reset();
     }, error => {
       throwError(error);

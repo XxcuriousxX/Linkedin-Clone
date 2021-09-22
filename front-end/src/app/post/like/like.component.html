@@ -1,10 +1,9 @@
 <!-- Section to Display Votes-->
 
-<!-- <div *ngIf="true"> -->
 <div *ngIf="liked_by_current_user == false; else already_liked">
 
 
-      
+
       Post id = {{ post.postId }}
       <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
         {{ post.likeCount}} likes  {{ post.commentCount}} comments
@@ -19,13 +18,12 @@
   <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
     {{ post.likeCount}} likes  {{ post.commentCount}} comments
   </a>
-  
+
     <br>
     <br>
-    <!-- <button mat-stroked-button color="primary" (click)="like()" class="fa fa-thumbs-up" aria-hidden="true" ></button> -->
+
     <button class="likedbutton button" mat-stroked-button color="accent" (click)="like()"   aria-hidden="true"> Liked </button>
-    
+
 
 </ng-template>
 
-<!-- </div> -->

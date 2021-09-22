@@ -70,7 +70,7 @@ export class SettingsComponent implements OnInit {
     this.settingsRequestPayload.password = passfield.value;
     this.settingsRequestPayload.username = this._authservice.getUserName();
     this._settingsService.changePassword(this.settingsRequestPayload).subscribe(res => {
-      
+
       this.ngOnInit();
     });
   }
@@ -99,8 +99,7 @@ export class SettingsComponent implements OnInit {
     const formData: FormData = new FormData();
     formData.append('username', this._authservice.getUserName());
     formData.append('profileImage', this.file);
-    // this.changeprofilepayload.username = this._authservice.getUserName();
-    // this.changeprofilepayload.file = this.file;
+
     if (!this.img_inv_format && !this.img_sz_exceed){
       this._userService.changeProfileImage(formData).subscribe(data => {
         this.ngOnInit();

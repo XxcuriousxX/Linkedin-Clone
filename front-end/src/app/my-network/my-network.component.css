@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap');
+
 body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -25,7 +27,11 @@ body::-webkit-scrollbar {
 
 
 .cl {
+  font-weight: bold;
+  top: 20px;
   text-decoration:none;
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
   color: black;
 
 }
@@ -37,7 +43,7 @@ img.avatar { /* for the connected users */
   border-radius: 50%;
   position: absolute;
   top: 35px;
-  left: 95px;
+  left: 100px;
   right: 125px;
   object-fit:cover;
 }
@@ -63,11 +69,18 @@ img.avatar-query {
   left: 50px; */
 }
 
+.username-on-query p {
+  position: relative;
+  top: -10px;
+  margin-top: -10px;
+}
 
 .username-on-query {
+  font-family: 'Lato', sans-serif;
   position: absolute;
   left: 100px;
   top: 40px;
+  font-size: 15px;
 
 }
 
@@ -93,26 +106,23 @@ img.avatar-query {
 }
 
 .box {
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
   position: relative;
-  border: 1px solid #cfc9c9;
   padding: 25px;
-  border-radius: 14px;
-
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-
+  background: linear-gradient(0deg, #a0cff8, #ffffff);
   width: 250px;
   height: 300px;
-
-
-  /* height: 300px; */
-
 }
 
 
 
 .box-view {
+  color: black;
+  text-underline: none;
   position: relative;
-  border: 1px solid #cfc9c9;
+  max-height: fit-content;
+  background: linear-gradient(0deg, #a0cff8, #ffffff);
+  z-index: 1;
   padding: 25px;
   border-radius: 12px;
   top: 100px;
@@ -121,7 +131,7 @@ img.avatar-query {
   margin-bottom: 10px;
   margin-right: 150px;
   margin-left: 150px;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 
 
 }

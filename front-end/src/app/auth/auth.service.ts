@@ -38,12 +38,6 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private localStorage: LocalStorageService) { }
 
 
-
-  // // obsolete function
-  // async getValFromObservable(user: any) {
-  //   return await this.signup(user).toPromise()
-  // }
-
   signup(user: any) {
     return this.httpClient.post<any>(this._registerUrl, user, {responseType:'text' as 'json'})
   }
@@ -56,7 +50,6 @@ export class AuthService {
       this.localStorage.store('authenticationToken', data.authenticationToken);
 
       this.localStorage.store('username', data.username);
-      // console.log("Auth token = ", data.username);
 
       this.uname = data.username
 
@@ -97,7 +90,7 @@ export class AuthService {
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
-    // console.log("Cleared everything");
+
   }
 
 

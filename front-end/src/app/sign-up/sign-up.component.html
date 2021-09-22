@@ -103,6 +103,18 @@
           </div>
         </div>
 
+
+        <div *ngIf="signUpForm.controls['company_name'].invalid && (signUpForm.controls['company_name'].dirty || signUpForm.controls['company_name'].touched)">
+          <div *ngIf="signUpForm.controls['company_name'].errors.required" class="text-error">
+            <li>Company Name is required.</li>
+          </div>
+          <div *ngIf="signUpForm.controls['company_name'].errors.minlength || signUpForm.controls['company_name'].errors.pattern" class="text-error">
+            <li>Company Name must be at least 2 characters.</li>
+          </div>
+        </div>
+
+
+
       </div>
 
 

@@ -12,9 +12,6 @@ export class DialogComponent{
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    // for (let k of data.users) {
-    //   console.log("ok edw" + k.username);
-    // }
   }
 
   onNoClick(): void {

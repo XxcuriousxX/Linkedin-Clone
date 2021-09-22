@@ -55,8 +55,8 @@ export class ConnectButtonComponent implements OnInit {
     this.connectPayload.receiver_username = this.receiver_user.username;
     this._connectService.makeConnectionRequest(this.connectPayload).subscribe( res => {
 		  this.connection_status = 1;
-      this.ngOnInit()
-		// window.location.reload();
+      this.ngOnInit();
+
 
 	}, err => { throwError(err) });
   }
@@ -66,8 +66,8 @@ export class ConnectButtonComponent implements OnInit {
 	  this.connectPayload.receiver_username = this.receiver_user.username;
 	  this._connectService.removeConnection(this.connectPayload).subscribe( res => {
 		  this.connection_status = 0;
-      this.ngOnInit()
-		  // window.location.reload();
+      this.ngOnInit();
+
 	  }, err => { throwError(err) });
   }
 
@@ -77,7 +77,7 @@ export class ConnectButtonComponent implements OnInit {
 	  this._connectService.acceptConnectionRequest(this.connectPayload).subscribe( res => {
 		  this.connection_status = 3;
       this.ngOnInit();
-		  // window.location.reload();
+
 
 	  })
   }

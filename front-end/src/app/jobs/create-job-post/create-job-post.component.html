@@ -15,30 +15,18 @@
     <br>
     <br>
     <textarea [formControlName]="'details'" rows="3" placeholder="details"></textarea>
-    <!-- <textarea [formControlName]="'requiredSkills'" rows="3" placeholder="requiredSkills"></textarea> -->
-    <!-- <div *ngFor="let k of keywords; let i = index">
-      {{ k }}
-      <button  (click)="removeKeyword(i)" id="mdiv"> 
-        <div class="mdiv">
-          <div class="md">   </div>
-        </div>
-    </button>
-    </div>
-    <input id="new_keyword" type="text" #input placeholder="enter a keyword (ex. web-dev)" rows="3" />
-    <button id="add_keyword_btn" class="addKeyword" (click)="addKeyword(input)"> add keyword  </button> -->
 
 
     <div *ngFor="let s of skills; let i = index">
       {{ s }}
-      <button  (click)="removeSkill(i)" id="mdiv"> 
+      <button  (click)="removeSkill(i)" id="mdiv">
         <div class="mdiv">
           <div class="md">   </div>
         </div>
     </button>
     </div>
-    <input type="text" #skill_input placeholder="enter a skill (ex. web-dev)" rows="3" />
+    <input type="text" #skill_input placeholder="enter a skill (ex. web-dev)" rows="3" [formControlName]="'requiredSkills'"/>
     <button class="addKeyword" (click)="addSkill(skill_input)"> add a skill  </button>
-    <!-- <textarea [formControlName]="'keywords'" rows="3" placeholder="keywords"></textarea> -->
     <textarea [formControlName]="'location'" rows="3" placeholder="location"></textarea>
     <br>
     <input type="text" [formControlName]="'employmentType'" placeholder="employmentType"  style="padding-left: 13px;padding-right:13px;" autocomplete="off"/>

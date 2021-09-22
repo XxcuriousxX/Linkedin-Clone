@@ -29,7 +29,6 @@ export class MyNetworkComponent implements OnInit {
     this.isLoaded = false;
 
     this.route.queryParams
-      //.filter(params => params.query)
       .subscribe(params => {
 
           this.query_param = params.query;

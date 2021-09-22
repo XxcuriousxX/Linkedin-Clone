@@ -17,27 +17,23 @@
 <div *ngIf="isLoaded">
 
   <div *ngFor="let user of usersList">
-    <!--      <mat-grid-list  cols="1" rowHeight="2:1" >-->
-    <!--      <mat-grid-tile class="list"> {{user.username}} </mat-grid-tile>-->
-    <!--    </mat-grid-list>-->
-    
+
+
           <div class="box-view">
             <div class="avater-query-left">
             <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar-query">
             </div>
             <div class="username-on-query">{{ user.username }}</div>
-            
-    
-    
-            <!-- <div class="button-connect" >con</div> -->
+
+
+
             <div class="button-connect">
-              <!-- <app-connect-button [receiver_user]="user"></app-connect-button> -->
                 <label class="switch">Four
-                  <input type="checkbox" value='{{ user.username }}'  id="{{ user.username }}"> 
+                  <input type="checkbox" value='{{ user.username }}'  id="{{ user.username }}">
                   <span class="slider round"></span>
                   <div style="position: relative;left: 130px;top:-23px;font-weight: bold;font-size: 17px"></div>
                 </label>
-              
+
             </div>
           </div>
   </div>

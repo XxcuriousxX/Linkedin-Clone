@@ -22,6 +22,7 @@ export class PersonalInfoComponent implements OnInit {
   infoForm: FormGroup;
   p_info_payload: PersonalInfoPayload = new PersonalInfoPayload();
 
+
   constructor(private httpClient: HttpClient,private formBuilder: FormBuilder,private _userService: UserService,public _authservice: AuthService,
               private _personalinfoService: PersonalInfoService) {
     this.infoForm = new FormGroup({
@@ -42,7 +43,7 @@ export class PersonalInfoComponent implements OnInit {
       var stud_elem = <HTMLInputElement> document.getElementById("stud_elem") // pass the value for the view
       stud_elem.value = this.pr.stud_desc;
 
-      if (this.pr.abilities_desc == "") 
+      if (this.pr.abilities_desc == "")
         this.abilities = [];
       else
         this.abilities = this.pr.abilities_desc.split(",");
@@ -58,17 +59,16 @@ export class PersonalInfoComponent implements OnInit {
 
   changePersonalinfo(){ // the form is not used anymrore
     this.p_info_payload.username = this._authservice.getUserName();
-    
+
     // this.p_info_payload.work_experience = this.infoForm.value.work ;
     var work_elem = <HTMLInputElement> document.getElementById("work_elem");
     this.p_info_payload.work_experience = work_elem.value;
 
-    // this.p_info_payload.studies =   this.infoForm.value.studies;
+
     var stud_elem = <HTMLInputElement> document.getElementById("stud_elem") // pass the value for the view
     this.p_info_payload.studies = stud_elem.value;
 
-    // this.p_info_payload.abilities = this.infoForm.value.abilities ;
-    
+
     var abilities_str = "";
     var i = 0;
     for (let a of this.abilities) { // convert from list to "ability1,ability2,..." format
@@ -78,7 +78,7 @@ export class PersonalInfoComponent implements OnInit {
     }
     this.p_info_payload.abilities = abilities_str;
     this._personalinfoService.changePersonalInfo(this.p_info_payload).subscribe( data => {
-          // this.infoForm.reset();
+
       },
       error => { throwError(error); });
   }

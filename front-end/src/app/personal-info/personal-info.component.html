@@ -34,16 +34,16 @@
     <br>
 
 
-      <!-- <textarea rows="3" formControlName="abilities" placeholder="Write your Abilities"></textarea> -->
+
       <div *ngFor="let s of abilities; let i = index">
         {{ s }}
-        <button  (click)="removeAbility(i)" id="mdiv"> 
+        <button  (click)="removeAbility(i)" id="mdiv">
           <div class="mdiv">
             <div class="md">   </div>
           </div>
       </button>
       </div>
-      <input type="text" #ability_input placeholder="enter an ability (ex. web-dev)" rows="3" />
+      <input type="text" #ability_input placeholder="enter an ability (ex. web-dev)" formControlName="abilities" rows="3" />
       <button class="addKeyword" (click)="addAbility(ability_input)"> add an ability  </button>
 
   </div>

@@ -14,7 +14,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">
       </ng-template>
 
-<!--      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="profile-pic">-->
+
 
 
       <p style="position:relative;top: 90px;font-weight: bold;font-family: 'Barlow Condensed', sans-serif;;font-size: 30px">{{ user_profile_info.username }}</p>
@@ -33,75 +33,7 @@
 </div>
 
 
-<!--  <div class="modified-mc-content">-->
 
-<!--  <mat-expansion-panel hideToggle class="one" [ngClass]="buttonInfo.studies ==true ? 'one' : 'one-dis'">-->
-<!--    <mat-expansion-panel-header>-->
-<!--      <mat-panel-title style="position: relative;left: 40%"-->
-<!--                       [ngStyle]="{'color': buttonInfo.studies == true ? '' : 'black' }">-->
-<!--        Studies-->
-<!--      </mat-panel-title>-->
-
-<!--    </mat-expansion-panel-header>-->
-<!--    <p *ngIf="buttonInfo.studies && user_profile_info.studies.length != 0">{{user_profile_info.studies}}</p>-->
-<!--    <p *ngIf="buttonInfo.studies && user_profile_info.studies.length == 0"> No Studies Added! </p>-->
-<!--    <div *ngIf="!buttonInfo.studies">-->
-<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
-<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
-<!--    </div>-->
-
-
-<!--  </mat-expansion-panel>-->
-
-
-<!--  <mat-expansion-panel  [ngClass]="buttonInfo.work_exp ==true ? 'two' : 'two-dis'">-->
-<!--    <mat-expansion-panel-header>-->
-<!--      <mat-panel-title style="position: relative;left: 34%"-->
-<!--                       [ngStyle]="{'color': buttonInfo.work_exp == true ? '' : 'black' }">-->
-<!--        Work Description-->
-<!--      </mat-panel-title>-->
-<!--  &lt;!&ndash;    <mat-panel-description>&ndash;&gt;-->
-<!--  &lt;!&ndash;      This is a summary of the content&ndash;&gt;-->
-<!--  &lt;!&ndash;    </mat-panel-description>&ndash;&gt;-->
-<!--    </mat-expansion-panel-header>-->
-
-<!--    <div class="cont">-->
-<!--      <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length != 0">{{user_profile_info.work_experience}}</p>-->
-<!--    </div>-->
-<!--    <p *ngIf="buttonInfo.work_exp && user_profile_info.work_experience.length == 0"> No Work Experience Added! </p>-->
-<!--    <div *ngIf="!buttonInfo.work_exp">-->
-<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
-<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
-<!--    </div>-->
-<!--  </mat-expansion-panel>-->
-
-
-
-<!--  <mat-expansion-panel  [ngClass]="buttonInfo.abilities ==true ? 'three' : 'three-dis'">-->
-<!--    <mat-expansion-panel-header>-->
-<!--      <mat-panel-title style="position: relative;left: 42%"-->
-<!--                       [ngStyle]="{'color': buttonInfo.abilities == true ? '' : 'black' }">-->
-<!--        Abilities-->
-<!--      </mat-panel-title>-->
-<!--  &lt;!&ndash;    <mat-panel-description>&ndash;&gt;-->
-<!--  &lt;!&ndash;      This is a summary of the content&ndash;&gt;-->
-<!--  &lt;!&ndash;    </mat-panel-description>&ndash;&gt;-->
-<!--    </mat-expansion-panel-header >-->
-<!--    <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length != 0"> {{user_profile_info.abilities}}</p>-->
-<!--    <p *ngIf="buttonInfo.abilities && user_profile_info.abilities.length == 0"> No Abilities Added! </p>-->
-<!--    <div *ngIf="!buttonInfo.abilities">-->
-<!--      <p style="text-align: center;color: #ff3232;font-weight: bold" > Private Field.</p>-->
-<!--      <p style="text-align: center"> You must be connected with <strong style="color: #ff3232">{{username}}</strong> to access it.</p>-->
-<!--    </div>-->
-<!--  </mat-expansion-panel>-->
-
-<!--  </div>-->
-
-<!--{{buttonInfo.work_exp}}-->
-<!--{{buttonInfo.studies}}-->
-<!--{{buttonInfo.abilities}}-->
-<!--{{buttonInfo.company}}-->
-<!--{{buttonInfo.phone}}-->
 
 <br>
 <br>
@@ -173,21 +105,7 @@
 
   </div>
 
-<!-- <div *ngIf="canrender" class="connect-btn">
-  <app-connect-button  [receiver_user]="user"></app-connect-button>
-</div>
 
-<br>
-<div *ngIf="connection_status == 3" class="message-btn">
- <button class="button" title="button" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton">Disabled</button>-->
-  <!-- <button mat-raised-button class="button" color="accent" [routerLink]="['/messages/']" [queryParams]="{conversation_name: username}" routerLinkActive="activebutton"  aria-hidden="true" >
-    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
-</div>
-
-<div *ngIf="connection_status != 3" class="message-btn">
-  <button mat-raised-button class="button-dis" color="accent" aria-hidden="true">
-    <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;Message </button>
-</div> -->
 
 </body>
 

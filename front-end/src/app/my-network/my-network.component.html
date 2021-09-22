@@ -6,8 +6,8 @@
   <div *ngIf="isLoaded">
     <div class="centered"> <app-loading></app-loading> </div>
   </div>
-  
-<!--</div>-->
+
+
 <!--My newtwork search view-->
 <div *ngIf="is_query">
 
@@ -25,11 +25,13 @@
 
 
         </div>
-        <div class="username-on-query">{{ user.username }}</div>
+        <div class="username-on-query">
+          <p> <span style="font-weight: bold"> {{ user.username | titlecase }}</span>  </p>
+          <p><span style="font-weight: bold"> {{ user.first_name | titlecase }} {{ user.last_name | titlecase }} </span></p>
+          <p>Working At:  <span style="font-weight: bold"> {{ user.company_name }}</span></p>
+        </div>
 
 
-
-        <!-- <div class="button-connect" >con</div> -->
         <div class="button-connect">
           <app-connect-button [receiver_user]="user"></app-connect-button>
         </div>
@@ -61,7 +63,7 @@
               </ng-template>
             </a>
 
-            <div class="text-center username">  <a class="cl" routerLink="/user/{{user.username}}">{{ user.username }}</a> </div>
+            <div class="text-center username">  <a class="cl" routerLink="/user/{{user.username}}">{{ user.username | titlecase }}</a> </div>
             <div class="con-button"> <app-connect-button [receiver_user]="user"></app-connect-button> </div>
           </div>
         </mat-grid-tile>
