@@ -5,7 +5,7 @@
 
 
       
-      Post id = {{ post.postId }}
+      <!-- Post id = {{ post.postId }} -->
       <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
         {{ post.likeCount}} likes  {{ post.commentCount}} comments
       </a>
@@ -15,7 +15,7 @@
 </div>
 
 <ng-template #already_liked>
-  Post id = {{ post.postId }}
+  <!-- Post id = {{ post.postId }} -->
   <a class="btnComments" routerLink="/post/{{post.postId}}" role="button">
     {{ post.likeCount}} likes  {{ post.commentCount}} comments
   </a>

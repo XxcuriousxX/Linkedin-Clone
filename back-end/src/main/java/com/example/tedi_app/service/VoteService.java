@@ -34,7 +34,7 @@ public class VoteService {
 
         Post post = postRepository.findById(voteData.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
-        System.out.println("Post id to be liked: " + post.getPostId());
+//        System.out.println("Post id to be liked: " + post.getPostId());
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
 
         if (voteByPostAndUser.isPresent()) { // if have already liked, then unlike
@@ -57,7 +57,7 @@ public class VoteService {
     public boolean has_liked(VoteData voteData) {
         Post post = postRepository.findById(voteData.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
-        System.out.println("Post id to be liked: " + post.getPostId());
+//        System.out.println("Post id to be liked: " + post.getPostId());
         Optional<Vote> voteByPostAndUser = voteRepository.findTopByPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
         if (voteByPostAndUser.isPresent()) {
             return true;

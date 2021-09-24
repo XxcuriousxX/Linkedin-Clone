@@ -96,7 +96,7 @@ public class PostService {
 //                .orElseThrow(() -> new UsernameNotFoundException(commentRequest.getUsername()));
         Post post = postRepository.getById(postId);
         List<Comment> C = this.commentRepository.findByPost(post);
-        System.out.println("Post id = " + post.getPostId());
+
         List<CommentResponse> respList = new ArrayList<>();
         for (Comment c : C) {
             respList.add(new CommentResponse(c.getId(), c.getUser().getUsername(), c.getText(), c.getCreatedDate()));

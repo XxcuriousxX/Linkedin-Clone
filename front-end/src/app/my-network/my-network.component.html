@@ -3,8 +3,10 @@
 
   <app-navigation-bar></app-navigation-bar>
   <br>
-  <div *ngIf="isLoaded">
-    <div class="centered"> <app-loading></app-loading> </div>
+  <div *ngIf="isLoaded == false">
+    <div class="centered"> 
+      <app-loading></app-loading> 
+    </div>
   </div>
   
 <!--</div>-->

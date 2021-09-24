@@ -58,6 +58,7 @@ body::-webkit-scrollbar {
   position: relative;
   border-radius: 1rem;
   font-family: 'Lato', sans-serif;
+  width: 70%;
 }
 
 .form-rounded-exists,
@@ -168,4 +169,9 @@ input:focus, textarea:focus
 
 .disable:hover{
   cursor: not-allowed;
+}
+
+.btn.btn-primary.btn-round {
+  position: relative;
+  left:20px;
 }

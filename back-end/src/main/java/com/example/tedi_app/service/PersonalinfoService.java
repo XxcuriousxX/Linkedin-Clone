@@ -56,9 +56,9 @@ public class PersonalinfoService {
                 usr_pinfo.setWork_desc(work_desc);
 
             personalinfoRepository.save(usr_pinfo);
-            System.out.println("Personale info: " + work_desc + " !!!");
-            System.out.println("Personale info: " + stud_desc + " !!!");
-            System.out.println("Personale info: " + abilities_desc + " !!!");
+//            System.out.println("Personale info: " + work_desc + " !!!");
+//            System.out.println("Personale info: " + stud_desc + " !!!");
+//            System.out.println("Personale info: " + abilities_desc + " !!!");
             return;
         }
 
@@ -68,9 +68,9 @@ public class PersonalinfoService {
 
 
 
-        System.out.println("Personal info: " + work_desc + " !!!");
-        System.out.println("Personal info: " + stud_desc + " !!!");
-        System.out.println("Personal info: " + abilities_desc + " !!!");
+//        System.out.println("Personal info: " + work_desc + " !!!");
+//        System.out.println("Personal info: " + stud_desc + " !!!");
+//        System.out.println("Personal info: " + abilities_desc + " !!!");
         return;
 
     }

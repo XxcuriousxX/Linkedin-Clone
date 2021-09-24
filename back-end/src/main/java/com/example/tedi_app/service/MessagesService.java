@@ -35,7 +35,7 @@ public class MessagesService {
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                         "Found with username : " + sender_username));
         messagesRepository.save(new Message(sender_user.getUserId(), receiver_user.getUserId(), msg));
-        System.out.println("Message sent: " + msg + " !!!");
+//        System.out.println("Message sent: " + msg + " !!!");
         return;
     }
 
@@ -55,9 +55,9 @@ public class MessagesService {
         List<Message> L = msgListOpt.orElseThrow(() -> new UsernameNotFoundException("No user " +
                 "Found with username : " + receiver_username));
 
-        for(Message each : L){
-            System.out.println(each.toString() + "  : ");
-        }
+//        for(Message each : L){
+//            System.out.println(each.toString() + "  : ");
+//        }
 
         if (msgListOpt.isEmpty())
             return new ArrayList();
@@ -83,11 +83,11 @@ public class MessagesService {
     public List<MessageResponse> loadMoreMessages(MessageResponse msg_resp){
 
         List<Message> more_messages = messagesRepository.loadMessagesAfterDate(msg_resp.getTimeCreated());
-    
+
 
         if (more_messages.isEmpty())
             return new ArrayList();
-        
+
 
         List<MessageResponse> new_messages = new ArrayList<>();
         for (Message m : more_messages) {

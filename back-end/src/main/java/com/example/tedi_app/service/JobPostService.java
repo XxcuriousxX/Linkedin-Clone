@@ -78,14 +78,14 @@ public class JobPostService {
 
     public double[] get_col(double[][] x, int k){
         double[] res = new double[x.length];
-        
-        
+
+
         for ( int j = 0; j < x.length; j++){
             res[j] = x[j][k];
         }
-        
+
         return res;
-        
+
 
     }
 
@@ -109,8 +109,8 @@ public class JobPostService {
 
         double eij = 0;
         for (int step = 0; step < iterations; step++) {
-            
-            
+
+
             for ( int i = 0; i < R.length; i++){
                 for( int j = 0; j < R[0].length; j++){
                     if (R[i][j] > 0){
@@ -128,12 +128,12 @@ public class JobPostService {
             for (int i = 0; i < R.length; i++) {
                 for (int j = 0; j < R[0].length; j++) {
                     if (R[i][j] > 0) {
-                        e = e + (R[i][j] - dot(get_line(P, i), get_col(Q, j))) * (R[i][j] - dot(get_line(P, i), get_col(Q, j))); 
-                        
+                        e = e + (R[i][j] - dot(get_line(P, i), get_col(Q, j))) * (R[i][j] - dot(get_line(P, i), get_col(Q, j)));
+
                         for(int k = 0; k < K; k++){
                             e = e + (beta / 2) * (P[i][k]*P[i][k]) + (Q[k][j]*Q[k][j]);
                         }
-                    
+
                     }
                 }
             }
@@ -148,7 +148,7 @@ public class JobPostService {
     // random arr of size N x K
     public double[][] random_array(int N, int K) {
         double[][] arr = new double[N][K];
-        Random rand = new Random();       
+        Random rand = new Random();
         for ( int n = 0; n < N; n++){
             for ( int k = 0; k < K; k++){
                 arr[n][k] = rand.nextDouble();
@@ -168,9 +168,9 @@ public class JobPostService {
         }
         return arr;
     }
-    
+
     public List<JobPostResponse> getSuggestions(String username) {
-        
+
 
 
         Optional<User> user_opt = userRepository.findByUsername(username);
@@ -211,7 +211,7 @@ public class JobPostService {
 
         int N = users_list.size();
         int M = jobPostsList.size();
-        System.out.println("N = " + N + "   M = " + M);
+//        System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
         for (int i = 0; i < N; i++)
@@ -240,7 +240,7 @@ public class JobPostService {
             }
         }
 
-        print_array(R);
+//        print_array(R);
         System.out.println("\n");
         System.out.println("\n");
         List<String> categories_list = new ArrayList<>();
@@ -260,11 +260,11 @@ public class JobPostService {
         Q = Transpose(Q);
 
         double[][] nR = dot_arrays(P,Q);
-        print_array(nR);
+//        print_array(nR);
 
-        for (JobPost jp : jobPostsList) {
-            System.out.println(jp.getKeywords());
-        }
+//        for (JobPost jp : jobPostsList) {
+//            System.out.println(jp.getKeywords());
+//        }
 
         int row = R.length - 1;
         double[] results = new double[M];
@@ -286,9 +286,9 @@ public class JobPostService {
         String[] myAbilities = personalinfoService.getPersonalInfo(user.getUsername())
                                 .getAbilities_desc().split(",");
 
-        System.out.println("Basics");
-        for (String a : myAbilities)
-            System.out.println(" + " + a);
+//        System.out.println("Basics");
+//        for (String a : myAbilities)
+//            System.out.println(" + " + a);
         // {key: jobPostId, value: num of required skills matched with my abilites}
         LinkedHashMap<Long, Integer> matches = new LinkedHashMap<>();
         // calculate all values for the matches hashmap to get the number of matching abilities per job post
@@ -297,7 +297,7 @@ public class JobPostService {
             String[] requiredSkills = suggestion.getRequiredSkills().split(",");
 
             for (String skill : requiredSkills) {
-                System.out.println("Sk: " + skill);
+//                System.out.println("Sk: " + skill);
                 for (String a : myAbilities) {
                     if (a.equals(skill)) {
                         matches.replace(suggestion.getJobPostId(), matches.get(suggestion.getJobPostId()) + 1);
@@ -307,15 +307,16 @@ public class JobPostService {
             }
         }
         orderByValue(matches, Collections.reverseOrder());
-        for (Long id : matches.keySet()) {
-            System.out.println(" ---- " + matches.get(id));
-        }
+//        for (Long id : matches.keySet()) {
+//            System.out.println(" ---- " + matches.get(id));
+//        }
 
         List<JobPostResponse> suggestionsFromMatches = new ArrayList<>();
         int m = 0;
         for (Long id : matches.keySet()) { // get top 5 more related according to abilites matching
             if (matches.get(id).equals(0) || m == 5) break;
             suggestionsFromMatches.add(getJobPost(id));
+            m++;
         }
 
         suggestionsList.addAll(suggestionsFromMatches);
@@ -325,6 +326,20 @@ public class JobPostService {
         for (JobPostResponse jpr : suggestionsList)
             if (!jobPostRepository.getByJobPostId(jpr.getJobPostId()).getUser().getUsername().equals(username))
                 finalList.add(jpr);
+
+        // Now add some job posts not based on the recommendations algorithm, but using
+        // the abilites from the user and the requiredSkills from the job post
+        List<JobPost> jobPostsNonAlgorithm = new ArrayList<>();
+        for (int s = 0; s < myAbilities.length; s++) {
+            List<JobPost> res = this.jobPostRepository.getAllBasedOnSkill(myAbilities[s]);
+            jobPostsNonAlgorithm.addAll(res);
+        }
+        removeDuplicatesJobPosts(jobPostsNonAlgorithm);
+        int sz = (jobPostsNonAlgorithm.size() < 5) ? jobPostsNonAlgorithm.size() : 5;
+        for (int s = 0; s < sz; s++) { // insert first 5
+            finalList.add(mapToDto(jobPostsNonAlgorithm.get(s)));
+        }
+        removeDuplicates(finalList);
         return finalList;
     }
 
@@ -380,21 +395,21 @@ public class JobPostService {
         }
     }
 
-    
 
 
-    // create job post 
+
+    // create job post
     public void createJobPost(JobPostRequest jobPostRequest){
-        
-    
+
+
         Optional<User> user_opt1 = userRepository.findByUsername(jobPostRequest.getAuthorUsername());
             User user1 = user_opt1.orElseThrow(() -> new UsernameNotFoundException("No user " +
                 "Found with username:" + jobPostRequest.getAuthorUsername()));
-        
+
         JobPost jobPost = new JobPost(user1, jobPostRequest.getTitle(), jobPostRequest.getLocation(),
                                             jobPostRequest.getEmploymentType(), jobPostRequest.getDetails(),jobPostRequest.getRequiredSkills()
                                             ,jobPostRequest.getKeywords());
-        
+
         jobPostRepository.save(jobPost);
 
 
@@ -413,10 +428,10 @@ public class JobPostService {
         User u = userRepository.findByUsername(authService.getCurrentUser().getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
                 "Found with username: "+ authService.getCurrentUser().getUsername()));
-        
-                
+
+
         JobPostViews jpv = jobPostViewsRepository.getByJobPostJobPostIdAndUserUserId(id, u.getUserId());
-        
+
         if (jpv == null) {
             jpv = new JobPostViews(jp, u);
             jpv.increaseViews();
@@ -426,7 +441,7 @@ public class JobPostService {
             jpv.increaseViews();
             jobPostViewsRepository.save(jpv);
         }
-        
+
         return mapToDto(jp);
     }
 
@@ -506,6 +521,23 @@ public class JobPostService {
         for (JobPostResponse p : L) {
             exists = false;
             for (JobPostResponse p2 : L2) {
+                if (p2.getJobPostId().equals(p.getJobPostId())) {
+                    exists = true;
+                    break;
+                }
+                if (!exists)
+                    L2.add(p);
+            }
+        }
+        return L2;
+    }
+
+    public List<JobPost> removeDuplicatesJobPosts(List<JobPost> L) {
+        List<JobPost> L2 = new ArrayList<>();
+        boolean exists = false;
+        for (JobPost p : L) {
+            exists = false;
+            for (JobPost p2 : L2) {
                 if (p2.getJobPostId().equals(p.getJobPostId())) {
                     exists = true;
                     break;
