@@ -26,13 +26,13 @@ public class JobVoteService {
 
         JobPost post = jobPostRepository.findById(voteData.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("JobPost Not Found with ID - " + voteData.getPostId()));
-        System.out.println("JobPost id to be liked: " + post.getJobPostId());
+//        System.out.println("JobPost id to be liked: " + post.getJobPostId());
         Optional<JobVote> jobvoteByPostAndUser = jobVoteRepository.findTopByJobPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
 
         if (jobvoteByPostAndUser.isPresent()) { // if have already liked, then unlike
             JobVote v = jobvoteByPostAndUser.orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
             post.setRequestedcount(post.getRequestedcount() - 1);
-            System.out.println("Vote id to be deleted = " + v.getVoteId() + " \n\n");
+//            System.out.println("Vote id to be deleted = " + v.getVoteId() + " \n\n");
             jobVoteRepository.deleteVoteByMyID(v.getVoteId());
             jobPostRepository.save(post);
             return false;
@@ -49,7 +49,7 @@ public class JobVoteService {
     public boolean has_liked(VoteData voteData) {
         JobPost post = jobPostRepository.findById(voteData.getPostId())
                 .orElseThrow(() -> new PostNotFoundException("Post Not Found with ID - " + voteData.getPostId()));
-        System.out.println("Post id to be liked: " + post.getJobPostId());
+//        System.out.println("Post id to be liked: " + post.getJobPostId());
         Optional<JobVote> voteByPostAndUser = jobVoteRepository.findTopByJobPostAndUserOrderByVoteIdDesc(post, authService.getCurrentUser());
         if (voteByPostAndUser.isPresent()) {
             return true;

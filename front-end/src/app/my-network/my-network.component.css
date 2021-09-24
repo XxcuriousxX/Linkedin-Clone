@@ -176,7 +176,9 @@ img.avatar-query {
 
 
 .centered {
-  position: absolute;
-  top: 5%;
-  left: 15%;
+  position: fixed;
+  top: 30%;
+  left:60%;
+  margin-top: -50px;
+  margin-left: -70px;
 }

@@ -17,6 +17,10 @@ public interface JobPostRepository extends JpaRepository<JobPost,Long> {
     JobPost getByJobPostId(Long jp_id);
 
 
+    @Query( value = "select * from job_post where required_skills like '%:skill%'", nativeQuery = true)
+    List<JobPost> getAllBasedOnSkill(@Param("skill") String skill);
+
+
     void deleteJobPostByJobPostId(Long id);
 
 

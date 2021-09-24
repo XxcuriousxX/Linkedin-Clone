@@ -70,7 +70,7 @@ export class MyNetworkComponent implements OnInit {
 
     this._userService.getAllConnected().subscribe(res => {
       this.usersList = res;
-      this.isLoaded = true;
+      
 
         //get each user's profile image and save it in usersList array
         for (let user of this.usersList){
@@ -78,10 +78,11 @@ export class MyNetworkComponent implements OnInit {
           this._userService.retrieveProfileImageByUsername(user.username).subscribe(data => {
             user.image = 'data:image/jpeg;base64,' + data.image;
           }, error => {
-            throwError(error);
+            // throwError(error);
           });
 
         }
+        this.isLoaded = true;
 
     },
       err => {

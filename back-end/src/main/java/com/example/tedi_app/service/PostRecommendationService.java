@@ -86,7 +86,7 @@ public class PostRecommendationService {
 
         int N = users_list.size();
         int M = postsList.size();
-        System.out.println("N = " + N + "   M = " + M);
+//        System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
         for (int i = 0; i < N; i++)
@@ -115,7 +115,7 @@ public class PostRecommendationService {
             }
         }
 
-        jobPostService.print_array(R);
+//        jobPostService.print_array(R);
         System.out.println("\n");
         System.out.println("\n");
 
@@ -132,7 +132,7 @@ public class PostRecommendationService {
         Q = jobPostService.Transpose(Q);
 
         double[][] nR = jobPostService.dot_arrays(P,Q);
-        jobPostService.print_array(nR);
+//        jobPostService.print_array(nR);
 
 
         int row = R.length - 1;
@@ -227,7 +227,7 @@ public class PostRecommendationService {
         int M = postsList.size();
 
 
-        System.out.println("N = " + N + "   M = " + M);
+//        System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
 
         for (int i = 0; i < N; i++)
@@ -256,10 +256,10 @@ public class PostRecommendationService {
             }
         }
 
-        System.out.println("LIKES R : ");
-        jobPostService.print_array(R);
-        System.out.println("\n");
-        System.out.println("\n");
+//        System.out.println("LIKES R : ");
+//        jobPostService.print_array(R);
+//        System.out.println("\n");
+//        System.out.println("\n");
 
 
 
@@ -275,8 +275,8 @@ public class PostRecommendationService {
 
         double[][] nR = jobPostService.dot_arrays(P,Q);
 
-        System.out.println("LIKES nR : ");
-        jobPostService.print_array(nR);
+//        System.out.println("LIKES nR : ");
+//        jobPostService.print_array(nR);
 
 
         int row = R.length - 1;
@@ -361,7 +361,7 @@ public class PostRecommendationService {
 
         int N = users_list.size();
         int M = postsList.size();
-        System.out.println("N = " + N + "   M = " + M);
+//        System.out.println("N = " + N + "   M = " + M);
         double[][] R = new double[N][M];
         for (int i = 0; i < N; i++)
             for (int j = 0; j < M; j++)
@@ -385,10 +385,9 @@ public class PostRecommendationService {
                 }
             }
         }
-        System.out.println("Comments R:");
-        jobPostService.print_array(R);
-        System.out.println("\n");
-        System.out.println("\n");
+
+//        jobPostService.print_array(R);
+
         int K = 10;
         double[][] P = jobPostService.random_array(N,K);
         double[][] Q = jobPostService.random_array(M,K);  //_in_range(M,K, 1.0, 5.0);
@@ -397,7 +396,7 @@ public class PostRecommendationService {
         Q = p.b;
         Q = jobPostService.Transpose(Q);
         double[][] nR = jobPostService.dot_arrays(P,Q);
-        jobPostService.print_array(nR);
+//        jobPostService.print_array(nR);
         int row = R.length - 1;
         double[] results = new double[M];
         for (j = 0; j < M; j++) {
@@ -469,14 +468,15 @@ public class PostRecommendationService {
         List<PostResponse> fromComments = getSuggestionsFromComments(username,true);
         List<PostResponse> fromLikes = getSuggestionsFromLikes(username,true);
         List<PostResponse> fromViews = getSuggestionsFromViews(username,true);
-        List<PostResponse> onlyFriends = new ArrayList<>();
+        List<PostResponse> finalList = new ArrayList<>();
         List<PostResponse> suggestedList = new ArrayList<>();
         int N_top_recent = 6;
 
         Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
 
-        suggestedList.addAll(fromComments);
+
         suggestedList.addAll(fromLikes);
+        suggestedList.addAll(fromComments);
         suggestedList.addAll(fromViews);
 
 
@@ -495,24 +495,24 @@ public class PostRecommendationService {
         // sort friends posts
         Collections.sort(allPostsFromConnected, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
         int k = (allPostsFromConnected.size() < N_top_recent ? allPostsFromConnected.size() : N_top_recent);
-        for (int i = 0; i < k; i++) {       // add top 5 recent posts to the onlyFriends list
-            onlyFriends.add(allPostsFromConnected.get(i));
+        for (int i = 0; i < k; i++) {       // add top 5 recent posts to the finalList list
+            finalList.add(allPostsFromConnected.get(i));
         }
 
         // sort the suggested posts from friends
         Collections.sort(suggestedList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
-        // add top 5 recent posts to the onlyFriends list from the suggested lists of friends
+        // add top 5 recent posts to the finalList list from the suggested lists of friends
         k = (suggestedList.size() < 1 ? suggestedList.size() : 1);
         for (int i = 0; i < k; i++) {
-            onlyFriends.add(suggestedList.get(i));
+            finalList.add(suggestedList.get(i));
         }
         // order the suggestion list
         Collections.sort(suggestedList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
         // sort again the posts from friends (suggested + top_5_recent) combined
-//        Collections.sort(onlyFriends, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
+//        Collections.sort(finalList, (p2, p1) -> p1.getCreatedDateLong().compareTo(p2.getCreatedDateLong()));
         suggestedList = removeDuplicates(suggestedList);
-        onlyFriends.addAll(suggestedList); // add suggestions at the end
-        return onlyFriends;
+        finalList.addAll(suggestedList); // add suggestions at the end
+        return finalList;
     }
 
     public List<PostResponse> getMorePostSuggestions(List<PostResponse> alreadySuggested) {
@@ -527,8 +527,8 @@ public class PostRecommendationService {
 
         Comparator<PostResponse> compareByTime = (PostResponse o1, PostResponse o2) -> o1.getCreatedDateLong().compareTo( o2.getCreatedDateLong() );
 
-        suggestedList.addAll(fromComments);
         suggestedList.addAll(fromLikes);
+        suggestedList.addAll(fromComments);
         suggestedList.addAll(fromViews);
 
 
