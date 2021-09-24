@@ -68,13 +68,14 @@ public class PostController {
 
     @PostMapping("more_suggestions/")
     public ResponseEntity<List<PostResponse>> getMorePostSuggestions(@RequestBody List<PostResponse> L) {
+        System.out.println("getMorePostSuggestions is triggered");
         return status(HttpStatus.OK).body(postRecommendationService.getMorePostSuggestions(L));
     }
 
     @GetMapping("suggestions/{username}")
     public ResponseEntity<Collection<PostResponse>> getSuggestions(@PathVariable String username) {
 
-
+        System.out.println("getSuggestions is triggered");
         List<PostResponse> col_n = postService.getPostsFromConnectedUsers(username);
 
         List<PostResponse> suggested = postRecommendationService.get_all_post_suggestions(username);

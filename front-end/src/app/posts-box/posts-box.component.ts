@@ -34,8 +34,8 @@ export class PostsBoxComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onScroll(): void {
-    console.log((window.innerHeight + window.scrollY), document.body.scrollHeight)
-    if ((window.innerHeight + window.scrollY)  >= document.body.scrollHeight  && this.more_suggestions_triggered <= 6) {
+
+    if ((window.innerHeight + window.scrollY)  >= document.body.scrollHeight   && this.more_suggestions_triggered <= 6) {
       this._postService.getMorePostSuggestions(this.posts).subscribe( more_sug => {
         for (let p of more_sug) {
           this.posts.push(p);
