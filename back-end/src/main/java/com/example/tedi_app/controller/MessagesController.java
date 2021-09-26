@@ -3,6 +3,7 @@ package com.example.tedi_app.controller;
 import com.example.tedi_app.dto.MessageRequest;
 import com.example.tedi_app.dto.MessageResponse;
 import com.example.tedi_app.model.Message;
+import com.example.tedi_app.model.User;
 import com.example.tedi_app.service.MessagesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,11 @@ public class MessagesController {
         return status(HttpStatus.OK).body(messagesService.loadMoreMessages(msgResponse));
     }
 
-    
+    @GetMapping("/get_conversation_names/")
+    public ResponseEntity<List<User>> get_conversation_names() {
+        return status(HttpStatus.OK).body(messagesService.get_conversation_names());
+    }
+
+
 
 }

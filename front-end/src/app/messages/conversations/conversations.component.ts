@@ -1,3 +1,4 @@
+import { MessagesService } from './../messages.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../user.service";
@@ -14,7 +15,7 @@ export class ConversationsComponent implements OnInit {
 
   selectedUserConv : string = "";
   usersList : User[] = []
-  constructor(private _userService: UserService, private _router: Router) { }
+  constructor(private _userService: UserService, private _router: Router, private _messagesService: MessagesService) { }
   toggle = -1;
 
 
@@ -35,7 +36,8 @@ export class ConversationsComponent implements OnInit {
   }
 
   get_conversation_names() {
-    this._userService.getAllConnected().subscribe( L => {
+    // this._userService.getAllConnected().subscribe( L => {
+    this._messagesService.getConversationNames().subscribe( L => {
       this.usersList = L;
     });
 

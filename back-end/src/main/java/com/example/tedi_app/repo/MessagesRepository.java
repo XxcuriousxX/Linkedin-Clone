@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
 import java.util.List;
@@ -18,4 +17,8 @@ public interface MessagesRepository extends JpaRepository<Message,Long> {
 
     @Query( value = "select * from Message where time_created > :time", nativeQuery = true)
     List<Message> loadMessagesAfterDate(@Param("time") Instant time_created);
+
+    @Query( value = "select * from Message where sender_id = :myid or receiver_id = :myid"
+            , nativeQuery = true)
+    List<Message> get_open_conversations(@Param("myid") Long myid);
 }
