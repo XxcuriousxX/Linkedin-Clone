@@ -137,7 +137,7 @@ public class UserController {
 
 
 
-    
+
 
 //    buttons ---- Change / Fetch State
     @PostMapping("/changebuttonstate")
@@ -238,6 +238,13 @@ public class UserController {
         Personalinfo pf = this.personalinfoService.getPersonalInfo(username);
         PersonalInfoResponse pr = new PersonalInfoResponse(pf.getWork_desc(), pf.getStud_desc(), pf.getAbilities_desc());
         return status(HttpStatus.OK).body(pr);
+    }
+
+
+
+    @GetMapping("/all_message_friends/{username}")
+    public ResponseEntity <List<User>> getAllConnectedUsersMessage(@PathVariable String username) {
+        return status(HttpStatus.OK).body(userService.get_all_connected_users_message(username));
     }
 }
 

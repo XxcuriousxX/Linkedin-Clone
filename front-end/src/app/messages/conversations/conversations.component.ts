@@ -36,8 +36,8 @@ export class ConversationsComponent implements OnInit {
   }
 
   get_conversation_names() {
-    // this._userService.getAllConnected().subscribe( L => {
-    this._messagesService.getConversationNames().subscribe( L => {
+    this._userService.getAllConnectedMessages().subscribe( L => {
+    // this._messagesService.getConversationNames().subscribe( L => {
       this.usersList = L;
     });
 

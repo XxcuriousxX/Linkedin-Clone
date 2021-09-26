@@ -17,6 +17,12 @@ export class UserService {
       return this.http.get("http://localhost:8080/api/users/" + this._authService.getUserName());
     }
 
+    getAllConnectedMessages() : Observable<any>{
+      return this.http.get("http://localhost:8080/api/users/all_message_friends/" + this._authService.getUserName());
+    }
+
+
+
     getUserById(uid: number) : Observable<UserResponse> {
       return this.http.get<UserResponse>("http://localhost:8080/api/users/get_user_by_id/" + uid);
 

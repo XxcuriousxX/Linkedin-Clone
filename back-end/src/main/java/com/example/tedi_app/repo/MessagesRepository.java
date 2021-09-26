@@ -21,4 +21,7 @@ public interface MessagesRepository extends JpaRepository<Message,Long> {
     @Query( value = "select * from Message where sender_id = :myid or receiver_id = :myid"
             , nativeQuery = true)
     List<Message> get_open_conversations(@Param("myid") Long myid);
+
+    @Query(value = "select * from Message where (sender_id = :param OR receiver_id = :param)",nativeQuery = true)
+    List<Message> getAllConnectedUsersMessage(@Param("param") Long user_id);
 }

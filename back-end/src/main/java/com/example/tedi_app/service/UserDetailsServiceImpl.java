@@ -35,6 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final CommentRepository commentRepository;
     private final VoteRepository voteRepository;
     private final PostMapper postMapper;
+    private final MessagesRepository messagesRepository;
 
 
 
@@ -374,6 +375,56 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return null;
 
 
+
+    }
+
+
+    // returns a list of Users who are friends of username
+    public List<User> get_all_connected_users_message(String username) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional
+                .orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+
+
+        List<Message> F = messagesRepository.getAllConnectedUsersMessage(user.getUserId());
+
+        ArrayList<User> friends_list = new ArrayList<>();
+        Long id = user.getUserId();
+        boolean exists = false;
+        for (Message friend : F) {
+            if (!friend.getReceiverId().equals(id)) {
+                User u1 = userRepository.findByUserId(friend.getReceiverId()).orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+//                for (User u : friends_list) {
+//                    if (u.getUserId().equals(u1.getUserId())) {
+//                        exists = true;
+//                        break;
+//                    }
+//                }
+
+                friends_list.add(u1);
+
+            }
+            if (!friend.getSenderId().equals(id)) {
+                User u2 = userRepository.findByUserId(friend.getSenderId()).orElseThrow(() -> new UsernameNotFoundException("No user " +
+                        "Found with username : " + username));
+//                for (User u : friends_list) {
+//                    if (u.getUserId().equals(u2.getUserId())) {
+//                        exists = true;
+//                        break;
+//                    }
+//                }
+                friends_list.add(u2);
+            }
+        }
+
+        Set<User> S = new HashSet<>(friends_list);
+        friends_list.clear();
+        friends_list.addAll(S);
+
+
+        return friends_list;
 
     }
 }

@@ -25,7 +25,7 @@ export class MessagesService {
         return this.http.post<MessageResponse[]>('http://localhost:8080/api/messages/more_messages/', messageresp);
     }
 
-    getConversationNames() : Observable<any> {
-        return this.http.get('http://localhost:8080/api/messages/get_conversation_names/');
+    getConversationNames() : Observable<User[]> {
+        return this.http.get<User[]>('http://localhost:8080/api/messages/get_conversation_names/');
     }
 }

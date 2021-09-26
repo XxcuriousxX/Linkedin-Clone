@@ -31,7 +31,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     this.authService.logout();
                     return this.handleAuthErrors(req, next);
                 } else {
-                    this.authService.logout();
+                    // this.authService.logout();
                     return throwError(error);
                 }
             }));

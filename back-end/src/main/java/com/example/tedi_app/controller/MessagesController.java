@@ -5,6 +5,8 @@ import com.example.tedi_app.dto.MessageResponse;
 import com.example.tedi_app.model.Message;
 import com.example.tedi_app.model.User;
 import com.example.tedi_app.service.MessagesService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +41,13 @@ public class MessagesController {
         return status(HttpStatus.OK).body(messagesService.loadMoreMessages(msgResponse));
     }
 
-    @GetMapping("/get_conversation_names/")
-    public ResponseEntity<List<User>> get_conversation_names() {
-        return status(HttpStatus.OK).body(messagesService.get_conversation_names());
-    }
+
+
+//    @GetMapping("/get_conversation_names/")
+//    public ResponseEntity<List<User>> get_conversation_names() {
+//        List<User> ulist = messagesService.get_conversation_names();
+//        return status(HttpStatus.OK).body(ulist);
+//    }
 
 
 

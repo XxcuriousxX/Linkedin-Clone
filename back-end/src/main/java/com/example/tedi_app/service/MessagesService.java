@@ -24,7 +24,7 @@ public class MessagesService {
     private final MessagesRepository messagesRepository;
     private final UserRepository userRepository;
     private final MessageMapper messageMapper;
-    private final AuthService authService;
+//    private final AuthService authService;
 
     public void sendMessage(String sender_username, String receiver_username, String msg) {
         Optional<User> receiverUserOptional = userRepository.findByUsername(receiver_username);
@@ -102,36 +102,36 @@ public class MessagesService {
     }
 
 
-    public List<User> get_conversation_names() {
-        boolean exists = false;
-        System.out.println("get conv names called!!!");
-        User myuser = authService.getCurrentUser();
-        List<Message> msgList = messagesRepository.get_open_conversations(myuser.getUserId());
-        List<User> convList = new ArrayList<>();
-        for (Message m : msgList) {
-            User u;
-            if (m.getSenderId().equals(myuser.getUserId()))
-                u = userRepository.getById(m.getReceiverId());
-            else
-                u = userRepository.getById(m.getSenderId());
-
-            for (User k : convList) { // if exists in list
-                if (k.getUserId().equals(u.getUserId())) {
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists)
-                convList.add(u);
-            exists = false; // reinit flag
-        }
-
-
-        for (User u : convList) {
-
-            System.out.println("usr = " + u.getUserId());
-        }
-        return convList;
-    }
+//    public List<User> get_conversation_names() {
+//        boolean exists = false;
+//        System.out.println("get conv names called!!!");
+//        User myuser = authService.getCurrentUser();
+//        List<Message> msgList = messagesRepository.get_open_conversations(myuser.getUserId());
+//        List<User> convList = new ArrayList<>();
+//        for (Message m : msgList) {
+//            User u;
+//            if (m.getSenderId().equals(myuser.getUserId()))
+//                u = userRepository.getById(m.getReceiverId());
+//            else
+//                u = userRepository.getById(m.getSenderId());
+//
+//            for (User k : convList) { // if exists in list
+//                if (k.getUserId().equals(u.getUserId())) {
+//                    exists = true;
+//                    break;
+//                }
+//            }
+//            if (!exists)
+//                convList.add(u);
+//            exists = false; // reinit flag
+//        }
+//
+//
+//        for (User u : convList) {
+//
+//            System.out.println("usr = " + u.getUserId());
+//        }
+//        return convList;
+//    }
 
 }

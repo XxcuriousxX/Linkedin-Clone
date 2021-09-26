@@ -1,5 +1,6 @@
 package com.example.tedi_app.repo;
 
+import com.example.tedi_app.model.Message;
 import com.example.tedi_app.model.User;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,5 +26,8 @@ public interface UserRepository extends JpaRepository <User,Long> {
 
     @Query(value = "select * from User where username like %:param% or first_name like %:param% or last_name like %:param% ", nativeQuery = true)
     Optional<List<User>> getUsersByQuery(@Param("param") String query_input);
+
+
+
 }
 
