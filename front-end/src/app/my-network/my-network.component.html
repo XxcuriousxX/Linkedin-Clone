@@ -19,10 +19,14 @@
         <div class="avater-query-left">
 
           <div *ngIf="user.image != null; else default">
-            <img  src="{{user.image}}" alt="Avatar" class="avatar-query">
+            <a routerLink="/user/{{_authService.getUserName() }}">
+              <img  src="{{user.image}}" alt="Avatar" class="avatar-query">
+            </a>
           </div>
           <ng-template #default>
-            <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar-query">
+            <a routerLink="/user/{{_authService.getUserName() }}">
+              <img  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar-query">
+            </a>
           </ng-template>
 
 

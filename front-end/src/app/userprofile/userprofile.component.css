@@ -17,10 +17,11 @@
 
 .flip-card {
   position: absolute;
-  top: 150px;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   align-items: center;
   /* justify-content: center; */
-  left: 540px;
   background-color: transparent;
   width: 50%;
   height: 250px;
@@ -110,7 +111,10 @@ body {
   width: 100%;
   padding: 10px;
   position: absolute;
-  top: 60%;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  /*top: 60%;*/
   right: 0%;
   margin: 20px auto;
 
@@ -244,14 +248,17 @@ body {
 .connect-btn{
   position: absolute;
   /* top: 100px; */
-  top: 415px;
-  left: 36%;
+  left: 35%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+
 }
 
 .message-btn {
   position: absolute;
-  top: 434px;
-  left: 60%;
+  left: 65%;
+  top: 73.5%;
+  transform: translate(-50%, -50%);
 }
 
 .button-dis {

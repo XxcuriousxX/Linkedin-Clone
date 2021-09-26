@@ -22,7 +22,7 @@ export class MyNetworkComponent implements OnInit {
   is_query: boolean = false;
   isLoaded: boolean = false;
   constructor(private _userService: UserService, private route: ActivatedRoute, private _searchService : SearchService,
-                                            private _authService: AuthService) { }
+                                            public _authService: AuthService) { }
 
   ngOnInit(): void {
     this.getScreenSize();

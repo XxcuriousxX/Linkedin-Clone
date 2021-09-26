@@ -16,10 +16,14 @@
               <br>
 
               <div *ngIf="image != null && is_render == true; else default">
-                <img src="{{image}}" alt="Avatar" class="avatar">
+                <a routerLink="/user/{{_authService.getUserName() }}">
+                  <img src="{{image}}" alt="Avatar" class="avatar">
+                </a>
               </div>
               <ng-template #default>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
+                <a routerLink="/user/{{_authService.getUserName() }}">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Avatar" class="avatar">
+                </a>
               </ng-template>
 
               <div class="text_center">
