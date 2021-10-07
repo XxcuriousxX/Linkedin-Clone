@@ -45,11 +45,12 @@ Start spring boot application, by running the main function
 ### Settings
 ![Settings](./img/settings.png)
 
+### Messages
+![Messages](./img/messages.png)
+
 
 ### Personal info
 ![Personal info](./img/personal-info.png)
 
 
 
-### Messages
-![Messages](./img/messages.png)
