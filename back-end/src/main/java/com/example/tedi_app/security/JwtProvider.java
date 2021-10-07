@@ -89,9 +89,6 @@ public class JwtProvider {
     private PrivateKey getPrivateKey() {
         try {
             PrivateKey pk = (PrivateKey) keyStore.getKey("springblog", "secret".toCharArray());
-//            if (pk == null)
-//                System.out.println("\n\n=== EInai null !!!!");
-//            else System.out.println("einai to " + pk);
             return pk;
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
             throw new SpringTediException("Exception occured while retrieving public key from keystore", e);

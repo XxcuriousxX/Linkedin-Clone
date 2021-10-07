@@ -165,7 +165,7 @@ public class AuthService {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
-        String token = jwtProvider.generateToken(authenticate); // skaei
+        String token = jwtProvider.generateToken(authenticate);
 //        return new AuthenticationResponse(token,loginRequest.getUsername());
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
