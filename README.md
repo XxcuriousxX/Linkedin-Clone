@@ -25,3 +25,31 @@ docker-compose down
 ```
 
 Start spring boot application, by running the main function
+
+
+
+## 2. Screenshots from the UI
+
+### Home
+![Home](./img/home.png)
+### Mobile view
+![mobile-view](./img/mobile-view.png)
+
+### My network
+![MyNetwork](./img/mynetwork.png)
+
+### Jobs
+![jobs](./img/Jobs.png)
+
+
+### Settings
+![Settings](./img/settings.png)
+
+
+### Personal info
+![Personal info](./img/personal-info.png)
+
+
+
+### Messages
+![Messages](./img/messages.png)
